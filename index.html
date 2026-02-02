@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ada - Voice-Driven Content Editor</title>
+  <meta name="description" content="Edit your writing with your voice. Socratic mode for refining ideas through discussion. Didactic mode for direct replacements. Local, private, powered by AI.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="logo">Ada</div>
+      <nav class="nav">
+        <a href="#features">Features</a>
+        <a href="#agents">Agents</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#updates" class="nav-download">Download</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-watermark" id="hero-watermark">Ada</div>
+      <div class="container">
+        <span class="beta-badge">Beta</span>
+        <h1>Edit with your voice.</h1>
+        <p class="hero-subtitle">
+          <span class="brand">Ada</span> is a voice-driven content editor for writers who think out loud.
+          Discuss your ideas, refine your prose, or dictate replacements. All with your voice.
+        </p>
+        <div class="hero-cta">
+          <a href="#updates" class="btn btn-primary">Download Beta</a>
+          <span class="version-note">v0.1.0 · macOS</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Demo Section -->
+    <section class="demo-hero">
+      <div class="container">
+        <div class="demo-window">
+          <div class="demo-titlebar">
+            <div class="demo-traffic-lights">
+              <span class="light red"></span>
+              <span class="light yellow"></span>
+              <span class="light green"></span>
+            </div>
+            <span class="demo-filename">declaration-draft.md</span>
+          </div>
+          <div class="demo-content">
+            <div class="demo-editor">
+              <p class="demo-text">We hold these truths to be <span class="demo-highlight" id="demo-selection">sacred and undeniable</span>, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness.</p>
+            </div>
+            <div class="demo-margin">
+              <div class="demo-card" id="demo-card">
+                <div class="demo-card-recording" id="demo-recording">
+                  <div class="demo-recording-header">
+                    <span class="demo-mode" id="demo-mode">Socratic</span>
+                    <span class="demo-recording-dot"></span>
+                  </div>
+                  <canvas id="demo-waveform" width="200" height="32"></canvas>
+                  <span class="demo-hint">Listening...</span>
+                </div>
+                <div class="demo-card-conversation" id="demo-conversation">
+                  <div class="demo-message user" id="demo-question"></div>
+                  <div class="demo-message assistant" id="demo-answer"></div>
+                </div>
+                <div class="demo-card-suggestion" id="demo-suggestion">
+                  <div class="demo-suggestion-label">Suggested edit</div>
+                  <div class="demo-suggestion-content" id="demo-suggestion-text"></div>
+                  <div class="demo-suggestion-actions">
+                    <button class="demo-btn-accept" id="demo-accept">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      Accept
+                    </button>
+                    <button class="demo-btn-reject">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                      Reject
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+      <div class="container">
+        <h2>Two modes. One voice.</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                <circle cx="12" cy="17" r="0.5" fill="currentColor"/>
+              </svg>
+            </div>
+            <h3>Socratic Mode</h3>
+            <p>Highlight text, press a hotkey, and <em>discuss</em> it. Ask questions like "Is this too formal?" or "Make this more concrete." Have a conversation, then apply the refined version.</p>
+            <div class="feature-shortcut">
+              <kbd>⌘</kbd> + <kbd>⇧</kbd> + <kbd>S</kbd>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
+                <path d="M19 10v1a7 7 0 0 1-14 0v-1"/>
+                <line x1="12" y1="18" x2="12" y2="22"/>
+              </svg>
+            </div>
+            <h3>Didactic Mode</h3>
+            <p>Highlight text, press a hotkey, and <em>tell</em> <span class="brand">Ada</span> what you want. Speak the replacement directly. <span class="brand">Ada</span> transcribes, cleans up filler words, and shows a diff.</p>
+            <div class="feature-shortcut">
+              <kbd>⌘</kbd> + <kbd>⇧</kbd> + <kbd>D</kbd>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <rect x="3" y="11" width="18" height="11" rx="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
+            <h3>Local & Private</h3>
+            <p>Speech recognition runs entirely on your Mac. Your drafts never leave your machine. Only the text you're actively editing is sent to the AI for suggestions.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
+            <h3>Comment Threads</h3>
+            <p>Create multiple annotations on different passages. Each becomes a persistent conversation thread in the margin, just like comments in Google Docs, but voice-first.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+      <div class="container">
+        <h2>How it works</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Select text</h3>
+            <p>Highlight the passage you want to edit or discuss.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Press & speak</h3>
+            <p>Hold the hotkey and speak your question or replacement text.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Review & apply</h3>
+            <p>See the suggested edit, accept or reject, and keep writing.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Voice Guide Demo Section -->
+    <section class="feature-demo-section" id="voice-guide-demo">
+      <div class="container">
+        <div class="feature-demo-header">
+          <div class="feature-demo-info">
+            <h2>Your voice, amplified</h2>
+            <p>Point <span class="brand">Ada</span> to your style guide. It learns your tone—direct, warm, technical, whatever—and keeps your writing consistent.</p>
+          </div>
+        </div>
+
+        <div class="feature-demo-window">
+          <div class="demo-titlebar">
+            <div class="demo-traffic-lights">
+              <span class="light red"></span>
+              <span class="light yellow"></span>
+              <span class="light green"></span>
+            </div>
+            <span class="demo-filename">VOICE.md</span>
+          </div>
+          <div class="voice-guide-demo-content">
+            <div class="voice-guide-code" id="voice-code">
+              <pre># Voice Guide
+
+## Tone
+Direct but warm. Like talking
+to a smart friend over coffee.
+
+## Style
+- Short paragraphs
+- Active voice always
+- No jargon
+
+## Avoid
+- Corporate speak
+- Hedging language
+- Passive constructions</pre>
+            </div>
+            <div class="voice-guide-result">
+              <div class="voice-guide-before">
+                <span class="label">Before</span>
+                <p id="voice-before">It is recommended that users familiarize themselves with the documentation prior to implementation.</p>
+              </div>
+              <div class="voice-guide-after">
+                <span class="label">After</span>
+                <p id="voice-after"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Privacy Demo Section -->
+    <section class="feature-demo-section alt-bg" id="privacy-demo">
+      <div class="container">
+        <div class="feature-demo-header">
+          <div class="feature-demo-info">
+            <h2>Local transcription, cloud intelligence</h2>
+            <p>Your voice is transcribed on your Mac—nothing leaves your machine. Only the text you're actively editing goes to Claude for suggestions.</p>
+          </div>
+        </div>
+
+        <div class="feature-demo-window" style="background: linear-gradient(180deg, var(--color-surface-elevated) 0%, var(--color-surface) 100%);">
+          <div class="demo-titlebar">
+            <div class="demo-traffic-lights">
+              <span class="light red"></span>
+              <span class="light yellow"></span>
+              <span class="light green"></span>
+            </div>
+            <span class="demo-filename">How it works</span>
+          </div>
+          <div class="privacy-demo-content">
+            <div class="privacy-demo-flow">
+              <div class="privacy-demo-node" id="privacy-voice">
+                <svg class="privacy-demo-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                  <line x1="12" y1="19" x2="12" y2="23"/>
+                </svg>
+                <span class="privacy-demo-label">Your Voice</span>
+              </div>
+
+              <div class="privacy-demo-arrow" id="privacy-arrow-1">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+                <span class="privacy-demo-arrow-label">Raw audio</span>
+              </div>
+
+              <div class="privacy-demo-node local" id="privacy-whisper">
+                <svg class="privacy-demo-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2"/>
+                  <line x1="8" y1="21" x2="16" y2="21"/>
+                  <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+                <span class="privacy-demo-label">Whisper (Local)</span>
+                <span class="privacy-demo-badge">On your Mac</span>
+              </div>
+
+              <div class="privacy-demo-arrow" id="privacy-arrow-2">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+                <span class="privacy-demo-arrow-label">Text only</span>
+              </div>
+
+              <div class="privacy-demo-node cloud" id="privacy-claude">
+                <svg class="privacy-demo-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                  <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"/>
+                </svg>
+                <span class="privacy-demo-label">Claude API</span>
+                <span class="privacy-demo-badge cloud">Encrypted</span>
+              </div>
+            </div>
+
+            <div class="privacy-demo-details">
+              <div class="privacy-demo-detail">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                <span>Audio never leaves your machine</span>
+              </div>
+              <div class="privacy-demo-detail">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                <span>Only highlighted text is sent</span>
+              </div>
+              <div class="privacy-demo-detail">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                <span>Drafts stay on your Mac</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Settings Demo Section -->
+    <section class="feature-demo-section" id="settings-demo">
+      <div class="container">
+        <div class="feature-demo-header">
+          <div class="feature-demo-info">
+            <h2>Make it yours</h2>
+            <p>Bring your own Anthropic key, choose your model, customize hotkeys. <span class="brand">Ada</span> adapts to how you work.</p>
+          </div>
+        </div>
+
+        <div class="feature-demo-window">
+          <div class="demo-titlebar">
+            <div class="demo-traffic-lights">
+              <span class="light red"></span>
+              <span class="light yellow"></span>
+              <span class="light green"></span>
+            </div>
+            <span class="demo-filename">Settings</span>
+          </div>
+          <div class="settings-demo-content">
+            <div class="settings-demo-modal">
+              <div class="settings-demo-header">
+                <h3>Settings</h3>
+                <svg class="settings-demo-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <line x1="18" y1="6" x2="6" y2="18"/>
+                  <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              </div>
+              <div class="settings-demo-tabs">
+                <div class="settings-demo-tab active">API</div>
+                <div class="settings-demo-tab">Hotkeys</div>
+                <div class="settings-demo-tab">Display</div>
+              </div>
+              <div class="settings-demo-body">
+                <div class="settings-demo-field">
+                  <label class="settings-demo-label">
+                    Anthropic API Key
+                    <span class="settings-demo-label-desc">Your key is stored locally and never shared</span>
+                  </label>
+                  <input type="password" class="settings-demo-input" value="sk-ant-api03-••••••••••••••••" readonly>
+                </div>
+                <div class="settings-demo-field">
+                  <label class="settings-demo-label">Model</label>
+                  <select class="settings-demo-select">
+                    <option selected>Claude Opus 4.5 (Recommended)</option>
+                    <option>Claude Sonnet 4</option>
+                    <option>Claude Haiku 3.5</option>
+                  </select>
+                </div>
+                <div class="settings-demo-field">
+                  <div class="settings-demo-toggle">
+                    <label class="settings-demo-label">
+                      Auto-save after edit
+                      <span class="settings-demo-label-desc">Automatically save when you accept a suggestion</span>
+                    </label>
+                    <div class="settings-demo-switch on" id="settings-switch"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Keyboard Shortcuts Demo Section -->
+    <section class="feature-demo-section alt-bg" id="shortcuts-demo">
+      <div class="container">
+        <div class="feature-demo-header">
+          <div class="feature-demo-info">
+            <h2>Keyboard-first</h2>
+            <p>Never leave the keyboard. <span class="brand">Ada</span> was built for writers who think in shortcuts.</p>
+          </div>
+        </div>
+
+        <div class="feature-demo-window">
+          <div class="demo-titlebar">
+            <div class="demo-traffic-lights">
+              <span class="light red"></span>
+              <span class="light yellow"></span>
+              <span class="light green"></span>
+            </div>
+            <span class="demo-filename">Keyboard Shortcuts</span>
+          </div>
+          <div class="shortcuts-demo-content">
+            <div class="shortcuts-demo-grid">
+              <div class="shortcut-item" id="shortcut-socratic">
+                <span class="shortcut-action">Socratic Mode</span>
+                <div class="shortcut-keys">
+                  <kbd>⌘</kbd><kbd>⇧</kbd><kbd>S</kbd>
+                </div>
+              </div>
+              <div class="shortcut-item" id="shortcut-dictation">
+                <span class="shortcut-action">Dictation Mode</span>
+                <div class="shortcut-keys">
+                  <kbd>⌘</kbd><kbd>⇧</kbd><kbd>D</kbd>
+                </div>
+              </div>
+              <div class="shortcut-item" id="shortcut-save">
+                <span class="shortcut-action">Save Document</span>
+                <div class="shortcut-keys">
+                  <kbd>⌘</kbd><kbd>S</kbd>
+                </div>
+              </div>
+              <div class="shortcut-item" id="shortcut-open">
+                <span class="shortcut-action">Open File</span>
+                <div class="shortcut-keys">
+                  <kbd>⌘</kbd><kbd>O</kbd>
+                </div>
+              </div>
+              <div class="shortcut-item" id="shortcut-accept">
+                <span class="shortcut-action">Accept Suggestion</span>
+                <div class="shortcut-keys">
+                  <kbd>⌘</kbd><kbd>↵</kbd>
+                </div>
+              </div>
+              <div class="shortcut-item" id="shortcut-reject">
+                <span class="shortcut-action">Reject Suggestion</span>
+                <div class="shortcut-keys">
+                  <kbd>Esc</kbd>
+                </div>
+              </div>
+              <div class="shortcut-item" id="shortcut-settings">
+                <span class="shortcut-action">Open Settings</span>
+                <div class="shortcut-keys">
+                  <kbd>⌘</kbd><kbd>,</kbd>
+                </div>
+              </div>
+              <div class="shortcut-item" id="shortcut-agents">
+                <span class="shortcut-action">Toggle Agents</span>
+                <div class="shortcut-keys">
+                  <kbd>⌘</kbd><kbd>⇧</kbd><kbd>A</kbd>
+                </div>
+              </div>
+            </div>
+            <p class="shortcuts-demo-hint">All shortcuts are customizable in <kbd>⌘</kbd><kbd>,</kbd> Settings</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Multiple Conversations Demo Section -->
+    <section class="feature-demo-section" id="conversations-demo">
+      <div class="container">
+        <div class="feature-demo-header">
+          <div class="feature-demo-info">
+            <h2>Multiple threads, one document</h2>
+            <p>Work on different passages simultaneously. Each annotation becomes its own conversation—come back to any of them later.</p>
+          </div>
+        </div>
+
+        <div class="feature-demo-window" style="max-width: 1000px;">
+          <div class="demo-titlebar">
+            <div class="demo-traffic-lights">
+              <span class="light red"></span>
+              <span class="light yellow"></span>
+              <span class="light green"></span>
+            </div>
+            <span class="demo-filename">remote-work-article.md</span>
+          </div>
+          <div class="feature-demo-content" style="grid-template-columns: 1fr 220px;">
+            <div class="feature-demo-editor">
+              <p class="feature-demo-text">
+                The shift to remote work has <span class="demo-highlight color-1" id="conv-highlight-1">fundamentally changed</span> how teams collaborate. Companies report <span class="demo-highlight color-2" id="conv-highlight-2">significant productivity gains</span> while employees enjoy better work-life balance.
+              </p>
+              <p class="feature-demo-text dim">
+                However, <span class="demo-highlight color-3" id="conv-highlight-3">maintaining company culture</span> remains a challenge. Leaders must find new ways to foster connection and shared purpose.
+              </p>
+            </div>
+            <div class="demo-margin conversations-demo-margin">
+              <!-- Card 1: Resolved -->
+              <div class="conv-card minimized" data-color="1" id="conv-card-1">
+                <div class="conv-header">
+                  <span class="conv-dot color-1"></span>
+                  <span class="conv-status">Resolved</span>
+                </div>
+                <div class="conv-preview">"fundamentally changed"</div>
+                <div class="conv-resolved">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  Changed to "transformed"
+                </div>
+              </div>
+
+              <!-- Card 2: Active -->
+              <div class="conv-card active" data-color="2" id="conv-card-2">
+                <div class="conv-header">
+                  <span class="conv-dot color-2"></span>
+                  <span class="conv-status">Active</span>
+                </div>
+                <div class="conv-quote">"significant productivity gains"</div>
+                <div class="conv-messages">
+                  <div class="conv-msg user">"Should I cite a source here?"</div>
+                  <div class="conv-msg assistant" id="conv-answer-2"></div>
+                </div>
+              </div>
+
+              <!-- Card 3: Minimized -->
+              <div class="conv-card minimized" data-color="3" id="conv-card-3">
+                <div class="conv-header">
+                  <span class="conv-dot color-3"></span>
+                  <span class="conv-status">Pending</span>
+                </div>
+                <div class="conv-preview">"maintaining company culture"</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Agents Section -->
+    <section class="agents-section" id="agents">
+      <div class="container">
+        <span class="agents-badge">Collaborative Agents</span>
+        <h2>A second set of eyes. Always.</h2>
+        <p class="agents-intro">
+          You know that feeling when you're too close to your own writing? Create agents that watch as you type and flag what you tend to miss. Their suggestions appear in the margin—accept, dismiss, or talk it through.
+        </p>
+
+        <!-- Agent Demo Window -->
+        <div class="agent-demo-window">
+          <div class="demo-titlebar">
+            <div class="demo-traffic-lights">
+              <span class="light red"></span>
+              <span class="light yellow"></span>
+              <span class="light green"></span>
+            </div>
+            <span class="demo-filename">quarterly-report.md</span>
+          </div>
+          <div class="agent-demo-content">
+            <!-- Agent Margin (left) -->
+            <div class="agent-demo-margin" id="agent-margin">
+              <!-- Empty state -->
+              <div class="agent-empty-state" id="agent-empty-state">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                  <rect x="3" y="8" width="18" height="12" rx="2" />
+                  <circle cx="9" cy="14" r="2" />
+                  <circle cx="15" cy="14" r="2" />
+                  <path d="M12 2v4" />
+                  <path d="M8 2h8" />
+                </svg>
+                <span>Agents are watching.<br/>Suggestions appear here.</span>
+              </div>
+
+              <!-- Suggestion Card (hidden initially) -->
+              <div class="agent-demo-card hidden" id="agent-card">
+                <div class="agent-demo-card-header">
+                  <div class="agent-demo-badge">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                      <rect x="3" y="8" width="18" height="12" rx="2" />
+                      <circle cx="9" cy="14" r="2" />
+                      <circle cx="15" cy="14" r="2" />
+                      <path d="M12 2v4" />
+                      <path d="M8 2h8" />
+                    </svg>
+                    <span id="agent-name">Clarity Check</span>
+                  </div>
+                </div>
+                <blockquote class="agent-demo-quote" id="agent-quote"></blockquote>
+                <p class="agent-demo-issue" id="agent-issue"></p>
+                <div class="agent-demo-revision" id="agent-revision">
+                  <span class="agent-revision-arrow">→</span>
+                  <span class="agent-revision-text" id="agent-revision-text"></span>
+                </div>
+                <div class="agent-demo-actions">
+                  <button class="agent-btn-accept" id="agent-accept">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    Accept
+                  </button>
+                  <button class="agent-btn-dismiss">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    Dismiss
+                  </button>
+                  <button class="agent-btn-discuss">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                      <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                      <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Agent Manager -->
+              <div class="agent-demo-manager">
+                <div class="agent-demo-manager-header">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <rect x="3" y="8" width="18" height="12" rx="2" />
+                    <circle cx="9" cy="14" r="2" />
+                    <circle cx="15" cy="14" r="2" />
+                    <path d="M12 2v4" />
+                    <path d="M8 2h8" />
+                  </svg>
+                  <span>AGENTS</span>
+                </div>
+                <div class="agent-demo-row" id="agent-row-1">
+                  <span class="agent-demo-dot active" id="agent-dot"></span>
+                  <span class="agent-demo-row-name">Clarity Check</span>
+                  <span class="agent-demo-row-scope">LOCAL</span>
+                </div>
+                <div class="agent-demo-row">
+                  <span class="agent-demo-dot paused"></span>
+                  <span class="agent-demo-row-name">Style Guide</span>
+                  <span class="agent-demo-row-scope">GLOBAL</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Editor (center) -->
+            <div class="agent-demo-editor">
+              <p class="agent-demo-text">
+                Our Q3 results <span class="agent-demo-highlight" id="agent-highlight">demonstrate a significant improvement</span> over the previous quarter. Revenue increased by 23% while operating costs decreased.
+              </p>
+              <p class="agent-demo-text" style="margin-top: 16px; color: #78716c;">
+                The marketing team's new strategy contributed to higher engagement across all channels. Customer acquisition cost dropped by 15%.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p class="agents-note">
+          Agents run in the background while you write. When they spot something, a note appears in the margin. You decide what to do with it.
+        </p>
+
+        <div class="agents-preview">
+          <div class="agent-card">
+            <div class="agent-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <circle cx="12" cy="8" r="5"/>
+                <path d="M3 21v-2a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v2"/>
+              </svg>
+            </div>
+            <h4>Catch your blind spots</h4>
+            <p>Arguments that need support. Transitions that don't land. The stuff you stop seeing after the third read.</p>
+          </div>
+          <div class="agent-card">
+            <div class="agent-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+              </svg>
+            </div>
+            <h4>Stay consistent</h4>
+            <p>Your tone drifts. Your style guide gathers dust. An agent remembers what you forget.</p>
+          </div>
+          <div class="agent-card">
+            <div class="agent-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+            </div>
+            <h4>Write your own rules</h4>
+            <p>Tell <span class="brand">Ada</span> what to watch for in plain English. "Flag jargon." "Question unsupported claims." It's your agent.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+      <div class="container">
+        <span class="agents-badge">Pricing</span>
+        <h2>Pick your path.</h2>
+        <p class="pricing-intro">
+          Use <span class="brand">Ada</span> with your own Anthropic key, or let us cover usage with a monthly plan.
+          Sign in with Google or GitHub to unlock billing.
+        </p>
+
+        <div class="pricing-grid">
+          <article class="pricing-card pricing-card-byok">
+            <div class="pricing-header">
+              <div>
+                <span class="pricing-label">Bring your own key</span>
+                <h3>BYOK</h3>
+              </div>
+              <span class="pricing-price"><s>$39</s> Free</span>
+            </div>
+            <p class="pricing-desc">Use your own Anthropic API key. Pay only for what you use.</p>
+            <ul class="pricing-list">
+              <li>Use your own Anthropic API key</li>
+              <li>All modes + agents</li>
+              <li>No monthly fee</li>
+            </ul>
+            <div class="pricing-actions">
+              <button class="btn btn-primary btn-ghost">Unlock BYOK</button>
+            </div>
+          </article>
+
+          <article class="pricing-card featured">
+            <div class="pricing-header">
+              <div>
+                <span class="pricing-label">Most popular</span>
+                <h3>Starter</h3>
+              </div>
+              <span class="pricing-price">$5 <span>/mo</span></span>
+            </div>
+            <p class="pricing-desc">For regular editing sessions and light agent usage.</p>
+            <ul class="pricing-list">
+              <li>Included usage</li>
+              <li>Daily request limits</li>
+              <li>All core features</li>
+            </ul>
+            <div class="pricing-actions">
+              <button class="btn btn-primary">Start Starter</button>
+            </div>
+          </article>
+
+          <article class="pricing-card pricing-card-pro">
+            <div class="pricing-header">
+              <div>
+                <span class="pricing-label">Higher limits</span>
+                <h3>Pro</h3>
+              </div>
+              <span class="pricing-price">$19 <span>/mo</span></span>
+            </div>
+            <p class="pricing-desc">For heavy usage, longer drafts, and more agent runs.</p>
+            <ul class="pricing-list">
+              <li>Higher usage limits</li>
+              <li>Priority throughput</li>
+              <li>All core features</li>
+            </ul>
+            <div class="pricing-actions">
+              <button class="btn btn-primary btn-outline">Go Pro</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="pricing-faq">
+          <div class="pricing-faq-item">
+            <h4>What happens when I hit a limit?</h4>
+            <p>You’ll see a clear “rate limited” message and can upgrade instantly.</p>
+          </div>
+          <div class="pricing-faq-item">
+            <h4>Does BYOK bypass limits?</h4>
+            <p>Yes. BYOK uses your Anthropic account directly, so your usage is billed by Anthropic.</p>
+          </div>
+          <div class="pricing-faq-item">
+            <h4>Can I cancel anytime?</h4>
+            <p>Yes. Manage or cancel your subscription in the billing portal.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download" id="download">
+      <div class="container">
+        <span class="beta-badge">Beta</span>
+        <h2>Download Ada</h2>
+        <p class="download-note">
+          <span class="brand">Ada</span> is free during beta. Bring your own Anthropic API key.
+        </p>
+        <div class="download-buttons" id="updates">
+          <a href="https://github.com/mattalldianhr/ada/releases/download/v0.1.0/Ada-0.1.0-arm64.dmg" class="btn btn-primary download-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download for Apple Silicon
+          </a>
+          <a href="https://github.com/mattalldianhr/ada/releases/download/v0.1.0/Ada-0.1.0.dmg" class="btn btn-secondary download-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download for Intel
+          </a>
+        </div>
+        <p class="download-version">v0.1.0 · macOS 11+</p>
+        <p class="download-note-small">
+          First launch: Right-click the app and select "Open" to bypass Gatekeeper.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p><span class="brand">Ada</span> is a project by <a href="https://mattalldian.com">Matt Alldian</a></p>
+      <p class="footer-note">Built with Electron, Whisper, and Claude.</p>
+    </div>
+  </footer>
+  <script>
+    // Watermark fade on scroll (fades out at top, fades back in at bottom)
+    (function() {
+      const watermark = document.getElementById('hero-watermark');
+      const fadeDistance = 150; // pixels to fully fade out
+      const fadeInDistance = 400; // pixels from bottom to start fading in
+
+      window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight;
+        const winHeight = window.innerHeight;
+        const distanceFromBottom = docHeight - (scrollY + winHeight);
+
+        // Fade out at top
+        const topOpacity = Math.max(0, 0.04 * (1 - scrollY / fadeDistance));
+
+        // Fade in at bottom
+        const bottomOpacity = Math.max(0, 0.04 * (1 - distanceFromBottom / fadeInDistance));
+
+        // Use whichever is higher
+        watermark.style.opacity = Math.max(topOpacity, bottomOpacity);
+      }, { passive: true });
+    })();
+
+    // Demo Animation
+    (function() {
+      const canvas = document.getElementById('demo-waveform');
+      const ctx = canvas.getContext('2d');
+      const recording = document.getElementById('demo-recording');
+      const conversation = document.getElementById('demo-conversation');
+      const suggestion = document.getElementById('demo-suggestion');
+      const questionEl = document.getElementById('demo-question');
+      const answerEl = document.getElementById('demo-answer');
+      const suggestionText = document.getElementById('demo-suggestion-text');
+      const acceptBtn = document.getElementById('demo-accept');
+      const selectionEl = document.getElementById('demo-selection');
+      const modeEl = document.getElementById('demo-mode');
+
+      // Demo scenarios
+      const demos = [
+        {
+          mode: 'Socratic',
+          originalText: 'sacred and undeniable',
+          question: "Is 'sacred' the right framing here? It sounds more religious than philosophical.",
+          answer: "'Self-evident' grounds the claim in reason and Enlightenment thinking rather than divine authority.",
+          newText: 'self-evident'
+        },
+        {
+          mode: 'Didactic',
+          originalText: 'sacred and undeniable',
+          question: '"Obvious"',
+          answer: null, // No conversation in didactic mode
+          newText: 'obvious'
+        }
+      ];
+
+      let currentDemo = 0;
+      let animationId;
+      let time = 0;
+
+      // Waveform animation
+      function drawWaveform() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = '#b45309';
+        ctx.lineWidth = 1.5;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+
+        const centerY = canvas.height / 2;
+        const segments = 40;
+        const segmentWidth = canvas.width / segments;
+
+        for (let i = 0; i <= segments; i++) {
+          const x = i * segmentWidth;
+          const wave1 = Math.sin(time * 3 + i * 0.3) * 8;
+          const wave2 = Math.sin(time * 5 + i * 0.5) * 4;
+          const wave3 = Math.sin(time * 2 + i * 0.2) * 3;
+          const amplitude = (wave1 + wave2 + wave3) * (0.5 + Math.random() * 0.3);
+          const y = centerY + amplitude;
+
+          if (i === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+        ctx.stroke();
+        time += 0.05;
+      }
+
+      // Typing animation
+      function typeText(element, text, speed = 30) {
+        return new Promise(resolve => {
+          let i = 0;
+          element.innerHTML = '<span class="typing-cursor"></span>';
+          element.style.display = 'block';
+
+          function type() {
+            if (i < text.length) {
+              element.innerHTML = text.substring(0, i + 1) + '<span class="typing-cursor"></span>';
+              i++;
+              setTimeout(type, speed + Math.random() * 20);
+            } else {
+              element.innerHTML = text;
+              resolve();
+            }
+          }
+          type();
+        });
+      }
+
+      // Reset state
+      function resetDemo(demo) {
+        recording.classList.remove('hidden');
+        conversation.classList.remove('visible');
+        suggestion.classList.remove('visible');
+        questionEl.innerHTML = '';
+        answerEl.innerHTML = '';
+        suggestionText.innerHTML = '';
+        acceptBtn.classList.remove('clicked');
+        selectionEl.textContent = demo.originalText;
+        selectionEl.classList.remove('accepted', 'changing');
+        modeEl.textContent = demo.mode;
+      }
+
+      // Animation phases
+      async function runDemo() {
+        const demo = demos[currentDemo];
+        resetDemo(demo);
+
+        // Phase 1: Waveform (2.5 seconds)
+        const waveformDuration = 2500;
+        const startTime = Date.now();
+
+        function animateWaveform() {
+          if (Date.now() - startTime < waveformDuration) {
+            drawWaveform();
+            animationId = requestAnimationFrame(animateWaveform);
+          } else {
+            cancelAnimationFrame(animationId);
+            showConversation(demo);
+          }
+        }
+        animateWaveform();
+      }
+
+      async function showConversation(demo) {
+        recording.classList.add('hidden');
+        conversation.classList.add('visible');
+
+        // Type the spoken text (question in Socratic, transcription in Didactic)
+        await typeText(questionEl, demo.question, 25);
+        await new Promise(r => setTimeout(r, 400));
+
+        // Only show answer in Socratic mode
+        if (demo.answer) {
+          await typeText(answerEl, demo.answer, 20);
+          await new Promise(r => setTimeout(r, 600));
+        }
+
+        // Show suggestion
+        suggestion.classList.add('visible');
+        await typeText(suggestionText, demo.newText, 15);
+        await new Promise(r => setTimeout(r, 1200));
+
+        // Auto-click accept
+        acceptBtn.classList.add('clicked');
+        await new Promise(r => setTimeout(r, 300));
+
+        // Update the text
+        selectionEl.classList.add('accepted');
+        selectionEl.textContent = demo.newText;
+
+        await new Promise(r => setTimeout(r, 200));
+        selectionEl.classList.add('changing');
+
+        // Wait then run next demo
+        await new Promise(r => setTimeout(r, 4000));
+        currentDemo = (currentDemo + 1) % demos.length;
+        runDemo();
+      }
+
+      // Start when visible
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            runDemo();
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+
+      observer.observe(document.querySelector('.demo-hero'));
+    })();
+
+    // Agent Demo Animation
+    (function() {
+      const emptyState = document.getElementById('agent-empty-state');
+      const agentCard = document.getElementById('agent-card');
+      const agentQuote = document.getElementById('agent-quote');
+      const agentIssue = document.getElementById('agent-issue');
+      const agentRevision = document.getElementById('agent-revision');
+      const agentRevisionText = document.getElementById('agent-revision-text');
+      const agentAccept = document.getElementById('agent-accept');
+      const agentHighlight = document.getElementById('agent-highlight');
+      const agentDot = document.getElementById('agent-dot');
+      const agentName = document.getElementById('agent-name');
+
+      // Demo scenarios with agent colors
+      const agentDemos = [
+        {
+          agent: 'Clarity Check',
+          color: '#059669', // Emerald green
+          quote: 'demonstrate a significant improvement',
+          issue: '"Significant" is vague—23% increase is specific. Lead with the number.',
+          revision: 'grew 23%',
+          originalText: 'demonstrate a significant improvement',
+          newText: 'grew 23%'
+        },
+        {
+          agent: 'Jargon Detector',
+          color: '#b45309', // Amber
+          quote: 'demonstrate a significant improvement',
+          issue: 'Corporate speak. "Demonstrate" + "significant" is filler. Be direct.',
+          revision: 'improved substantially',
+          originalText: 'grew 23%',  // Picks up from previous
+          newText: 'improved substantially'
+        }
+      ];
+
+      let currentAgentDemo = 0;
+
+      // Typing animation
+      function typeTextAgent(element, text, speed = 20) {
+        return new Promise(resolve => {
+          let i = 0;
+          element.innerHTML = '<span class="typing-cursor"></span>';
+          element.style.display = 'block';
+
+          function type() {
+            if (i < text.length) {
+              element.innerHTML = text.substring(0, i + 1) + '<span class="typing-cursor"></span>';
+              i++;
+              setTimeout(type, speed + Math.random() * 15);
+            } else {
+              element.innerHTML = text;
+              resolve();
+            }
+          }
+          type();
+        });
+      }
+
+      // Reset state
+      function resetAgentDemo(demo) {
+        emptyState.classList.remove('hidden');
+        agentCard.classList.add('hidden');
+        agentQuote.innerHTML = '';
+        agentIssue.innerHTML = '';
+        agentRevisionText.innerHTML = '';
+        agentRevision.classList.add('hidden');
+        agentAccept.classList.remove('clicked');
+        agentHighlight.textContent = demo.originalText;
+        agentHighlight.classList.remove('accepted', 'changing');
+        agentHighlight.style.background = `${demo.color}22`; // 22 = ~13% opacity
+        agentDot.classList.remove('running');
+        agentDot.classList.add('active');
+        agentDot.style.background = demo.color;
+        agentDot.style.boxShadow = `0 0 0 2px ${demo.color}33`;
+        agentName.textContent = demo.agent;
+        agentCard.style.borderLeftColor = demo.color;
+        document.querySelector('.agent-demo-badge').style.color = demo.color;
+        document.querySelector('.agent-revision-arrow').style.color = demo.color;
+        document.querySelector('.agent-demo-revision').style.background = `${demo.color}1a`;
+      }
+
+      async function runAgentDemo() {
+        const demo = agentDemos[currentAgentDemo];
+        resetAgentDemo(demo);
+
+        // Phase 1: Wait a moment (simulating typing)
+        await new Promise(r => setTimeout(r, 1500));
+
+        // Phase 2: Agent starts thinking (dot pulses)
+        agentDot.classList.remove('active');
+        agentDot.classList.add('running');
+        await new Promise(r => setTimeout(r, 1200));
+
+        // Phase 3: Card appears
+        agentDot.classList.remove('running');
+        agentDot.classList.add('active');
+        emptyState.classList.add('hidden');
+        agentCard.classList.remove('hidden');
+
+        // Type quote
+        agentQuote.textContent = '"' + demo.quote + '"';
+        await new Promise(r => setTimeout(r, 400));
+
+        // Type issue
+        await typeTextAgent(agentIssue, demo.issue, 18);
+        await new Promise(r => setTimeout(r, 500));
+
+        // Show revision
+        agentRevision.classList.remove('hidden');
+        await typeTextAgent(agentRevisionText, '"' + demo.revision + '"', 25);
+        await new Promise(r => setTimeout(r, 1500));
+
+        // Phase 4: Accept
+        agentAccept.classList.add('clicked');
+        await new Promise(r => setTimeout(r, 250));
+
+        // Update highlight
+        agentHighlight.classList.add('accepted');
+        agentHighlight.textContent = demo.newText;
+        await new Promise(r => setTimeout(r, 200));
+        agentHighlight.classList.add('changing');
+
+        // Wait then next demo
+        await new Promise(r => setTimeout(r, 4000));
+        currentAgentDemo = (currentAgentDemo + 1) % agentDemos.length;
+        runAgentDemo();
+      }
+
+      // Start when visible
+      const agentObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            runAgentDemo();
+            agentObserver.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+
+      agentObserver.observe(document.querySelector('.agent-demo-window'));
+    })();
+
+    // Email Signup Handler
+    (function() {
+      const form = document.getElementById('email-form');
+      const input = document.getElementById('email-input');
+      const content = document.querySelector('.email-signup-content');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = input.value.trim();
+        if (!email) return;
+
+        const submitBtn = form.querySelector('.email-submit');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Subscribing...';
+        submitBtn.disabled = true;
+
+        try {
+          const response = await fetch('https://formspree.io/f/xvzqbpol', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ email })
+          });
+
+          if (response.ok) {
+            content.innerHTML = '<div class="email-success">Thanks! You\'ll hear from us soon.</div>';
+          } else {
+            throw new Error('Form submission failed');
+          }
+        } catch (err) {
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+          alert('Something went wrong. Please try again.');
+        }
+      });
+    })();
+
+    // Voice Guide Demo
+    (function() {
+      const afterEl = document.getElementById('voice-after');
+      if (!afterEl) return;
+
+      const codeEl = document.getElementById('voice-code');
+      const beforeEl = document.getElementById('voice-before');
+
+      const transformations = [
+        {
+          before: "It is recommended that users familiarize themselves with the documentation prior to implementation.",
+          after: "Read the docs before you start. It'll save you time."
+        },
+        {
+          before: "We are pleased to announce the launch of our new product offering.",
+          after: "We just launched something new. Here's what it does."
+        },
+        {
+          before: "In order to optimize efficiency, it is advisable to leverage existing resources.",
+          after: "Use what you have. It's faster."
+        }
+      ];
+
+      let isRunning = false;
+      let currentIndex = 0;
+
+      function typeTextVoice(element, text, speed = 20) {
+        return new Promise(resolve => {
+          let i = 0;
+          element.innerHTML = '<span class="typing-cursor"></span>';
+          function type() {
+            if (i < text.length) {
+              element.innerHTML = text.substring(0, i + 1) + '<span class="typing-cursor"></span>';
+              i++;
+              setTimeout(type, speed + Math.random() * 15);
+            } else {
+              element.innerHTML = text;
+              resolve();
+            }
+          }
+          type();
+        });
+      }
+
+      async function runVoiceDemo() {
+        if (isRunning) return;
+        isRunning = true;
+
+        const transform = transformations[currentIndex];
+        beforeEl.textContent = transform.before;
+        afterEl.textContent = '';
+
+        await new Promise(r => setTimeout(r, 1500));
+
+        // Pulse the code block
+        codeEl.style.transition = 'box-shadow 0.3s ease';
+        codeEl.style.boxShadow = '0 0 0 2px rgba(5, 150, 105, 0.3)';
+        await new Promise(r => setTimeout(r, 500));
+        codeEl.style.boxShadow = 'none';
+
+        await typeTextVoice(afterEl, transform.after, 20);
+
+        await new Promise(r => setTimeout(r, 4000));
+
+        currentIndex = (currentIndex + 1) % transformations.length;
+        isRunning = false;
+        runVoiceDemo();
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !isRunning) {
+            runVoiceDemo();
+          }
+        });
+      }, { threshold: 0.3 });
+
+      observer.observe(document.getElementById('voice-guide-demo'));
+    })();
+
+    // Privacy Demo
+    (function() {
+      const voiceNode = document.getElementById('privacy-voice');
+      if (!voiceNode) return;
+
+      const whisperNode = document.getElementById('privacy-whisper');
+      const claudeNode = document.getElementById('privacy-claude');
+      const arrow1 = document.getElementById('privacy-arrow-1');
+      const arrow2 = document.getElementById('privacy-arrow-2');
+
+      let isRunning = false;
+
+      async function runPrivacyDemo() {
+        if (isRunning) return;
+        isRunning = true;
+
+        // Reset
+        [voiceNode, whisperNode, claudeNode].forEach(n => n.classList.remove('active'));
+        [arrow1, arrow2].forEach(a => a.classList.remove('active'));
+
+        await new Promise(r => setTimeout(r, 500));
+
+        // Step 1: Voice activates
+        voiceNode.classList.add('active');
+        await new Promise(r => setTimeout(r, 800));
+
+        // Step 2: Arrow 1 activates
+        arrow1.classList.add('active');
+        voiceNode.classList.remove('active');
+        await new Promise(r => setTimeout(r, 600));
+
+        // Step 3: Whisper activates
+        whisperNode.classList.add('active');
+        arrow1.classList.remove('active');
+        await new Promise(r => setTimeout(r, 1000));
+
+        // Step 4: Arrow 2 activates
+        arrow2.classList.add('active');
+        whisperNode.classList.remove('active');
+        await new Promise(r => setTimeout(r, 600));
+
+        // Step 5: Claude activates
+        claudeNode.classList.add('active');
+        arrow2.classList.remove('active');
+        await new Promise(r => setTimeout(r, 1500));
+
+        // Reset and loop
+        claudeNode.classList.remove('active');
+        await new Promise(r => setTimeout(r, 2000));
+
+        isRunning = false;
+        runPrivacyDemo();
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !isRunning) {
+            runPrivacyDemo();
+          }
+        });
+      }, { threshold: 0.3 });
+
+      observer.observe(document.getElementById('privacy-demo'));
+    })();
+
+    // Keyboard Shortcuts Demo
+    (function() {
+      const shortcuts = [
+        'shortcut-socratic',
+        'shortcut-dictation',
+        'shortcut-save',
+        'shortcut-accept',
+        'shortcut-reject',
+        'shortcut-open',
+        'shortcut-settings',
+        'shortcut-agents'
+      ];
+
+      let currentIndex = 0;
+      let isRunning = false;
+
+      async function runShortcutsDemo() {
+        if (isRunning) return;
+        isRunning = true;
+
+        // Reset all
+        shortcuts.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.classList.remove('active');
+        });
+
+        await new Promise(r => setTimeout(r, 500));
+
+        // Highlight each shortcut in sequence
+        for (let i = 0; i < shortcuts.length; i++) {
+          const el = document.getElementById(shortcuts[i]);
+          if (el) {
+            el.classList.add('active');
+            await new Promise(r => setTimeout(r, 600));
+            el.classList.remove('active');
+            await new Promise(r => setTimeout(r, 200));
+          }
+        }
+
+        await new Promise(r => setTimeout(r, 2000));
+
+        isRunning = false;
+        runShortcutsDemo();
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !isRunning) {
+            runShortcutsDemo();
+          }
+        });
+      }, { threshold: 0.3 });
+
+      observer.observe(document.getElementById('shortcuts-demo'));
+    })();
+
+    // Settings Demo - Toggle animation
+    (function() {
+      const switchEl = document.getElementById('settings-switch');
+      if (!switchEl) return;
+
+      let isRunning = false;
+
+      async function runSettingsDemo() {
+        if (isRunning) return;
+        isRunning = true;
+
+        await new Promise(r => setTimeout(r, 2000));
+
+        // Toggle off
+        switchEl.classList.remove('on');
+        await new Promise(r => setTimeout(r, 1500));
+
+        // Toggle on
+        switchEl.classList.add('on');
+        await new Promise(r => setTimeout(r, 3000));
+
+        isRunning = false;
+        runSettingsDemo();
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !isRunning) {
+            runSettingsDemo();
+          }
+        });
+      }, { threshold: 0.3 });
+
+      observer.observe(document.getElementById('settings-demo'));
+    })();
+
+    // Multiple Conversations Demo
+    (function() {
+      const answerEl = document.getElementById('conv-answer-2');
+      if (!answerEl) return;
+
+      const highlight2 = document.getElementById('conv-highlight-2');
+      let isRunning = false;
+
+      function typeTextConv(element, text, speed = 15) {
+        return new Promise(resolve => {
+          let i = 0;
+          element.innerHTML = '<span class="typing-cursor"></span>';
+          element.style.display = 'block';
+          function type() {
+            if (i < text.length) {
+              element.innerHTML = text.substring(0, i + 1) + '<span class="typing-cursor"></span>';
+              i++;
+              setTimeout(type, speed + Math.random() * 10);
+            } else {
+              element.innerHTML = text;
+              resolve();
+            }
+          }
+          type();
+        });
+      }
+
+      async function runConversationsDemo() {
+        if (isRunning) return;
+        isRunning = true;
+
+        // Reset
+        answerEl.textContent = '';
+        answerEl.style.display = 'none';
+        highlight2.classList.remove('accepted');
+        highlight2.textContent = 'significant productivity gains';
+
+        await new Promise(r => setTimeout(r, 1500));
+
+        // Type the AI response
+        await typeTextConv(
+          answerEl,
+          "Yes, citing a source would strengthen this claim. Try: 'A Stanford study found productivity rose 13% for remote workers.'",
+          12
+        );
+
+        await new Promise(r => setTimeout(r, 2500));
+
+        // Apply the edit
+        highlight2.classList.add('accepted');
+        highlight2.textContent = 'a Stanford study found productivity rose 13% for remote workers';
+
+        await new Promise(r => setTimeout(r, 5000));
+
+        isRunning = false;
+        runConversationsDemo();
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !isRunning) {
+            runConversationsDemo();
+          }
+        });
+      }, { threshold: 0.3 });
+
+      observer.observe(document.getElementById('conversations-demo'));
+    })();
+  </script>
+</body>
+</html>
