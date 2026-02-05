@@ -18,6 +18,7 @@
         <a href="#features">Features</a>
         <a href="#agents">Agents</a>
         <a href="#pricing">Pricing</a>
+        <a href="/brand">Brand</a>
         <a href="#updates" class="nav-download">Download</a>
       </nav>
     </div>
@@ -31,8 +32,8 @@
         <span class="beta-badge">Beta</span>
         <h1>Edit with your voice.</h1>
         <p class="hero-subtitle">
-          <span class="brand">Ada</span> is a voice-driven content editor for writers who think out loud.
-          Discuss your ideas, refine your prose, or dictate replacements. All with your voice.
+          <span class="brand">Ada</span> is a voice-driven content editor with built-in agents that watch as you write.
+          Discuss ideas, refine prose, or dictate replacements—all with your voice.
         </p>
         <div class="hero-cta">
           <a href="#updates" class="btn btn-primary">Download Beta</a>
@@ -64,7 +65,7 @@
                     <span class="demo-mode" id="demo-mode">Socratic</span>
                     <span class="demo-recording-dot"></span>
                   </div>
-                  <canvas id="demo-waveform" width="200" height="32"></canvas>
+                  <canvas id="demo-waveform" width="54" height="54"></canvas>
                   <span class="demo-hint">Listening...</span>
                 </div>
                 <div class="demo-card-conversation" id="demo-conversation">
@@ -513,6 +514,20 @@ to a smart friend over coffee.
                   <div class="conv-msg user">"Should I cite a source here?"</div>
                   <div class="conv-msg assistant" id="conv-answer-2"></div>
                 </div>
+                <div class="conv-suggestion" id="conv-suggestion-2">
+                  <div class="conv-suggestion-label">Suggested edit</div>
+                  <div class="conv-suggestion-content" id="conv-suggestion-text"></div>
+                  <div class="conv-suggestion-actions">
+                    <button class="conv-btn-accept" id="conv-accept-2">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      Accept
+                    </button>
+                    <button class="conv-btn-reject">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                      Reject
+                    </button>
+                  </div>
+                </div>
               </div>
 
               <!-- Card 3: Minimized -->
@@ -563,28 +578,26 @@ to a smart friend over coffee.
                 <span>Agents are watching.<br/>Suggestions appear here.</span>
               </div>
 
-              <!-- Suggestion Card (hidden initially) -->
-              <div class="agent-demo-card hidden" id="agent-card">
+              <!-- Suggestion Card 1: Clarity Check -->
+              <div class="agent-demo-card hidden" id="agent-card-1" data-agent="clarity">
                 <div class="agent-demo-card-header">
-                  <div class="agent-demo-badge">
+                  <div class="agent-demo-badge" style="color: #059669;">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                      <rect x="3" y="8" width="18" height="12" rx="2" />
-                      <circle cx="9" cy="14" r="2" />
-                      <circle cx="15" cy="14" r="2" />
-                      <path d="M12 2v4" />
-                      <path d="M8 2h8" />
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M12 16v-4"/>
+                      <path d="M12 8h.01"/>
                     </svg>
-                    <span id="agent-name">Clarity Check</span>
+                    <span>Clarity Check</span>
                   </div>
                 </div>
-                <blockquote class="agent-demo-quote" id="agent-quote"></blockquote>
-                <p class="agent-demo-issue" id="agent-issue"></p>
-                <div class="agent-demo-revision" id="agent-revision">
-                  <span class="agent-revision-arrow">→</span>
-                  <span class="agent-revision-text" id="agent-revision-text"></span>
+                <blockquote class="agent-demo-quote" id="agent-quote-1"></blockquote>
+                <p class="agent-demo-issue" id="agent-issue-1"></p>
+                <div class="agent-demo-revision" id="agent-revision-1" style="background: rgba(5, 150, 105, 0.1);">
+                  <span class="agent-revision-arrow" style="color: #059669;">→</span>
+                  <span class="agent-revision-text" id="agent-revision-text-1"></span>
                 </div>
                 <div class="agent-demo-actions">
-                  <button class="agent-btn-accept" id="agent-accept">
+                  <button class="agent-btn-accept" id="agent-accept-1">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
                     Accept
                   </button>
@@ -592,11 +605,34 @@ to a smart friend over coffee.
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                     Dismiss
                   </button>
-                  <button class="agent-btn-discuss">
+                </div>
+              </div>
+
+              <!-- Suggestion Card 2: Voice Consistency -->
+              <div class="agent-demo-card hidden" id="agent-card-2" data-agent="voice">
+                <div class="agent-demo-card-header">
+                  <div class="agent-demo-badge" style="color: #7c3aed;">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                      <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-                      <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                      <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                      <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
                     </svg>
+                    <span>Voice Consistency</span>
+                  </div>
+                </div>
+                <blockquote class="agent-demo-quote" id="agent-quote-2"></blockquote>
+                <p class="agent-demo-issue" id="agent-issue-2"></p>
+                <div class="agent-demo-revision" id="agent-revision-2" style="background: rgba(124, 58, 237, 0.1);">
+                  <span class="agent-revision-arrow" style="color: #7c3aed;">→</span>
+                  <span class="agent-revision-text" id="agent-revision-text-2"></span>
+                </div>
+                <div class="agent-demo-actions">
+                  <button class="agent-btn-accept" id="agent-accept-2">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    Accept
+                  </button>
+                  <button class="agent-btn-dismiss">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    Dismiss
                   </button>
                 </div>
               </div>
@@ -613,14 +649,19 @@ to a smart friend over coffee.
                   </svg>
                   <span>AGENTS</span>
                 </div>
-                <div class="agent-demo-row" id="agent-row-1">
-                  <span class="agent-demo-dot active" id="agent-dot"></span>
+                <div class="agent-demo-row" id="agent-row-clarity">
+                  <span class="agent-demo-dot active" id="agent-dot-clarity" style="background: #059669; box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.2);"></span>
                   <span class="agent-demo-row-name">Clarity Check</span>
                   <span class="agent-demo-row-scope">LOCAL</span>
                 </div>
+                <div class="agent-demo-row" id="agent-row-voice">
+                  <span class="agent-demo-dot active" id="agent-dot-voice" style="background: #7c3aed; box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);"></span>
+                  <span class="agent-demo-row-name">Voice Consistency</span>
+                  <span class="agent-demo-row-scope">GLOBAL</span>
+                </div>
                 <div class="agent-demo-row">
                   <span class="agent-demo-dot paused"></span>
-                  <span class="agent-demo-row-name">Style Guide</span>
+                  <span class="agent-demo-row-name">Argument Flow</span>
                   <span class="agent-demo-row-scope">GLOBAL</span>
                 </div>
               </div>
@@ -629,10 +670,10 @@ to a smart friend over coffee.
             <!-- Editor (center) -->
             <div class="agent-demo-editor">
               <p class="agent-demo-text">
-                Our Q3 results <span class="agent-demo-highlight" id="agent-highlight">demonstrate a significant improvement</span> over the previous quarter. Revenue increased by 23% while operating costs decreased.
+                Our Q3 results <span class="agent-demo-highlight highlight-clarity" id="agent-highlight-1">demonstrate a significant improvement</span> over the previous quarter. Revenue increased by 23% while operating costs decreased.
               </p>
-              <p class="agent-demo-text" style="margin-top: 16px; color: #78716c;">
-                The marketing team's new strategy contributed to higher engagement across all channels. Customer acquisition cost dropped by 15%.
+              <p class="agent-demo-text" style="margin-top: 16px;">
+                The marketing team's <span class="agent-demo-highlight highlight-voice" id="agent-highlight-2">new strategy contributed to</span> higher engagement across all channels. Customer acquisition cost dropped by 15%.
               </p>
             </div>
           </div>
@@ -693,8 +734,8 @@ to a smart friend over coffee.
           <article class="pricing-card pricing-card-byok">
             <div class="pricing-header">
               <div>
-                <span class="pricing-label">Bring your own key</span>
-                <h3>BYOK</h3>
+                <span class="pricing-label">BYOK</span>
+                <h3>Direct</h3>
               </div>
               <span class="pricing-price"><s>$39</s> Free</span>
             </div>
@@ -724,7 +765,7 @@ to a smart friend over coffee.
               <li>All core features</li>
             </ul>
             <div class="pricing-actions">
-              <button class="btn btn-primary">Start Starter</button>
+              <button class="btn btn-primary" disabled>Starter (Coming Soon)</button>
             </div>
           </article>
 
@@ -743,7 +784,7 @@ to a smart friend over coffee.
               <li>All core features</li>
             </ul>
             <div class="pricing-actions">
-              <button class="btn btn-primary btn-outline">Go Pro</button>
+              <button class="btn btn-primary btn-outline" disabled>Pro (Coming Soon)</button>
             </div>
           </article>
         </div>
@@ -792,9 +833,6 @@ to a smart friend over coffee.
           </a>
         </div>
         <p class="download-version">v0.1.0 · macOS 11+</p>
-        <p class="download-note-small">
-          First launch: Right-click the app and select "Open" to bypass Gatekeeper.
-        </p>
       </div>
     </section>
   </main>
@@ -865,33 +903,137 @@ to a smart friend over coffee.
       let animationId;
       let time = 0;
 
-      // Waveform animation
-      function drawWaveform() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.strokeStyle = '#b45309';
-        ctx.lineWidth = 1.5;
-        ctx.lineCap = 'round';
-        ctx.beginPath();
+      // Orbit visualization state
+      const orbitState = {
+        particles: [],
+        thinkingPhase: 0,
+        initialized: false
+      };
 
-        const centerY = canvas.height / 2;
-        const segments = 40;
-        const segmentWidth = canvas.width / segments;
-
-        for (let i = 0; i <= segments; i++) {
-          const x = i * segmentWidth;
-          const wave1 = Math.sin(time * 3 + i * 0.3) * 8;
-          const wave2 = Math.sin(time * 5 + i * 0.5) * 4;
-          const wave3 = Math.sin(time * 2 + i * 0.2) * 3;
-          const amplitude = (wave1 + wave2 + wave3) * (0.5 + Math.random() * 0.3);
-          const y = centerY + amplitude;
-
-          if (i === 0) {
-            ctx.moveTo(x, y);
-          } else {
-            ctx.lineTo(x, y);
-          }
+      // Initialize orbit particles (scaled for 36px canvas)
+      // Original: 32 particles (24+8), scaled to ~10 (7+3) for 30% size
+      function initOrbitParticles() {
+        if (orbitState.initialized) return;
+        orbitState.particles = [];
+        const originalCount = 10;
+        const permanentCount = 3;
+        const totalParticles = originalCount + permanentCount;
+        for (let i = 0; i < totalParticles; i++) {
+          orbitState.particles.push({
+            angle: (i / totalParticles) * Math.PI * 2,
+            radius: 4,
+            size: 1.5,  // scaled for 54px canvas
+            state: 'orbiting',
+            permanent: i >= originalCount,
+            x: 0, y: 0, vx: 0, vy: 0, life: 1
+          });
         }
-        ctx.stroke();
+        orbitState.initialized = true;
+      }
+
+      // Orbit waveform visualization - Speak vs Think mode
+      function drawWaveform() {
+        initOrbitParticles();
+
+        const w = canvas.width;
+        const h = canvas.height;
+        const centerX = w / 2;
+        const centerY = h / 2;
+
+        // Clear with transparent background
+        ctx.clearRect(0, 0, w, h);
+
+        // Simulate voice level with pulsing
+        const simulatedLevel = 0.5 + Math.sin(time * 4) * 0.3 + Math.sin(time * 7) * 0.15;
+        const boostedLevel = Math.pow(Math.max(0, simulatedLevel), 0.5) * 1.6;
+
+        const maxRadius = Math.min(w, h) / 2 - 2;
+        const halfRadius = maxRadius * 0.35;  // 35% of max (matching explorer)
+
+        // Detect speaking vs thinking mode
+        const isSpeaking = boostedLevel > 0.18;
+
+        let orbitRadius;
+        if (isSpeaking) {
+          // Speaking: fixed at 35% radius
+          orbitRadius = halfRadius;
+        } else {
+          // Thinking: pulse between 15% and 35%
+          orbitState.thinkingPhase += 0.03;
+          const pulse = Math.sin(orbitState.thinkingPhase) * 0.5 + 0.5;
+          orbitRadius = maxRadius * (0.15 + pulse * 0.2);
+        }
+
+        // Spin speed varies by mode
+        const spinSpeed = isSpeaking ? 0.03 + boostedLevel * 0.02 : 0.015;
+
+        orbitState.particles.forEach(p => {
+          if (p.state === 'orbiting') {
+            p.angle += spinSpeed;
+            p.radius += (orbitRadius - p.radius) * 0.1;
+
+            const x = centerX + Math.cos(p.angle) * p.radius;
+            const y = centerY + Math.sin(p.angle) * p.radius;
+
+            // Check horizon for detach (scaled for 54px canvas)
+            const atHorizon = Math.abs(y - centerY) < 4;
+            const shouldDetach = !p.permanent && isSpeaking && atHorizon && Math.random() < boostedLevel * 0.4;
+
+            if (shouldDetach) {
+              p.state = 'flying';
+              p.x = x;
+              p.y = y;
+              // Scaled velocity for 54px canvas
+              p.vx = (x < centerX ? -1 : 1) * (0.4 + boostedLevel * 0.4);
+              p.vy = (Math.random() - 0.5) * 0.2;
+              p.life = 1;
+            } else {
+              ctx.beginPath();
+              ctx.arc(x, y, p.size + (isSpeaking ? boostedLevel * 0.3 : 0.1), 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(180, 83, 9, ${isSpeaking ? 0.8 : 0.5})`;
+              ctx.fill();
+            }
+
+          } else if (p.state === 'flying') {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy *= 0.96;
+            p.life -= 0.05;  // fadeRate from style guide
+
+            if (p.life > 0) {
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, p.size * (0.5 + p.life * 0.5), 0, Math.PI * 2);
+              const isLeft = p.vx < 0;
+              ctx.fillStyle = isLeft
+                ? `rgba(220, 100, 20, ${p.life * 0.9})`
+                : `rgba(251, 191, 36, ${p.life * 0.9})`;
+              ctx.fill();
+            }
+
+            if (p.life <= 0) {
+              p.state = 'refilling';
+              p.radius = 0;
+            }
+
+          } else if (p.state === 'refilling') {
+            p.angle += spinSpeed;
+            p.radius += (orbitRadius - p.radius) * 0.08;
+
+            const x = centerX + Math.cos(p.angle) * p.radius;
+            const y = centerY + Math.sin(p.angle) * p.radius;
+            const fadeIn = Math.min(1, p.radius / (orbitRadius * 0.8));
+
+            ctx.beginPath();
+            ctx.arc(x, y, p.size * fadeIn, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(180, 83, 9, ${fadeIn * (isSpeaking ? 0.8 : 0.5)})`;
+            ctx.fill();
+
+            if (p.radius > orbitRadius * 0.9) {
+              p.state = 'orbiting';
+            }
+          }
+        });
+
         time += 0.05;
       }
 
@@ -1003,39 +1145,28 @@ to a smart friend over coffee.
     // Agent Demo Animation
     (function() {
       const emptyState = document.getElementById('agent-empty-state');
-      const agentCard = document.getElementById('agent-card');
-      const agentQuote = document.getElementById('agent-quote');
-      const agentIssue = document.getElementById('agent-issue');
-      const agentRevision = document.getElementById('agent-revision');
-      const agentRevisionText = document.getElementById('agent-revision-text');
-      const agentAccept = document.getElementById('agent-accept');
-      const agentHighlight = document.getElementById('agent-highlight');
-      const agentDot = document.getElementById('agent-dot');
-      const agentName = document.getElementById('agent-name');
 
-      // Demo scenarios with agent colors
-      const agentDemos = [
-        {
-          agent: 'Clarity Check',
-          color: '#059669', // Emerald green
-          quote: 'demonstrate a significant improvement',
-          issue: '"Significant" is vague—23% increase is specific. Lead with the number.',
-          revision: 'grew 23%',
-          originalText: 'demonstrate a significant improvement',
-          newText: 'grew 23%'
-        },
-        {
-          agent: 'Jargon Detector',
-          color: '#b45309', // Amber
-          quote: 'demonstrate a significant improvement',
-          issue: 'Corporate speak. "Demonstrate" + "significant" is filler. Be direct.',
-          revision: 'improved substantially',
-          originalText: 'grew 23%',  // Picks up from previous
-          newText: 'improved substantially'
-        }
-      ];
+      // Agent 1: Clarity Check
+      const card1 = document.getElementById('agent-card-1');
+      const quote1 = document.getElementById('agent-quote-1');
+      const issue1 = document.getElementById('agent-issue-1');
+      const revision1 = document.getElementById('agent-revision-1');
+      const revisionText1 = document.getElementById('agent-revision-text-1');
+      const accept1 = document.getElementById('agent-accept-1');
+      const highlight1 = document.getElementById('agent-highlight-1');
+      const dot1 = document.getElementById('agent-dot-clarity');
 
-      let currentAgentDemo = 0;
+      // Agent 2: Voice Consistency
+      const card2 = document.getElementById('agent-card-2');
+      const quote2 = document.getElementById('agent-quote-2');
+      const issue2 = document.getElementById('agent-issue-2');
+      const revision2 = document.getElementById('agent-revision-2');
+      const revisionText2 = document.getElementById('agent-revision-text-2');
+      const accept2 = document.getElementById('agent-accept-2');
+      const highlight2 = document.getElementById('agent-highlight-2');
+      const dot2 = document.getElementById('agent-dot-voice');
+
+      if (!card1 || !card2) return;
 
       // Typing animation
       function typeTextAgent(element, text, speed = 20) {
@@ -1043,7 +1174,6 @@ to a smart friend over coffee.
           let i = 0;
           element.innerHTML = '<span class="typing-cursor"></span>';
           element.style.display = 'block';
-
           function type() {
             if (i < text.length) {
               element.innerHTML = text.substring(0, i + 1) + '<span class="typing-cursor"></span>';
@@ -1058,73 +1188,94 @@ to a smart friend over coffee.
         });
       }
 
-      // Reset state
-      function resetAgentDemo(demo) {
+      // Reset all state
+      function resetAgentDemo() {
         emptyState.classList.remove('hidden');
-        agentCard.classList.add('hidden');
-        agentQuote.innerHTML = '';
-        agentIssue.innerHTML = '';
-        agentRevisionText.innerHTML = '';
-        agentRevision.classList.add('hidden');
-        agentAccept.classList.remove('clicked');
-        agentHighlight.textContent = demo.originalText;
-        agentHighlight.classList.remove('accepted', 'changing');
-        agentHighlight.style.background = `${demo.color}22`; // 22 = ~13% opacity
-        agentDot.classList.remove('running');
-        agentDot.classList.add('active');
-        agentDot.style.background = demo.color;
-        agentDot.style.boxShadow = `0 0 0 2px ${demo.color}33`;
-        agentName.textContent = demo.agent;
-        agentCard.style.borderLeftColor = demo.color;
-        document.querySelector('.agent-demo-badge').style.color = demo.color;
-        document.querySelector('.agent-revision-arrow').style.color = demo.color;
-        document.querySelector('.agent-demo-revision').style.background = `${demo.color}1a`;
+
+        // Reset card 1
+        card1.classList.add('hidden');
+        quote1.innerHTML = '';
+        issue1.innerHTML = '';
+        revisionText1.innerHTML = '';
+        revision1.classList.add('hidden');
+        accept1.classList.remove('clicked');
+        highlight1.textContent = 'demonstrate a significant improvement';
+        highlight1.classList.remove('accepted', 'changing-clarity');
+        dot1.classList.remove('running');
+
+        // Reset card 2
+        card2.classList.add('hidden');
+        quote2.innerHTML = '';
+        issue2.innerHTML = '';
+        revisionText2.innerHTML = '';
+        revision2.classList.add('hidden');
+        accept2.classList.remove('clicked');
+        highlight2.textContent = 'new strategy contributed to';
+        highlight2.classList.remove('accepted', 'changing-voice');
+        dot2.classList.remove('running');
       }
 
       async function runAgentDemo() {
-        const demo = agentDemos[currentAgentDemo];
-        resetAgentDemo(demo);
+        resetAgentDemo();
 
-        // Phase 1: Wait a moment (simulating typing)
+        // Wait a moment
         await new Promise(r => setTimeout(r, 1500));
 
-        // Phase 2: Agent starts thinking (dot pulses)
-        agentDot.classList.remove('active');
-        agentDot.classList.add('running');
-        await new Promise(r => setTimeout(r, 1200));
+        // === AGENT 1: Clarity Check ===
+        dot1.classList.add('running');
+        await new Promise(r => setTimeout(r, 1000));
+        dot1.classList.remove('running');
 
-        // Phase 3: Card appears
-        agentDot.classList.remove('running');
-        agentDot.classList.add('active');
+        // Show card 1
         emptyState.classList.add('hidden');
-        agentCard.classList.remove('hidden');
+        card1.classList.remove('hidden');
+        quote1.textContent = '"demonstrate a significant improvement"';
+        await new Promise(r => setTimeout(r, 300));
 
-        // Type quote
-        agentQuote.textContent = '"' + demo.quote + '"';
+        await typeTextAgent(issue1, '"Significant" is vague—you have the number. Lead with it.', 16);
         await new Promise(r => setTimeout(r, 400));
 
-        // Type issue
-        await typeTextAgent(agentIssue, demo.issue, 18);
-        await new Promise(r => setTimeout(r, 500));
+        revision1.classList.remove('hidden');
+        await typeTextAgent(revisionText1, '"grew 23%"', 25);
+        await new Promise(r => setTimeout(r, 800));
 
-        // Show revision
-        agentRevision.classList.remove('hidden');
-        await typeTextAgent(agentRevisionText, '"' + demo.revision + '"', 25);
-        await new Promise(r => setTimeout(r, 1500));
+        // === AGENT 2: Voice Consistency (starts while card 1 visible) ===
+        dot2.classList.add('running');
+        await new Promise(r => setTimeout(r, 800));
+        dot2.classList.remove('running');
 
-        // Phase 4: Accept
-        agentAccept.classList.add('clicked');
+        // Show card 2
+        card2.classList.remove('hidden');
+        quote2.textContent = '"new strategy contributed to"';
+        await new Promise(r => setTimeout(r, 300));
+
+        await typeTextAgent(issue2, 'Passive construction. Your voice guide says: active voice always.', 16);
+        await new Promise(r => setTimeout(r, 400));
+
+        revision2.classList.remove('hidden');
+        await typeTextAgent(revisionText2, '"new strategy drove"', 25);
+        await new Promise(r => setTimeout(r, 1200));
+
+        // Accept card 1
+        accept1.classList.add('clicked');
         await new Promise(r => setTimeout(r, 250));
-
-        // Update highlight
-        agentHighlight.classList.add('accepted');
-        agentHighlight.textContent = demo.newText;
+        highlight1.classList.add('accepted');
+        highlight1.textContent = 'grew 23%';
         await new Promise(r => setTimeout(r, 200));
-        agentHighlight.classList.add('changing');
+        highlight1.classList.add('changing-clarity');
+        card1.classList.add('hidden');
+        await new Promise(r => setTimeout(r, 800));
 
-        // Wait then next demo
+        // Accept card 2
+        accept2.classList.add('clicked');
+        await new Promise(r => setTimeout(r, 250));
+        highlight2.classList.add('accepted');
+        highlight2.textContent = 'new strategy drove';
+        await new Promise(r => setTimeout(r, 200));
+        highlight2.classList.add('changing-voice');
+
+        // Wait then loop
         await new Promise(r => setTimeout(r, 4000));
-        currentAgentDemo = (currentAgentDemo + 1) % agentDemos.length;
         runAgentDemo();
       }
 
@@ -1144,6 +1295,7 @@ to a smart friend over coffee.
     // Email Signup Handler
     (function() {
       const form = document.getElementById('email-form');
+      if (!form) return;
       const input = document.getElementById('email-input');
       const content = document.querySelector('.email-signup-content');
 
@@ -1200,13 +1352,13 @@ to a smart friend over coffee.
         }
       ];
 
-      let isRunning = false;
       let currentIndex = 0;
 
       function typeTextVoice(element, text, speed = 20) {
         return new Promise(resolve => {
           let i = 0;
           element.innerHTML = '<span class="typing-cursor"></span>';
+          element.style.display = 'block';
           function type() {
             if (i < text.length) {
               element.innerHTML = text.substring(0, i + 1) + '<span class="typing-cursor"></span>';
@@ -1222,12 +1374,10 @@ to a smart friend over coffee.
       }
 
       async function runVoiceDemo() {
-        if (isRunning) return;
-        isRunning = true;
-
         const transform = transformations[currentIndex];
         beforeEl.textContent = transform.before;
         afterEl.textContent = '';
+        afterEl.style.display = 'none';
 
         await new Promise(r => setTimeout(r, 1500));
 
@@ -1242,14 +1392,14 @@ to a smart friend over coffee.
         await new Promise(r => setTimeout(r, 4000));
 
         currentIndex = (currentIndex + 1) % transformations.length;
-        isRunning = false;
         runVoiceDemo();
       }
 
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting && !isRunning) {
+          if (entry.isIntersecting) {
             runVoiceDemo();
+            observer.disconnect();
           }
         });
       }, { threshold: 0.3 });
@@ -1420,6 +1570,9 @@ to a smart friend over coffee.
       if (!answerEl) return;
 
       const highlight2 = document.getElementById('conv-highlight-2');
+      const suggestionCard = document.getElementById('conv-suggestion-2');
+      const suggestionText = document.getElementById('conv-suggestion-text');
+      const acceptBtn = document.getElementById('conv-accept-2');
       let isRunning = false;
 
       function typeTextConv(element, text, speed = 15) {
@@ -1445,28 +1598,48 @@ to a smart friend over coffee.
         if (isRunning) return;
         isRunning = true;
 
-        // Reset
+        // Reset all elements
         answerEl.textContent = '';
         answerEl.style.display = 'none';
+        suggestionCard.classList.remove('visible');
+        suggestionText.textContent = '';
+        acceptBtn.classList.remove('clicked');
         highlight2.classList.remove('accepted');
         highlight2.textContent = 'significant productivity gains';
 
         await new Promise(r => setTimeout(r, 1500));
 
-        // Type the AI response
+        // Type the AI response (just the answer, not the suggestion)
         await typeTextConv(
           answerEl,
-          "Yes, citing a source would strengthen this claim. Try: 'A Stanford study found productivity rose 13% for remote workers.'",
+          "Yes, citing a source would strengthen this claim.",
+          15
+        );
+
+        await new Promise(r => setTimeout(r, 800));
+
+        // Show suggestion card
+        suggestionCard.classList.add('visible');
+        await new Promise(r => setTimeout(r, 300));
+
+        // Type the suggested text
+        await typeTextConv(
+          suggestionText,
+          "A Stanford study found productivity rose 13% for remote workers.",
           12
         );
 
-        await new Promise(r => setTimeout(r, 2500));
+        await new Promise(r => setTimeout(r, 1500));
 
-        // Apply the edit
+        // Click Accept
+        acceptBtn.classList.add('clicked');
+        await new Promise(r => setTimeout(r, 300));
+
+        // Apply the edit to the document
         highlight2.classList.add('accepted');
         highlight2.textContent = 'a Stanford study found productivity rose 13% for remote workers';
 
-        await new Promise(r => setTimeout(r, 5000));
+        await new Promise(r => setTimeout(r, 4000));
 
         isRunning = false;
         runConversationsDemo();

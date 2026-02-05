@@ -1,0 +1,2730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ada Brand Guidelines</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Literata';
+      src: url('fonts/Literata-Variable.ttf') format('truetype');
+      font-weight: 200 900;
+      font-style: normal;
+    }
+
+    :root {
+      --color-bg: #FDFCFA;
+      --color-surface: #FFFFFF;
+      --color-surface-elevated: #F5F4F2;
+      --color-text: #2D2D2D;
+      --color-text-muted: #78716C;
+      --color-text-faint: #A8A29E;
+      --color-border: #E7E5E4;
+      --color-border-strong: #D6D3D1;
+      --color-accent: #B45309;
+      --color-accent-hover: #92400E;
+      --color-accent-light: #FEF3C7;
+      --color-success: #059669;
+      --color-error: #DC2626;
+
+      --font-ui: 'Inter', -apple-system, system-ui, sans-serif;
+      --font-content: 'Literata', Georgia, serif;
+
+      --spacing-xs: 4px;
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+    }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+
+    /* Navigation */
+    .brand-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(253, 252, 250, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--spacing-md) var(--spacing-lg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-nav-logo {
+      font-family: var(--font-content);
+      font-size: 1.25rem;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--color-text);
+      text-decoration: none;
+    }
+
+    .brand-nav-links {
+      display: flex;
+      gap: var(--spacing-lg);
+    }
+
+    .brand-nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .brand-nav-links a:hover {
+      color: var(--color-text);
+    }
+
+    /* Slide Container */
+    .slide {
+      height: 100vh;
+      max-height: 100vh;
+      padding: 60px var(--spacing-xl) 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      overflow: hidden;
+    }
+
+    .slide-content {
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    .slide-number {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--color-text-faint);
+      letter-spacing: 0.1em;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .slide-title {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--spacing-sm);
+      line-height: 1.1;
+    }
+
+    .slide-subtitle {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      max-width: 600px;
+      margin-bottom: var(--spacing-md);
+    }
+
+    /* Cover Slide */
+    .slide-cover {
+      background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-surface) 100%);
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .slide-cover .brand-logo {
+      font-family: var(--font-content);
+      font-size: 8rem;
+      font-weight: 600;
+      font-style: italic;
+      letter-spacing: -0.03em;
+      margin-bottom: var(--spacing-lg);
+      color: var(--color-text);
+    }
+
+    .slide-cover .brand-tagline {
+      font-size: 1.5rem;
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .slide-cover .brand-version {
+      font-size: 0.85rem;
+      color: var(--color-text-faint);
+      padding: var(--spacing-sm) var(--spacing-md);
+      background: var(--color-surface-elevated);
+      border-radius: 100px;
+      display: inline-block;
+    }
+
+    /* Color Swatches */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-md);
+    }
+
+    .color-swatch {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .color-swatch-preview {
+      height: 40px;
+    }
+
+    .color-swatch-info {
+      padding: var(--spacing-sm);
+    }
+
+    .color-swatch-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .color-swatch-value {
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    .color-swatch-usage {
+      font-size: 0.75rem;
+      color: var(--color-text-faint);
+      margin-top: var(--spacing-xs);
+    }
+
+    /* Color Sections */
+    .color-section {
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .color-section-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    /* Typography Specimens */
+    .type-specimen {
+      margin-bottom: var(--spacing-sm);
+      padding: var(--spacing-md);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+    }
+
+    .type-specimen-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-accent);
+      background: var(--color-accent-light);
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: 100px;
+      display: inline-block;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .type-specimen-sample {
+      font-size: 1.5rem;
+      line-height: 1.2;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .type-specimen-sample.serif {
+      font-family: var(--font-content);
+    }
+
+    .type-specimen-sample.mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 1.5rem;
+    }
+
+    .type-specimen-meta {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+
+    .type-specimen-meta code {
+      background: var(--color-surface-elevated);
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      font-family: monospace;
+      font-size: 0.8rem;
+    }
+
+    /* Type Scale */
+    .type-scale {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+
+    .type-scale-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      align-items: baseline;
+      gap: var(--spacing-md);
+      padding-bottom: var(--spacing-sm);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .type-scale-item:last-child {
+      border-bottom: none;
+    }
+
+    .type-scale-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+    }
+
+    .type-scale-label code {
+      display: block;
+      font-family: monospace;
+      font-size: 0.7rem;
+      color: var(--color-text-faint);
+      margin-top: var(--spacing-xs);
+    }
+
+    /* Spacing Demo */
+    .spacing-grid {
+      display: flex;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+      margin-top: var(--spacing-md);
+    }
+
+    .spacing-item {
+      text-align: center;
+    }
+
+    .spacing-box {
+      background: var(--color-accent-light);
+      border: 2px solid var(--color-accent);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .spacing-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .spacing-value {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      font-family: monospace;
+    }
+
+    /* Radius Demo */
+    .radius-grid {
+      display: flex;
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-md);
+    }
+
+    .radius-item {
+      text-align: center;
+    }
+
+    .radius-box {
+      width: 50px;
+      height: 50px;
+      background: var(--color-surface);
+      border: 2px solid var(--color-border-strong);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .radius-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .radius-value {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      font-family: monospace;
+    }
+
+    /* Shadow Demo */
+    .shadow-grid {
+      display: flex;
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-md);
+    }
+
+    .shadow-item {
+      text-align: center;
+    }
+
+    .shadow-box {
+      width: 80px;
+      height: 50px;
+      background: var(--color-surface);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .shadow-sm { box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .shadow-md { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); }
+    .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); }
+
+    .shadow-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* Icon Demo */
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-md);
+    }
+
+    .icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: var(--spacing-md);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+    }
+
+    .icon-item svg {
+      margin-bottom: var(--spacing-sm);
+      color: var(--color-text);
+    }
+
+    .icon-item span {
+      font-size: 0.7rem;
+      color: var(--color-text-muted);
+    }
+
+    .icon-specs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-md);
+    }
+
+    .icon-spec {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-md);
+    }
+
+    .icon-spec-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .icon-spec-value {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .icon-spec-note {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      margin-top: var(--spacing-xs);
+    }
+
+    /* Component Demo */
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-md);
+    }
+
+    .component-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-md);
+    }
+
+    .component-card-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .component-demo {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+      align-items: center;
+    }
+
+    /* Button Demos */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      padding: 12px 24px;
+      font-family: var(--font-ui);
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-primary {
+      background: var(--color-text);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #333;
+    }
+
+    .btn-secondary {
+      background: var(--color-surface);
+      color: var(--color-text);
+      border: 1px solid var(--color-border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--color-surface-elevated);
+      border-color: var(--color-border-strong);
+    }
+
+    .btn-accent {
+      background: var(--color-accent);
+      color: white;
+    }
+
+    .btn-accent:hover {
+      background: var(--color-accent-hover);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--color-text);
+      border: 1px solid var(--color-text);
+    }
+
+    .btn-ghost:hover {
+      background: var(--color-text);
+      color: white;
+    }
+
+    .btn-success {
+      background: #D1FAE5;
+      color: var(--color-success);
+      border: 1px solid var(--color-success);
+    }
+
+    .btn-success:hover {
+      background: var(--color-success);
+      color: white;
+    }
+
+    /* Badge Demos */
+    .badge {
+      display: inline-block;
+      padding: var(--spacing-xs) var(--spacing-md);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: 100px;
+    }
+
+    .badge-accent {
+      background: var(--color-accent-light);
+      color: var(--color-accent);
+    }
+
+    .badge-success {
+      background: #D1FAE5;
+      color: var(--color-success);
+    }
+
+    .badge-muted {
+      background: var(--color-surface-elevated);
+      color: var(--color-text-muted);
+    }
+
+    /* Input Demos */
+    .input-demo {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+
+    .input {
+      padding: 10px 14px;
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-bg);
+      color: var(--color-text);
+      transition: border-color 0.15s;
+      width: 100%;
+    }
+
+    .input:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px var(--color-accent-light);
+    }
+
+    .input::placeholder {
+      color: var(--color-text-faint);
+    }
+
+    /* Card Demos */
+    .demo-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-lg);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .demo-card-title {
+      font-weight: 600;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .demo-card-text {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Voice Section */
+    .voice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-md);
+    }
+
+    .voice-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-md);
+    }
+
+    .voice-card-header {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .voice-card-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .voice-card-icon.do {
+      background: #D1FAE5;
+      color: var(--color-success);
+    }
+
+    .voice-card-icon.dont {
+      background: #FEE2E2;
+      color: var(--color-error);
+    }
+
+    .voice-card-title {
+      font-weight: 600;
+    }
+
+    .voice-examples {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+
+    .voice-example {
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+    }
+
+    .voice-example.do {
+      background: #F0FDF4;
+      border-left: 3px solid var(--color-success);
+    }
+
+    .voice-example.dont {
+      background: #FEF2F2;
+      border-left: 3px solid var(--color-error);
+      text-decoration: line-through;
+      color: var(--color-text-muted);
+    }
+
+    /* Principles */
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-md);
+    }
+
+    .principle-card {
+      padding: var(--spacing-md);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+    }
+
+    .principle-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .principle-title {
+      font-weight: 600;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .principle-text {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Key Phrases */
+    .phrases-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-md);
+    }
+
+    .phrase {
+      font-family: var(--font-content);
+      font-size: 1rem;
+      font-style: italic;
+      padding: var(--spacing-sm) var(--spacing-md);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+    }
+
+    /* Highlight Colors */
+    .highlight-grid {
+      display: flex;
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-lg);
+    }
+
+    .highlight-item {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-radius: var(--radius-sm);
+    }
+
+    .highlight-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .highlight-text {
+      font-size: 0.85rem;
+    }
+
+    /* Footer */
+    .brand-footer {
+      text-align: center;
+      padding: var(--spacing-xl);
+      border-top: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      font-size: 0.85rem;
+    }
+
+    .brand-footer a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    /* Responsive */
+    /* Logo Section */
+    .logo-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-md);
+    }
+
+    .logo-demo {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100px;
+    }
+
+    .logo-demo.dark {
+      background: #2D2D2D;
+      border-color: #2D2D2D;
+    }
+
+    .logo-demo-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .logo-demo.dark .logo-demo-label {
+      color: #A8A29E;
+    }
+
+    .logo-small {
+      font-family: var(--font-content);
+      font-size: 1.5rem;
+      font-weight: 600;
+      font-style: italic;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+    }
+
+    .logo-demo.dark .logo-small {
+      color: #FDFCFA;
+    }
+
+    .logo-large {
+      font-family: var(--font-content);
+      font-size: 3rem;
+      font-weight: 600;
+      font-style: italic;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      line-height: 1;
+    }
+
+    .logo-demo.dark .logo-large {
+      color: #FDFCFA;
+    }
+
+    .logo-watermark-demo {
+      position: relative;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-sm);
+      min-height: 80px;
+      overflow: hidden;
+      margin-top: var(--spacing-sm);
+    }
+
+    .logo-watermark {
+      position: absolute;
+      bottom: -0.15em;
+      left: -0.02em;
+      font-family: var(--font-content);
+      font-weight: 600;
+      font-style: italic;
+      font-size: 20vw;
+      line-height: 0.8;
+      color: var(--color-text);
+      opacity: 0.04;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .logo-watermark-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-watermark-content h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .logo-watermark-content p {
+      color: var(--color-text-muted);
+      max-width: 400px;
+      font-size: 0.85rem;
+    }
+
+    .logo-specs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-md);
+    }
+
+    .logo-spec {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-sm);
+    }
+
+    .logo-spec-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .logo-spec-value {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .logo-spec-value.serif {
+      font-family: var(--font-content);
+      font-style: italic;
+    }
+
+    .logo-clearspace {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: var(--spacing-md);
+    }
+
+    .logo-clearspace-box {
+      position: relative;
+      padding: 24px 40px;
+      border: 2px dashed var(--color-border-strong);
+      border-radius: var(--radius-md);
+    }
+
+    .logo-clearspace-logo {
+      font-family: var(--font-content);
+      font-size: 2rem;
+      font-weight: 600;
+      font-style: italic;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-clearspace-marker {
+      position: absolute;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      background: var(--color-accent-light);
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+    }
+
+    .logo-clearspace-marker.top {
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .logo-clearspace-marker.bottom {
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .logo-clearspace-marker.left {
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .logo-clearspace-marker.right {
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .logo-donts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-md);
+    }
+
+    .logo-dont {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-sm);
+      text-align: center;
+    }
+
+    .logo-dont-demo {
+      font-family: var(--font-content);
+      font-size: 1.2rem;
+      font-weight: 600;
+      font-style: italic;
+      margin-bottom: var(--spacing-xs);
+      color: var(--color-text);
+      position: relative;
+    }
+
+    .logo-dont-demo::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 2px;
+      background: var(--color-error);
+    }
+
+    .logo-dont-demo.stretched {
+      transform: scaleX(1.5);
+    }
+
+    .logo-dont-demo.squished {
+      transform: scaleY(0.7);
+    }
+
+    .logo-dont-demo.rotated {
+      transform: rotate(-15deg);
+    }
+
+    .logo-dont-demo.wrong-font {
+      font-family: Arial, sans-serif;
+      font-style: normal;
+    }
+
+    .logo-dont-label {
+      font-size: 0.75rem;
+      color: var(--color-error);
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .slide-title {
+        font-size: 2rem;
+      }
+
+      .slide-cover .brand-logo {
+        font-size: 4rem;
+      }
+
+      .color-grid,
+      .component-grid,
+      .voice-grid,
+      .principles-grid,
+      .icon-specs,
+      .logo-showcase,
+      .logo-specs,
+      .logo-donts {
+        grid-template-columns: 1fr;
+      }
+
+      .logo-large {
+        font-size: 4rem;
+      }
+
+      .type-scale-item {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+      }
+
+      .brand-nav-links {
+        display: none;
+      }
+    }
+
+    /* === AD CONCEPTS SECTION === */
+    .slide-concepts {
+      height: auto;
+      min-height: 100vh;
+      max-height: none;
+      scroll-snap-align: start;
+      scroll-snap-stop: normal;
+      padding: 100px var(--spacing-xl) 80px;
+      overflow: visible;
+    }
+
+    .concepts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-lg);
+    }
+
+    .concept-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .concept-card:hover {
+      border-color: var(--color-accent);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .concept-card.expanded {
+      grid-column: 1 / -1;
+    }
+
+    .concept-header {
+      padding: var(--spacing-md);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--spacing-md);
+    }
+
+    .concept-number {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-accent);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .concept-name {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .concept-insight {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      font-style: italic;
+    }
+
+    .concept-toggle {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--color-surface-elevated);
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+
+    .concept-card.expanded .concept-toggle {
+      transform: rotate(180deg);
+    }
+
+    .concept-ads {
+      display: none;
+      padding: 0 var(--spacing-md) var(--spacing-md);
+    }
+
+    .concept-card.expanded .concept-ads {
+      display: block;
+    }
+
+    .ads-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+      justify-content: flex-start;
+    }
+
+    /* === PHONE FRAME (Light Theme) === */
+    .phone-frame {
+      width: 200px;
+      height: 414px;
+      background: #1c1917;
+      border-radius: 28px;
+      padding: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .phone-frame::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 54px;
+      height: 17px;
+      background: #000;
+      border-radius: 9px;
+      z-index: 10;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: #fdfcfa;
+      border-radius: 22px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ad-content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(180deg, #fdfcfa 0%, #f5f4f2 100%);
+      padding: 56px 12px 79px;
+      position: relative;
+    }
+
+    .ad-watermark {
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      font-family: var(--font-content);
+      font-weight: 600;
+      font-style: italic;
+      font-size: 5rem;
+      line-height: 0.8;
+      color: #1c1917;
+      opacity: 0.04;
+      pointer-events: none;
+    }
+
+    .ad-demo {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      position: relative;
+      z-index: 1;
+      opacity: 1;
+      transition: opacity 0.4s ease;
+    }
+
+    .ad-tagline {
+      font-size: 0.55rem;
+      font-weight: 500;
+      color: #78716c;
+      text-align: center;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .ad-tagline:empty { display: none; }
+
+    .ad-editor {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      margin: 0 2px;
+      padding: 12px;
+    }
+
+    .ad-editor-text {
+      font-family: var(--font-content);
+      font-size: 0.68rem;
+      line-height: 1.6;
+      color: #1c1917;
+    }
+
+    .highlight {
+      padding: 1px 2px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, #fef3c7 50%, transparent 50%);
+      background-size: 200% 100%;
+      background-position: 100% 0;
+      transition: background-position 0.5s ease;
+    }
+
+    .highlight.active { background-position: 0% 0; }
+    .highlight.accepted { background: #d1fae5; transition: background 0.3s ease; }
+
+    .ad-frames {
+      margin-top: 12px;
+      border-radius: 6px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      overflow: hidden;
+      max-height: 0;
+      padding: 0 12px;
+      transition: max-height 0.3s ease, padding 0.3s ease, background 0.3s ease;
+    }
+
+    .ad-frames.visible {
+      background: #f5f4f2;
+      max-height: 150px;
+      padding: 14px 12px;
+    }
+
+    .ad-frame {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .ad-frame.active { display: flex; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(3px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ad-frame-label {
+      font-size: 0.5rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #78716c;
+      margin-bottom: 6px;
+    }
+
+    .ad-voice-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .ad-voice-mode {
+      font-size: 0.5rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-accent);
+    }
+
+    .ad-voice-dot {
+      width: 5px;
+      height: 5px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
+    }
+
+    .ad-waveform-container { display: flex; justify-content: center; }
+    .ad-waveform { width: 42px; height: 42px; }
+
+    .ad-thinking-label {
+      font-size: 0.55rem;
+      color: #78716c;
+      margin-top: 6px;
+    }
+
+    .ad-transcription {
+      font-family: var(--font-content);
+      font-size: 0.65rem;
+      color: #1c1917;
+      font-style: italic;
+    }
+
+    .ad-suggestion-text {
+      font-family: var(--font-content);
+      font-size: 0.65rem;
+      color: #1c1917;
+      margin-bottom: 8px;
+    }
+
+    .ad-suggestion-actions {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .ad-btn {
+      padding: 5px 10px;
+      font-size: 0.5rem;
+      font-weight: 600;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .ad-btn-accept {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+
+    .ad-btn-accept.clicked {
+      background: #166534;
+      color: white;
+    }
+
+    .ad-btn-reject {
+      background: #f5f4f2;
+      color: #78716c;
+      border: 1px solid #e7e5e4;
+    }
+
+    .ad-applied-check { margin-bottom: 6px; }
+
+    .ad-applied-text {
+      font-size: 0.55rem;
+      font-weight: 600;
+      color: #059669;
+    }
+
+    .ad-cta-frame {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #fdfcfa 0%, #f5f4f2 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 16px;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+      border-radius: 22px;
+    }
+
+    .ad-cta-frame.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .ad-cta-description {
+      font-size: 0.68rem;
+      line-height: 1.4;
+      color: #57534e;
+      margin-bottom: 6px;
+      max-width: 140px;
+    }
+
+    .ad-cta-headline {
+      font-family: var(--font-content);
+      font-size: 1.75rem;
+      font-weight: 600;
+      font-style: italic;
+      color: #1c1917;
+      margin-bottom: 16px;
+    }
+
+    .ad-cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
+      background: #1c1917;
+      color: #fafaf9;
+      font-size: 0.625rem;
+      font-weight: 600;
+      border-radius: 6px;
+      text-decoration: none;
+      width: 100%;
+    }
+
+    .ad-cta-note {
+      font-size: 0.5rem;
+      color: #a8a29e;
+      margin-top: 6px;
+    }
+
+    .ad-variant-label {
+      font-size: 0.5rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 1px;
+      height: 0.8em;
+      background: var(--color-accent);
+      margin-left: 1px;
+      animation: blink 0.8s ease-in-out infinite;
+      vertical-align: text-bottom;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    @media (max-width: 768px) {
+      .concepts-grid {
+        grid-template-columns: 1fr;
+      }
+      .phone-frame {
+        width: 180px;
+        height: 372px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="brand-nav">
+    <a href="/" class="brand-nav-logo">Ada</a>
+    <div class="brand-nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#logo">Logo</a>
+      <a href="#colors">Colors</a>
+      <a href="#typography">Typography</a>
+      <a href="#spacing">Spacing</a>
+      <a href="#icons">Icons</a>
+      <a href="#components">Components</a>
+      <a href="#voice">Voice</a>
+    </div>
+  </nav>
+
+  <!-- Slide 1: Cover -->
+  <section class="slide slide-cover" id="cover">
+    <div class="brand-logo">Ada</div>
+    <p class="brand-tagline">Brand Guidelines</p>
+    <span class="brand-version">Version 1.0 · February 2026</span>
+  </section>
+
+  <!-- Slide 2: Overview -->
+  <section class="slide" id="overview">
+    <div class="slide-content">
+      <span class="slide-number">01</span>
+      <h1 class="slide-title">Brand Overview</h1>
+      <p class="slide-subtitle">Ada is a voice-driven content editor for writers who think out loud. Our brand is warm, intelligent, and approachable.</p>
+
+      <div class="principles-grid">
+        <div class="principle-card">
+          <div class="principle-number">01</div>
+          <h3 class="principle-title">Direct but warm</h3>
+          <p class="principle-text">Like talking to a smart friend over coffee. Confident without being cold or corporate.</p>
+        </div>
+        <div class="principle-card">
+          <div class="principle-number">02</div>
+          <h3 class="principle-title">Intelligent but unpretentious</h3>
+          <p class="principle-text">We use technical terms naturally, never condescending. We respect our users' intelligence.</p>
+        </div>
+        <div class="principle-card">
+          <div class="principle-number">03</div>
+          <h3 class="principle-title">Paper-like warmth</h3>
+          <p class="principle-text">Warm off-white backgrounds, amber accents, and thoughtful typography create a crafted feel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 3: Logo -->
+  <section class="slide" id="logo">
+    <div class="slide-content">
+      <span class="slide-number">02</span>
+      <h1 class="slide-title">Logo</h1>
+      <p class="slide-subtitle">The Ada wordmark uses Literata in italic. Simple, warm, and literary.</p>
+
+      <div class="logo-showcase">
+        <div class="logo-demo">
+          <span class="logo-demo-label">Primary (Light)</span>
+          <div class="logo-large">Ada</div>
+        </div>
+        <div class="logo-demo dark">
+          <span class="logo-demo-label">Primary (Dark)</span>
+          <div class="logo-large">Ada</div>
+        </div>
+      </div>
+
+      <div class="logo-specs">
+        <div class="logo-spec">
+          <div class="logo-spec-title">Font</div>
+          <div class="logo-spec-value serif">Literata</div>
+        </div>
+        <div class="logo-spec">
+          <div class="logo-spec-title">Weight</div>
+          <div class="logo-spec-value">600 (SemiBold)</div>
+        </div>
+        <div class="logo-spec">
+          <div class="logo-spec-title">Style</div>
+          <div class="logo-spec-value serif">Italic</div>
+        </div>
+        <div class="logo-spec">
+          <div class="logo-spec-title">Letter Spacing</div>
+          <div class="logo-spec-value">-0.02em</div>
+        </div>
+      </div>
+
+      <h3 class="color-section-title" style="margin-top: var(--spacing-lg);">Clear Space</h3>
+      <p style="color: var(--color-text-muted); margin-bottom: var(--spacing-lg);">Maintain minimum clear space around the logo equal to the height of the "A".</p>
+      <div class="logo-clearspace">
+        <div class="logo-clearspace-box">
+          <span class="logo-clearspace-marker top">A height</span>
+          <span class="logo-clearspace-marker bottom">A height</span>
+          <span class="logo-clearspace-marker left">A</span>
+          <span class="logo-clearspace-marker right">A</span>
+          <div class="logo-clearspace-logo">Ada</div>
+        </div>
+      </div>
+
+      <h3 class="color-section-title" style="margin-top: var(--spacing-lg);">Watermark Usage</h3>
+      <p style="color: var(--color-text-muted); margin-bottom: var(--spacing-lg);">The logo can be used as a large watermark at 4% opacity for branded backgrounds.</p>
+      <div class="logo-watermark-demo">
+        <div class="logo-watermark">Ada</div>
+        <div class="logo-watermark-content">
+          <h3>Edit with your voice.</h3>
+          <p>The watermark adds subtle brand presence without interfering with content.</p>
+        </div>
+      </div>
+
+      <h3 class="color-section-title" style="margin-top: var(--spacing-lg);">Don'ts</h3>
+      <div class="logo-donts">
+        <div class="logo-dont">
+          <div class="logo-dont-demo stretched">Ada</div>
+          <div class="logo-dont-label">Don't stretch</div>
+        </div>
+        <div class="logo-dont">
+          <div class="logo-dont-demo squished">Ada</div>
+          <div class="logo-dont-label">Don't squish</div>
+        </div>
+        <div class="logo-dont">
+          <div class="logo-dont-demo rotated">Ada</div>
+          <div class="logo-dont-label">Don't rotate</div>
+        </div>
+        <div class="logo-dont">
+          <div class="logo-dont-demo wrong-font">Ada</div>
+          <div class="logo-dont-label">Don't change font</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 4: Colors -->
+  <section class="slide" id="colors">
+    <div class="slide-content">
+      <span class="slide-number">03</span>
+      <h1 class="slide-title">Color Palette</h1>
+      <p class="slide-subtitle">A warm, paper-like palette with amber accents. Designed for long reading sessions and a crafted feel.</p>
+
+      <div class="color-section">
+        <h3 class="color-section-title">Core Colors</h3>
+        <div class="color-grid">
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: #FDFCFA; border-bottom: 1px solid #E7E5E4;"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Background</div>
+              <div class="color-swatch-value">#FDFCFA</div>
+              <div class="color-swatch-usage">Page background</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: #FFFFFF; border-bottom: 1px solid #E7E5E4;"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Surface</div>
+              <div class="color-swatch-value">#FFFFFF</div>
+              <div class="color-swatch-usage">Cards, elevated content</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: #F5F4F2;"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Surface Elevated</div>
+              <div class="color-swatch-value">#F5F4F2</div>
+              <div class="color-swatch-usage">Secondary surfaces</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: #2D2D2D;"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Text</div>
+              <div class="color-swatch-value">#2D2D2D</div>
+              <div class="color-swatch-usage">Primary text</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: #78716C;"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Text Muted</div>
+              <div class="color-swatch-value">#78716C</div>
+              <div class="color-swatch-usage">Secondary text</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: #E7E5E4;"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Border</div>
+              <div class="color-swatch-value">#E7E5E4</div>
+              <div class="color-swatch-usage">Borders, dividers</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="color-section">
+        <h3 class="color-section-title">Accent Colors</h3>
+        <div class="color-grid">
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: #B45309;"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Accent</div>
+              <div class="color-swatch-value">#B45309</div>
+              <div class="color-swatch-usage">Primary actions, links</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: #92400E;"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Accent Hover</div>
+              <div class="color-swatch-value">#92400E</div>
+              <div class="color-swatch-usage">Hover states</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: #FEF3C7;"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Accent Light</div>
+              <div class="color-swatch-value">#FEF3C7</div>
+              <div class="color-swatch-usage">Badges, highlights</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="color-section">
+        <h3 class="color-section-title">Status Colors</h3>
+        <div class="color-grid">
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: #059669;"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Success</div>
+              <div class="color-swatch-value">#059669</div>
+              <div class="color-swatch-usage">Accept, success states</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: #DC2626;"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Error</div>
+              <div class="color-swatch-value">#DC2626</div>
+              <div class="color-swatch-usage">Error states</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="color-section">
+        <h3 class="color-section-title">Highlight Colors (Annotations)</h3>
+        <div class="highlight-grid">
+          <div class="highlight-item" style="background: #FEF3C7;">
+            <div class="highlight-dot" style="background: #B45309;"></div>
+            <span class="highlight-text">Yellow</span>
+          </div>
+          <div class="highlight-item" style="background: #DBEAFE;">
+            <div class="highlight-dot" style="background: #2563EB;"></div>
+            <span class="highlight-text">Blue</span>
+          </div>
+          <div class="highlight-item" style="background: #D1FAE5;">
+            <div class="highlight-dot" style="background: #059669;"></div>
+            <span class="highlight-text">Green</span>
+          </div>
+          <div class="highlight-item" style="background: #FDE4E4;">
+            <div class="highlight-dot" style="background: #DB2777;"></div>
+            <span class="highlight-text">Pink</span>
+          </div>
+          <div class="highlight-item" style="background: #E9D5FF;">
+            <div class="highlight-dot" style="background: #7C3AED;"></div>
+            <span class="highlight-text">Purple</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 4: Typography -->
+  <section class="slide" id="typography">
+    <div class="slide-content">
+      <span class="slide-number">04</span>
+      <h1 class="slide-title">Typography</h1>
+      <p class="slide-subtitle">Two fonts: Inter for UI, Literata for content. Following Butterick's Practical Typography principles.</p>
+
+      <div class="type-specimen">
+        <span class="type-specimen-label">UI Font</span>
+        <div class="type-specimen-sample">Inter</div>
+        <p class="type-specimen-meta">
+          <code>'Inter', -apple-system, system-ui, sans-serif</code><br>
+          Used for buttons, labels, navigation, and all UI elements.
+        </p>
+      </div>
+
+      <div class="type-specimen">
+        <span class="type-specimen-label">Content Font</span>
+        <div class="type-specimen-sample serif">Literata</div>
+        <p class="type-specimen-meta">
+          <code>'Literata', 'Source Serif Pro', Georgia, serif</code><br>
+          Used for document content, brand moments, and editorial text.
+        </p>
+      </div>
+
+      <div class="type-specimen">
+        <span class="type-specimen-label">Monospace</span>
+        <div class="type-specimen-sample mono">ui-monospace</div>
+        <p class="type-specimen-meta">
+          <code>ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace</code><br>
+          Used for code, API keys, and technical content.
+        </p>
+      </div>
+
+      <h3 class="color-section-title" style="margin-top: var(--spacing-lg);">Type Scale</h3>
+      <div class="type-scale">
+        <div class="type-scale-item">
+          <div class="type-scale-label">Hero<code>3-4rem</code></div>
+          <div style="font-size: 3rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1;">Edit with your voice.</div>
+        </div>
+        <div class="type-scale-item">
+          <div class="type-scale-label">H2<code>2rem</code></div>
+          <div style="font-size: 2rem; font-weight: 700; letter-spacing: -0.02em;">Two modes. One voice.</div>
+        </div>
+        <div class="type-scale-item">
+          <div class="type-scale-label">H3<code>1.25rem</code></div>
+          <div style="font-size: 1.25rem; font-weight: 600;">Socratic Mode</div>
+        </div>
+        <div class="type-scale-item">
+          <div class="type-scale-label">Body<code>16-19px</code></div>
+          <div style="font-size: 1rem; line-height: 1.6;">Highlight text, press a hotkey, and discuss it. Ask questions like "Is this too formal?" or "Make this more concrete."</div>
+        </div>
+        <div class="type-scale-item">
+          <div class="type-scale-label">Small<code>0.85rem</code></div>
+          <div style="font-size: 0.85rem; color: var(--color-text-muted);">v0.1.0 · macOS 11+</div>
+        </div>
+        <div class="type-scale-item">
+          <div class="type-scale-label">Label<code>0.7rem</code></div>
+          <div style="font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-accent);">BETA</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 5: Spacing -->
+  <section class="slide" id="spacing">
+    <div class="slide-content">
+      <span class="slide-number">05</span>
+      <h1 class="slide-title">Spacing & Layout</h1>
+      <p class="slide-subtitle">A 4px base unit system. Consistent tokens for padding, margins, and gaps throughout.</p>
+
+      <h3 class="color-section-title">Spacing Scale</h3>
+      <div class="spacing-grid">
+        <div class="spacing-item">
+          <div class="spacing-box" style="width: 4px; height: 40px;"></div>
+          <div class="spacing-label">XS</div>
+          <div class="spacing-value">4px</div>
+        </div>
+        <div class="spacing-item">
+          <div class="spacing-box" style="width: 8px; height: 40px;"></div>
+          <div class="spacing-label">SM</div>
+          <div class="spacing-value">8px</div>
+        </div>
+        <div class="spacing-item">
+          <div class="spacing-box" style="width: 16px; height: 40px;"></div>
+          <div class="spacing-label">MD</div>
+          <div class="spacing-value">16px</div>
+        </div>
+        <div class="spacing-item">
+          <div class="spacing-box" style="width: 24px; height: 40px;"></div>
+          <div class="spacing-label">LG</div>
+          <div class="spacing-value">24px</div>
+        </div>
+        <div class="spacing-item">
+          <div class="spacing-box" style="width: 32px; height: 40px;"></div>
+          <div class="spacing-label">XL</div>
+          <div class="spacing-value">32px</div>
+        </div>
+      </div>
+
+      <h3 class="color-section-title" style="margin-top: var(--spacing-lg);">Border Radius</h3>
+      <div class="radius-grid">
+        <div class="radius-item">
+          <div class="radius-box" style="border-radius: 4px;"></div>
+          <div class="radius-label">Small</div>
+          <div class="radius-value">4px</div>
+        </div>
+        <div class="radius-item">
+          <div class="radius-box" style="border-radius: 8px;"></div>
+          <div class="radius-label">Medium</div>
+          <div class="radius-value">8px</div>
+        </div>
+        <div class="radius-item">
+          <div class="radius-box" style="border-radius: 12px;"></div>
+          <div class="radius-label">Large</div>
+          <div class="radius-value">12px</div>
+        </div>
+        <div class="radius-item">
+          <div class="radius-box" style="border-radius: 50%;"></div>
+          <div class="radius-label">Full</div>
+          <div class="radius-value">50% / 100px</div>
+        </div>
+      </div>
+
+      <h3 class="color-section-title" style="margin-top: var(--spacing-lg);">Shadows</h3>
+      <div class="shadow-grid">
+        <div class="shadow-item">
+          <div class="shadow-box shadow-sm"></div>
+          <div class="shadow-label">Small</div>
+        </div>
+        <div class="shadow-item">
+          <div class="shadow-box shadow-md"></div>
+          <div class="shadow-label">Medium</div>
+        </div>
+        <div class="shadow-item">
+          <div class="shadow-box shadow-lg"></div>
+          <div class="shadow-label">Large</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 6: Icons -->
+  <section class="slide" id="icons">
+    <div class="slide-content">
+      <span class="slide-number">06</span>
+      <h1 class="slide-title">Iconography</h1>
+      <p class="slide-subtitle">Custom stroke-based icons following Feather-like design principles. Always use currentColor for theming.</p>
+
+      <div class="icon-specs">
+        <div class="icon-spec">
+          <div class="icon-spec-title">Stroke Width</div>
+          <div class="icon-spec-value">2px</div>
+          <div class="icon-spec-note">Standard for all icons</div>
+        </div>
+        <div class="icon-spec">
+          <div class="icon-spec-title">ViewBox</div>
+          <div class="icon-spec-value">24×24</div>
+          <div class="icon-spec-note">Universal viewBox size</div>
+        </div>
+        <div class="icon-spec">
+          <div class="icon-spec-title">Line Cap</div>
+          <div class="icon-spec-value">Round</div>
+          <div class="icon-spec-note">Softer, friendlier endpoints</div>
+        </div>
+      </div>
+
+      <h3 class="color-section-title" style="margin-top: var(--spacing-lg);">Common Icons</h3>
+      <div class="icon-grid">
+        <div class="icon-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" y1="19" x2="12" y2="23"/>
+          </svg>
+          <span>Microphone</span>
+        </div>
+        <div class="icon-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+            <circle cx="12" cy="17" r="0.5" fill="currentColor"/>
+          </svg>
+          <span>Question</span>
+        </div>
+        <div class="icon-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <rect x="3" y="11" width="18" height="11" rx="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <span>Lock</span>
+        </div>
+        <div class="icon-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          <span>Chat</span>
+        </div>
+        <div class="icon-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          <span>Check</span>
+        </div>
+        <div class="icon-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+          <span>Close</span>
+        </div>
+        <div class="icon-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+          <span>Settings</span>
+        </div>
+        <div class="icon-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          <span>Download</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 7: Components -->
+  <section class="slide" id="components">
+    <div class="slide-content">
+      <span class="slide-number">07</span>
+      <h1 class="slide-title">UI Components</h1>
+      <p class="slide-subtitle">Consistent, reusable components built from our design tokens.</p>
+
+      <div class="component-grid">
+        <div class="component-card">
+          <h3 class="component-card-title">Buttons</h3>
+          <div class="component-demo">
+            <button class="btn btn-primary">Primary</button>
+            <button class="btn btn-secondary">Secondary</button>
+            <button class="btn btn-ghost">Ghost</button>
+            <button class="btn btn-accent">Accent</button>
+            <button class="btn btn-success">Accept</button>
+          </div>
+        </div>
+
+        <div class="component-card">
+          <h3 class="component-card-title">Badges</h3>
+          <div class="component-demo">
+            <span class="badge badge-accent">Beta</span>
+            <span class="badge badge-accent">BYOK</span>
+            <span class="badge badge-success">Active</span>
+            <span class="badge badge-muted">Pending</span>
+          </div>
+        </div>
+
+        <div class="component-card">
+          <h3 class="component-card-title">Inputs</h3>
+          <div class="input-demo">
+            <input type="text" class="input" placeholder="Enter your API key...">
+            <input type="text" class="input" value="sk-ant-api03-..." readonly>
+          </div>
+        </div>
+
+        <div class="component-card">
+          <h3 class="component-card-title">Cards</h3>
+          <div class="demo-card">
+            <div class="demo-card-title">Socratic Mode</div>
+            <p class="demo-card-text">Highlight text, press a hotkey, and discuss it with Ada.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 8: Voice -->
+  <section class="slide" id="voice">
+    <div class="slide-content">
+      <span class="slide-number">08</span>
+      <h1 class="slide-title">Voice & Tone</h1>
+      <p class="slide-subtitle">Direct but warm. Like talking to a smart friend over coffee.</p>
+
+      <div class="voice-grid">
+        <div class="voice-card">
+          <div class="voice-card-header">
+            <div class="voice-card-icon do">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3 class="voice-card-title">Do</h3>
+          </div>
+          <div class="voice-examples">
+            <div class="voice-example do">"Read the docs before you start. It'll save you time."</div>
+            <div class="voice-example do">"Use what you have. It's faster."</div>
+            <div class="voice-example do">"Accept, dismiss, or talk it through."</div>
+          </div>
+        </div>
+
+        <div class="voice-card">
+          <div class="voice-card-header">
+            <div class="voice-card-icon dont">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </div>
+            <h3 class="voice-card-title">Don't</h3>
+          </div>
+          <div class="voice-examples">
+            <div class="voice-example dont">"It is recommended that users familiarize themselves with the documentation."</div>
+            <div class="voice-example dont">"Leverage existing resources to optimize efficiency."</div>
+            <div class="voice-example dont">"The system will process your request accordingly."</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="color-section-title" style="margin-top: var(--spacing-lg);">Key Phrases</h3>
+      <div class="phrases-grid">
+        <div class="phrase">"Edit with your voice."</div>
+        <div class="phrase">"A second set of eyes. Always."</div>
+        <div class="phrase">"Writers who think out loud."</div>
+        <div class="phrase">"Your voice, amplified."</div>
+        <div class="phrase">"Local transcription, cloud intelligence."</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 9: Ad Concepts -->
+  <section class="slide slide-concepts" id="concepts">
+    <div class="slide-content" style="max-width: 1400px;">
+      <span class="slide-number">09</span>
+      <h1 class="slide-title">Ad Concepts</h1>
+      <p class="slide-subtitle">17 creative concepts, each with 6 animated ad variants. Click a concept to preview its ads.</p>
+
+      <div class="concepts-grid" id="concepts-grid">
+        <!-- Concepts will be injected by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="brand-footer">
+    <p><a href="/">Ada</a> Brand Guidelines · Version 1.0 · February 2026</p>
+  </footer>
+
+  <script>
+    // =====================================================
+    // AD CONCEPTS DATA
+    // =====================================================
+    const adConcepts = [
+      {
+        id: 'famous-edits',
+        name: 'Famous Edits That Changed History',
+        description: 'Small word changes with massive consequences. Historical examples of how tiny edits transformed documents into legendary texts.',
+        insight: '"History was made in the edit."',
+        variants: [
+          { id: 'famous-jfk-ask-not', tagline: null, editorText: 'And so, my fellow Americans, you should {{not ask what your country can do for you, ask what you can do for your country}}.', mode: 'Socratic', transcription: '"Should I flip this around?"', suggestion: 'ask not what your country can do for you', timing: { initialPause: 800, highlightDuration: 2400, voiceDuration: 2000, transcriptionDuration: 1600, thinkingDuration: 1700, suggestionDuration: 1800, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Find the right structure with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'famous-mlk-dream', tagline: null, editorText: 'I say to you today, my friends, that in spite of the difficulties and frustrations, {{I still have an idea}}.', mode: 'Socratic', transcription: '"Is \'idea\' too weak?"', suggestion: 'I still have a dream', timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 1700, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Find the right word with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'famous-declaration', tagline: null, editorText: 'We hold these truths to be {{sacred and undeniable}}, that all men are created equal.', mode: 'Socratic', transcription: '"Too religious?"', suggestion: 'self-evident', timing: { initialPause: 800, highlightDuration: 1300, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Find the right tone with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'famous-apple', tagline: null, editorText: 'Here\'s to the crazy ones. The misfits. The rebels. {{Think Differently}}.', mode: 'Socratic', transcription: '"Too proper?"', suggestion: 'Think Different', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1400, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Break the rules with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'famous-gettysburg', tagline: null, editorText: '{{Eighty-seven years ago}}, our fathers brought forth on this continent a new nation.', mode: 'Socratic', transcription: '"Too plain?"', suggestion: 'Four score and seven years ago', timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 1400, transcriptionDuration: 1200, thinkingDuration: 1600, suggestionDuration: 1600, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Find your voice with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'famous-hemingway', tagline: null, editorText: 'The old man sat alone in a boat. He was very sad because he hadn\'t caught a fish {{and this made him feel like a failure}}.', mode: 'Socratic', transcription: '"Too much explaining?"', suggestion: 'in eighty-four days', timing: { initialPause: 800, highlightDuration: 1800, voiceDuration: 1900, transcriptionDuration: 1500, thinkingDuration: 1700, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Show, don\'t tell with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'small-changes',
+        name: 'Small Changes, Big Consequences',
+        description: 'Words that look similar but change everything. The anxiety of not knowing which word is right—and the relief of getting it correct.',
+        insight: '"One letter can change everything."',
+        variants: [
+          { id: 'confuse-affect', tagline: null, editorText: 'The new policy will {{effect}} how we handle customer complaints going forward.', mode: 'Socratic', transcription: '"Wait, affect or effect?"', suggestion: 'affect', timing: { initialPause: 800, highlightDuration: 800, voiceDuration: 2000, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Catch your mistakes with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'confuse-complement', tagline: null, editorText: 'The red wine really {{compliments}} the steak beautifully.', mode: 'Socratic', transcription: '"Is that the right one?"', suggestion: 'complements', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1800, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Get the details right with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'confuse-discrete', tagline: null, editorText: 'Please keep this conversation {{discrete}}. We can\'t have word getting out.', mode: 'Socratic', transcription: '"Discrete or discreet?"', suggestion: 'discreet', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1900, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Say exactly what you mean with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'confuse-principal', tagline: null, editorText: 'As a matter of {{principal}}, I never discuss salary with colleagues.', mode: 'Socratic', transcription: '"Wait, which spelling?"', suggestion: 'principle', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1800, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Catch the small stuff with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'confuse-stationary', tagline: null, editorText: 'I need to order new company {{stationary}} with the updated logo.', mode: 'Socratic', transcription: '"Is that the paper one?"', suggestion: 'stationery', timing: { initialPause: 800, highlightDuration: 1000, voiceDuration: 1800, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Never second-guess with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'confuse-whos', tagline: null, editorText: 'The client {{who\'s}} project we just finished wants to schedule a follow-up call.', mode: 'Socratic', transcription: '"Who\'s or whose?"', suggestion: 'whose', timing: { initialPause: 800, highlightDuration: 800, voiceDuration: 1700, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Ask your doubts out loud with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'killing-office-speak',
+        name: 'Killing Office Speak',
+        description: 'Corporate bloat transformed into human speech. The universal hatred of jargon and the satisfaction of killing it.',
+        insight: '"Say it like a person."',
+        variants: [
+          { id: 'jargon-synergy', tagline: null, editorText: 'We need to {{leverage our cross-functional synergies}} to maximize output this quarter.', mode: 'Socratic', transcription: '"Does anyone know what this means?"', suggestion: 'work together', timing: { initialPause: 800, highlightDuration: 1800, voiceDuration: 2400, transcriptionDuration: 1800, thinkingDuration: 1700, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Kill your jargon with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'jargon-circle-back', tagline: null, editorText: 'Let\'s {{circle back}} on this and touch base after I\'ve had time to review.', mode: 'Socratic', transcription: '"Too corporate?"', suggestion: 'talk again', timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Sound human with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'jargon-going-forward', tagline: null, editorText: '{{Going forward}}, we need to ensure all reports are submitted by Friday.', mode: 'Socratic', transcription: '"Do I need this?"', suggestion: 'From now on', timing: { initialPause: 800, highlightDuration: 1000, voiceDuration: 1600, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Cut the fluff with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'jargon-end-of-day', tagline: null, editorText: '{{At the end of the day}}, what matters most is that we hit our targets.', mode: 'Socratic', transcription: '"Ugh, everyone says this"', suggestion: 'Ultimately', timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 2000, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Kill your cliches with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'jargon-per-my-last', tagline: null, editorText: '{{Per my last email}}, the deadline was moved to Monday. Please confirm receipt.', mode: 'Socratic', transcription: '"Too passive-aggressive?"', suggestion: 'As I mentioned', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 2100, transcriptionDuration: 1600, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Sound less annoyed with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'jargon-low-hanging', tagline: null, editorText: 'Let\'s focus on the {{low-hanging fruit}} first before tackling the bigger issues.', mode: 'Socratic', transcription: '"Too buzzwordy?"', suggestion: 'quick wins', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1600, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Say it straight with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'thinking-partners',
+        name: 'Thinking Partners',
+        description: 'Reframing the question entirely. Having someone help you see what you\'re really trying to say—and the courage to say it.',
+        insight: '"What are you really trying to say?"',
+        variants: [
+          { id: 'reframe-passive', tagline: null, editorText: '{{Mistakes were made}} in the handling of this account. We regret the inconvenience.', mode: 'Socratic', transcription: '"Am I hiding who did it?"', suggestion: 'We made mistakes', timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 2100, transcriptionDuration: 1600, thinkingDuration: 1700, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Own your words with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'reframe-hedging', tagline: null, editorText: 'I {{think we might want to consider}} raising prices next quarter.', mode: 'Socratic', transcription: '"Am I just hedging?"', suggestion: 'recommend we', timing: { initialPause: 800, highlightDuration: 1500, voiceDuration: 1900, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Find your confidence with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'reframe-burying', tagline: null, editorText: 'After reviewing the data from Q3, {{I believe we should cancel the project}}.', mode: 'Socratic', transcription: '"Should I lead with this?"', suggestion: 'We should cancel the project', timing: { initialPause: 800, highlightDuration: 1800, voiceDuration: 2100, transcriptionDuration: 1600, thinkingDuration: 1700, suggestionDuration: 1600, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Lead with your point with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'reframe-over-apologizing', tagline: null, editorText: '{{I\'m sorry to bother you, but}} I need the report by end of day.', mode: 'Socratic', transcription: '"Why am I apologizing?"', suggestion: 'Hi,', timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 2000, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Stop over-apologizing with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'reframe-vague', tagline: null, editorText: 'There were {{some concerns raised}} about the timeline in yesterday\'s meeting.', mode: 'Socratic', transcription: '"Am I being too vague?"', suggestion: 'concerns', timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 2000, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Be direct with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'reframe-softening', tagline: null, editorText: 'We\'ve {{decided to go in a different direction}} with the role. Thank you for your time.', mode: 'Socratic', transcription: '"Should I just say it?"', suggestion: 'chosen another candidate', timing: { initialPause: 800, highlightDuration: 1700, voiceDuration: 2000, transcriptionDuration: 1500, thinkingDuration: 1700, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Say what you mean with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'generational-code-switching',
+        name: 'Generational Code-Switching',
+        description: 'Translating across age gaps. Different generations communicate differently, and what sounds professional to one may sound dated to another.',
+        insight: '"Speak every generation\'s language."',
+        variants: [
+          { id: 'gen-millennial', tagline: null, editorText: 'Just wanted to {{circle back on this}} and see if we can sync up about the Q3 deliverables.', mode: 'Socratic', transcription: '"Too millennial for the CEO?"', suggestion: 'follow up on this', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Translate across generations with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'gen-boomer', tagline: null, editorText: 'We are seeking a {{highly motivated self-starter}} to join our dynamic team.', mode: 'Socratic', transcription: '"Does this sound like a boomer?"', suggestion: 'driven problem-solver', timing: { initialPause: 800, highlightDuration: 1300, voiceDuration: 1700, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Speak every generation\'s language with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'gen-professional', tagline: null, editorText: '{{Please be advised that}} the office will be closed on Friday for the retreat.', mode: 'Socratic', transcription: '"This is just for Slack"', suggestion: 'Heads up:', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Match the channel\'s vibe with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'gen-slack', tagline: null, editorText: 'The new policy is {{kinda confusing ngl}} and we should probably talk about it.', mode: 'Socratic', transcription: '"This is for the board memo"', suggestion: 'unclear', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 800, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Code-switch effortlessly with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'gen-internet', tagline: null, editorText: 'The results were {{lowkey amazing}} and exceeded our expectations for the quarter.', mode: 'Socratic', transcription: '"Too casual for investors?"', suggestion: 'surprisingly strong', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Find the right register with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'gen-formal', tagline: null, editorText: 'I\'ve been {{optimizing our B2B SaaS conversion funnel}} which has been rewarding.', mode: 'Socratic', transcription: '"How do I explain this to mom?"', suggestion: 'helping businesses sign up faster', timing: { initialPause: 800, highlightDuration: 1600, voiceDuration: 1800, transcriptionDuration: 1600, thinkingDuration: 1700, suggestionDuration: 1600, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Translate for any audience with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'apology-spectrum',
+        name: 'The Apology Spectrum',
+        description: 'Finding the right level of sorry. Over-apologizing weakens your message, under-apologizing seems cold. Ada helps you calibrate.',
+        insight: '"Find the right level of sorry."',
+        variants: [
+          { id: 'apology-over', tagline: null, editorText: '{{I\'m so incredibly sorry for any inconvenience this may have caused}} but we need to reschedule.', mode: 'Socratic', transcription: '"Am I over-apologizing?"', suggestion: 'Thanks for your flexibility', timing: { initialPause: 800, highlightDuration: 1800, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Find the right level of sorry with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'apology-under', tagline: null, editorText: 'The report will be late. {{I\'ll send it tomorrow}} instead of today as planned.', mode: 'Socratic', transcription: '"Should I apologize here?"', suggestion: 'Apologies, I\'ll send it tomorrow', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Strike the right balance with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'apology-thanks', tagline: null, editorText: '{{Sorry for the delayed response}} but I wanted to give your question proper thought.', mode: 'Socratic', transcription: '"Gratitude not guilt?"', suggestion: 'Thanks for your patience', timing: { initialPause: 800, highlightDuration: 1300, voiceDuration: 1300, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Turn sorry into thanks with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'apology-performative', tagline: null, editorText: '{{Sorry to bother you, but}} do you have a minute to review this draft?', mode: 'Socratic', transcription: '"Do I need to apologize?"', suggestion: 'Do you have a minute', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Stop apologizing for existing with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'apology-calibrating', tagline: null, editorText: '{{I deeply apologize for this oversight}} and it will never happen again. The typo has been corrected.', mode: 'Socratic', transcription: '"Too dramatic for a typo?"', suggestion: 'Sorry about that', timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Calibrate your apologies with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'apology-sincerity', tagline: null, editorText: '{{We apologize for any inconvenience}} and appreciate your continued loyalty.', mode: 'Socratic', transcription: '"This sounds robotic"', suggestion: 'We\'re sorry this happened', timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 1400, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Make apologies feel human with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'confidence-edit',
+        name: 'The Confidence Edit',
+        description: 'Hedging to asserting. Stop shrinking yourself with weak language. Ada helps you write with conviction.',
+        insight: '"Write with conviction."',
+        variants: [
+          { id: 'confidence-hedge', tagline: null, editorText: '{{I think maybe we should consider}} launching the campaign in March.', mode: 'Socratic', transcription: '"Too much hedging?"', suggestion: 'We should', timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 1300, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Write with conviction with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'confidence-just', tagline: null, editorText: 'I {{just wanted to}} check if you had a chance to review the proposal.', mode: 'Socratic', transcription: '"Why am I shrinking myself?"', suggestion: 'wanted to', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1600, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Stop shrinking yourself with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'confidence-belief', tagline: null, editorText: '{{I believe that our team}} has the skills needed to deliver this project on time.', mode: 'Socratic', transcription: '"Why \'believe\'? I know it."', suggestion: 'Our team', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 800, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'State what you know with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'confidence-permission', tagline: null, editorText: '{{If it\'s okay with everyone}}, I\'d like to propose a new approach.', mode: 'Socratic', transcription: '"I don\'t need permission"', suggestion: 'I\'d like to propose', timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Own your ideas with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'confidence-weak', tagline: null, editorText: 'The data {{seems to suggest that}} customers prefer the new design.', mode: 'Socratic', transcription: '"The data doesn\'t \'seem\'"', suggestion: 'shows that', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Let the facts speak with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'confidence-doubt', tagline: null, editorText: '{{This might be a dumb question, but}} what\'s the expected timeline?', mode: 'Socratic', transcription: '"Not a dumb question"', suggestion: 'What\'s', timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 1300, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 700, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Ask without apology with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'finding-your-voice',
+        name: 'Finding Your Voice',
+        description: 'Empowering people who struggle to be direct or assertive. Own your decisions, claim your wins, and speak directly.',
+        insight: '"Advocate for yourself."',
+        variants: [
+          { id: 'voice-passive', tagline: null, editorText: '{{It was decided that the project would be}} moved to Q2 for additional testing.', mode: 'Socratic', transcription: '"Who decided? I did."', suggestion: 'I decided to move the project to', timing: { initialPause: 800, highlightDuration: 1500, voiceDuration: 1400, transcriptionDuration: 1300, thinkingDuration: 1600, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Own your decisions with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'voice-native', tagline: null, editorText: 'I would like to {{make a suggestion about}} how we can improve the experience.', mode: 'Socratic', transcription: '"More natural in English?"', suggestion: 'suggest how', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Find natural phrasing with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'voice-introvert', tagline: null, editorText: '{{I was lucky enough to be part of}} the team that increased revenue by forty percent.', mode: 'Socratic', transcription: '"I earned this"', suggestion: 'I led', timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 1100, transcriptionDuration: 1000, thinkingDuration: 1500, suggestionDuration: 700, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Claim your wins with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'voice-deferential', tagline: null, editorText: '{{If you have time and it\'s not too much trouble}}, could you review my summary?', mode: 'Socratic', transcription: '"I deserve a review"', suggestion: 'When you have a chance', timing: { initialPause: 800, highlightDuration: 1600, voiceDuration: 1300, transcriptionDuration: 1200, thinkingDuration: 1600, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Advocate for yourself with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'voice-credit', tagline: null, editorText: '{{The team worked on}} a new onboarding flow that reduced churn by twenty percent.', mode: 'Socratic', transcription: '"I designed most of it"', suggestion: 'I designed', timing: { initialPause: 800, highlightDuration: 1000, voiceDuration: 1400, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Take up space with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'voice-conditional', tagline: null, editorText: '{{I would say that}} this approach gives us the best chance of meeting the deadline.', mode: 'Socratic', transcription: '"Why so conditional?"', suggestion: 'This approach', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1300, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Speak directly with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'brevity-challenge',
+        name: 'The Brevity Challenge',
+        description: 'Every word should earn its place. Ada helps you cut the fluff and get to the point faster.',
+        insight: '"How short can you go?"',
+        variants: [
+          { id: 'brevity-email', tagline: null, editorText: '{{I am writing to inform you that we have received your application}} and will review it shortly.', mode: 'Socratic', transcription: '"Way too long"', suggestion: 'Got your application', timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 1200, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Cut the fluff with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'brevity-schedule', tagline: null, editorText: 'I was wondering if {{it would be possible for us to schedule}} a call next week.', mode: 'Socratic', transcription: '"Just ask directly"', suggestion: 'we could schedule', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1400, transcriptionDuration: 1300, thinkingDuration: 1600, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Get to the point with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'brevity-status', tagline: null, editorText: '{{I wanted to reach out to let you know that}} the project is on track for Friday.', mode: 'Socratic', transcription: '"Half of this is filler"', suggestion: 'Quick update:', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Say more with less using', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'brevity-thanks', tagline: null, editorText: 'I just wanted to {{take a moment to express my gratitude}} for your help.', mode: 'Socratic', transcription: '"Too wordy for a thanks"', suggestion: 'thank you', timing: { initialPause: 800, highlightDuration: 1000, voiceDuration: 1600, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Trim the fat with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'brevity-follow', tagline: null, editorText: 'I am {{following up on my previous email regarding}} the budget proposal.', mode: 'Socratic', transcription: '"Can I just say checking in?"', suggestion: 'checking in on', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1800, transcriptionDuration: 1600, thinkingDuration: 1500, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Write shorter emails with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'brevity-request', tagline: null, editorText: '{{I was hoping you might be able to}} send me the latest draft.', mode: 'Socratic', transcription: '"So much padding"', suggestion: 'Could you', timing: { initialPause: 800, highlightDuration: 1000, voiceDuration: 1200, transcriptionDuration: 1200, thinkingDuration: 1600, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Ditch the preamble with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'tone-ladder',
+        name: 'The Tone Ladder',
+        description: 'The same message hits different depending on who receives it. Ada helps you find the right register for every audience.',
+        insight: '"Same message, different registers."',
+        variants: [
+          { id: 'tone-formal', tagline: null, editorText: '{{I acknowledge receipt of your correspondence}} and will respond by end of day.', mode: 'Socratic', transcription: '"This isn\'t a law firm"', suggestion: 'Got your email', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Match your tone with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'tone-stiff', tagline: null, editorText: 'Team, {{please be advised that}} the meeting has been moved to 3pm tomorrow.', mode: 'Socratic', transcription: '"Too formal for Slack"', suggestion: 'heads up:', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1400, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Find the right register with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'tone-casual', tagline: null, editorText: 'Hey! {{Just wanted to ping you real quick}} about the contract renewal.', mode: 'Socratic', transcription: '"Too casual for a client"', suggestion: 'Following up', timing: { initialPause: 800, highlightDuration: 1000, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Dial in your tone with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'tone-board', tagline: null, editorText: 'Hi everyone, {{just a quick note to say}} quarterly revenue exceeded projections.', mode: 'Socratic', transcription: '"Too casual for the board"', suggestion: 'I am pleased to report', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1600, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Strike the right tone with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'tone-friendly', tagline: null, editorText: 'Sarah, {{per my previous communication}}, the files you requested are attached.', mode: 'Socratic', transcription: '"She\'s my friend, not a vendor"', suggestion: 'as promised', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1800, transcriptionDuration: 1600, thinkingDuration: 1500, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Write like you talk with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'tone-text', tagline: null, editorText: 'The redesign is {{gonna be done by Friday}} and the team is wrapping up.', mode: 'Socratic', transcription: '"This is for the exec team"', suggestion: 'scheduled for Friday', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1600, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Adjust your register with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'actually-what-i-mean',
+        name: 'The "Actually What I Mean" Edit',
+        description: 'Corporate speak hides what we really think. Ada helps you decode the subtext and say it plainly.',
+        insight: '"Subtext becomes text."',
+        variants: [
+          { id: 'mean-interesting', tagline: null, editorText: 'Thanks for sharing. {{That\'s an interesting approach}} and I appreciate the creativity.', mode: 'Socratic', transcription: '"I mean I disagree"', suggestion: 'I have some concerns', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1400, transcriptionDuration: 1300, thinkingDuration: 1600, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Say what you mean with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'mean-table', tagline: null, editorText: 'Good discussion, but {{let\'s table this for now}} and revisit when we have more data.', mode: 'Socratic', transcription: '"This is never happening"', suggestion: 'I don\'t think this is the right direction', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1600, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Make implicit explicit with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'mean-forward', tagline: null, editorText: '{{Going forward}}, please ensure all changes are reviewed before deployment.', mode: 'Socratic', transcription: '"I mean don\'t do that again"', suggestion: 'From now on', timing: { initialPause: 800, highlightDuration: 700, voiceDuration: 1700, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Drop the corporate mask with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'mean-opportunity', tagline: null, editorText: 'The delayed launch {{presents an opportunity}} to refine our messaging strategy.', mode: 'Socratic', transcription: '"It\'s a setback, be honest"', suggestion: 'gives us time', timing: { initialPause: 800, highlightDuration: 800, voiceDuration: 1600, transcriptionDuration: 1500, thinkingDuration: 1500, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Speak plainly with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'mean-challenging', tagline: null, editorText: 'The timeline is {{challenging but achievable}} if the team prioritizes effectively.', mode: 'Socratic', transcription: '"It\'s basically impossible"', suggestion: 'tight', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1600, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 800, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Cut the spin with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'mean-misaligned', tagline: null, editorText: 'I think our teams are {{slightly misaligned}} on the deliverables for this sprint.', mode: 'Socratic', transcription: '"We totally disagree"', suggestion: 'not on the same page', timing: { initialPause: 800, highlightDuration: 800, voiceDuration: 1400, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Say the quiet part with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'stakes-spectrum',
+        name: 'The Stakes Spectrum',
+        description: 'When everything is urgent, nothing is. Ada helps you match your words to what actually matters.',
+        insight: '"Matching urgency to reality."',
+        variants: [
+          { id: 'stakes-urgent', tagline: null, editorText: 'Hi team, {{URGENT:}} please update your availability in the shared calendar by Friday.', mode: 'Socratic', transcription: '"Calendar updates aren\'t urgent"', suggestion: 'Reminder:', timing: { initialPause: 800, highlightDuration: 700, voiceDuration: 1700, transcriptionDuration: 1500, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Match urgency to stakes with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'stakes-downplay', tagline: null, editorText: '{{When you get a chance}}, the client needs the revised contract before their board meeting tomorrow.', mode: 'Socratic', transcription: '"This is actually urgent"', suggestion: 'By end of day today', timing: { initialPause: 800, highlightDuration: 800, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Signal what matters with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'stakes-asap', tagline: null, editorText: 'Please send me the meeting notes {{ASAP}}. I want to share them with the team next week.', mode: 'Socratic', transcription: '"ASAP for next week?"', suggestion: 'when you can', timing: { initialPause: 800, highlightDuration: 600, voiceDuration: 1400, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Calibrate your urgency with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'stakes-critical', tagline: null, editorText: 'The security patch {{should probably be applied}} to production servers this weekend.', mode: 'Socratic', transcription: '"This is critical, not optional"', suggestion: 'must be applied', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1700, transcriptionDuration: 1600, thinkingDuration: 1600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Get the stakes right with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'stakes-exclaim', tagline: null, editorText: 'Great news! The logo options are ready! {{Can\'t wait for your feedback!!!}} Let me know!', mode: 'Socratic', transcription: '"Too many exclamation points"', suggestion: 'Looking forward to your thoughts.', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1700, transcriptionDuration: 1500, thinkingDuration: 1500, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Calibrate your energy with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'stakes-time', tagline: null, editorText: '{{If possible}}, please approve the vendor invoice before the payment deadline on Monday.', mode: 'Socratic', transcription: '"It\'s not optional, we\'ll miss payment"', suggestion: 'Please', timing: { initialPause: 800, highlightDuration: 700, voiceDuration: 2000, transcriptionDuration: 1800, thinkingDuration: 1600, suggestionDuration: 800, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Match words to stakes with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'delete-key',
+        name: 'The Delete Key',
+        description: 'Sometimes the best edit is removal. Cutting unnecessary words makes writing stronger and more confident.',
+        insight: '"The best word is often no word."',
+        variants: [
+          { id: 'delete-think', tagline: null, editorText: '{{I think we should}} move forward with the rebrand since all stakeholders approved.', mode: 'Socratic', transcription: '"Too hesitant?"', suggestion: 'We should', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1200, transcriptionDuration: 1100, thinkingDuration: 1500, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Cut the filler with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'delete-just', tagline: null, editorText: 'I wanted to {{just quickly}} check if you had a chance to review the proposal.', mode: 'Socratic', transcription: '"Why am I minimizing this?"', suggestion: 'check', timing: { initialPause: 800, highlightDuration: 800, voiceDuration: 2000, transcriptionDuration: 1600, thinkingDuration: 1600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Stop undermining yourself with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'delete-very', tagline: null, editorText: 'The client feedback was {{very positive}} and they want to expand the project scope.', mode: 'Socratic', transcription: '"Weak. Just say it."', suggestion: 'excellent', timing: { initialPause: 800, highlightDuration: 800, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Say more with less using', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'delete-basically', tagline: null, editorText: 'The new system {{basically allows us to}} track inventory in real time.', mode: 'Socratic', transcription: '"This adds nothing."', suggestion: 'lets us', timing: { initialPause: 800, highlightDuration: 1000, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Trim the fat with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'delete-honestly', tagline: null, editorText: '{{Honestly, I believe}} this is the best approach given our constraints.', mode: 'Socratic', transcription: '"Sounds like I\'m lying."', suggestion: 'This is', timing: { initialPause: 800, highlightDuration: 950, voiceDuration: 1700, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Sound more confident with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'delete-order', tagline: null, editorText: 'We restructured the team {{in order to}} improve communication between teams.', mode: 'Socratic', transcription: '"Three words for one?"', suggestion: 'to', timing: { initialPause: 800, highlightDuration: 750, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 800, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Write leaner with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'context-collapse',
+        name: 'The Context Collapse',
+        description: 'Same words, different audience = different meaning. These ads show how context changes everything.',
+        insight: '"The right words depend on who\'s reading."',
+        variants: [
+          { id: 'context-tiger', tagline: null, editorText: 'The {{tiger team}} has been working on this issue and expects resolution by end of week.', mode: 'Socratic', transcription: '"Board won\'t know this term."', suggestion: 'dedicated task force', timing: { initialPause: 800, highlightDuration: 750, voiceDuration: 2000, transcriptionDuration: 1600, thinkingDuration: 1600, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Know your audience with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'context-hey', tagline: null, editorText: '{{Hey!}} Thanks for sending over the contracts. I took a look and have questions.', mode: 'Socratic', transcription: '"Too casual for this client?"', suggestion: 'Hello,', timing: { initialPause: 800, highlightDuration: 600, voiceDuration: 1900, transcriptionDuration: 1500, thinkingDuration: 1500, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Match the room with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'context-sync', tagline: null, editorText: 'We\'ll {{sync offline}} to discuss the details and get back to you with a proposal.', mode: 'Socratic', transcription: '"They\'re not in tech."', suggestion: 'follow up separately', timing: { initialPause: 800, highlightDuration: 750, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Speak their language with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'context-crush', tagline: null, editorText: 'Looking forward to the partnership! {{Let\'s crush it!}}', mode: 'Socratic', transcription: '"This is going to legal."', suggestion: 'Best regards,', timing: { initialPause: 800, highlightDuration: 850, voiceDuration: 1700, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Read the room with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'context-api', tagline: null, editorText: 'The {{API latency issues}} have been resolved and the system is now performing well.', mode: 'Socratic', transcription: '"CEO doesn\'t care how."', suggestion: 'technical problems', timing: { initialPause: 800, highlightDuration: 950, voiceDuration: 1800, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Translate for your audience with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'context-inquire', tagline: null, editorText: '{{I am writing to inquire}} whether you might have availability next Tuesday.', mode: 'Socratic', transcription: '"This is a startup founder."', suggestion: 'Got time', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1900, transcriptionDuration: 1500, thinkingDuration: 1700, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Match their vibe with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'time-capsule',
+        name: 'The Time Capsule',
+        description: 'Phrases that aged poorly or feel dated. These ads help users update their vocabulary and sound contemporary.',
+        insight: '"Good writing ages - make sure yours keeps up."',
+        variants: [
+          { id: 'time-synergies', tagline: null, editorText: 'Let\'s {{leverage our synergies}} to create a more efficient workflow across departments.', mode: 'Socratic', transcription: '"Did I write this in 1999?"', suggestion: 'work together', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1900, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Update your vocabulary with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'time-unprecedented', tagline: null, editorText: '{{In these unprecedented times}}, we remain committed to serving our customers.', mode: 'Socratic', transcription: '"This sounds exhausting now."', suggestion: 'As always,', timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 2100, transcriptionDuration: 1700, thinkingDuration: 1700, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Keep it current with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'time-gendered', tagline: null, editorText: 'Each employee should submit {{his}} timesheet by end of day Friday.', mode: 'Socratic', transcription: '"This feels old."', suggestion: 'their', timing: { initialPause: 800, highlightDuration: 600, voiceDuration: 1400, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Modernize your writing with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'time-pivot', tagline: null, editorText: 'We need to {{pivot}} our strategy based on the latest customer feedback data.', mode: 'Socratic', transcription: '"This word is tired."', suggestion: 'shift', timing: { initialPause: 800, highlightDuration: 650, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Refresh your language with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'time-faithfully', tagline: null, editorText: 'Please find attached the documents you requested. {{Yours faithfully}}, Sarah', mode: 'Socratic', transcription: '"What century is this?"', suggestion: 'Best,', timing: { initialPause: 800, highlightDuration: 850, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Sound contemporary with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'time-park', tagline: null, editorText: 'Let\'s {{hit this one out of the park}} and deliver exceptional results this quarter.', mode: 'Socratic', transcription: '"Everyone uses this."', suggestion: 'deliver something great', timing: { initialPause: 800, highlightDuration: 1300, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1600, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Find fresher phrases with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'feedback-sandwich',
+        name: 'The Feedback Sandwich Deconstruction',
+        description: 'Give feedback people can actually use. Direct but kind. Stop hiding criticism in compliments.',
+        insight: '"Kindness is clarity, not cushioning."',
+        variants: [
+          { id: 'feedback-buried', tagline: null, editorText: 'Great work on this! {{Maybe consider possibly}} restructuring section two. Love the energy!', mode: 'Socratic', transcription: '"They\'ll miss this."', suggestion: 'Please', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1400, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Give real feedback with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'feedback-soft', tagline: null, editorText: 'The presentation was good! {{I wonder if it might help to}} add more data on slide four.', mode: 'Socratic', transcription: '"Just tell them."', suggestion: 'Add more data to', timing: { initialPause: 800, highlightDuration: 1300, voiceDuration: 1300, transcriptionDuration: 1100, thinkingDuration: 1500, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Be clear and kind with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'feedback-passive', tagline: null, editorText: 'The report is solid overall. {{It would be beneficial if}} the timeline was more detailed.', mode: 'Socratic', transcription: '"Beneficial to whom?"', suggestion: 'Please make', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1600, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Say what you mean with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'feedback-question', tagline: null, editorText: 'Have you {{thought about whether this}} could be shortened? Just curious.', mode: 'Socratic', transcription: '"I should just say it."', suggestion: 'considered shortening this', timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 1700, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Stop hinting, start saying with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'feedback-hedge', tagline: null, editorText: 'This is really close. {{I\'m not sure but I think}} the numbers in table three need checking.', mode: 'Socratic', transcription: '"I am sure actually."', suggestion: 'The numbers in', timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Trust your edits with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'feedback-compliment', tagline: null, editorText: 'Loved this draft! So creative! {{One tiny thought}} - the conclusion feels rushed.', mode: 'Socratic', transcription: '"It\'s not tiny."', suggestion: 'One note', timing: { initialPause: 800, highlightDuration: 850, voiceDuration: 1200, transcriptionDuration: 1100, thinkingDuration: 1500, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Give useful feedback with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'autocorrect-disaster',
+        name: 'The Autocorrect Disaster Prevention',
+        description: 'Catching embarrassing mistakes before send. Using Didactic mode to quickly correct potentially career-ending typos.',
+        insight: '"One letter can end your career. Hear it first."',
+        variants: [
+          { id: 'autocorrect-regards', tagline: null, editorText: 'Thank you for your consideration. Best {{retards}}, Michael', mode: 'Didactic', transcription: '"Regards"', suggestion: 'regards', timing: { initialPause: 800, highlightDuration: 700, voiceDuration: 1000, transcriptionDuration: 900, thinkingDuration: 700, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Catch disasters before send with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'autocorrect-asses', tagline: null, editorText: 'Please complete your risk {{asses}} form and return it by Friday.', mode: 'Didactic', transcription: '"Assessment"', suggestion: 'assessment', timing: { initialPause: 800, highlightDuration: 650, voiceDuration: 1100, transcriptionDuration: 1000, thinkingDuration: 700, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Save yourself the horror with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'autocorrect-pubic', tagline: null, editorText: 'We are excited to announce our {{pubic}} launch event scheduled for next month.', mode: 'Didactic', transcription: '"Public"', suggestion: 'public', timing: { initialPause: 800, highlightDuration: 650, voiceDuration: 900, transcriptionDuration: 800, thinkingDuration: 600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Proofread by voice with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'autocorrect-manger', tagline: null, editorText: 'Please direct all questions to your project {{manger}} during the transition.', mode: 'Didactic', transcription: '"Manager"', suggestion: 'manager', timing: { initialPause: 800, highlightDuration: 700, voiceDuration: 1000, transcriptionDuration: 900, thinkingDuration: 700, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Speak it right with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'autocorrect-shift', tagline: null, editorText: 'The deadline has been moved, so please plan for the {{shit}} in timeline.', mode: 'Didactic', transcription: '"Shift"', suggestion: 'shift', timing: { initialPause: 800, highlightDuration: 600, voiceDuration: 900, transcriptionDuration: 800, thinkingDuration: 600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Avoid career-ending typos with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'autocorrect-count', tagline: null, editorText: 'Please update the inventory {{count}} and send me the final numbers by noon.', mode: 'Socratic', transcription: '"Wait, this is spelled right?"', suggestion: 'total', timing: { initialPause: 800, highlightDuration: 650, voiceDuration: 2000, transcriptionDuration: 1600, thinkingDuration: 1600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Double-check everything with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      }
+    ];
+
+    // =====================================================
+    // WAVEFORM ANIMATION
+    // =====================================================
+    function createWaveformAnimation(canvas, scale = 1) {
+      const ctx = canvas.getContext('2d');
+      const particles = [];
+      const particleCount = Math.floor(8 * scale);
+      const permanentCount = Math.floor(2 * scale);
+      let time = 0;
+      let thinkingPhase = 0;
+      let mode = 'speaking';
+
+      for (let i = 0; i < particleCount + permanentCount; i++) {
+        particles.push({
+          angle: (i / (particleCount + permanentCount)) * Math.PI * 2,
+          radius: 3 * scale,
+          size: 1.2 * scale,
+          state: 'orbiting',
+          permanent: i >= particleCount,
+          x: 0, y: 0, vx: 0, vy: 0, life: 1
+        });
+      }
+
+      function draw() {
+        const w = canvas.width;
+        const h = canvas.height;
+        const centerX = w / 2;
+        const centerY = h / 2;
+        ctx.clearRect(0, 0, w, h);
+
+        let isSpeaking, boostedLevel;
+        if (mode === 'speaking') {
+          const simulatedLevel = 0.5 + Math.sin(time * 4) * 0.3 + Math.sin(time * 7) * 0.15;
+          boostedLevel = Math.pow(Math.max(0, simulatedLevel), 0.5) * 1.6;
+          isSpeaking = boostedLevel > 0.18;
+        } else {
+          isSpeaking = false;
+          boostedLevel = 0;
+        }
+
+        const maxRadius = Math.min(w, h) / 2 - 2;
+        const halfRadius = maxRadius * 0.35;
+        let orbitRadius;
+        if (isSpeaking) {
+          orbitRadius = halfRadius;
+        } else {
+          thinkingPhase += 0.03;
+          const pulse = Math.sin(thinkingPhase) * 0.5 + 0.5;
+          orbitRadius = maxRadius * (0.15 + pulse * 0.2);
+        }
+
+        const spinSpeed = isSpeaking ? 0.03 + boostedLevel * 0.02 : 0.015;
+
+        particles.forEach(p => {
+          if (p.state === 'orbiting') {
+            p.angle += spinSpeed;
+            p.radius += (orbitRadius - p.radius) * 0.1;
+            const x = centerX + Math.cos(p.angle) * p.radius;
+            const y = centerY + Math.sin(p.angle) * p.radius;
+            const atHorizon = Math.abs(y - centerY) < 3 * scale;
+            const shouldDetach = !p.permanent && isSpeaking && atHorizon && Math.random() < boostedLevel * 0.4;
+
+            if (shouldDetach) {
+              p.state = 'flying';
+              p.x = x; p.y = y;
+              p.vx = (x < centerX ? -1 : 1) * (0.4 + boostedLevel * 0.4) * scale;
+              p.vy = (Math.random() - 0.5) * 0.2 * scale;
+              p.life = 1;
+            } else {
+              ctx.beginPath();
+              ctx.arc(x, y, p.size + (isSpeaking ? boostedLevel * 0.3 : 0.1), 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(180, 83, 9, ${isSpeaking ? 0.8 : 0.5})`;
+              ctx.fill();
+            }
+          } else if (p.state === 'flying') {
+            p.x += p.vx; p.y += p.vy;
+            p.vy *= 0.96; p.life -= 0.05;
+            if (p.life > 0) {
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, p.size * (0.5 + p.life * 0.5), 0, Math.PI * 2);
+              ctx.fillStyle = p.vx < 0 ? `rgba(220, 100, 20, ${p.life * 0.9})` : `rgba(251, 191, 36, ${p.life * 0.9})`;
+              ctx.fill();
+            }
+            if (p.life <= 0) { p.state = 'refilling'; p.radius = 0; }
+          } else if (p.state === 'refilling') {
+            p.angle += spinSpeed;
+            p.radius += (orbitRadius - p.radius) * 0.08;
+            const x = centerX + Math.cos(p.angle) * p.radius;
+            const y = centerY + Math.sin(p.angle) * p.radius;
+            const fadeIn = Math.min(1, p.radius / (orbitRadius * 0.8));
+            ctx.beginPath();
+            ctx.arc(x, y, p.size * fadeIn, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(180, 83, 9, ${fadeIn * (isSpeaking ? 0.8 : 0.5)})`;
+            ctx.fill();
+            if (p.radius > orbitRadius * 0.9) p.state = 'orbiting';
+          }
+        });
+
+        time += 0.05;
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+      return {
+        setMode: (newMode) => { mode = newMode; },
+        setSpeaking: () => { mode = 'speaking'; },
+        setThinking: () => { mode = 'thinking'; }
+      };
+    }
+
+    // =====================================================
+    // RENDER CONCEPTS
+    // =====================================================
+    function parseEditorText(text) {
+      const match = text.match(/\{\{(.+?)\}\}/);
+      if (match) {
+        return { before: text.substring(0, match.index), highlightText: match[1], after: text.substring(match.index + match[0].length) };
+      }
+      return { before: text, highlightText: '', after: '' };
+    }
+
+    function createAdHTML(variant, adIndex, conceptIndex) {
+      const prefix = `c${conceptIndex}-a${adIndex}`;
+      const parsed = parseEditorText(variant.editorText);
+
+      return `
+        <div class="ad-slot">
+          <div class="ad-variant-label">Variant ${String.fromCharCode(65 + adIndex)}</div>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="ad-content">
+                <div class="ad-watermark">Ada</div>
+                <div class="ad-demo" id="${prefix}-demo">
+                  <div class="ad-tagline">${variant.tagline || ''}</div>
+                  <div class="ad-editor">
+                    <div class="ad-editor-text">
+                      ${parsed.before}<span class="highlight" id="${prefix}-highlight">${parsed.highlightText}</span>${parsed.after}
+                    </div>
+                    <div class="ad-frames" id="${prefix}-frames">
+                      <div class="ad-frame" id="${prefix}-frame-speaking">
+                        <div class="ad-voice-header">
+                          <span class="ad-voice-mode">${variant.mode}</span>
+                          <span class="ad-voice-dot"></span>
+                        </div>
+                        <div class="ad-waveform-container">
+                          <canvas class="ad-waveform" id="${prefix}-waveform" width="42" height="42"></canvas>
+                        </div>
+                      </div>
+                      <div class="ad-frame" id="${prefix}-frame-transcription">
+                        <div class="ad-frame-label">You said</div>
+                        <div class="ad-transcription">${variant.transcription}</div>
+                      </div>
+                      <div class="ad-frame" id="${prefix}-frame-thinking">
+                        <div class="ad-waveform-container">
+                          <canvas class="ad-waveform" id="${prefix}-waveform-thinking" width="42" height="42"></canvas>
+                        </div>
+                        <div class="ad-thinking-label">Thinking...</div>
+                      </div>
+                      <div class="ad-frame" id="${prefix}-frame-suggestion">
+                        <div class="ad-frame-label">Suggested edit</div>
+                        <div class="ad-suggestion-text">${variant.suggestion}</div>
+                        <div class="ad-suggestion-actions">
+                          <button class="ad-btn ad-btn-accept" id="${prefix}-accept">
+                            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                            Accept
+                          </button>
+                          <button class="ad-btn ad-btn-reject">
+                            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="ad-frame" id="${prefix}-frame-applied">
+                        <div class="ad-applied-check">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <div class="ad-applied-text">Edit applied</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="ad-cta-frame" id="${prefix}-cta-frame">
+                  <div class="ad-cta-description">${variant.cta.description}</div>
+                  <div class="ad-cta-headline">${variant.cta.headline}</div>
+                  <a href="#" class="ad-cta-button">${variant.cta.buttonText}</a>
+                  <div class="ad-cta-note">${variant.cta.note}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function createConceptHTML(concept, conceptIndex) {
+      return `
+        <div class="concept-card" data-concept="${conceptIndex}">
+          <div class="concept-header">
+            <div>
+              <div class="concept-number">Concept ${conceptIndex + 1}</div>
+              <div class="concept-name">${concept.name}</div>
+              <div class="concept-insight">${concept.insight}</div>
+            </div>
+            <div class="concept-toggle">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+          <div class="concept-ads">
+            <div class="ads-wrap" id="concept-${conceptIndex}-ads"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Render all concepts
+    const conceptsGrid = document.getElementById('concepts-grid');
+    conceptsGrid.innerHTML = adConcepts.map((c, i) => createConceptHTML(c, i)).join('');
+
+    // Track initialized ads
+    const initializedConcepts = new Set();
+
+    // Handle concept expansion
+    document.querySelectorAll('.concept-card').forEach(card => {
+      card.addEventListener('click', function(e) {
+        if (e.target.closest('.ad-btn')) return; // Don't toggle when clicking ad buttons
+
+        const conceptIndex = parseInt(this.dataset.concept);
+        const isExpanded = this.classList.contains('expanded');
+
+        // Collapse all others
+        document.querySelectorAll('.concept-card.expanded').forEach(c => {
+          if (c !== this) c.classList.remove('expanded');
+        });
+
+        // Toggle this one
+        this.classList.toggle('expanded');
+
+        // Initialize ads if not already done
+        if (!isExpanded && !initializedConcepts.has(conceptIndex)) {
+          const concept = adConcepts[conceptIndex];
+          const adsContainer = document.getElementById(`concept-${conceptIndex}-ads`);
+          adsContainer.innerHTML = concept.variants.map((v, i) => createAdHTML(v, i, conceptIndex)).join('');
+
+          // Initialize animations
+          concept.variants.forEach((variant, vIndex) => {
+            initializeAd(variant, vIndex, conceptIndex);
+          });
+
+          initializedConcepts.add(conceptIndex);
+        }
+      });
+    });
+
+    // =====================================================
+    // ANIMATION CONTROLLER
+    // =====================================================
+    function initializeAd(variant, adIndex, conceptIndex) {
+      const prefix = `c${conceptIndex}-a${adIndex}`;
+      const highlight = document.getElementById(`${prefix}-highlight`);
+      const acceptBtn = document.getElementById(`${prefix}-accept`);
+      const framesContainer = document.getElementById(`${prefix}-frames`);
+      const demoArea = document.getElementById(`${prefix}-demo`);
+      const ctaFrame = document.getElementById(`${prefix}-cta-frame`);
+
+      const frames = {
+        speaking: document.getElementById(`${prefix}-frame-speaking`),
+        transcription: document.getElementById(`${prefix}-frame-transcription`),
+        thinking: document.getElementById(`${prefix}-frame-thinking`),
+        suggestion: document.getElementById(`${prefix}-frame-suggestion`),
+        applied: document.getElementById(`${prefix}-frame-applied`)
+      };
+
+      const speakingCanvas = document.getElementById(`${prefix}-waveform`);
+      const thinkingCanvas = document.getElementById(`${prefix}-waveform-thinking`);
+      const speakingWaveform = createWaveformAnimation(speakingCanvas, 0.7);
+      const thinkingWaveform = createWaveformAnimation(thinkingCanvas, 0.7);
+      thinkingWaveform.setThinking();
+
+      function showFrame(frameName) {
+        framesContainer.classList.add('visible');
+        Object.values(frames).forEach(f => f.classList.remove('active'));
+        if (frames[frameName]) frames[frameName].classList.add('active');
+      }
+
+      function hideAllFrames() {
+        framesContainer.classList.remove('visible');
+        Object.values(frames).forEach(f => f.classList.remove('active'));
+      }
+
+      function showCTA() {
+        demoArea.style.opacity = '0';
+        ctaFrame.classList.add('visible');
+      }
+
+      function hideCTA() {
+        ctaFrame.classList.remove('visible');
+        demoArea.style.opacity = '1';
+      }
+
+      async function runAd() {
+        const t = variant.timing;
+        const parsed = parseEditorText(variant.editorText);
+
+        hideCTA();
+        hideAllFrames();
+        highlight.classList.remove('active', 'accepted');
+        highlight.textContent = parsed.highlightText;
+        acceptBtn.classList.remove('clicked');
+
+        await new Promise(r => setTimeout(r, t.initialPause));
+        highlight.classList.add('active');
+        await new Promise(r => setTimeout(r, t.highlightDuration));
+        showFrame('speaking');
+        await new Promise(r => setTimeout(r, t.voiceDuration));
+        showFrame('transcription');
+        await new Promise(r => setTimeout(r, t.transcriptionDuration));
+        showFrame('thinking');
+        await new Promise(r => setTimeout(r, t.thinkingDuration));
+        showFrame('suggestion');
+        await new Promise(r => setTimeout(r, t.suggestionDuration));
+        acceptBtn.classList.add('clicked');
+        await new Promise(r => setTimeout(r, t.acceptDelay));
+        showFrame('applied');
+        highlight.classList.remove('active');
+        highlight.classList.add('accepted');
+        if (variant.suggestion !== '(deleted)' && variant.suggestion !== '(delete)') {
+          highlight.textContent = variant.suggestion;
+        } else {
+          highlight.style.display = 'none';
+        }
+        await new Promise(r => setTimeout(r, t.appliedDuration));
+        showCTA();
+        await new Promise(r => setTimeout(r, t.ctaDuration));
+        highlight.style.display = '';
+        runAd();
+      }
+
+      runAd();
+    }
+  </script>
+</body>
+</html>
