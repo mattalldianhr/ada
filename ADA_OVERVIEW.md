@@ -2,7 +2,7 @@
 
 > **Edit with your voice.**
 
-Ada is a voice-driven content editor for macOS with built-in AI agents that watch as you write. Designed for writers who think out loud, Ada transforms spoken input into refined written edits through natural conversation.
+Ada is an agentic voice-driven content editor for macOS with built-in AI agents that watch as you write. Designed for writers who think out loud, Ada transforms spoken input into refined written edits through natural conversation.
 
 ## Core Value Proposition
 
@@ -98,7 +98,7 @@ Point Ada to a markdown style guide and it learns your tone—direct, warm, tech
 - Apple Silicon (native) and Intel builds available
 
 ### Current Version
-- **v0.1.6** (Beta)
+- **v0.1.9** (Beta)
 - Free during beta
 
 ### Technology Stack
@@ -108,8 +108,8 @@ Point Ada to a markdown style guide and it learns your tone—direct, warm, tech
 - **Supported Models**: Claude Opus 4.5 (recommended), Sonnet 4, Haiku 3.5
 
 ### Download
-- [Apple Silicon (.dmg)](https://github.com/mattalldianhr/ada/releases/download/v0.1.6/Ada-0.1.6-arm64.dmg)
-- [Intel (.dmg)](https://github.com/mattalldianhr/ada/releases/download/v0.1.6/Ada-0.1.6.dmg)
+- [Apple Silicon (.dmg)](https://github.com/mattalldianhr/ada/releases/download/v0.1.9/Ada-0.1.9-arm64.dmg)
+- [Intel (.dmg)](https://github.com/mattalldianhr/ada/releases/download/v0.1.9/Ada-0.1.9.dmg)
 
 ---
 
