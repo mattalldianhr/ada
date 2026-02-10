@@ -47,7 +47,8 @@ Cloudflare Pages edge cache may take 1-2 minutes to propagate after deploy. Veri
 ## Related Repositories
 
 - **App source**: `/Users/mattalldian/Personal/projects/voice-content-editor` (Electron app, `mattalldianhr/ada-source`)
-- **Public releases**: `mattalldianhr/ada` on GitHub (DMGs uploaded via `gh release create`)
+- **This repo / public releases**: `mattalldianhr/ada` on GitHub (website source, GitHub Pages, AND release DMGs)
+- Note: `ada-source` is private. Releases must go on `ada` (public) so download links work.
 
 ## Releasing a New App Version
 
