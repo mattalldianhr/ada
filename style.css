@@ -746,6 +746,208 @@ kbd {
   font-size: 0.875rem;
 }
 
+/* ============================================================
+   DE-SLOP FEATURE SECTION
+   ============================================================ */
+
+.deslop-section {
+  padding: 90px 0;
+  text-align: center;
+  border-top: 1px solid var(--color-border);
+}
+
+.deslop-section h2 {
+  font-family: 'Literata', Georgia, serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.deslop-intro {
+  max-width: 600px;
+  margin: 0 auto 48px;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Stats row */
+.deslop-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 400px;
+  margin: 0 auto 56px;
+}
+
+.deslop-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.deslop-stat-number {
+  font-family: 'Literata', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+}
+
+.deslop-stat-label {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+/* Before / After comparison */
+.deslop-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--color-border);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  max-width: 800px;
+  margin: 0 auto 56px;
+  text-align: left;
+}
+
+.deslop-before,
+.deslop-after {
+  padding: 28px 28px 32px;
+  background: var(--color-surface);
+}
+
+.deslop-before p,
+.deslop-after p {
+  font-family: 'Literata', Georgia, serif;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.deslop-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+
+.deslop-label-before {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.deslop-label-after {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.slop-highlight {
+  background: #fef2f2;
+  color: #dc2626;
+  padding: 1px 3px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+/* Slop word cloud */
+.deslop-subhead {
+  font-family: 'Literata', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.deslop-subdesc {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  max-width: 520px;
+  margin: 0 auto 20px;
+}
+
+.deslop-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  max-width: 600px;
+  margin: 0 auto 56px;
+}
+
+.deslop-word {
+  background: #fef2f2;
+  color: #dc2626;
+  padding: 4px 14px;
+  border-radius: 100px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+  white-space: nowrap;
+}
+
+/* 6 Dimensions grid */
+.deslop-dimensions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.deslop-dim {
+  padding: 16px 20px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.deslop-dim-name {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--color-text);
+}
+
+.deslop-dim-desc {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .deslop-comparison {
+    grid-template-columns: 1fr;
+  }
+  .deslop-stats {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .deslop-dimensions {
+    grid-template-columns: 1fr;
+  }
+  .deslop-section h2 {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .deslop-dimensions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* Pricing Section */
 .pricing-section {
   padding: 90px 0;
@@ -1337,9 +1539,15 @@ kbd {
 
 .agents-preview {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
   margin-bottom: 40px;
+}
+
+@media (max-width: 1024px) {
+  .agents-preview {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
@@ -1385,6 +1593,11 @@ kbd {
   margin: 0;
 }
 
+.agent-icon-deslop {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
 .agents-note {
   text-align: center;
   font-size: 0.9rem;
@@ -1405,7 +1618,7 @@ kbd {
   box-shadow: var(--shadow-lg);
   max-width: 900px;
   margin: 0 auto 40px;
-  height: 460px; /* Fixed total height */
+  height: 520px; /* Fixed total height */
   overflow: hidden;
 }
 
