@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ada - Creative Strategy Review</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Review Page Styles */
+    .review-page {
+      min-height: 100vh;
+      background: #fdfcfa;
+      padding: 40px 24px 80px;
+    }
+
+    .review-header {
+      max-width: 900px;
+      margin: 0 auto 48px;
+      text-align: center;
+    }
+
+    .review-header h1 {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      font-style: italic;
+      color: #1c1917;
+      margin-bottom: 8px;
+    }
+
+    .review-header p {
+      color: #78716c;
+      font-size: 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Strategy Section */
+    .strategy-section {
+      max-width: 1400px;
+      margin: 0 auto 64px;
+      padding: 32px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+
+    .strategy-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #e7e5e4;
+    }
+
+    .strategy-number {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      background: #1c1917;
+      color: #fafaf9;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    .strategy-info {
+      flex: 1;
+    }
+
+    .strategy-info h2 {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1c1917;
+      margin-bottom: 4px;
+    }
+
+    .strategy-framework {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #b45309;
+      margin-bottom: 12px;
+    }
+
+    .strategy-info p {
+      color: #57534e;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .strategy-insight {
+      background: #fef3c7;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      color: #92400e;
+    }
+
+    .strategy-insight strong {
+      font-weight: 600;
+    }
+
+    /* Ads Grid */
+    .ads-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 1200px) {
+      .ads-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .ads-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .ad-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ad-variant-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #78716c;
+      margin-bottom: 8px;
+    }
+
+    /* Phone Frame - Smaller for review */
+    .phone-frame-sm {
+      width: 200px;
+      height: 420px;
+      background: #0c0a09;
+      border-radius: 28px;
+      padding: 8px;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.1),
+        0 12px 24px -6px rgba(0,0,0,0.3);
+      position: relative;
+      margin: 0 auto;
+    }
+
+    .phone-frame-sm::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 54px;
+      height: 18px;
+      background: #000;
+      border-radius: 9px;
+      z-index: 10;
+    }
+
+    .phone-screen-sm {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #fdfcfa 0%, #f5f4f2 100%);
+      border-radius: 22px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 56px 12px 80px;
+    }
+
+    /* Ad Content Styles */
+    .ad-watermark-sm {
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      font-family: 'Literata', Georgia, serif;
+      font-weight: 600;
+      font-style: italic;
+      font-size: 5rem;
+      line-height: 0.8;
+      color: #1c1917;
+      opacity: 0.04;
+      pointer-events: none;
+    }
+
+    .ad-tagline-sm {
+      font-size: 0.6rem;
+      font-weight: 500;
+      color: #78716c;
+      text-align: center;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .ad-headline-sm {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      font-style: italic;
+      color: #1c1917;
+      text-align: center;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    .ad-body-sm {
+      font-size: 0.7rem;
+      color: #57534e;
+      text-align: center;
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .ad-editor-sm {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 10px;
+      margin-top: 12px;
+      font-family: 'Literata', Georgia, serif;
+      font-size: 0.65rem;
+      line-height: 1.6;
+      color: #1c1917;
+    }
+
+    .highlight-sm {
+      background: #fef3c7;
+      padding: 1px 2px;
+      border-radius: 2px;
+    }
+
+    .ad-cta-sm {
+      margin-top: auto;
+      text-align: center;
+    }
+
+    .ad-cta-btn-sm {
+      display: inline-block;
+      padding: 8px 16px;
+      background: #1c1917;
+      color: #fafaf9;
+      font-size: 0.65rem;
+      font-weight: 600;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    .ad-cta-note-sm {
+      font-size: 0.55rem;
+      color: #a8a29e;
+      margin-top: 4px;
+    }
+
+    /* Ad Description */
+    .ad-description {
+      margin-top: 16px;
+      padding: 12px;
+      background: #f5f4f2;
+      border-radius: 8px;
+    }
+
+    .ad-description h4 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #1c1917;
+      margin-bottom: 4px;
+    }
+
+    .ad-description p {
+      font-size: 0.7rem;
+      color: #78716c;
+      line-height: 1.4;
+    }
+
+    /* Back link */
+    .back-link {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      color: #78716c;
+      text-decoration: none;
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.15s;
+      z-index: 100;
+    }
+
+    .back-link:hover {
+      color: #1c1917;
+    }
+
+    /* Navigation */
+    .strategy-nav {
+      position: fixed;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 100;
+    }
+
+    .strategy-nav a {
+      width: 12px;
+      height: 12px;
+      background: #d6d3d1;
+      border-radius: 50%;
+      transition: all 0.15s;
+    }
+
+    .strategy-nav a:hover,
+    .strategy-nav a.active {
+      background: #b45309;
+      transform: scale(1.2);
+    }
+
+    /* Principles Box */
+    .principles-box {
+      max-width: 900px;
+      margin: 0 auto 48px;
+      padding: 24px 32px;
+      background: #1c1917;
+      color: #fafaf9;
+      border-radius: 12px;
+    }
+
+    .principles-box h3 {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .principles-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px 24px;
+    }
+
+    .principles-list li {
+      font-size: 0.875rem;
+      color: #d6d3d1;
+      line-height: 1.4;
+    }
+
+    .principles-list strong {
+      color: #fafaf9;
+    }
+
+    @media (max-width: 700px) {
+      .principles-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-link">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M19 12H5"/>
+      <polyline points="12 19 5 12 12 5"/>
+    </svg>
+    Back to site
+  </a>
+
+  <nav class="strategy-nav">
+    <a href="#strategy-1" title="Think Out Loud"></a>
+    <a href="#strategy-2" title="Voice-First USP"></a>
+    <a href="#strategy-3" title="Flow State"></a>
+    <a href="#strategy-4" title="We Listen"></a>
+    <a href="#strategy-5" title="Demonstration"></a>
+  </nav>
+
+  <div class="review-page">
+    <header class="review-header">
+      <h1>Creative Strategy Review</h1>
+      <p>Five distinct advertising approaches for Ada, each grounded in proven frameworks from advertising's golden age. Four executions per strategy.</p>
+    </header>
+
+    <div class="principles-box">
+      <h3>Guiding Principles (Classic Agency Wisdom)</h3>
+      <ul class="principles-list">
+        <li><strong>One Big Idea</strong> per campaign, expressed simply</li>
+        <li><strong>Benefits over features</strong> - what does the user GET?</li>
+        <li><strong>Specificity builds credibility</strong> - avoid vague claims</li>
+        <li><strong>Respect audience intelligence</strong> - no hard sell</li>
+        <li><strong>Find the human truth</strong> - what tension does Ada resolve?</li>
+        <li><strong>Position against alternatives</strong> - what makes us different?</li>
+      </ul>
+    </div>
+
+    <!-- Strategy 1: Think Out Loud (VW Think Small / Bernbach) -->
+    <section class="strategy-section" id="strategy-1">
+      <div class="strategy-header">
+        <div class="strategy-number">1</div>
+        <div class="strategy-info">
+          <div class="strategy-framework">Bernbach / VW "Think Small" Framework</div>
+          <h2>Think Out Loud</h2>
+          <p>Position Ada's voice-first approach as a return to natural thinking, not a technological addition. Lean into simplicity and honesty. Acknowledge that AI writing tools can feel robotic and impersonal - Ada is different because it listens to YOU, in YOUR voice.</p>
+          <div class="strategy-insight">
+            <strong>Big Idea:</strong> "The best editing happens out loud." - Voice editing isn't adding complexity; it's returning to how you naturally think and refine ideas.
+          </div>
+        </div>
+      </div>
+
+      <div class="ads-row">
+        <!-- Ad 1.1 -->
+        <div class="ad-card">
+          <div class="ad-variant-label">Variant A - Simplicity</div>
+          <div class="phone-frame-sm">
+            <div class="phone-screen-sm">
+              <div class="ad-watermark-sm">Ada</div>
+              <div class="ad-tagline-sm">Think out loud</div>
+              <div class="ad-headline-sm">You already edit out loud.</div>
+              <div class="ad-body-sm">
+                You mumble "that's not right" while reading your draft. You talk through sentences before typing them. Ada just makes it count.
+              </div>
+              <div class="ad-cta-sm">
+                <a href="#" class="ad-cta-btn-sm">Download Free</a>
+                <div class="ad-cta-note-sm">macOS only</div>
+              </div>
+            </div>
+          </div>
+          <div class="ad-description">
+            <h4>Honest Observation</h4>
+            <p>Acknowledges existing behavior. Doesn't sell a new habit - validates what writers already do.</p>
+          </div>
+        </div>
+
+        <!-- Ad 1.2 -->
+        <div class="ad-card">
+          <div class="ad-variant-label">Variant B - Anti-Tech</div>
+          <div class="phone-frame-sm">
+            <div class="phone-screen-sm">
+              <div class="ad-watermark-sm">Ada</div>
+              <div class="ad-tagline-sm">Think out loud</div>
+              <div class="ad-headline-sm">No prompts. No chat windows. Just talk.</div>
+              <div class="ad-body-sm">
+                Highlight a sentence. Say what's wrong with it. Ada listens, thinks, suggests. That's it.
+              </div>
+              <div class="ad-cta-sm">
+                <a href="#" class="ad-cta-btn-sm">Download Free</a>
+                <div class="ad-cta-note-sm">macOS only</div>
+              </div>
+            </div>
+          </div>
+          <div class="ad-description">
+            <h4>Contrast with AI tools</h4>
+            <p>Positions against ChatGPT/Copilot complexity. Simple, direct, no learning curve.</p>
+          </div>
+        </div>
+
+        <!-- Ad 1.3 -->
+        <div class="ad-card">
+          <div class="ad-variant-label">Variant C - Wit</div>
+          <div class="phone-frame-sm">
+            <div class="phone-screen-sm">
+              <div class="ad-watermark-sm">Ada</div>
+              <div class="ad-tagline-sm">Think out loud</div>
+              <div class="ad-headline-sm">Talk to your draft. It finally talks back.</div>
+              <div class="ad-body-sm">
+                Writers have been arguing with their paragraphs for centuries. Now they can win.
+              </div>
+              <div class="ad-cta-sm">
+                <a href="#" class="ad-cta-btn-sm">Download Free</a>
+                <div class="ad-cta-note-sm">macOS only</div>
+              </div>
+            </div>
+          </div>
+          <div class="ad-description">
+            <h4>Playful/Literary</h4>
+            <p>Humor that respects intelligence. References the writer's internal dialogue.</p>
+          </div>
+        </div>
+
+        <!-- Ad 1.4 -->
+        <div class="ad-card">
+          <div class="ad-variant-label">Variant D - Minimal</div>
+          <div class="phone-frame-sm">
+            <div class="phone-screen-sm">
+              <div class="ad-watermark-sm">Ada</div>
+              <div class="ad-tagline-sm">Think out loud</div>
+              <div class="ad-headline-sm">Edit with your voice.</div>
+              <div class="ad-editor-sm">
+                The policy will <span class="highlight-sm">significantly impact</span> our projections.
+              </div>
+              <div class="ad-body-sm" style="margin-top: 8px;">
+                "Is this too vague?"
+              </div>
+              <div class="ad-cta-sm">
+                <a href="#" class="ad-cta-btn-sm">Download Free</a>
+                <div class="ad-cta-note-sm">macOS only</div>
+              </div>
+            </div>
+          </div>
+          <div class="ad-description">
+            <h4>Show Don't Tell</h4>
+            <p>Minimal copy. Let the UI mockup do the work. VW "Think Small" energy.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Strategy 2: Voice-First USP (Rosser Reeves) -->
+    <section class="strategy-section" id="strategy-2">
+      <div class="strategy-header">
+        <div class="strategy-number">2</div>
+        <div class="strategy-info">
+          <div class="strategy-framework">Rosser Reeves / USP Framework</div>
+          <h2>The Voice-First Editor</h2>
+          <p>A clear, specific, provable proposition: Ada is the only editor where you speak your edits instead of typing them. Local transcription means privacy. Cloud AI means intelligence. This is a unique combination no competitor offers.</p>
+          <div class="strategy-insight">
+            <strong>USP:</strong> "Speak your edits. Keep your privacy." - The only editor with local voice transcription and cloud AI suggestions.
+          </div>
+        </div>
+      </div>
+
+      <div class="ads-row">
+        <!-- Ad 2.1 -->
+        <div class="ad-card">
+          <div class="ad-variant-label">Variant A - The Claim</div>
+          <div class="phone-frame-sm">
+            <div class="phone-screen-sm">
+              <div class="ad-watermark-sm">Ada</div>
+              <div class="ad-tagline-sm">Voice-first editing</div>
+              <div class="ad-headline-sm">Your voice never leaves your Mac.</div>
+              <div class="ad-body-sm">
+                Local transcription. Cloud intelligence. Only the text you highlight is sent to AI. Your audio stays on your machine.
+              </div>
+              <div class="ad-cta-sm">
+                <a href="#" class="ad-cta-btn-sm">Download Free</a>
+                <div class="ad-cta-note-sm">macOS only</div>
+              </div>
+            </div>
+          </div>
+          <div class="ad-description">
+            <h4>Privacy USP</h4>
+            <p>Specific, provable claim. Differentiates from cloud-only AI tools.</p>
+          </div>
+        </div>
+
+        <!-- Ad 2.2 -->
+        <div class="ad-card">
+          <div class="ad-variant-label">Variant B - Speed</div>
+          <div class="phone-frame-sm">
+            <div class="phone-screen-sm">
+              <div class="ad-watermark-sm">Ada</div>
+              <div class="ad-tagline-sm">Voice-first editing</div>
+              <div class="ad-headline-sm">Speak at 150 words per minute. Type at 40.</div>
+              <div class="ad-body-sm">
+                Your voice is faster than your fingers. Ada turns speech into refined edits instantly.
+              </div>
+              <div class="ad-cta-sm">
+                <a href="#" class="ad-cta-btn-sm">Download Free</a>
+                <div class="ad-cta-note-sm">macOS only</div>
+              </div>
+            </div>
+          </div>
+          <div class="ad-description">
+            <h4>Speed USP</h4>
+            <p>Specific numbers build credibility. Reeves would approve.</p>
+          </div>
+        </div>
+
+        <!-- Ad 2.3 -->
+        <div class="ad-card">
+          <div class="ad-variant-label">Variant C - Two Modes</div>
+          <div class="phone-frame-sm">
+            <div class="phone-screen-sm">
+              <div class="ad-watermark-sm">Ada</div>
+              <div class="ad-tagline-sm">Voice-first editing</div>
+              <div class="ad-headline-sm">Two ways to edit. Zero typing.</div>
+              <div class="ad-body-sm">
+                <strong>Socratic:</strong> Ask questions, get suggestions.<br><br>
+                <strong>Didactic:</strong> Speak replacements directly.
+              </div>
+              <div class="ad-cta-sm">
+                <a href="#" class="ad-cta-btn-sm">Download Free</a>
+                <div class="ad-cta-note-sm">macOS only</div>
+              </div>
+            </div>
+          </div>
+          <div class="ad-description">
+            <h4>Feature USP</h4>
+            <p>Clear differentiation through unique modes. Specific and memorable.</p>
+          </div>
+        </div>
+
+        <!-- Ad 2.4 -->
+        <div class="ad-card">
+          <div class="ad-variant-label">Variant D - BYOK</div>
+          <div class="phone-frame-sm">
+            <div class="phone-screen-sm">
+              <div class="ad-watermark-sm">Ada</div>
+              <div class="ad-tagline-sm">Voice-first editing</div>
+              <div class="ad-headline-sm">Your API key. Your control. Our interface.</div>
+              <div class="ad-body-sm">
+                Bring your own Anthropic key. Pay only for what you use. No subscriptions. No limits.
+              </div>
+              <div class="ad-cta-sm">
+                <a href="#" class="ad-cta-btn-sm">Download Free</a>
+                <div class="ad-cta-note-sm">macOS only</div>
+              </div>
+            </div>
+          </div>
+          <div class="ad-description">
+            <h4>Business Model USP</h4>
+            <p>Differentiates on pricing/control. Appeals to power users.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Strategy 3: Flow State (Problem/Solution) -->
+    <section class="strategy-section" id="strategy-3">
+      <div class="strategy-header">
+        <div class="strategy-number">3</div>
+        <div class="strategy-info">
+          <div class="strategy-framework">Problem/Solution Framework</div>
+          <h2>Stay in Flow</h2>
+          <p>The problem: Editing breaks creative momentum. Every time you stop to fix a sentence, you lose your train of thought. The solution: Ada lets you talk through changes without breaking stride. Keep writing, keep thinking, stay in flow.</p>
+          <div class="strategy-insight">
+            <strong>Consumer Tension:</strong> "I know something's wrong with this sentence, but if I stop to fix it, I'll lose my momentum."
+          </div>
+        </div>
+      </div>
+
+      <div class="ads-row">
+        <!-- Ad 3.1 -->
+        <div class="ad-card">
+          <div class="ad-variant-label">Variant A - The Pain</div>
+          <div class="phone-frame-sm">
+            <div class="phone-screen-sm">
+              <div class="ad-watermark-sm">Ada</div>
+              <div class="ad-tagline-sm">Stay in flow</div>
+              <div class="ad-headline-sm">Stop. Delete. Retype. Lose your thought.</div>
+              <div class="ad-body-sm">
+                Or just say "that's too formal" and keep writing. Ada handles the rest.
+              </div>
+              <div class="ad-cta-sm">
+                <a href="#" class="ad-cta-btn-sm">Download Free</a>
+                <div class="ad-cta-note-sm">macOS only</div>
+              </div>
+            </div>
+          </div>
+          <div class="ad-description">
+            <h4>Pain Point First</h4>
+            <p>Articulates the frustration, then offers relief. Classic problem/solution.</p>
+          </div>
+        </div>
+
+        <!-- Ad 3.2 -->
+        <div class="ad-card">
+          <div class="ad-variant-label">Variant B - Momentum</div>
+          <div class="phone-frame-sm">
+            <div class="phone-screen-sm">
+              <div class="ad-watermark-sm">Ada</div>
+              <div class="ad-tagline-sm">Stay in flow</div>
+              <div class="ad-headline-sm">Edit later. Don't stop now.</div>
+              <div class="ad-body-sm">
+                Flag it with your voice. Ada remembers. Keep your momentum. Come back when you're ready.
+              </div>
+              <div class="ad-cta-sm">
+                <a href="#" class="ad-cta-btn-sm">Download Free</a>
+                <div class="ad-cta-note-sm">macOS only</div>
+              </div>
+            </div>
+          </div>
+          <div class="ad-description">
+            <h4>Momentum Focus</h4>
+            <p>Writers' greatest fear: losing the thread. Ada protects it.</p>
+          </div>
+        </div>
+
+        <!-- Ad 3.3 -->
+        <div class="ad-card">
+          <div class="ad-variant-label">Variant C - Context Switch</div>
+          <div class="phone-frame-sm">
+            <div class="phone-screen-sm">
+              <div class="ad-watermark-sm">Ada</div>
+              <div class="ad-tagline-sm">Stay in flow</div>
+              <div class="ad-headline-sm">Writing mode. Editing mode. Never switch.</div>
+              <div class="ad-body-sm">
+                Your hands write. Your voice edits. Both happen at once.
+              </div>
+              <div class="ad-cta-sm">
+                <a href="#" class="ad-cta-btn-sm">Download Free</a>
+                <div class="ad-cta-note-sm">macOS only</div>
+              </div>
+            </div>
+          </div>
+          <div class="ad-description">
+            <h4>Mode Switching</h4>
+            <p>Technical benefit expressed as human workflow improvement.</p>
+          </div>
+        </div>
+
+        <!-- Ad 3.4 -->
+        <div class="ad-card">
+          <div class="ad-variant-label">Variant D - Draft Zero</div>
+          <div class="phone-frame-sm">
+            <div class="phone-screen-sm">
+              <div class="ad-watermark-sm">Ada</div>
+              <div class="ad-tagline-sm">Stay in flow</div>
+              <div class="ad-headline-sm">First drafts don't have to be rough.</div>
+              <div class="ad-body-sm">
+                Talk through your edits as you write. Finish with a draft that's already refined.
+              </div>
+              <div class="ad-cta-sm">
+                <a href="#" class="ad-cta-btn-sm">Download Free</a>
+                <div class="ad-cta-note-sm">macOS only</div>
+              </div>
+            </div>
+          </div>
+          <div class="ad-description">
+            <h4>Outcome Focus</h4>
+            <p>The end benefit: better first drafts. Less revision later.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Strategy 4: We Listen (Avis "We Try Harder") -->
+    <section class="strategy-section" id="strategy-4">
+      <div class="strategy-header">
+        <div class="strategy-number">4</div>
+        <div class="strategy-info">
+          <div class="strategy-framework">Avis "We Try Harder" / Underdog Framework</div>
+          <h2>We Listen</h2>
+          <p>Position Ada against big AI tools that write FOR you. Ada listens TO you. It amplifies YOUR voice instead of replacing it. Smaller, more personal, more respectful of the writer's craft. The underdog that tries harder.</p>
+          <div class="strategy-insight">
+            <strong>Positioning:</strong> "AI that writes for you vs. AI that listens to you." - We're not trying to replace writers. We're trying to help them.
+          </div>
+        </div>
+      </div>
+
+      <div class="ads-row">
+        <!-- Ad 4.1 -->
+        <div class="ad-card">
+          <div class="ad-variant-label">Variant A - Not a Writer</div>
+          <div class="phone-frame-sm">
+            <div class="phone-screen-sm">
+              <div class="ad-watermark-sm">Ada</div>
+              <div class="ad-tagline-sm">We listen</div>
+              <div class="ad-headline-sm">Ada doesn't write for you.</div>
+              <div class="ad-body-sm">
+                It listens. It thinks. It suggests. You decide. Your words, your voice, your name on the byline.
+              </div>
+              <div class="ad-cta-sm">
+                <a href="#" class="ad-cta-btn-sm">Download Free</a>
+                <div class="ad-cta-note-sm">macOS only</div>
+              </div>
+            </div>
+          </div>
+          <div class="ad-description">
+            <h4>Anti-AI Positioning</h4>
+            <p>Differentiates from ChatGPT/Copilot. Protects writer identity.</p>
+          </div>
+        </div>
+
+        <!-- Ad 4.2 -->
+        <div class="ad-card">
+          <div class="ad-variant-label">Variant B - Amplify</div>
+          <div class="phone-frame-sm">
+            <div class="phone-screen-sm">
+              <div class="ad-watermark-sm">Ada</div>
+              <div class="ad-tagline-sm">We listen</div>
+              <div class="ad-headline-sm">Your voice, amplified.</div>
+              <div class="ad-body-sm">
+                Not replaced. Not rewritten. Just clearer, sharper, more you.
+              </div>
+              <div class="ad-cta-sm">
+                <a href="#" class="ad-cta-btn-sm">Download Free</a>
+                <div class="ad-cta-note-sm">macOS only</div>
+              </div>
+            </div>
+          </div>
+          <div class="ad-description">
+            <h4>Amplification Theme</h4>
+            <p>Ada as amplifier, not author. Respects the craft.</p>
+          </div>
+        </div>
+
+        <!-- Ad 4.3 -->
+        <div class="ad-card">
+          <div class="ad-variant-label">Variant C - Discussion</div>
+          <div class="phone-frame-sm">
+            <div class="phone-screen-sm">
+              <div class="ad-watermark-sm">Ada</div>
+              <div class="ad-tagline-sm">We listen</div>
+              <div class="ad-headline-sm">An editor that asks before changing.</div>
+              <div class="ad-body-sm">
+                "Is this too vague?" "Too formal?" "Make it shorter?"<br><br>
+                You ask. Ada suggests. You decide.
+              </div>
+              <div class="ad-cta-sm">
+                <a href="#" class="ad-cta-btn-sm">Download Free</a>
+                <div class="ad-cta-note-sm">macOS only</div>
+              </div>
+            </div>
+          </div>
+          <div class="ad-description">
+            <h4>Collaborative Frame</h4>
+            <p>Editor as collaborator, not autocrat. Respects writer agency.</p>
+          </div>
+        </div>
+
+        <!-- Ad 4.4 -->
+        <div class="ad-card">
+          <div class="ad-variant-label">Variant D - Second Eyes</div>
+          <div class="phone-frame-sm">
+            <div class="phone-screen-sm">
+              <div class="ad-watermark-sm">Ada</div>
+              <div class="ad-tagline-sm">We listen</div>
+              <div class="ad-headline-sm">A second set of eyes. Always.</div>
+              <div class="ad-body-sm">
+                Agents watch as you write. They catch what you miss. They suggest, never demand.
+              </div>
+              <div class="ad-cta-sm">
+                <a href="#" class="ad-cta-btn-sm">Download Free</a>
+                <div class="ad-cta-note-sm">macOS only</div>
+              </div>
+            </div>
+          </div>
+          <div class="ad-description">
+            <h4>Agent Focus</h4>
+            <p>Introduces the agent feature as helpful presence, not intrusion.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Strategy 5: Demonstration/Slice of Life -->
+    <section class="strategy-section" id="strategy-5">
+      <div class="strategy-header">
+        <div class="strategy-number">5</div>
+        <div class="strategy-info">
+          <div class="strategy-framework">Demonstration / Slice of Life Framework</div>
+          <h2>See It Work</h2>
+          <p>Show, don't tell. The magic of Ada is in the moment: highlight text, speak your thought, watch it transform. These ads focus on demonstrating the actual workflow through realistic scenarios writers face every day.</p>
+          <div class="strategy-insight">
+            <strong>Execution:</strong> Mini-demonstrations of real editing scenarios. Let the product prove itself through action.
+          </div>
+        </div>
+      </div>
+
+      <div class="ads-row">
+        <!-- Ad 5.1 -->
+        <div class="ad-card">
+          <div class="ad-variant-label">Variant A - Vague Language</div>
+          <div class="phone-frame-sm">
+            <div class="phone-screen-sm">
+              <div class="ad-watermark-sm">Ada</div>
+              <div class="ad-tagline-sm">See it work</div>
+              <div class="ad-editor-sm">
+                The results were <span class="highlight-sm">very significant</span> for stakeholders.
+              </div>
+              <div class="ad-body-sm" style="margin-top: 12px;">
+                <strong>"Too vague?"</strong><br><br>
+                <span style="color: #059669;">Suggestion: "increased revenue 23%"</span>
+              </div>
+              <div class="ad-cta-sm">
+                <a href="#" class="ad-cta-btn-sm">Download Free</a>
+                <div class="ad-cta-note-sm">macOS only</div>
+              </div>
+            </div>
+          </div>
+          <div class="ad-description">
+            <h4>Clarity Demo</h4>
+            <p>Shows Socratic mode turning vague language into specific claims.</p>
+          </div>
+        </div>
+
+        <!-- Ad 5.2 -->
+        <div class="ad-card">
+          <div class="ad-variant-label">Variant B - Tone Shift</div>
+          <div class="phone-frame-sm">
+            <div class="phone-screen-sm">
+              <div class="ad-watermark-sm">Ada</div>
+              <div class="ad-tagline-sm">See it work</div>
+              <div class="ad-editor-sm">
+                We are <span class="highlight-sm">pleased to inform you</span> that your application...
+              </div>
+              <div class="ad-body-sm" style="margin-top: 12px;">
+                <strong>"Too formal?"</strong><br><br>
+                <span style="color: #059669;">Suggestion: "happy to share"</span>
+              </div>
+              <div class="ad-cta-sm">
+                <a href="#" class="ad-cta-btn-sm">Download Free</a>
+                <div class="ad-cta-note-sm">macOS only</div>
+              </div>
+            </div>
+          </div>
+          <div class="ad-description">
+            <h4>Tone Demo</h4>
+            <p>Shows adjusting formality level. Relatable business writing scenario.</p>
+          </div>
+        </div>
+
+        <!-- Ad 5.3 -->
+        <div class="ad-card">
+          <div class="ad-variant-label">Variant C - Direct Replace</div>
+          <div class="phone-frame-sm">
+            <div class="phone-screen-sm">
+              <div class="ad-watermark-sm">Ada</div>
+              <div class="ad-tagline-sm">See it work</div>
+              <div class="ad-editor-sm">
+                The deadline is <span class="highlight-sm">next month</span> and we need to prepare.
+              </div>
+              <div class="ad-body-sm" style="margin-top: 12px;">
+                <strong>"March 15th"</strong><br><br>
+                <span style="color: #059669;">Replaced: "March 15th"</span>
+              </div>
+              <div class="ad-cta-sm">
+                <a href="#" class="ad-cta-btn-sm">Download Free</a>
+                <div class="ad-cta-note-sm">macOS only</div>
+              </div>
+            </div>
+          </div>
+          <div class="ad-description">
+            <h4>Didactic Demo</h4>
+            <p>Shows direct replacement mode. Speak the change, it happens.</p>
+          </div>
+        </div>
+
+        <!-- Ad 5.4 -->
+        <div class="ad-card">
+          <div class="ad-variant-label">Variant D - Agent Catch</div>
+          <div class="phone-frame-sm">
+            <div class="phone-screen-sm">
+              <div class="ad-watermark-sm">Ada</div>
+              <div class="ad-tagline-sm">See it work</div>
+              <div class="ad-editor-sm">
+                This will <span class="highlight-sm">leverage synergies</span> across departments.
+              </div>
+              <div class="ad-body-sm" style="margin-top: 12px;">
+                <span style="color: #b45309; font-size: 0.6rem;">CLARITY AGENT</span><br>
+                <strong>Jargon detected</strong><br><br>
+                <span style="color: #059669;">Suggestion: "connect teams"</span>
+              </div>
+              <div class="ad-cta-sm">
+                <a href="#" class="ad-cta-btn-sm">Download Free</a>
+                <div class="ad-cta-note-sm">macOS only</div>
+              </div>
+            </div>
+          </div>
+          <div class="ad-description">
+            <h4>Agent Demo</h4>
+            <p>Shows background agent catching jargon. "Second set of eyes" in action.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // Highlight nav on scroll
+    const sections = document.querySelectorAll('.strategy-section');
+    const navLinks = document.querySelectorAll('.strategy-nav a');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+
+    sections.forEach(section => observer.observe(section));
+  </script>
+</body>
+</html>

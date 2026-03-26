@@ -1,0 +1,8 @@
+{
+  "error": {
+    "message": "Invalid value: 'juniper'. Supported values are: 'alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer', 'coral', 'verse', 'ballad', 'ash', 'sage', 'marin', and 'cedar'.",
+    "type": "invalid_request_error",
+    "param": "voice",
+    "code": "invalid_value"
+  }
+}

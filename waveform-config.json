@@ -1,0 +1,71 @@
+{
+  "version": "1.0",
+  "description": "Ada Waveform Style Guide - Finalized responsive config",
+  "rules": {
+    "width": "100% of container",
+    "height": "80% of container",
+    "background": "transparent",
+    "particles": "10 detachable + 3 permanent",
+    "orbitRadius": "35% of canvas (speaking mode)",
+    "thinkingPulse": "15-35% of canvas"
+  },
+  "breakpoints": {
+    "hero": { "containerSize": 200, "result": "200×160px" },
+    "desktop": { "containerSize": 160, "result": "160×128px" },
+    "tablet": { "containerSize": 140, "result": "140×112px" },
+    "mobile": { "containerSize": 120, "result": "120×96px" },
+    "compact": { "containerSize": 100, "result": "100×80px" }
+  },
+  "configs": [
+    {
+      "name": "Hero",
+      "widthPct": 100,
+      "heightPct": 80,
+      "containerSize": 200,
+      "particles": { "count": 10, "permanent": 3, "size": 1.5, "spread": 0, "grouping": 0 },
+      "orbit": { "speakRadius": 0.35, "thinkMin": 0.15, "thinkMax": 0.35, "spinSpeed": 0.03, "pulseSpeed": 0.03 },
+      "detach": { "probability": 0.4, "flySpeed": 0.4, "fadeRate": 0.05 },
+      "colors": { "orbit": "#b45309", "flyLeft": "#dc6414", "flyRight": "#fbbf24", "bg": "#ffffff", "bgOpacity": 0 }
+    },
+    {
+      "name": "Desktop",
+      "widthPct": 100,
+      "heightPct": 80,
+      "containerSize": 160,
+      "particles": { "count": 10, "permanent": 3, "size": 1.5, "spread": 0, "grouping": 0 },
+      "orbit": { "speakRadius": 0.35, "thinkMin": 0.15, "thinkMax": 0.35, "spinSpeed": 0.03, "pulseSpeed": 0.03 },
+      "detach": { "probability": 0.4, "flySpeed": 0.4, "fadeRate": 0.05 },
+      "colors": { "orbit": "#b45309", "flyLeft": "#dc6414", "flyRight": "#fbbf24", "bg": "#ffffff", "bgOpacity": 0 }
+    },
+    {
+      "name": "Tablet",
+      "widthPct": 100,
+      "heightPct": 80,
+      "containerSize": 140,
+      "particles": { "count": 10, "permanent": 3, "size": 1.5, "spread": 0, "grouping": 0 },
+      "orbit": { "speakRadius": 0.35, "thinkMin": 0.15, "thinkMax": 0.35, "spinSpeed": 0.03, "pulseSpeed": 0.03 },
+      "detach": { "probability": 0.4, "flySpeed": 0.4, "fadeRate": 0.05 },
+      "colors": { "orbit": "#b45309", "flyLeft": "#dc6414", "flyRight": "#fbbf24", "bg": "#ffffff", "bgOpacity": 0 }
+    },
+    {
+      "name": "Mobile",
+      "widthPct": 100,
+      "heightPct": 80,
+      "containerSize": 120,
+      "particles": { "count": 10, "permanent": 3, "size": 1.5, "spread": 0, "grouping": 0 },
+      "orbit": { "speakRadius": 0.35, "thinkMin": 0.15, "thinkMax": 0.35, "spinSpeed": 0.03, "pulseSpeed": 0.03 },
+      "detach": { "probability": 0.4, "flySpeed": 0.4, "fadeRate": 0.05 },
+      "colors": { "orbit": "#b45309", "flyLeft": "#dc6414", "flyRight": "#fbbf24", "bg": "#ffffff", "bgOpacity": 0 }
+    },
+    {
+      "name": "Compact",
+      "widthPct": 100,
+      "heightPct": 80,
+      "containerSize": 100,
+      "particles": { "count": 10, "permanent": 3, "size": 1.5, "spread": 0, "grouping": 0 },
+      "orbit": { "speakRadius": 0.35, "thinkMin": 0.15, "thinkMax": 0.35, "spinSpeed": 0.03, "pulseSpeed": 0.03 },
+      "detach": { "probability": 0.4, "flySpeed": 0.4, "fadeRate": 0.05 },
+      "colors": { "orbit": "#b45309", "flyLeft": "#dc6414", "flyRight": "#fbbf24", "bg": "#ffffff", "bgOpacity": 0 }
+    }
+  ]
+}

@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ada - Go-to-Market</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* GTM Page Styles */
+    .gtm-hero {
+      padding: 120px 0 48px;
+      text-align: center;
+    }
+
+    .gtm-hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .gtm-hero p {
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .gtm-last-updated {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      margin-top: 16px;
+    }
+
+    /* Phase sections */
+    .gtm-phase {
+      padding: 64px 0;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .gtm-phase.alt-bg {
+      background: var(--color-surface);
+    }
+
+    .gtm-phase-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .gtm-phase-number {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+      background: var(--color-accent-light);
+      padding: 4px 12px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .gtm-phase-header h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    /* Checklist items */
+    .gtm-checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .gtm-item {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 12px;
+      padding: 16px 20px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      transition: box-shadow 0.15s;
+    }
+
+    .gtm-phase.alt-bg .gtm-item {
+      background: var(--color-bg);
+    }
+
+    .gtm-item:hover {
+      box-shadow: var(--shadow-sm);
+    }
+
+    .gtm-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .gtm-item.done .gtm-check {
+      background: #059669;
+      border-color: #059669;
+    }
+
+    .gtm-item.done .gtm-check svg {
+      display: block;
+    }
+
+    .gtm-item.in-progress .gtm-check {
+      border-color: var(--color-accent);
+      background: var(--color-accent-light);
+    }
+
+    .gtm-check svg {
+      display: none;
+      width: 12px;
+      height: 12px;
+      color: white;
+    }
+
+    .gtm-item-content h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .gtm-item-content p {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .gtm-item.done .gtm-item-content h3 {
+      color: var(--color-text-muted);
+    }
+
+    .gtm-evidence {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #059669;
+      background: #ecfdf5;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-top: 6px;
+    }
+
+    .gtm-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-top: 6px;
+      margin-right: 4px;
+    }
+
+    .gtm-tag.product { background: #dbeafe; color: #2563eb; }
+    .gtm-tag.marketing { background: #fce7f3; color: #be185d; }
+    .gtm-tag.launch { background: #fef3c7; color: #b45309; }
+    .gtm-tag.monetization { background: #ede9fe; color: #7c3aed; }
+    .gtm-tag.growth { background: #d1fae5; color: #059669; }
+
+    /* Summary stats */
+    .gtm-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .gtm-stat {
+      padding: 20px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      text-align: center;
+    }
+
+    .gtm-stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-text);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .gtm-stat-label {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      font-weight: 500;
+    }
+
+    .gtm-stat-number.accent { color: var(--color-accent); }
+    .gtm-stat-number.green { color: #059669; }
+
+    /* Channels section */
+    .gtm-channels {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .gtm-channel {
+      padding: 24px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+    }
+
+    .gtm-phase.alt-bg .gtm-channel {
+      background: var(--color-bg);
+    }
+
+    .gtm-channel h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .gtm-channel p {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .gtm-channel-status {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .gtm-channel-status.ready { color: #059669; }
+    .gtm-channel-status.partial { color: var(--color-accent); }
+    .gtm-channel-status.planned { color: var(--color-text-muted); }
+
+    /* Timeline */
+    .gtm-timeline {
+      position: relative;
+      padding-left: 32px;
+      margin-top: 24px;
+    }
+
+    .gtm-timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--color-border);
+    }
+
+    .gtm-timeline-item {
+      position: relative;
+      padding-bottom: 32px;
+    }
+
+    .gtm-timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .gtm-timeline-dot {
+      position: absolute;
+      left: -28px;
+      top: 4px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--color-border);
+      border: 2px solid var(--color-bg);
+    }
+
+    .gtm-phase.alt-bg .gtm-timeline-dot {
+      border-color: var(--color-surface);
+    }
+
+    .gtm-timeline-item.done .gtm-timeline-dot { background: #059669; }
+    .gtm-timeline-item.current .gtm-timeline-dot { background: var(--color-accent); }
+
+    .gtm-timeline-item h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .gtm-timeline-item p {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* Back link */
+    .gtm-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      padding: 8px 0;
+      transition: color 0.15s;
+    }
+
+    .gtm-back:hover {
+      color: var(--color-text);
+    }
+
+    /* Inline demo containers */
+    .gtm-demo-embed {
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 1px dashed var(--color-border);
+    }
+
+    .gtm-demo-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .gtm-demo-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--color-border);
+    }
+
+    /* Iframe embed wrapper */
+    .gtm-iframe-wrap {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .gtm-iframe-wrap iframe {
+      width: 100%;
+      border: none;
+      display: block;
+    }
+
+    .gtm-iframe-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      background: var(--color-surface-elevated);
+      border-top: 1px solid var(--color-border);
+      font-size: 0.8rem;
+    }
+
+    .gtm-iframe-bar span {
+      color: var(--color-text-muted);
+      font-size: 0.75rem;
+    }
+
+    .gtm-iframe-bar a {
+      color: var(--color-accent);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.8rem;
+    }
+
+    .gtm-iframe-bar a:hover {
+      text-decoration: underline;
+    }
+
+    /* Multi-embed grid for side-by-side iframes */
+    .gtm-embed-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .gtm-phase-header {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .gtm-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gtm-channels {
+        grid-template-columns: 1fr;
+      }
+
+      .gtm-embed-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="logo">Ada</div>
+      <nav class="nav">
+        <a href="index.html" class="gtm-back">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Back to site
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="gtm-hero">
+      <div class="container">
+        <span class="beta-badge">Internal</span>
+        <h1>Go-to-Market</h1>
+        <p>Everything we've built, where we are, and what's left to ship <span class="brand">Ada</span> to the world.</p>
+        <div class="gtm-last-updated">Last updated February 6, 2026</div>
+      </div>
+    </section>
+
+    <!-- The Why -->
+    <section class="gtm-phase" id="why">
+      <div class="container">
+        <div class="gtm-phase-header">
+          <span class="gtm-phase-number">The Why</span>
+          <h2>Purpose, Mission, Vision</h2>
+        </div>
+
+        <a href="brand/why.html" style="display: block; max-width: 640px; padding: 24px 28px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); text-decoration: none; color: inherit; transition: box-shadow 0.15s;">
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.02em; font-family: 'Literata', Georgia, serif;">The thinking is the writing.</h3>
+          <p style="color: var(--color-text-muted); line-height: 1.6; margin: 0 0 12px; font-size: 0.95rem;">
+            Why <span class="brand">Ada</span> exists, what it's for, and where it's headed. Origin story, mission, vision, and the line we won't cross.
+          </p>
+          <span style="color: var(--color-accent); font-size: 0.85rem; font-weight: 500;">Read the full document &rarr;</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Overview Stats -->
+    <section class="gtm-phase alt-bg">
+      <div class="container">
+        <div class="gtm-stats">
+          <div class="gtm-stat">
+            <div class="gtm-stat-number green">v0.1.9</div>
+            <div class="gtm-stat-label">Current beta</div>
+          </div>
+          <div class="gtm-stat">
+            <div class="gtm-stat-number">2</div>
+            <div class="gtm-stat-label">Core modes (Socratic + Dictation)</div>
+          </div>
+          <div class="gtm-stat">
+            <div class="gtm-stat-number accent">102</div>
+            <div class="gtm-stat-label">Ad concepts written</div>
+          </div>
+          <div class="gtm-stat">
+            <div class="gtm-stat-number">15</div>
+            <div class="gtm-stat-label">Creative angles documented</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase 1: Product Foundation (DONE) -->
+    <section class="gtm-phase alt-bg" id="product">
+      <div class="container">
+        <div class="gtm-phase-header">
+          <span class="gtm-phase-number">Phase 1</span>
+          <h2>Product Foundation</h2>
+        </div>
+        <ul class="gtm-checklist">
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>Core editing engine with TipTap</h3>
+              <p>Rich text editor with voice-driven editing, highlight-to-speak workflow, and real-time streaming responses from Claude.</p>
+              <span class="gtm-tag product">Product</span>
+              <span class="gtm-evidence">Shipping in v0.1.9</span>
+            </div>
+          </li>
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>Socratic Mode</h3>
+              <p>Conversational refinement through voice. Highlight text, speak your thought, get a nuanced suggestion with the reasoning behind it. Uses &lt;find&gt;/&lt;replace&gt; diffs for surgical edits.</p>
+              <span class="gtm-tag product">Product</span>
+              <span class="gtm-evidence">Cmd+Shift+S</span>
+            </div>
+          </li>
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>Dictation Mode</h3>
+              <p>Direct spoken text replacement with light grammar cleanup. Say what you mean, it replaces the selection. Minimal AI intervention.</p>
+              <span class="gtm-tag product">Product</span>
+              <span class="gtm-evidence">Cmd+Shift+D</span>
+            </div>
+          </li>
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>Local Whisper transcription</h3>
+              <p>Browser-based speech recognition via Transformers.js. No audio leaves the device. ~40MB model cached in browser. Silence detection auto-stops after 4s.</p>
+              <span class="gtm-tag product">Product</span>
+              <span class="gtm-evidence">Xenova/whisper-tiny.en</span>
+            </div>
+          </li>
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>AI Agents system</h3>
+              <p>Background monitors that watch as you write and surface suggestions. Custom rules, multiple agents running simultaneously, non-intrusive sidenote annotations.</p>
+              <span class="gtm-tag product">Product</span>
+              <span class="gtm-evidence">Live in app</span>
+            </div>
+          </li>
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>Multi-annotation system</h3>
+              <p>Multiple conversations in the sidebar simultaneously. Accept, reject, revert edits. Color-coded highlights cycle through 5 colors. Full conversation history per annotation.</p>
+              <span class="gtm-tag product">Product</span>
+            </div>
+          </li>
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>Voice guide & context file support</h3>
+              <p>VOICE.md for tone/style rules, context files for project-specific knowledge. Relevance-scored and injected into AI prompts.</p>
+              <span class="gtm-tag product">Product</span>
+            </div>
+          </li>
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>Apple code signing & notarization</h3>
+              <p>Signed with Developer ID, notarized by Apple, stapled DMGs for both Apple Silicon and Intel. No Gatekeeper warnings on install.</p>
+              <span class="gtm-tag product">Product</span>
+              <span class="gtm-evidence">Notarized Feb 2, 2026</span>
+            </div>
+          </li>
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>E2E test suite with Playwright</h3>
+              <p>Automated tests for UI, editor behavior, keyboard shortcuts, and voice pipeline. TTS-generated test audio clips for voice mode testing.</p>
+              <span class="gtm-tag product">Product</span>
+            </div>
+          </li>
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>Sentry usage tracking</h3>
+              <p>Error monitoring and usage analytics integrated. Tracking key events across the app.</p>
+              <span class="gtm-tag product">Product</span>
+              <span class="gtm-evidence">Added in v0.1.7</span>
+            </div>
+          </li>
+        </ul>
+
+        <!-- Inline Demo: Interactive demo page (the real one) -->
+        <div class="gtm-demo-embed">
+          <div class="gtm-demo-label">Live demo &mdash; from demo.html</div>
+          <div class="gtm-iframe-wrap">
+            <iframe src="demo.html" loading="lazy" title="Ada interactive demo" style="height: 600px;"></iframe>
+            <div class="gtm-iframe-bar">
+              <span>demo.html &mdash; Socratic, Dictation, Agents, Voice Guide demos</span>
+              <a href="demo.html" target="_blank">Open full page &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase 2: Brand & Website (DONE) -->
+    <section class="gtm-phase" id="brand">
+      <div class="container">
+        <div class="gtm-phase-header">
+          <span class="gtm-phase-number">Phase 2</span>
+          <h2>Brand & Website</h2>
+        </div>
+        <ul class="gtm-checklist">
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>Marketing website at writewithada.com</h3>
+              <p>Full landing page with hero, interactive demo, feature sections, agents showcase, pricing, and download links. Deployed on Cloudflare Pages with secondary domain at ada.mattalldian.com.</p>
+              <span class="gtm-tag marketing">Marketing</span>
+              <span class="gtm-evidence">Live at writewithada.com</span>
+            </div>
+          </li>
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>Interactive Jefferson demo</h3>
+              <p>The "What if Jefferson had AI?" hook. Animated demo showing Socratic mode turning "sacred and undeniable" into "self-evident." Runs in-page with particle orbit waveform.</p>
+              <span class="gtm-tag marketing">Marketing</span>
+              <span class="gtm-evidence">Homepage hero demo</span>
+            </div>
+          </li>
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>Brand identity & design system</h3>
+              <p>Warm paper-like palette (off-white, amber accent, green success). Literata serif for branding, Inter for UI. Waveform style guide. Brand guidelines page.</p>
+              <span class="gtm-tag marketing">Marketing</span>
+              <span class="gtm-evidence">brand/ directory</span>
+            </div>
+          </li>
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>Particle orbit waveform visualization</h3>
+              <p>Distinctive audio visualization with orbiting particles that detach during speech. Speak mode vs think mode states. Used across website and app.</p>
+              <span class="gtm-tag marketing">Marketing</span>
+              <span class="gtm-evidence">explorer.html style guide</span>
+            </div>
+          </li>
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>Feature demo sections</h3>
+              <p>Animated interactive demos for voice guide, privacy flow, settings, keyboard shortcuts, and multi-conversation management. All auto-play on scroll via IntersectionObserver.</p>
+              <span class="gtm-tag marketing">Marketing</span>
+            </div>
+          </li>
+        </ul>
+
+        <!-- Inline Demo: Live website -->
+        <div class="gtm-demo-embed">
+          <div class="gtm-demo-label">Live website &mdash; index.html</div>
+          <div class="gtm-iframe-wrap">
+            <iframe src="index.html" loading="lazy" title="Ada marketing website" style="height: 600px;"></iframe>
+            <div class="gtm-iframe-bar">
+              <span>writewithada.com</span>
+              <a href="index.html" target="_blank">Open full site &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Brand guidelines -->
+        <div class="gtm-demo-embed">
+          <div class="gtm-demo-label">Brand guidelines &mdash; brand/index.html</div>
+          <div class="gtm-iframe-wrap">
+            <iframe src="brand/index.html" loading="lazy" title="Ada brand guidelines" style="height: 500px;"></iframe>
+            <div class="gtm-iframe-bar">
+              <span>Brand guidelines, waveform specs, voice &amp; tone</span>
+              <a href="brand/index.html" target="_blank">Open full page &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase 3: Creative & Ad Infrastructure (DONE) -->
+    <section class="gtm-phase alt-bg" id="creative">
+      <div class="container">
+        <div class="gtm-phase-header">
+          <span class="gtm-phase-number">Phase 3</span>
+          <h2>Creative & Ad Infrastructure</h2>
+        </div>
+        <ul class="gtm-checklist">
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>102 ad concepts across 17 hooks</h3>
+              <p>From famous historical edits (JFK, MLK, Declaration of Independence) to everyday writing pain points (jargon, hedging, passive voice, overthinking). Organized into campaign themes.</p>
+              <span class="gtm-tag marketing">Marketing</span>
+              <span class="gtm-evidence">AD_CONCEPTS.md</span>
+            </div>
+          </li>
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>15 creative angles with campaign groupings</h3>
+              <p>"Kill Your Clich&eacute;s," "Say What You Mean," "Think Out Loud," "Just Speak It." Priority-ranked by impact with production roadmap.</p>
+              <span class="gtm-tag marketing">Marketing</span>
+              <span class="gtm-evidence">CREATIVE_ANGLES.md</span>
+            </div>
+          </li>
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>Schema-driven ad mockup system</h3>
+              <p>HTML-based ad previews at phone viewport. Configurable via JSON (timing, text, suggestions, CTA). Loop-ready for Instagram Stories/Reels. Supports Socratic and Dictation modes.</p>
+              <span class="gtm-tag marketing">Marketing</span>
+              <span class="gtm-evidence">brand/ads.html, brand/agents-ads.html</span>
+            </div>
+          </li>
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>Ad copy rules & character limits</h3>
+              <p>Per-platform guidelines for tone, structure, character counts. Instagram, LinkedIn, Product Hunt formats documented.</p>
+              <span class="gtm-tag marketing">Marketing</span>
+              <span class="gtm-evidence">AD_COPY_RULES.md</span>
+            </div>
+          </li>
+          <li class="gtm-item">
+            <div class="gtm-check"></div>
+            <div class="gtm-item-content">
+              <h3>Finalize creative review interfaces</h3>
+              <p>Redo creative-review.html, ad-review.html, angles-review.html with final edits. Ensure they reflect the updated narrative position and ad structure.</p>
+              <span class="gtm-tag marketing">Marketing</span>
+            </div>
+          </li>
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>TTS voice generation for ad audio</h3>
+              <p>Generated voice variant samples for ads. Multiple voice options tested and stored in brand/voice-samples/.</p>
+              <span class="gtm-tag marketing">Marketing</span>
+              <span class="gtm-evidence">brand/generate-voices.js</span>
+            </div>
+          </li>
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>AI-generated music for ads &amp; demo</h3>
+              <p>Background music tracks generated via Suno for ad creatives and demo video. Warm, minimal, matches the brand tone without competing with the voice.</p>
+              <span class="gtm-tag marketing">Marketing</span>
+              <span class="gtm-evidence">Suno</span>
+            </div>
+          </li>
+        </ul>
+
+        <!-- Inline Demo: Ad concept browser -->
+        <div class="gtm-demo-embed">
+          <div class="gtm-demo-label">Ad mockups &mdash; 17 Socratic hooks + 12 Agent types</div>
+          <div class="gtm-iframe-wrap">
+            <iframe src="brand/ad-concepts.html" loading="lazy" title="Ad concepts browser — Socratic & Agent mockups" style="height: 700px;"></iframe>
+            <div class="gtm-iframe-bar">
+              <span>brand/ad-concepts.html &mdash; 102 Socratic + 72 Agent ad variants</span>
+              <a href="brand/ad-concepts.html" target="_blank">Open full page &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Waveform explorer -->
+        <div class="gtm-demo-embed">
+          <div class="gtm-demo-label">Waveform style guide &mdash; explorer.html</div>
+          <div class="gtm-iframe-wrap">
+            <iframe src="explorer.html" loading="lazy" title="Waveform style explorer" style="height: 500px;"></iframe>
+            <div class="gtm-iframe-bar">
+              <span>explorer.html &mdash; Particle orbit visualization reference</span>
+              <a href="explorer.html" target="_blank">Open &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase 4: Launch Prep (IN PROGRESS) -->
+    <section class="gtm-phase" id="launch-prep">
+      <div class="container">
+        <div class="gtm-phase-header">
+          <span class="gtm-phase-number">Phase 4 &mdash; Now</span>
+          <h2>Launch Preparation</h2>
+        </div>
+        <ul class="gtm-checklist">
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>Demo video storyboard</h3>
+              <p>5-act structure, 60-90 seconds. Shot list with sample content, transitions, music direction, and 30-second cut variant. Ready for production.</p>
+              <span class="gtm-tag launch">Launch</span>
+              <span class="gtm-evidence">VIDEO_STORYBOARD.md</span>
+            </div>
+          </li>
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>Product Hunt demo recording guide</h3>
+              <p>3-minute demo structure: app launch, UI overview, Socratic mode, accept/reject flow, Dictation mode, agents. Narration cues and post-production notes included.</p>
+              <span class="gtm-tag launch">Launch</span>
+              <span class="gtm-evidence">DEMO_RECORDING.md</span>
+            </div>
+          </li>
+          <li class="gtm-item done">
+            <div class="gtm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="gtm-item-content">
+              <h3>Define the narrative position</h3>
+              <p>"The thinking is the writing." Intentionality over automation. Every piece of launch content&mdash;ads, posts, the maker's comment&mdash;should show a writer having a thought about their own text, speaking it, getting a suggestion, and deciding. The philosophy is the structure, not a tagline bolted on top.</p>
+              <span class="gtm-tag launch">Launch</span>
+              <span class="gtm-evidence">brand/why.html</span>
+            </div>
+          </li>
+          <li class="gtm-item in-progress">
+            <div class="gtm-check"></div>
+            <div class="gtm-item-content">
+              <h3>Record Product Hunt demo video</h3>
+              <p>Execute the storyboard. Screen capture with voiceover. The demo itself should embody the loop: notice a problem, speak a thought, get a suggestion, decide. Speed up AI waits (2x-4x). Background music, captions. 1080p.</p>
+              <span class="gtm-tag launch">Launch</span>
+            </div>
+          </li>
+          <li class="gtm-item">
+            <div class="gtm-check"></div>
+            <div class="gtm-item-content">
+              <h3>Write Product Hunt listing</h3>
+              <p>Maker's first comment should tell the origin story: "I watched autonomous agents go viral and felt something was off." Lead with the two-questions framework, then let the product speak for itself. Tagline, gallery (5-8 screenshots), description. Tuesday/Wednesday launch, 12:01 AM PST.</p>
+              <span class="gtm-tag launch">Launch</span>
+            </div>
+          </li>
+          <li class="gtm-item">
+            <div class="gtm-check"></div>
+            <div class="gtm-item-content">
+              <h3>Prepare LinkedIn launch series</h3>
+              <p>Three posts across launch week. Post 1: the position&mdash;"Everyone's building AI that acts on your behalf. I built one that amplifies your intentional action." Post 2: the co-creation story&mdash;product, website, 102 ads, all built through human-AI dialogue with the human steering. Post 3: the demo, with the writing-pain hook. Demo GIF or short video in each.</p>
+              <span class="gtm-tag launch">Launch</span>
+            </div>
+          </li>
+          <li class="gtm-item">
+            <div class="gtm-check"></div>
+            <div class="gtm-item-content">
+              <h3>Produce Instagram/Reel ad creatives</h3>
+              <p>Every ad follows the same structure: writer notices a problem in their text, speaks their thought, gets a suggestion, decides. The hook varies (jargon, cringe email, hedging, specificity) but the loop is always visible. Screen record from brand/ads.html at proper aspect ratios. 15-30s Reels + 5-10s Stories.</p>
+              <span class="gtm-tag launch">Launch</span>
+            </div>
+          </li>
+          <li class="gtm-item">
+            <div class="gtm-check"></div>
+            <div class="gtm-item-content">
+              <h3>Set up Meta ad account & campaigns</h3>
+              <p>Create Business Manager, ad account, pixel. Upload creatives. Targeting: writers, content creators, marketers, 25-45. A/B test hooks but keep the underlying structure consistent across all variants.</p>
+              <span class="gtm-tag launch">Launch</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Phase 5: Launch Channels -->
+    <section class="gtm-phase alt-bg" id="channels">
+      <div class="container">
+        <div class="gtm-phase-header">
+          <span class="gtm-phase-number">Phase 5</span>
+          <h2>Launch Channels</h2>
+        </div>
+        <p style="color: var(--color-text-muted); margin-bottom: 24px;">Each channel leads with the position, adapted to the audience. The underlying story is the same: intentionality over automation, the writer stays in the loop.</p>
+        <div class="gtm-channels">
+          <div class="gtm-channel">
+            <div class="gtm-channel-status planned">Planned</div>
+            <h3>Product Hunt</h3>
+            <p>Lead with the origin story in the maker's comment. The demo video shows the loop in action. Gallery images pair before/after text with the voice instruction that produced the change. PH rewards authenticity&mdash;the philosophical stance is the differentiator here.</p>
+          </div>
+          <div class="gtm-channel">
+            <div class="gtm-channel-status planned">Planned</div>
+            <h3>LinkedIn</h3>
+            <p>3-post series. The position ("amplify intentional action, not replace it"), the co-creation experiment (entire product built through human-AI dialogue), and the product demo. Each post stands alone but builds the narrative across the week.</p>
+          </div>
+          <div class="gtm-channel">
+            <div class="gtm-channel-status partial">Assets Ready</div>
+            <h3>Instagram Ads</h3>
+            <p>102 concepts, all following the same structure: writer notices, speaks, gets suggestion, decides. The hook varies by audience pain point but the loop is always visible. The ads <em>are</em> the philosophy&mdash;they show thinking, not generation.</p>
+          </div>
+          <div class="gtm-channel">
+            <div class="gtm-channel-status planned">Planned</div>
+            <h3>Hacker News</h3>
+            <p>Two angles: a "Show HN" for the product (local Whisper, Electron, Transformers.js) and the Why document as a standalone essay submission. HN responds to philosophical takes on technology&mdash;"intentionality over automation" is that essay.</p>
+          </div>
+          <div class="gtm-channel">
+            <div class="gtm-channel-status planned">Planned</div>
+            <h3>Twitter/X</h3>
+            <p>Launch thread opens with the two-questions framework, then shows the product in action. Target writing communities, AI tool discourse, indie hackers. The contrarian take ("everyone's building autonomous agents, I built the opposite") is the hook.</p>
+          </div>
+          <div class="gtm-channel">
+            <div class="gtm-channel-status planned">Planned</div>
+            <h3>Reddit</h3>
+            <p>r/writing, r/SideProject, r/macapps. Lead with the problem, not the product. "I think out loud but freeze at the keyboard" resonates in writing communities. The philosophical framing matters less here&mdash;the use case speaks for itself.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase 6: Monetization -->
+    <section class="gtm-phase" id="monetization">
+      <div class="container">
+        <div class="gtm-phase-header">
+          <span class="gtm-phase-number">Phase 6</span>
+          <h2>Monetization</h2>
+        </div>
+        <p style="color: var(--color-text-muted); margin-bottom: 24px;">Implementation plan documented (42 tasks, 8 priority levels). Ship after validating demand from launch.</p>
+        <div class="gtm-timeline">
+          <div class="gtm-timeline-item done">
+            <div class="gtm-timeline-dot"></div>
+            <h4>Pricing strategy defined</h4>
+            <p>Free trial, then one-time purchase for BYOK users (the value is the tool, not the API), subscription tiers for managed API access. Starter ($5/mo, higher limits), Pro ($19/mo, unlimited).</p>
+          </div>
+          <div class="gtm-timeline-item done">
+            <div class="gtm-timeline-dot"></div>
+            <h4>Implementation plan written</h4>
+            <p>42 tasks across 8 priority levels: feature flags, entitlements, onboarding modal, account menu, usage display, upgrade modal, agent limits, integration polish.</p>
+          </div>
+          <div class="gtm-timeline-item">
+            <div class="gtm-timeline-dot"></div>
+            <h4>Feature flags & entitlements</h4>
+            <p>Server-side toggles for auth/billing/agents. Plan limit enforcement (maxAgents per tier).</p>
+          </div>
+          <div class="gtm-timeline-item">
+            <div class="gtm-timeline-dot"></div>
+            <h4>Auth & onboarding</h4>
+            <p>OAuth flow (Google/GitHub) with "use own API key" fallback. Onboarding modal for new users.</p>
+          </div>
+          <div class="gtm-timeline-item">
+            <div class="gtm-timeline-dot"></div>
+            <h4>Stripe integration</h4>
+            <p>Checkout sessions, subscription management, usage metering. Upgrade prompts when hitting limits.</p>
+          </div>
+          <div class="gtm-timeline-item">
+            <div class="gtm-timeline-dot"></div>
+            <h4>Usage dashboard</h4>
+            <p>Daily/monthly request bars in settings. Clear visibility into what you've used and what's left.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase 7: Post-Launch Growth -->
+    <section class="gtm-phase alt-bg" id="growth">
+      <div class="container">
+        <div class="gtm-phase-header">
+          <span class="gtm-phase-number">Phase 7</span>
+          <h2>Post-Launch Growth</h2>
+        </div>
+        <ul class="gtm-checklist">
+          <li class="gtm-item">
+            <div class="gtm-check"></div>
+            <div class="gtm-item-content">
+              <h3>A/B test top ad creatives</h3>
+              <p>Run 4 creative angles against each other. Measure click-through to download. Iterate on winning hooks. Scale budget on performers.</p>
+              <span class="gtm-tag growth">Growth</span>
+            </div>
+          </li>
+          <li class="gtm-item">
+            <div class="gtm-check"></div>
+            <div class="gtm-item-content">
+              <h3>Collect user feedback & testimonials</h3>
+              <p>Reach out to early beta users. Document use cases. Get permission for quotes on the website. Identify power users for case studies.</p>
+              <span class="gtm-tag growth">Growth</span>
+            </div>
+          </li>
+          <li class="gtm-item">
+            <div class="gtm-check"></div>
+            <div class="gtm-item-content">
+              <h3>SEO content strategy</h3>
+              <p>"Voice editing," "AI writing assistant," "voice-driven editor" keywords. Blog posts around writing workflows and voice-first editing.</p>
+              <span class="gtm-tag growth">Growth</span>
+            </div>
+          </li>
+          <li class="gtm-item">
+            <div class="gtm-check"></div>
+            <div class="gtm-item-content">
+              <h3>Referral & word-of-mouth mechanics</h3>
+              <p>Consider sharing incentives, "made with Ada" watermark option, community building (Discord or Slack).</p>
+              <span class="gtm-tag growth">Growth</span>
+            </div>
+          </li>
+          <li class="gtm-item">
+            <div class="gtm-check"></div>
+            <div class="gtm-item-content">
+              <h3>Windows & Linux builds</h3>
+              <p>Expand platform reach beyond macOS. Electron makes this possible but needs testing and platform-specific signing.</p>
+              <span class="gtm-tag growth">Growth</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- What Claude Code Built -->
+    <section class="gtm-phase" id="built-with-claude">
+      <div class="container">
+        <div class="gtm-phase-header">
+          <span class="gtm-phase-number">Meta</span>
+          <h2>Built with Claude Code</h2>
+        </div>
+        <p style="color: var(--color-text-muted); margin-bottom: 24px; max-width: 640px;">
+          This project has been developed almost entirely through conversation with Claude Code. Here's a snapshot of what we've built together.
+        </p>
+        <div class="gtm-channels">
+          <div class="gtm-channel">
+            <h3>Full Electron app</h3>
+            <p>React 18 + Redux + TipTap editor, Whisper transcription pipeline, IPC bridge, streaming API integration, multi-annotation system, agent framework.</p>
+          </div>
+          <div class="gtm-channel">
+            <h3>Marketing website</h3>
+            <p>Landing page with 10 animated demo sections, responsive design, Cloudflare Pages deployment, two custom domains.</p>
+          </div>
+          <div class="gtm-channel">
+            <h3>Ad creative system</h3>
+            <p>102 ad concepts, 15 creative angles, schema-driven mockup engine, review interfaces, TTS voice generation, copy rules documentation.</p>
+          </div>
+          <div class="gtm-channel">
+            <h3>Launch infrastructure</h3>
+            <p>Video storyboard, demo recording guide, this GTM tracker, monetization implementation plan, brand guidelines, code signing & notarization.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p><span class="brand">Ada</span> is a project by <a href="https://mattalldian.com">Matt Alldian</a></p>
+      <p class="footer-note">Built with Electron, Whisper, and Claude.</p>
+    </div>
+  </footer>
+</body>
+</html>

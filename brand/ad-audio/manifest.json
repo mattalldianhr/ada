@@ -1,0 +1,512 @@
+{
+  "famous-jfk-ask-not": {
+    "voice": "alloy",
+    "file": "socratic/famous-jfk-ask-not.mp3",
+    "size": 37632
+  },
+  "famous-mlk-dream": {
+    "voice": "ash",
+    "file": "socratic/famous-mlk-dream.mp3",
+    "size": 45696
+  },
+  "famous-declaration": {
+    "voice": "ballad",
+    "file": "socratic/famous-declaration.mp3",
+    "size": 36096
+  },
+  "famous-apple": {
+    "voice": "coral",
+    "file": "socratic/famous-apple.mp3",
+    "size": 39168
+  },
+  "famous-gettysburg": {
+    "voice": "echo",
+    "file": "socratic/famous-gettysburg.mp3",
+    "size": 19968
+  },
+  "famous-hemingway": {
+    "voice": "fable",
+    "file": "socratic/famous-hemingway.mp3",
+    "size": 24192
+  },
+  "confuse-affect": {
+    "voice": "nova",
+    "file": "socratic/confuse-affect.mp3",
+    "size": 39168
+  },
+  "confuse-complement": {
+    "voice": "onyx",
+    "file": "socratic/confuse-complement.mp3",
+    "size": 27264
+  },
+  "confuse-discrete": {
+    "voice": "sage",
+    "file": "socratic/confuse-discrete.mp3",
+    "size": 52224
+  },
+  "confuse-principal": {
+    "voice": "shimmer",
+    "file": "socratic/confuse-principal.mp3",
+    "size": 41088
+  },
+  "confuse-stationary": {
+    "voice": "verse",
+    "file": "socratic/confuse-stationary.mp3",
+    "size": 47232
+  },
+  "confuse-whos": {
+    "voice": "alloy",
+    "file": "socratic/confuse-whos.mp3",
+    "size": 33024
+  },
+  "jargon-synergy": {
+    "voice": "ash",
+    "file": "socratic/jargon-synergy.mp3",
+    "size": 43392
+  },
+  "jargon-circle-back": {
+    "voice": "ballad",
+    "file": "socratic/jargon-circle-back.mp3",
+    "size": 31488
+  },
+  "jargon-going-forward": {
+    "voice": "coral",
+    "file": "socratic/jargon-going-forward.mp3",
+    "size": 36096
+  },
+  "jargon-end-of-day": {
+    "voice": "echo",
+    "file": "socratic/jargon-end-of-day.mp3",
+    "size": 57600
+  },
+  "jargon-per-my-last": {
+    "voice": "fable",
+    "file": "socratic/jargon-per-my-last.mp3",
+    "size": 27264
+  },
+  "jargon-low-hanging": {
+    "voice": "nova",
+    "file": "socratic/jargon-low-hanging.mp3",
+    "size": 33024
+  },
+  "reframe-passive": {
+    "voice": "onyx",
+    "file": "socratic/reframe-passive.mp3",
+    "size": 40320
+  },
+  "reframe-hedging": {
+    "voice": "sage",
+    "file": "socratic/reframe-hedging.mp3",
+    "size": 38400
+  },
+  "reframe-burying": {
+    "voice": "shimmer",
+    "file": "socratic/reframe-burying.mp3",
+    "size": 31488
+  },
+  "reframe-over-apologizing": {
+    "voice": "verse",
+    "file": "socratic/reframe-over-apologizing.mp3",
+    "size": 44928
+  },
+  "reframe-vague": {
+    "voice": "alloy",
+    "file": "socratic/reframe-vague.mp3",
+    "size": 38400
+  },
+  "reframe-softening": {
+    "voice": "ash",
+    "file": "socratic/reframe-softening.mp3",
+    "size": 36864
+  },
+  "gen-millennial": {
+    "voice": "ballad",
+    "file": "socratic/gen-millennial.mp3",
+    "size": 52992
+  },
+  "gen-boomer": {
+    "voice": "coral",
+    "file": "socratic/gen-boomer.mp3",
+    "size": 33024
+  },
+  "gen-professional": {
+    "voice": "echo",
+    "file": "socratic/gen-professional.mp3",
+    "size": 33792
+  },
+  "gen-slack": {
+    "voice": "fable",
+    "file": "socratic/gen-slack.mp3",
+    "size": 33024
+  },
+  "gen-internet": {
+    "voice": "nova",
+    "file": "socratic/gen-internet.mp3",
+    "size": 36096
+  },
+  "gen-formal": {
+    "voice": "onyx",
+    "file": "socratic/gen-formal.mp3",
+    "size": 38400
+  },
+  "apology-over": {
+    "voice": "sage",
+    "file": "socratic/apology-over.mp3",
+    "size": 49920
+  },
+  "apology-under": {
+    "voice": "shimmer",
+    "file": "socratic/apology-under.mp3",
+    "size": 29568
+  },
+  "apology-thanks": {
+    "voice": "verse",
+    "file": "socratic/apology-thanks.mp3",
+    "size": 49920
+  },
+  "apology-performative": {
+    "voice": "alloy",
+    "file": "socratic/apology-performative.mp3",
+    "size": 42624
+  },
+  "apology-calibrating": {
+    "voice": "ash",
+    "file": "socratic/apology-calibrating.mp3",
+    "size": 36864
+  },
+  "apology-sincerity": {
+    "voice": "ballad",
+    "file": "socratic/apology-sincerity.mp3",
+    "size": 36864
+  },
+  "confidence-hedge": {
+    "voice": "coral",
+    "file": "socratic/confidence-hedge.mp3",
+    "size": 30720
+  },
+  "confidence-just": {
+    "voice": "echo",
+    "file": "socratic/confidence-just.mp3",
+    "size": 35328
+  },
+  "confidence-belief": {
+    "voice": "fable",
+    "file": "socratic/confidence-belief.mp3",
+    "size": 45696
+  },
+  "confidence-permission": {
+    "voice": "nova",
+    "file": "socratic/confidence-permission.mp3",
+    "size": 36096
+  },
+  "confidence-weak": {
+    "voice": "onyx",
+    "file": "socratic/confidence-weak.mp3",
+    "size": 41088
+  },
+  "confidence-doubt": {
+    "voice": "sage",
+    "file": "socratic/confidence-doubt.mp3",
+    "size": 40320
+  },
+  "voice-passive": {
+    "voice": "shimmer",
+    "file": "socratic/voice-passive.mp3",
+    "size": 50688
+  },
+  "voice-native": {
+    "voice": "verse",
+    "file": "socratic/voice-native.mp3",
+    "size": 38400
+  },
+  "voice-introvert": {
+    "voice": "alloy",
+    "file": "socratic/voice-introvert.mp3",
+    "size": 28800
+  },
+  "voice-deferential": {
+    "voice": "ash",
+    "file": "socratic/voice-deferential.mp3",
+    "size": 33024
+  },
+  "voice-credit": {
+    "voice": "ballad",
+    "file": "socratic/voice-credit.mp3",
+    "size": 41088
+  },
+  "voice-conditional": {
+    "voice": "coral",
+    "file": "socratic/voice-conditional.mp3",
+    "size": 40320
+  },
+  "brevity-email": {
+    "voice": "echo",
+    "file": "socratic/brevity-email.mp3",
+    "size": 52992
+  },
+  "brevity-schedule": {
+    "voice": "fable",
+    "file": "socratic/brevity-schedule.mp3",
+    "size": 33024
+  },
+  "brevity-status": {
+    "voice": "nova",
+    "file": "socratic/brevity-status.mp3",
+    "size": 39168
+  },
+  "brevity-thanks": {
+    "voice": "onyx",
+    "file": "socratic/brevity-thanks.mp3",
+    "size": 46464
+  },
+  "brevity-follow": {
+    "voice": "sage",
+    "file": "socratic/brevity-follow.mp3",
+    "size": 52992
+  },
+  "brevity-request": {
+    "voice": "shimmer",
+    "file": "socratic/brevity-request.mp3",
+    "size": 33024
+  },
+  "tone-formal": {
+    "voice": "verse",
+    "file": "socratic/tone-formal.mp3",
+    "size": 37632
+  },
+  "tone-stiff": {
+    "voice": "alloy",
+    "file": "socratic/tone-stiff.mp3",
+    "size": 35328
+  },
+  "tone-casual": {
+    "voice": "ash",
+    "file": "socratic/tone-casual.mp3",
+    "size": 58368
+  },
+  "tone-board": {
+    "voice": "ballad",
+    "file": "socratic/tone-board.mp3",
+    "size": 45696
+  },
+  "tone-friendly": {
+    "voice": "coral",
+    "file": "socratic/tone-friendly.mp3",
+    "size": 56832
+  },
+  "tone-text": {
+    "voice": "echo",
+    "file": "socratic/tone-text.mp3",
+    "size": 32256
+  },
+  "mean-interesting": {
+    "voice": "fable",
+    "file": "socratic/mean-interesting.mp3",
+    "size": 25728
+  },
+  "mean-table": {
+    "voice": "nova",
+    "file": "socratic/mean-table.mp3",
+    "size": 33792
+  },
+  "mean-forward": {
+    "voice": "onyx",
+    "file": "socratic/mean-forward.mp3",
+    "size": 42624
+  },
+  "mean-opportunity": {
+    "voice": "sage",
+    "file": "socratic/mean-opportunity.mp3",
+    "size": 66432
+  },
+  "mean-challenging": {
+    "voice": "shimmer",
+    "file": "socratic/mean-challenging.mp3",
+    "size": 41088
+  },
+  "mean-misaligned": {
+    "voice": "verse",
+    "file": "socratic/mean-misaligned.mp3",
+    "size": 52992
+  },
+  "stakes-urgent": {
+    "voice": "alloy",
+    "file": "socratic/stakes-urgent.mp3",
+    "size": 36096
+  },
+  "stakes-downplay": {
+    "voice": "ash",
+    "file": "socratic/stakes-downplay.mp3",
+    "size": 50688
+  },
+  "stakes-asap": {
+    "voice": "ballad",
+    "file": "socratic/stakes-asap.mp3",
+    "size": 61056
+  },
+  "stakes-critical": {
+    "voice": "coral",
+    "file": "socratic/stakes-critical.mp3",
+    "size": 38400
+  },
+  "stakes-exclaim": {
+    "voice": "echo",
+    "file": "socratic/stakes-exclaim.mp3",
+    "size": 45696
+  },
+  "stakes-time": {
+    "voice": "fable",
+    "file": "socratic/stakes-time.mp3",
+    "size": 48000
+  },
+  "delete-think": {
+    "voice": "nova",
+    "file": "socratic/delete-think.mp3",
+    "size": 37632
+  },
+  "delete-just": {
+    "voice": "onyx",
+    "file": "socratic/delete-just.mp3",
+    "size": 38400
+  },
+  "delete-very": {
+    "voice": "sage",
+    "file": "socratic/delete-very.mp3",
+    "size": 39168
+  },
+  "delete-basically": {
+    "voice": "shimmer",
+    "file": "socratic/delete-basically.mp3",
+    "size": 42624
+  },
+  "delete-honestly": {
+    "voice": "verse",
+    "file": "socratic/delete-honestly.mp3",
+    "size": 39168
+  },
+  "delete-order": {
+    "voice": "alloy",
+    "file": "socratic/delete-order.mp3",
+    "size": 31488
+  },
+  "context-tiger": {
+    "voice": "ash",
+    "file": "socratic/context-tiger.mp3",
+    "size": 38400
+  },
+  "context-hey": {
+    "voice": "ballad",
+    "file": "socratic/context-hey.mp3",
+    "size": 46464
+  },
+  "context-sync": {
+    "voice": "coral",
+    "file": "socratic/context-sync.mp3",
+    "size": 53760
+  },
+  "context-crush": {
+    "voice": "echo",
+    "file": "socratic/context-crush.mp3",
+    "size": 54528
+  },
+  "context-api": {
+    "voice": "fable",
+    "file": "socratic/context-api.mp3",
+    "size": 40320
+  },
+  "context-inquire": {
+    "voice": "nova",
+    "file": "socratic/context-inquire.mp3",
+    "size": 37632
+  },
+  "time-synergies": {
+    "voice": "onyx",
+    "file": "socratic/time-synergies.mp3",
+    "size": 51456
+  },
+  "time-unprecedented": {
+    "voice": "sage",
+    "file": "socratic/time-unprecedented.mp3",
+    "size": 55296
+  },
+  "time-gendered": {
+    "voice": "shimmer",
+    "file": "socratic/time-gendered.mp3",
+    "size": 32256
+  },
+  "time-pivot": {
+    "voice": "verse",
+    "file": "socratic/time-pivot.mp3",
+    "size": 52992
+  },
+  "time-faithfully": {
+    "voice": "alloy",
+    "file": "socratic/time-faithfully.mp3",
+    "size": 37632
+  },
+  "time-park": {
+    "voice": "ash",
+    "file": "socratic/time-park.mp3",
+    "size": 41088
+  },
+  "feedback-buried": {
+    "voice": "ballad",
+    "file": "socratic/feedback-buried.mp3",
+    "size": 38400
+  },
+  "feedback-soft": {
+    "voice": "coral",
+    "file": "socratic/feedback-soft.mp3",
+    "size": 34560
+  },
+  "feedback-passive": {
+    "voice": "echo",
+    "file": "socratic/feedback-passive.mp3",
+    "size": 33792
+  },
+  "feedback-question": {
+    "voice": "fable",
+    "file": "socratic/feedback-question.mp3",
+    "size": 35328
+  },
+  "feedback-hedge": {
+    "voice": "nova",
+    "file": "socratic/feedback-hedge.mp3",
+    "size": 38400
+  },
+  "feedback-compliment": {
+    "voice": "onyx",
+    "file": "socratic/feedback-compliment.mp3",
+    "size": 24960
+  },
+  "autocorrect-regards": {
+    "voice": "sage",
+    "file": "socratic/autocorrect-regards.mp3",
+    "size": 21120
+  },
+  "autocorrect-asses": {
+    "voice": "shimmer",
+    "file": "socratic/autocorrect-asses.mp3",
+    "size": 14592
+  },
+  "autocorrect-pubic": {
+    "voice": "verse",
+    "file": "socratic/autocorrect-pubic.mp3",
+    "size": 19200
+  },
+  "autocorrect-manger": {
+    "voice": "alloy",
+    "file": "socratic/autocorrect-manger.mp3",
+    "size": 19200
+  },
+  "autocorrect-shift": {
+    "voice": "ash",
+    "file": "socratic/autocorrect-shift.mp3",
+    "size": 5760
+  },
+  "autocorrect-count": {
+    "voice": "ballad",
+    "file": "socratic/autocorrect-count.mp3",
+    "size": 41856
+  }
+}

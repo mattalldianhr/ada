@@ -1,0 +1,2876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ada Ad Concepts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Literata';
+      src: url('../fonts/Literata-Variable.ttf') format('truetype');
+      font-weight: 200 900;
+      font-style: normal;
+    }
+
+    :root {
+      --color-bg: #FDFCFA;
+      --color-surface: #FFFFFF;
+      --color-surface-elevated: #F5F4F2;
+      --color-text: #2D2D2D;
+      --color-text-muted: #78716C;
+      --color-text-faint: #A8A29E;
+      --color-border: #E7E5E4;
+      --color-border-strong: #D6D3D1;
+      --color-accent: #B45309;
+      --color-accent-hover: #92400E;
+      --color-accent-light: #FEF3C7;
+      --color-success: #059669;
+      --color-error: #DC2626;
+
+      --font-ui: 'Inter', -apple-system, system-ui, sans-serif;
+      --font-content: 'Literata', Georgia, serif;
+
+      --spacing-xs: 4px;
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+
+    /* Navigation */
+    .brand-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(253, 252, 250, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--spacing-md) var(--spacing-lg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-nav-logo {
+      font-family: var(--font-content);
+      font-size: 1.25rem;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--color-text);
+      text-decoration: none;
+    }
+
+    .brand-nav-links {
+      display: flex;
+      gap: var(--spacing-lg);
+    }
+
+    .brand-nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .brand-nav-links a:hover {
+      color: var(--color-text);
+    }
+
+    /* Slide Container */
+    .slide {
+      min-height: 100vh;
+      padding: 60px var(--spacing-xl) 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .slide-content {
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    .slide-number {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--color-text-faint);
+      letter-spacing: 0.1em;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .slide-title {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--spacing-sm);
+      line-height: 1.1;
+    }
+
+    .slide-subtitle {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      max-width: 600px;
+      margin-bottom: var(--spacing-md);
+    }
+
+    /* Cover Slide */
+    .slide-cover {
+      background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-surface) 100%);
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .slide-cover .brand-logo {
+      font-family: var(--font-content);
+      font-size: 8rem;
+      font-weight: 600;
+      font-style: italic;
+      letter-spacing: -0.03em;
+      margin-bottom: var(--spacing-lg);
+      color: var(--color-text);
+    }
+
+    .slide-cover .brand-tagline {
+      font-size: 1.5rem;
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .slide-cover .brand-version {
+      font-size: 0.85rem;
+      color: var(--color-text-faint);
+      padding: var(--spacing-sm) var(--spacing-md);
+      background: var(--color-surface-elevated);
+      border-radius: 100px;
+      display: inline-block;
+    }
+
+    /* Color Swatches */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-md);
+    }
+
+    .color-swatch {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .color-swatch-preview {
+      height: 40px;
+    }
+
+    .color-swatch-info {
+      padding: var(--spacing-sm);
+    }
+
+    .color-swatch-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .color-swatch-value {
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    .color-swatch-usage {
+      font-size: 0.75rem;
+      color: var(--color-text-faint);
+      margin-top: var(--spacing-xs);
+    }
+
+    /* Color Sections */
+    .color-section {
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .color-section-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    /* Typography Specimens */
+    .type-specimen {
+      margin-bottom: var(--spacing-sm);
+      padding: var(--spacing-md);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+    }
+
+    .type-specimen-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-accent);
+      background: var(--color-accent-light);
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: 100px;
+      display: inline-block;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .type-specimen-sample {
+      font-size: 1.5rem;
+      line-height: 1.2;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .type-specimen-sample.serif {
+      font-family: var(--font-content);
+    }
+
+    .type-specimen-sample.mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 1.5rem;
+    }
+
+    .type-specimen-meta {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+
+    .type-specimen-meta code {
+      background: var(--color-surface-elevated);
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      font-family: monospace;
+      font-size: 0.8rem;
+    }
+
+    /* Type Scale */
+    .type-scale {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+
+    .type-scale-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      align-items: baseline;
+      gap: var(--spacing-md);
+      padding-bottom: var(--spacing-sm);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .type-scale-item:last-child {
+      border-bottom: none;
+    }
+
+    .type-scale-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+    }
+
+    .type-scale-label code {
+      display: block;
+      font-family: monospace;
+      font-size: 0.7rem;
+      color: var(--color-text-faint);
+      margin-top: var(--spacing-xs);
+    }
+
+    /* Spacing Demo */
+    .spacing-grid {
+      display: flex;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+      margin-top: var(--spacing-md);
+    }
+
+    .spacing-item {
+      text-align: center;
+    }
+
+    .spacing-box {
+      background: var(--color-accent-light);
+      border: 2px solid var(--color-accent);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .spacing-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .spacing-value {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      font-family: monospace;
+    }
+
+    /* Radius Demo */
+    .radius-grid {
+      display: flex;
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-md);
+    }
+
+    .radius-item {
+      text-align: center;
+    }
+
+    .radius-box {
+      width: 50px;
+      height: 50px;
+      background: var(--color-surface);
+      border: 2px solid var(--color-border-strong);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .radius-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .radius-value {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      font-family: monospace;
+    }
+
+    /* Shadow Demo */
+    .shadow-grid {
+      display: flex;
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-md);
+    }
+
+    .shadow-item {
+      text-align: center;
+    }
+
+    .shadow-box {
+      width: 80px;
+      height: 50px;
+      background: var(--color-surface);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .shadow-sm { box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .shadow-md { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); }
+    .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); }
+
+    .shadow-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* Icon Demo */
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-md);
+    }
+
+    .icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: var(--spacing-md);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+    }
+
+    .icon-item svg {
+      margin-bottom: var(--spacing-sm);
+      color: var(--color-text);
+    }
+
+    .icon-item span {
+      font-size: 0.7rem;
+      color: var(--color-text-muted);
+    }
+
+    .icon-specs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-md);
+    }
+
+    .icon-spec {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-md);
+    }
+
+    .icon-spec-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .icon-spec-value {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .icon-spec-note {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      margin-top: var(--spacing-xs);
+    }
+
+    /* Component Demo */
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-md);
+    }
+
+    .component-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-md);
+    }
+
+    .component-card-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .component-demo {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+      align-items: center;
+    }
+
+    /* Button Demos */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      padding: 12px 24px;
+      font-family: var(--font-ui);
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-primary {
+      background: var(--color-text);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #333;
+    }
+
+    .btn-secondary {
+      background: var(--color-surface);
+      color: var(--color-text);
+      border: 1px solid var(--color-border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--color-surface-elevated);
+      border-color: var(--color-border-strong);
+    }
+
+    .btn-accent {
+      background: var(--color-accent);
+      color: white;
+    }
+
+    .btn-accent:hover {
+      background: var(--color-accent-hover);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--color-text);
+      border: 1px solid var(--color-text);
+    }
+
+    .btn-ghost:hover {
+      background: var(--color-text);
+      color: white;
+    }
+
+    .btn-success {
+      background: #D1FAE5;
+      color: var(--color-success);
+      border: 1px solid var(--color-success);
+    }
+
+    .btn-success:hover {
+      background: var(--color-success);
+      color: white;
+    }
+
+    /* Badge Demos */
+    .badge {
+      display: inline-block;
+      padding: var(--spacing-xs) var(--spacing-md);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: 100px;
+    }
+
+    .badge-accent {
+      background: var(--color-accent-light);
+      color: var(--color-accent);
+    }
+
+    .badge-success {
+      background: #D1FAE5;
+      color: var(--color-success);
+    }
+
+    .badge-muted {
+      background: var(--color-surface-elevated);
+      color: var(--color-text-muted);
+    }
+
+    /* Input Demos */
+    .input-demo {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+
+    .input {
+      padding: 10px 14px;
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-bg);
+      color: var(--color-text);
+      transition: border-color 0.15s;
+      width: 100%;
+    }
+
+    .input:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px var(--color-accent-light);
+    }
+
+    .input::placeholder {
+      color: var(--color-text-faint);
+    }
+
+    /* Card Demos */
+    .demo-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-lg);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .demo-card-title {
+      font-weight: 600;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .demo-card-text {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Voice Section */
+    .voice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-md);
+    }
+
+    .voice-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-md);
+    }
+
+    .voice-card-header {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .voice-card-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .voice-card-icon.do {
+      background: #D1FAE5;
+      color: var(--color-success);
+    }
+
+    .voice-card-icon.dont {
+      background: #FEE2E2;
+      color: var(--color-error);
+    }
+
+    .voice-card-title {
+      font-weight: 600;
+    }
+
+    .voice-examples {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+
+    .voice-example {
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+    }
+
+    .voice-example.do {
+      background: #F0FDF4;
+      border-left: 3px solid var(--color-success);
+    }
+
+    .voice-example.dont {
+      background: #FEF2F2;
+      border-left: 3px solid var(--color-error);
+      text-decoration: line-through;
+      color: var(--color-text-muted);
+    }
+
+    /* Principles */
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-md);
+    }
+
+    .principle-card {
+      padding: var(--spacing-md);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+    }
+
+    .principle-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .principle-title {
+      font-weight: 600;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .principle-text {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Key Phrases */
+    .phrases-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-md);
+    }
+
+    .phrase {
+      font-family: var(--font-content);
+      font-size: 1rem;
+      font-style: italic;
+      padding: var(--spacing-sm) var(--spacing-md);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+    }
+
+    /* Highlight Colors */
+    .highlight-grid {
+      display: flex;
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-lg);
+    }
+
+    .highlight-item {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-radius: var(--radius-sm);
+    }
+
+    .highlight-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .highlight-text {
+      font-size: 0.85rem;
+    }
+
+    /* Footer */
+    .brand-footer {
+      text-align: center;
+      padding: var(--spacing-xl);
+      border-top: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      font-size: 0.85rem;
+    }
+
+    .brand-footer a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    /* Logo Section */
+    .logo-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-md);
+    }
+
+    .logo-demo {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100px;
+    }
+
+    .logo-demo.dark {
+      background: #2D2D2D;
+      border-color: #2D2D2D;
+    }
+
+    .logo-demo-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .logo-demo.dark .logo-demo-label {
+      color: #A8A29E;
+    }
+
+    .logo-small {
+      font-family: var(--font-content);
+      font-size: 1.5rem;
+      font-weight: 600;
+      font-style: italic;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+    }
+
+    .logo-demo.dark .logo-small {
+      color: #FDFCFA;
+    }
+
+    .logo-large {
+      font-family: var(--font-content);
+      font-size: 3rem;
+      font-weight: 600;
+      font-style: italic;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      line-height: 1;
+    }
+
+    .logo-demo.dark .logo-large {
+      color: #FDFCFA;
+    }
+
+    .logo-watermark-demo {
+      position: relative;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-sm);
+      min-height: 80px;
+      overflow: hidden;
+      margin-top: var(--spacing-sm);
+    }
+
+    .logo-watermark {
+      position: absolute;
+      bottom: -0.15em;
+      left: -0.02em;
+      font-family: var(--font-content);
+      font-weight: 600;
+      font-style: italic;
+      font-size: 20vw;
+      line-height: 0.8;
+      color: var(--color-text);
+      opacity: 0.04;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .logo-watermark-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-watermark-content h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .logo-watermark-content p {
+      color: var(--color-text-muted);
+      max-width: 400px;
+      font-size: 0.85rem;
+    }
+
+    .logo-specs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-md);
+    }
+
+    .logo-spec {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-sm);
+    }
+
+    .logo-spec-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .logo-spec-value {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .logo-spec-value.serif {
+      font-family: var(--font-content);
+      font-style: italic;
+    }
+
+    .logo-clearspace {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: var(--spacing-md);
+    }
+
+    .logo-clearspace-box {
+      position: relative;
+      padding: 24px 40px;
+      border: 2px dashed var(--color-border-strong);
+      border-radius: var(--radius-md);
+    }
+
+    .logo-clearspace-logo {
+      font-family: var(--font-content);
+      font-size: 2rem;
+      font-weight: 600;
+      font-style: italic;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-clearspace-marker {
+      position: absolute;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      background: var(--color-accent-light);
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+    }
+
+    .logo-clearspace-marker.top {
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .logo-clearspace-marker.bottom {
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .logo-clearspace-marker.left {
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .logo-clearspace-marker.right {
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .logo-donts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-md);
+    }
+
+    .logo-dont {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-sm);
+      text-align: center;
+    }
+
+    .logo-dont-demo {
+      font-family: var(--font-content);
+      font-size: 1.2rem;
+      font-weight: 600;
+      font-style: italic;
+      margin-bottom: var(--spacing-xs);
+      color: var(--color-text);
+      position: relative;
+    }
+
+    .logo-dont-demo::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 2px;
+      background: var(--color-error);
+    }
+
+    .logo-dont-demo.stretched {
+      transform: scaleX(1.5);
+    }
+
+    .logo-dont-demo.squished {
+      transform: scaleY(0.7);
+    }
+
+    .logo-dont-demo.rotated {
+      transform: rotate(-15deg);
+    }
+
+    .logo-dont-demo.wrong-font {
+      font-family: Arial, sans-serif;
+      font-style: normal;
+    }
+
+    .logo-dont-label {
+      font-size: 0.75rem;
+      color: var(--color-error);
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .slide-title {
+        font-size: 2rem;
+      }
+
+      .slide-cover .brand-logo {
+        font-size: 4rem;
+      }
+
+      .color-grid,
+      .component-grid,
+      .voice-grid,
+      .principles-grid,
+      .icon-specs,
+      .logo-showcase,
+      .logo-specs,
+      .logo-donts {
+        grid-template-columns: 1fr;
+      }
+
+      .logo-large {
+        font-size: 4rem;
+      }
+
+      .type-scale-item {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+      }
+
+      .brand-nav-links {
+        display: none;
+      }
+    }
+
+    /* === AD CONCEPTS SECTION === */
+    .slide-concepts {
+      height: auto;
+      min-height: 100vh;
+      max-height: none;
+      padding: 100px var(--spacing-xl) 80px;
+      overflow: visible;
+    }
+
+    .concepts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-lg);
+    }
+
+    .concept-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .concept-card:hover {
+      border-color: var(--color-accent);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .concept-card.expanded {
+      grid-column: 1 / -1;
+    }
+
+    .concept-header {
+      padding: var(--spacing-md);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--spacing-md);
+    }
+
+    .concept-number {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-accent);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .concept-name {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .concept-insight {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      font-style: italic;
+    }
+
+    .concept-toggle {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--color-surface-elevated);
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+
+    .concept-card.expanded .concept-toggle {
+      transform: rotate(180deg);
+    }
+
+    .concept-ads {
+      display: none;
+      padding: 0 var(--spacing-md) var(--spacing-md);
+    }
+
+    .concept-card.expanded .concept-ads {
+      display: block;
+    }
+
+    .ads-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+      justify-content: flex-start;
+    }
+
+    /* === PHONE FRAME (Light Theme) === */
+    .phone-frame {
+      width: 200px;
+      height: 414px;
+      background: #1c1917;
+      border-radius: 28px;
+      padding: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .phone-frame::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 54px;
+      height: 17px;
+      background: #000;
+      border-radius: 9px;
+      z-index: 10;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: #fdfcfa;
+      border-radius: 22px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ad-content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(180deg, #fdfcfa 0%, #f5f4f2 100%);
+      padding: 56px 12px 79px;
+      position: relative;
+    }
+
+    .ad-watermark {
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      font-family: var(--font-content);
+      font-weight: 600;
+      font-style: italic;
+      font-size: 5rem;
+      line-height: 0.8;
+      color: #1c1917;
+      opacity: 0.04;
+      pointer-events: none;
+    }
+
+    .ad-demo {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      position: relative;
+      z-index: 1;
+      opacity: 1;
+      transition: opacity 0.4s ease;
+    }
+
+    .ad-tagline {
+      font-size: 0.55rem;
+      font-weight: 500;
+      color: #78716c;
+      text-align: center;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .ad-tagline:empty { display: none; }
+
+    .ad-editor {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      margin: 0 2px;
+      padding: 12px;
+    }
+
+    .ad-editor-text {
+      font-family: var(--font-content);
+      font-size: 0.68rem;
+      line-height: 1.6;
+      color: #1c1917;
+    }
+
+    .highlight {
+      padding: 1px 2px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, #fef3c7 50%, transparent 50%);
+      background-size: 200% 100%;
+      background-position: 100% 0;
+      transition: background-position 0.5s ease;
+    }
+
+    .highlight.active { background-position: 0% 0; }
+    .highlight.accepted { background: #d1fae5; transition: background 0.3s ease; }
+
+    .ad-frames {
+      margin-top: 12px;
+      border-radius: 6px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      overflow: hidden;
+      max-height: 0;
+      padding: 0 12px;
+      transition: max-height 0.3s ease, padding 0.3s ease, background 0.3s ease;
+    }
+
+    .ad-frames.visible {
+      background: #f5f4f2;
+      max-height: 150px;
+      padding: 14px 12px;
+    }
+
+    .ad-frame {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .ad-frame.active { display: flex; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(3px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ad-frame-label {
+      font-size: 0.5rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #78716c;
+      margin-bottom: 6px;
+    }
+
+    .ad-voice-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .ad-voice-mode {
+      font-size: 0.5rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-accent);
+    }
+
+    .ad-voice-dot {
+      width: 5px;
+      height: 5px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
+    }
+
+    .ad-waveform-container { display: flex; justify-content: center; }
+    .ad-waveform { width: 42px; height: 42px; }
+
+    .ad-thinking-label {
+      font-size: 0.55rem;
+      color: #78716c;
+      margin-top: 6px;
+    }
+
+    .ad-transcription {
+      font-family: var(--font-content);
+      font-size: 0.65rem;
+      color: #1c1917;
+      font-style: italic;
+    }
+
+    .ad-suggestion-text {
+      font-family: var(--font-content);
+      font-size: 0.65rem;
+      color: #1c1917;
+      margin-bottom: 8px;
+    }
+
+    .ad-suggestion-actions {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .ad-btn {
+      padding: 5px 10px;
+      font-size: 0.5rem;
+      font-weight: 600;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .ad-btn-accept {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+
+    .ad-btn-accept.clicked {
+      background: #166534;
+      color: white;
+    }
+
+    .ad-btn-reject {
+      background: #f5f4f2;
+      color: #78716c;
+      border: 1px solid #e7e5e4;
+    }
+
+    .ad-applied-check { margin-bottom: 6px; }
+
+    .ad-applied-text {
+      font-size: 0.55rem;
+      font-weight: 600;
+      color: #059669;
+    }
+
+    .ad-cta-frame {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #fdfcfa 0%, #f5f4f2 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 16px;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+      border-radius: 22px;
+    }
+
+    .ad-cta-frame.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .ad-cta-description {
+      font-size: 0.68rem;
+      line-height: 1.4;
+      color: #57534e;
+      margin-bottom: 6px;
+      max-width: 140px;
+    }
+
+    .ad-cta-headline {
+      font-family: var(--font-content);
+      font-size: 1.75rem;
+      font-weight: 600;
+      font-style: italic;
+      color: #1c1917;
+      margin-bottom: 16px;
+    }
+
+    .ad-cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
+      background: #1c1917;
+      color: #fafaf9;
+      font-size: 0.625rem;
+      font-weight: 600;
+      border-radius: 6px;
+      text-decoration: none;
+      width: 100%;
+    }
+
+    .ad-cta-note {
+      font-size: 0.5rem;
+      color: #a8a29e;
+      margin-top: 6px;
+    }
+
+    .ad-final-frame {
+      justify-content: center;
+      padding: 24px 18px;
+    }
+
+    .ad-final-frame.fade-out {
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    .ad-final-text {
+      font-family: var(--font-content);
+      font-size: 0.6rem;
+      line-height: 1.6;
+      color: #1c1917;
+      text-align: left;
+      max-width: 170px;
+    }
+
+    .ad-variant-label {
+      font-size: 0.5rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 1px;
+      height: 0.8em;
+      background: var(--color-accent);
+      margin-left: 1px;
+      animation: blink 0.8s ease-in-out infinite;
+      vertical-align: text-bottom;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    @media (max-width: 768px) {
+      .concepts-grid {
+        grid-template-columns: 1fr;
+      }
+      .phone-frame {
+        width: 180px;
+        height: 372px;
+      }
+    }
+
+    /* === AGENT AD STYLES === */
+    .agent-badge {
+      position: absolute;
+      top: -8px;
+      right: 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 7px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      font-size: 0.45rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: all 0.3s ease;
+    }
+
+    .agent-badge.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .agent-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .agent-badge.running .agent-badge-dot {
+      animation: agentPulse 1s ease-in-out infinite;
+    }
+
+    @keyframes agentPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.3); }
+    }
+
+    .agent-card {
+      margin-top: 8px;
+      padding: 8px;
+      background: #f5f4f2;
+      border-radius: 6px;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .agent-card.visible {
+      opacity: 1;
+      max-height: 200px;
+    }
+
+    .agent-card-header {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 5px;
+    }
+
+    .agent-card-icon {
+      width: 10px;
+      height: 10px;
+    }
+
+    .agent-card-name {
+      font-size: 0.45rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .agent-card-issue {
+      font-size: 0.55rem;
+      color: #57534e;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .agent-card-suggestion {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 7px;
+      background: #fff;
+      border-radius: 4px;
+      margin-bottom: 6px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .agent-card-suggestion.visible {
+      opacity: 1;
+    }
+
+    .agent-suggestion-arrow {
+      font-weight: 600;
+      font-size: 0.6rem;
+    }
+
+    .agent-suggestion-text {
+      font-family: var(--font-content);
+      font-size: 0.55rem;
+      color: #1c1917;
+    }
+
+    .agent-card-actions {
+      display: flex;
+      gap: 5px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .agent-card-actions.visible {
+      opacity: 1;
+    }
+
+    .agent-card-applied {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 5px 0;
+    }
+
+    .agent-card-applied.visible {
+      display: flex;
+    }
+
+    .agent-card-applied-text {
+      font-size: 0.5rem;
+      font-weight: 600;
+      color: #059669;
+    }
+
+    .agent-ad-editor-text {
+      font-family: var(--font-content);
+      font-size: 0.68rem;
+      line-height: 1.6;
+      color: #1c1917;
+      min-height: 50px;
+    }
+
+    .agent-ad-editor-text .highlight {
+      padding: 1px 2px;
+      border-radius: 2px;
+      background: transparent;
+      transition: background 0.3s ease;
+    }
+
+    .agent-ad-editor-text .highlight.active {
+      background: #fef3c7;
+    }
+
+    .agent-ad-editor-text .highlight.accepted {
+      background: #d1fae5;
+    }
+
+    /* Sound toggle button on phone frames */
+    .phone-sound-toggle {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      z-index: 20;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid #e7e5e4;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s, background 0.2s;
+    }
+
+    .phone-sound-toggle:hover {
+      opacity: 1;
+    }
+
+    .phone-sound-toggle.active {
+      opacity: 1;
+      background: #fff;
+      border-color: var(--color-accent);
+    }
+
+    .phone-sound-toggle .sound-on { display: none; }
+    .phone-sound-toggle .sound-off { display: block; }
+    .phone-sound-toggle.active .sound-on { display: block; }
+    .phone-sound-toggle.active .sound-off { display: none; }
+  </style>
+</head>
+<body>
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; border-bottom: 1px solid var(--color-border);">
+    <a href="/" style="font-family: var(--font-content); font-size: 1.5rem; font-weight: 700; font-style: italic; color: var(--color-text); text-decoration: none;">Ada</a>
+    <a href="../gtm.html" style="font-size: 0.85rem; color: var(--color-accent); text-decoration: none; font-weight: 500;">&larr; Back to GTM</a>
+  </header>
+
+  <section class="slide slide-concepts" id="concepts" style="padding-top: 60px;">
+    <div class="slide-content" style="max-width: 1400px;">
+      <h1 class="slide-title">Ad Concepts</h1>
+      <p class="slide-subtitle">17 creative concepts, each with 6 animated ad variants. Click a concept to preview its ads.</p>
+      <div class="concepts-grid" id="concepts-grid"></div>
+    </div>
+  </section>
+
+  <section class="slide slide-concepts" id="agent-concepts" style="padding-top: 60px;">
+    <div class="slide-content" style="max-width: 1400px;">
+      <h1 class="slide-title">Agent Ad Concepts</h1>
+      <p class="slide-subtitle">12 agents, each with 6 animated ad variants. Agents watch while you type and catch issues in real time.</p>
+      <div class="concepts-grid" id="agent-concepts-grid"></div>
+    </div>
+  </section>
+
+  <footer style="text-align: center; padding: 40px; color: var(--color-text-muted); font-size: 0.85rem;">
+    <p><a href="/" style="color: var(--color-text-muted); text-decoration: none;">Ada</a> Ad Concepts &middot; Version 1.0 &middot; February 2026</p>
+  </footer>
+
+  <script>
+    // Audio state - each phone tracks its own sound-on state
+    const audioEnabledPhones = new Set();
+    const phoneBgMusic = new Map(); // phoneKey -> Audio element
+
+    // Background music management
+    function startBgMusic(phoneKey) {
+      if (phoneBgMusic.has(phoneKey)) return;
+      const bg = new Audio('ad-audio/thesis-drifter.mp3');
+      bg.loop = true;
+      bg.volume = 0.15;
+      bg.play().catch(() => {});
+      phoneBgMusic.set(phoneKey, bg);
+    }
+
+    function stopBgMusic(phoneKey) {
+      const bg = phoneBgMusic.get(phoneKey);
+      if (bg) {
+        bg.pause();
+        bg.currentTime = 0;
+        phoneBgMusic.delete(phoneKey);
+      }
+    }
+
+    // Beat grid constants — 81 BPM
+    const BEAT = 741;        // 1 beat in ms (60000 / 81)
+    const HALF_BEAT = 370;   // half beat
+    const BAR = 2963;        // 4 beats
+
+    // =====================================================
+    // AD CONCEPTS DATA
+    // =====================================================
+    const adConcepts = [
+      {
+        id: 'famous-edits',
+        name: 'Famous Edits That Changed History',
+        description: 'Small word changes with massive consequences. Historical examples of how tiny edits transformed documents into legendary texts.',
+        insight: '"History was made in the edit."',
+        variants: [
+          { id: 'famous-jfk-ask-not', tagline: null, editorText: 'And so, my fellow Americans, you should {{not ask what your country can do for you, ask what you can do for your country}}.', mode: 'Socratic', transcription: '"Should I flip this around?"', suggestion: 'ask not what your country can do for you', timing: { initialPause: 800, highlightDuration: 2400, voiceDuration: 2000, transcriptionDuration: 1600, thinkingDuration: 1700, suggestionDuration: 1800, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Find the right structure with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'famous-mlk-dream', tagline: null, editorText: 'I say to you today, my friends, that in spite of the difficulties and frustrations, {{I still have an idea}}.', mode: 'Socratic', transcription: '"Is \'idea\' too weak?"', suggestion: 'I still have a dream', timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 1700, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Find the right word with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'famous-declaration', tagline: null, editorText: 'We hold these truths to be {{sacred and undeniable}}, that all men are created equal.', mode: 'Socratic', transcription: '"Too religious?"', suggestion: 'self-evident', timing: { initialPause: 800, highlightDuration: 1300, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Find the right tone with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'famous-apple', tagline: null, editorText: 'Here\'s to the crazy ones. The misfits. The rebels. {{Think Differently}}.', mode: 'Socratic', transcription: '"Too proper?"', suggestion: 'Think Different', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1400, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Break the rules with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'famous-gettysburg', tagline: null, editorText: '{{Eighty-seven years ago}}, our fathers brought forth on this continent a new nation.', mode: 'Socratic', transcription: '"Too plain?"', suggestion: 'Four score and seven years ago', timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 1400, transcriptionDuration: 1200, thinkingDuration: 1600, suggestionDuration: 1600, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Find your voice with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'famous-hemingway', tagline: null, editorText: 'The old man sat alone in a boat. He was very sad because he hadn\'t caught a fish {{and this made him feel like a failure}}.', mode: 'Socratic', transcription: '"Too much explaining?"', suggestion: 'in eighty-four days', timing: { initialPause: 800, highlightDuration: 1800, voiceDuration: 1900, transcriptionDuration: 1500, thinkingDuration: 1700, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Show, don\'t tell with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'small-changes',
+        name: 'Small Changes, Big Consequences',
+        description: 'Words that look similar but change everything. The anxiety of not knowing which word is right—and the relief of getting it correct.',
+        insight: '"One letter can change everything."',
+        variants: [
+          { id: 'confuse-affect', tagline: null, editorText: 'The new policy will {{effect}} how we handle customer complaints going forward.', mode: 'Socratic', transcription: '"Wait, affect or effect?"', suggestion: 'affect', timing: { initialPause: 800, highlightDuration: 800, voiceDuration: 2000, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Catch your mistakes with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'confuse-complement', tagline: null, editorText: 'The red wine really {{compliments}} the steak beautifully.', mode: 'Socratic', transcription: '"Is that the right one?"', suggestion: 'complements', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1800, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Get the details right with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'confuse-discrete', tagline: null, editorText: 'Please keep this conversation {{discrete}}. We can\'t have word getting out.', mode: 'Socratic', transcription: '"Discrete or discreet?"', suggestion: 'discreet', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1900, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Say exactly what you mean with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'confuse-principal', tagline: null, editorText: 'As a matter of {{principal}}, I never discuss salary with colleagues.', mode: 'Socratic', transcription: '"Wait, which spelling?"', suggestion: 'principle', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1800, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Catch the small stuff with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'confuse-stationary', tagline: null, editorText: 'I need to order new company {{stationary}} with the updated logo.', mode: 'Socratic', transcription: '"Is that the paper one?"', suggestion: 'stationery', timing: { initialPause: 800, highlightDuration: 1000, voiceDuration: 1800, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Never second-guess with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'confuse-whos', tagline: null, editorText: 'The client {{who\'s}} project we just finished wants to schedule a follow-up call.', mode: 'Socratic', transcription: '"Who\'s or whose?"', suggestion: 'whose', timing: { initialPause: 800, highlightDuration: 800, voiceDuration: 1700, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Ask your doubts out loud with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'killing-office-speak',
+        name: 'Killing Office Speak',
+        description: 'Corporate bloat transformed into human speech. The universal hatred of jargon and the satisfaction of killing it.',
+        insight: '"Say it like a person."',
+        variants: [
+          { id: 'jargon-synergy', tagline: null, editorText: 'We need to {{leverage our cross-functional synergies}} to maximize output this quarter.', mode: 'Socratic', transcription: '"Does anyone know what this means?"', suggestion: 'work together', timing: { initialPause: 800, highlightDuration: 1800, voiceDuration: 2400, transcriptionDuration: 1800, thinkingDuration: 1700, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Kill your jargon with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'jargon-circle-back', tagline: null, editorText: 'Let\'s {{circle back}} on this and touch base after I\'ve had time to review.', mode: 'Socratic', transcription: '"Too corporate?"', suggestion: 'talk again', timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Sound human with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'jargon-going-forward', tagline: null, editorText: '{{Going forward}}, we need to ensure all reports are submitted by Friday.', mode: 'Socratic', transcription: '"Do I need this?"', suggestion: 'From now on', timing: { initialPause: 800, highlightDuration: 1000, voiceDuration: 1600, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Cut the fluff with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'jargon-end-of-day', tagline: null, editorText: '{{At the end of the day}}, what matters most is that we hit our targets.', mode: 'Socratic', transcription: '"Ugh, everyone says this"', suggestion: 'Ultimately', timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 2000, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Kill your cliches with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'jargon-per-my-last', tagline: null, editorText: '{{Per my last email}}, the deadline was moved to Monday. Please confirm receipt.', mode: 'Socratic', transcription: '"Too passive-aggressive?"', suggestion: 'As I mentioned', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 2100, transcriptionDuration: 1600, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Sound less annoyed with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'jargon-low-hanging', tagline: null, editorText: 'Let\'s focus on the {{low-hanging fruit}} first before tackling the bigger issues.', mode: 'Socratic', transcription: '"Too buzzwordy?"', suggestion: 'quick wins', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1600, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Say it straight with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'thinking-partners',
+        name: 'Thinking Partners',
+        description: 'Reframing the question entirely. Having someone help you see what you\'re really trying to say—and the courage to say it.',
+        insight: '"What are you really trying to say?"',
+        variants: [
+          { id: 'reframe-passive', tagline: null, editorText: '{{Mistakes were made}} in the handling of this account. We regret the inconvenience.', mode: 'Socratic', transcription: '"Am I hiding who did it?"', suggestion: 'We made mistakes', timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 2100, transcriptionDuration: 1600, thinkingDuration: 1700, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Own your words with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'reframe-hedging', tagline: null, editorText: 'I {{think we might want to consider}} raising prices next quarter.', mode: 'Socratic', transcription: '"Am I just hedging?"', suggestion: 'recommend we', timing: { initialPause: 800, highlightDuration: 1500, voiceDuration: 1900, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Find your confidence with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'reframe-burying', tagline: null, editorText: 'After reviewing the data from Q3, {{I believe we should cancel the project}}.', mode: 'Socratic', transcription: '"Should I lead with this?"', suggestion: 'We should cancel the project', timing: { initialPause: 800, highlightDuration: 1800, voiceDuration: 2100, transcriptionDuration: 1600, thinkingDuration: 1700, suggestionDuration: 1600, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Lead with your point with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'reframe-over-apologizing', tagline: null, editorText: '{{I\'m sorry to bother you, but}} I need the report by end of day.', mode: 'Socratic', transcription: '"Why am I apologizing?"', suggestion: 'Hi,', timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 2000, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Stop over-apologizing with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'reframe-vague', tagline: null, editorText: 'There were {{some concerns raised}} about the timeline in yesterday\'s meeting.', mode: 'Socratic', transcription: '"Am I being too vague?"', suggestion: 'concerns', timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 2000, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Be direct with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'reframe-softening', tagline: null, editorText: 'We\'ve {{decided to go in a different direction}} with the role. Thank you for your time.', mode: 'Socratic', transcription: '"Should I just say it?"', suggestion: 'chosen another candidate', timing: { initialPause: 800, highlightDuration: 1700, voiceDuration: 2000, transcriptionDuration: 1500, thinkingDuration: 1700, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Say what you mean with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'generational-code-switching',
+        name: 'Generational Code-Switching',
+        description: 'Translating across age gaps. Different generations communicate differently, and what sounds professional to one may sound dated to another.',
+        insight: '"Speak every generation\'s language."',
+        variants: [
+          { id: 'gen-millennial', tagline: null, editorText: 'Just wanted to {{circle back on this}} and see if we can sync up about the Q3 deliverables.', mode: 'Socratic', transcription: '"Too millennial for the CEO?"', suggestion: 'follow up on this', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Translate across generations with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'gen-boomer', tagline: null, editorText: 'We are seeking a {{highly motivated self-starter}} to join our dynamic team.', mode: 'Socratic', transcription: '"Does this sound like a boomer?"', suggestion: 'driven problem-solver', timing: { initialPause: 800, highlightDuration: 1300, voiceDuration: 1700, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Speak every generation\'s language with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'gen-professional', tagline: null, editorText: '{{Please be advised that}} the office will be closed on Friday for the retreat.', mode: 'Socratic', transcription: '"This is just for Slack"', suggestion: 'Heads up:', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Match the channel\'s vibe with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'gen-slack', tagline: null, editorText: 'The new policy is {{kinda confusing ngl}} and we should probably talk about it.', mode: 'Socratic', transcription: '"This is for the board memo"', suggestion: 'unclear', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 800, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Code-switch effortlessly with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'gen-internet', tagline: null, editorText: 'The results were {{lowkey amazing}} and exceeded our expectations for the quarter.', mode: 'Socratic', transcription: '"Too casual for investors?"', suggestion: 'surprisingly strong', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Find the right register with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'gen-formal', tagline: null, editorText: 'I\'ve been {{optimizing our B2B SaaS conversion funnel}} which has been rewarding.', mode: 'Socratic', transcription: '"How do I explain this to mom?"', suggestion: 'helping businesses sign up faster', timing: { initialPause: 800, highlightDuration: 1600, voiceDuration: 1800, transcriptionDuration: 1600, thinkingDuration: 1700, suggestionDuration: 1600, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Translate for any audience with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'apology-spectrum',
+        name: 'The Apology Spectrum',
+        description: 'Finding the right level of sorry. Over-apologizing weakens your message, under-apologizing seems cold. Ada helps you calibrate.',
+        insight: '"Find the right level of sorry."',
+        variants: [
+          { id: 'apology-over', tagline: null, editorText: '{{I\'m so incredibly sorry for any inconvenience this may have caused}} but we need to reschedule.', mode: 'Socratic', transcription: '"Am I over-apologizing?"', suggestion: 'Thanks for your flexibility', timing: { initialPause: 800, highlightDuration: 1800, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Find the right level of sorry with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'apology-under', tagline: null, editorText: 'The report will be late. {{I\'ll send it tomorrow}} instead of today as planned.', mode: 'Socratic', transcription: '"Should I apologize here?"', suggestion: 'Apologies, I\'ll send it tomorrow', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Strike the right balance with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'apology-thanks', tagline: null, editorText: '{{Sorry for the delayed response}} but I wanted to give your question proper thought.', mode: 'Socratic', transcription: '"Gratitude not guilt?"', suggestion: 'Thanks for your patience', timing: { initialPause: 800, highlightDuration: 1300, voiceDuration: 1300, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Turn sorry into thanks with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'apology-performative', tagline: null, editorText: '{{Sorry to bother you, but}} do you have a minute to review this draft?', mode: 'Socratic', transcription: '"Do I need to apologize?"', suggestion: 'Do you have a minute', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Stop apologizing for existing with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'apology-calibrating', tagline: null, editorText: '{{I deeply apologize for this oversight}} and it will never happen again. The typo has been corrected.', mode: 'Socratic', transcription: '"Too dramatic for a typo?"', suggestion: 'Sorry about that', timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Calibrate your apologies with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'apology-sincerity', tagline: null, editorText: '{{We apologize for any inconvenience}} and appreciate your continued loyalty.', mode: 'Socratic', transcription: '"This sounds robotic"', suggestion: 'We\'re sorry this happened', timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 1400, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Make apologies feel human with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'confidence-edit',
+        name: 'The Confidence Edit',
+        description: 'Hedging to asserting. Stop shrinking yourself with weak language. Ada helps you write with conviction.',
+        insight: '"Write with conviction."',
+        variants: [
+          { id: 'confidence-hedge', tagline: null, editorText: '{{I think maybe we should consider}} launching the campaign in March.', mode: 'Socratic', transcription: '"Too much hedging?"', suggestion: 'We should', timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 1300, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Write with conviction with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'confidence-just', tagline: null, editorText: 'I {{just wanted to}} check if you had a chance to review the proposal.', mode: 'Socratic', transcription: '"Why am I shrinking myself?"', suggestion: 'wanted to', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1600, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Stop shrinking yourself with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'confidence-belief', tagline: null, editorText: '{{I believe that our team}} has the skills needed to deliver this project on time.', mode: 'Socratic', transcription: '"Why \'believe\'? I know it."', suggestion: 'Our team', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 800, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'State what you know with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'confidence-permission', tagline: null, editorText: '{{If it\'s okay with everyone}}, I\'d like to propose a new approach.', mode: 'Socratic', transcription: '"I don\'t need permission"', suggestion: 'I\'d like to propose', timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Own your ideas with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'confidence-weak', tagline: null, editorText: 'The data {{seems to suggest that}} customers prefer the new design.', mode: 'Socratic', transcription: '"The data doesn\'t \'seem\'"', suggestion: 'shows that', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Let the facts speak with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'confidence-doubt', tagline: null, editorText: '{{This might be a dumb question, but}} what\'s the expected timeline?', mode: 'Socratic', transcription: '"Not a dumb question"', suggestion: 'What\'s', timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 1300, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 700, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Ask without apology with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'finding-your-voice',
+        name: 'Finding Your Voice',
+        description: 'Empowering people who struggle to be direct or assertive. Own your decisions, claim your wins, and speak directly.',
+        insight: '"Advocate for yourself."',
+        variants: [
+          { id: 'voice-passive', tagline: null, editorText: '{{It was decided that the project would be}} moved to Q2 for additional testing.', mode: 'Socratic', transcription: '"Who decided? I did."', suggestion: 'I decided to move the project to', timing: { initialPause: 800, highlightDuration: 1500, voiceDuration: 1400, transcriptionDuration: 1300, thinkingDuration: 1600, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Own your decisions with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'voice-native', tagline: null, editorText: 'I would like to {{make a suggestion about}} how we can improve the experience.', mode: 'Socratic', transcription: '"More natural in English?"', suggestion: 'suggest how', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Find natural phrasing with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'voice-introvert', tagline: null, editorText: '{{I was lucky enough to be part of}} the team that increased revenue by forty percent.', mode: 'Socratic', transcription: '"I earned this"', suggestion: 'I led', timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 1100, transcriptionDuration: 1000, thinkingDuration: 1500, suggestionDuration: 700, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Claim your wins with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'voice-deferential', tagline: null, editorText: '{{If you have time and it\'s not too much trouble}}, could you review my summary?', mode: 'Socratic', transcription: '"I deserve a review"', suggestion: 'When you have a chance', timing: { initialPause: 800, highlightDuration: 1600, voiceDuration: 1300, transcriptionDuration: 1200, thinkingDuration: 1600, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Advocate for yourself with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'voice-credit', tagline: null, editorText: '{{The team worked on}} a new onboarding flow that reduced churn by twenty percent.', mode: 'Socratic', transcription: '"I designed most of it"', suggestion: 'I designed', timing: { initialPause: 800, highlightDuration: 1000, voiceDuration: 1400, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Take up space with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'voice-conditional', tagline: null, editorText: '{{I would say that}} this approach gives us the best chance of meeting the deadline.', mode: 'Socratic', transcription: '"Why so conditional?"', suggestion: 'This approach', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1300, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Speak directly with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'brevity-challenge',
+        name: 'The Brevity Challenge',
+        description: 'Every word should earn its place. Ada helps you cut the fluff and get to the point faster.',
+        insight: '"How short can you go?"',
+        variants: [
+          { id: 'brevity-email', tagline: null, editorText: '{{I am writing to inform you that we have received your application}} and will review it shortly.', mode: 'Socratic', transcription: '"Way too long"', suggestion: 'Got your application', timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 1200, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Cut the fluff with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'brevity-schedule', tagline: null, editorText: 'I was wondering if {{it would be possible for us to schedule}} a call next week.', mode: 'Socratic', transcription: '"Just ask directly"', suggestion: 'we could schedule', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1400, transcriptionDuration: 1300, thinkingDuration: 1600, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Get to the point with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'brevity-status', tagline: null, editorText: '{{I wanted to reach out to let you know that}} the project is on track for Friday.', mode: 'Socratic', transcription: '"Half of this is filler"', suggestion: 'Quick update:', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Say more with less using', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'brevity-thanks', tagline: null, editorText: 'I just wanted to {{take a moment to express my gratitude}} for your help.', mode: 'Socratic', transcription: '"Too wordy for a thanks"', suggestion: 'thank you', timing: { initialPause: 800, highlightDuration: 1000, voiceDuration: 1600, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Trim the fat with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'brevity-follow', tagline: null, editorText: 'I am {{following up on my previous email regarding}} the budget proposal.', mode: 'Socratic', transcription: '"Can I just say checking in?"', suggestion: 'checking in on', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1800, transcriptionDuration: 1600, thinkingDuration: 1500, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Write shorter emails with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'brevity-request', tagline: null, editorText: '{{I was hoping you might be able to}} send me the latest draft.', mode: 'Socratic', transcription: '"So much padding"', suggestion: 'Could you', timing: { initialPause: 800, highlightDuration: 1000, voiceDuration: 1200, transcriptionDuration: 1200, thinkingDuration: 1600, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Ditch the preamble with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'tone-ladder',
+        name: 'The Tone Ladder',
+        description: 'The same message hits different depending on who receives it. Ada helps you find the right register for every audience.',
+        insight: '"Same message, different registers."',
+        variants: [
+          { id: 'tone-formal', tagline: null, editorText: '{{I acknowledge receipt of your correspondence}} and will respond by end of day.', mode: 'Socratic', transcription: '"This isn\'t a law firm"', suggestion: 'Got your email', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Match your tone with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'tone-stiff', tagline: null, editorText: 'Team, {{please be advised that}} the meeting has been moved to 3pm tomorrow.', mode: 'Socratic', transcription: '"Too formal for Slack"', suggestion: 'heads up:', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1400, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Find the right register with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'tone-casual', tagline: null, editorText: 'Hey! {{Just wanted to ping you real quick}} about the contract renewal.', mode: 'Socratic', transcription: '"Too casual for a client"', suggestion: 'Following up', timing: { initialPause: 800, highlightDuration: 1000, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Dial in your tone with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'tone-board', tagline: null, editorText: 'Hi everyone, {{just a quick note to say}} quarterly revenue exceeded projections.', mode: 'Socratic', transcription: '"Too casual for the board"', suggestion: 'I am pleased to report', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1600, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Strike the right tone with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'tone-friendly', tagline: null, editorText: 'Sarah, {{per my previous communication}}, the files you requested are attached.', mode: 'Socratic', transcription: '"She\'s my friend, not a vendor"', suggestion: 'as promised', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1800, transcriptionDuration: 1600, thinkingDuration: 1500, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Write like you talk with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'tone-text', tagline: null, editorText: 'The redesign is {{gonna be done by Friday}} and the team is wrapping up.', mode: 'Socratic', transcription: '"This is for the exec team"', suggestion: 'scheduled for Friday', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1600, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Adjust your register with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'actually-what-i-mean',
+        name: 'The "Actually What I Mean" Edit',
+        description: 'Corporate speak hides what we really think. Ada helps you decode the subtext and say it plainly.',
+        insight: '"Subtext becomes text."',
+        variants: [
+          { id: 'mean-interesting', tagline: null, editorText: 'Thanks for sharing. {{That\'s an interesting approach}} and I appreciate the creativity.', mode: 'Socratic', transcription: '"I mean I disagree"', suggestion: 'I have some concerns', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1400, transcriptionDuration: 1300, thinkingDuration: 1600, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Say what you mean with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'mean-table', tagline: null, editorText: 'Good discussion, but {{let\'s table this for now}} and revisit when we have more data.', mode: 'Socratic', transcription: '"This is never happening"', suggestion: 'I don\'t think this is the right direction', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1600, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Make implicit explicit with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'mean-forward', tagline: null, editorText: '{{Going forward}}, please ensure all changes are reviewed before deployment.', mode: 'Socratic', transcription: '"I mean don\'t do that again"', suggestion: 'From now on', timing: { initialPause: 800, highlightDuration: 700, voiceDuration: 1700, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Drop the corporate mask with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'mean-opportunity', tagline: null, editorText: 'The delayed launch {{presents an opportunity}} to refine our messaging strategy.', mode: 'Socratic', transcription: '"It\'s a setback, be honest"', suggestion: 'gives us time', timing: { initialPause: 800, highlightDuration: 800, voiceDuration: 1600, transcriptionDuration: 1500, thinkingDuration: 1500, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Speak plainly with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'mean-challenging', tagline: null, editorText: 'The timeline is {{challenging but achievable}} if the team prioritizes effectively.', mode: 'Socratic', transcription: '"It\'s basically impossible"', suggestion: 'tight', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1600, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 800, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Cut the spin with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'mean-misaligned', tagline: null, editorText: 'I think our teams are {{slightly misaligned}} on the deliverables for this sprint.', mode: 'Socratic', transcription: '"We totally disagree"', suggestion: 'not on the same page', timing: { initialPause: 800, highlightDuration: 800, voiceDuration: 1400, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Say the quiet part with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'stakes-spectrum',
+        name: 'The Stakes Spectrum',
+        description: 'When everything is urgent, nothing is. Ada helps you match your words to what actually matters.',
+        insight: '"Matching urgency to reality."',
+        variants: [
+          { id: 'stakes-urgent', tagline: null, editorText: 'Hi team, {{URGENT:}} please update your availability in the shared calendar by Friday.', mode: 'Socratic', transcription: '"Calendar updates aren\'t urgent"', suggestion: 'Reminder:', timing: { initialPause: 800, highlightDuration: 700, voiceDuration: 1700, transcriptionDuration: 1500, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Match urgency to stakes with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'stakes-downplay', tagline: null, editorText: '{{When you get a chance}}, the client needs the revised contract before their board meeting tomorrow.', mode: 'Socratic', transcription: '"This is actually urgent"', suggestion: 'By end of day today', timing: { initialPause: 800, highlightDuration: 800, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Signal what matters with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'stakes-asap', tagline: null, editorText: 'Please send me the meeting notes {{ASAP}}. I want to share them with the team next week.', mode: 'Socratic', transcription: '"ASAP for next week?"', suggestion: 'when you can', timing: { initialPause: 800, highlightDuration: 600, voiceDuration: 1400, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Calibrate your urgency with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'stakes-critical', tagline: null, editorText: 'The security patch {{should probably be applied}} to production servers this weekend.', mode: 'Socratic', transcription: '"This is critical, not optional"', suggestion: 'must be applied', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1700, transcriptionDuration: 1600, thinkingDuration: 1600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Get the stakes right with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'stakes-exclaim', tagline: null, editorText: 'Great news! The logo options are ready! {{Can\'t wait for your feedback!!!}} Let me know!', mode: 'Socratic', transcription: '"Too many exclamation points"', suggestion: 'Looking forward to your thoughts.', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1700, transcriptionDuration: 1500, thinkingDuration: 1500, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Calibrate your energy with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'stakes-time', tagline: null, editorText: '{{If possible}}, please approve the vendor invoice before the payment deadline on Monday.', mode: 'Socratic', transcription: '"It\'s not optional, we\'ll miss payment"', suggestion: 'Please', timing: { initialPause: 800, highlightDuration: 700, voiceDuration: 2000, transcriptionDuration: 1800, thinkingDuration: 1600, suggestionDuration: 800, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Match words to stakes with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'delete-key',
+        name: 'The Delete Key',
+        description: 'Sometimes the best edit is removal. Cutting unnecessary words makes writing stronger and more confident.',
+        insight: '"The best word is often no word."',
+        variants: [
+          { id: 'delete-think', tagline: null, editorText: '{{I think we should}} move forward with the rebrand since all stakeholders approved.', mode: 'Socratic', transcription: '"Too hesitant?"', suggestion: 'We should', timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1200, transcriptionDuration: 1100, thinkingDuration: 1500, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Cut the filler with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'delete-just', tagline: null, editorText: 'I wanted to {{just quickly}} check if you had a chance to review the proposal.', mode: 'Socratic', transcription: '"Why am I minimizing this?"', suggestion: 'check', timing: { initialPause: 800, highlightDuration: 800, voiceDuration: 2000, transcriptionDuration: 1600, thinkingDuration: 1600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Stop undermining yourself with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'delete-very', tagline: null, editorText: 'The client feedback was {{very positive}} and they want to expand the project scope.', mode: 'Socratic', transcription: '"Weak. Just say it."', suggestion: 'excellent', timing: { initialPause: 800, highlightDuration: 800, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Say more with less using', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'delete-basically', tagline: null, editorText: 'The new system {{basically allows us to}} track inventory in real time.', mode: 'Socratic', transcription: '"This adds nothing."', suggestion: 'lets us', timing: { initialPause: 800, highlightDuration: 1000, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Trim the fat with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'delete-honestly', tagline: null, editorText: '{{Honestly, I believe}} this is the best approach given our constraints.', mode: 'Socratic', transcription: '"Sounds like I\'m lying."', suggestion: 'This is', timing: { initialPause: 800, highlightDuration: 950, voiceDuration: 1700, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Sound more confident with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'delete-order', tagline: null, editorText: 'We restructured the team {{in order to}} improve communication between teams.', mode: 'Socratic', transcription: '"Three words for one?"', suggestion: 'to', timing: { initialPause: 800, highlightDuration: 750, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 800, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Write leaner with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'context-collapse',
+        name: 'The Context Collapse',
+        description: 'Same words, different audience = different meaning. These ads show how context changes everything.',
+        insight: '"The right words depend on who\'s reading."',
+        variants: [
+          { id: 'context-tiger', tagline: null, editorText: 'The {{tiger team}} has been working on this issue and expects resolution by end of week.', mode: 'Socratic', transcription: '"Board won\'t know this term."', suggestion: 'dedicated task force', timing: { initialPause: 800, highlightDuration: 750, voiceDuration: 2000, transcriptionDuration: 1600, thinkingDuration: 1600, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Know your audience with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'context-hey', tagline: null, editorText: '{{Hey!}} Thanks for sending over the contracts. I took a look and have questions.', mode: 'Socratic', transcription: '"Too casual for this client?"', suggestion: 'Hello,', timing: { initialPause: 800, highlightDuration: 600, voiceDuration: 1900, transcriptionDuration: 1500, thinkingDuration: 1500, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Match the room with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'context-sync', tagline: null, editorText: 'We\'ll {{sync offline}} to discuss the details and get back to you with a proposal.', mode: 'Socratic', transcription: '"They\'re not in tech."', suggestion: 'follow up separately', timing: { initialPause: 800, highlightDuration: 750, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Speak their language with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'context-crush', tagline: null, editorText: 'Looking forward to the partnership! {{Let\'s crush it!}}', mode: 'Socratic', transcription: '"This is going to legal."', suggestion: 'Best regards,', timing: { initialPause: 800, highlightDuration: 850, voiceDuration: 1700, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Read the room with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'context-api', tagline: null, editorText: 'The {{API latency issues}} have been resolved and the system is now performing well.', mode: 'Socratic', transcription: '"CEO doesn\'t care how."', suggestion: 'technical problems', timing: { initialPause: 800, highlightDuration: 950, voiceDuration: 1800, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Translate for your audience with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'context-inquire', tagline: null, editorText: '{{I am writing to inquire}} whether you might have availability next Tuesday.', mode: 'Socratic', transcription: '"This is a startup founder."', suggestion: 'Got time', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1900, transcriptionDuration: 1500, thinkingDuration: 1700, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Match their vibe with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'time-capsule',
+        name: 'The Time Capsule',
+        description: 'Phrases that aged poorly or feel dated. These ads help users update their vocabulary and sound contemporary.',
+        insight: '"Good writing ages - make sure yours keeps up."',
+        variants: [
+          { id: 'time-synergies', tagline: null, editorText: 'Let\'s {{leverage our synergies}} to create a more efficient workflow across departments.', mode: 'Socratic', transcription: '"Did I write this in 1999?"', suggestion: 'work together', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1900, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Update your vocabulary with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'time-unprecedented', tagline: null, editorText: '{{In these unprecedented times}}, we remain committed to serving our customers.', mode: 'Socratic', transcription: '"This sounds exhausting now."', suggestion: 'As always,', timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 2100, transcriptionDuration: 1700, thinkingDuration: 1700, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Keep it current with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'time-gendered', tagline: null, editorText: 'Each employee should submit {{his}} timesheet by end of day Friday.', mode: 'Socratic', transcription: '"This feels old."', suggestion: 'their', timing: { initialPause: 800, highlightDuration: 600, voiceDuration: 1400, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Modernize your writing with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'time-pivot', tagline: null, editorText: 'We need to {{pivot}} our strategy based on the latest customer feedback data.', mode: 'Socratic', transcription: '"This word is tired."', suggestion: 'shift', timing: { initialPause: 800, highlightDuration: 650, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Refresh your language with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'time-faithfully', tagline: null, editorText: 'Please find attached the documents you requested. {{Yours faithfully}}, Sarah', mode: 'Socratic', transcription: '"What century is this?"', suggestion: 'Best,', timing: { initialPause: 800, highlightDuration: 850, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Sound contemporary with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'time-park', tagline: null, editorText: 'Let\'s {{hit this one out of the park}} and deliver exceptional results this quarter.', mode: 'Socratic', transcription: '"Everyone uses this."', suggestion: 'deliver something great', timing: { initialPause: 800, highlightDuration: 1300, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1600, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Find fresher phrases with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'feedback-sandwich',
+        name: 'The Feedback Sandwich Deconstruction',
+        description: 'Give feedback people can actually use. Direct but kind. Stop hiding criticism in compliments.',
+        insight: '"Kindness is clarity, not cushioning."',
+        variants: [
+          { id: 'feedback-buried', tagline: null, editorText: 'Great work on this! {{Maybe consider possibly}} restructuring section two. Love the energy!', mode: 'Socratic', transcription: '"They\'ll miss this."', suggestion: 'Please', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1400, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Give real feedback with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'feedback-soft', tagline: null, editorText: 'The presentation was good! {{I wonder if it might help to}} add more data on slide four.', mode: 'Socratic', transcription: '"Just tell them."', suggestion: 'Add more data to', timing: { initialPause: 800, highlightDuration: 1300, voiceDuration: 1300, transcriptionDuration: 1100, thinkingDuration: 1500, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Be clear and kind with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'feedback-passive', tagline: null, editorText: 'The report is solid overall. {{It would be beneficial if}} the timeline was more detailed.', mode: 'Socratic', transcription: '"Beneficial to whom?"', suggestion: 'Please make', timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1600, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Say what you mean with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'feedback-question', tagline: null, editorText: 'Have you {{thought about whether this}} could be shortened? Just curious.', mode: 'Socratic', transcription: '"I should just say it."', suggestion: 'considered shortening this', timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 1700, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Stop hinting, start saying with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'feedback-hedge', tagline: null, editorText: 'This is really close. {{I\'m not sure but I think}} the numbers in table three need checking.', mode: 'Socratic', transcription: '"I am sure actually."', suggestion: 'The numbers in', timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Trust your edits with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'feedback-compliment', tagline: null, editorText: 'Loved this draft! So creative! {{One tiny thought}} - the conclusion feels rushed.', mode: 'Socratic', transcription: '"It\'s not tiny."', suggestion: 'One note', timing: { initialPause: 800, highlightDuration: 850, voiceDuration: 1200, transcriptionDuration: 1100, thinkingDuration: 1500, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Give useful feedback with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      },
+      {
+        id: 'autocorrect-disaster',
+        name: 'The Autocorrect Disaster Prevention',
+        description: 'Catching embarrassing mistakes before send. Using Didactic mode to quickly correct potentially career-ending typos.',
+        insight: '"One letter can end your career. Hear it first."',
+        variants: [
+          { id: 'autocorrect-regards', tagline: null, editorText: 'Thank you for your consideration. Best {{retards}}, Michael', mode: 'Didactic', transcription: '"Regards"', suggestion: 'regards', timing: { initialPause: 800, highlightDuration: 700, voiceDuration: 1000, transcriptionDuration: 900, thinkingDuration: 700, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Catch disasters before send with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'autocorrect-asses', tagline: null, editorText: 'Please complete your risk {{asses}} form and return it by Friday.', mode: 'Didactic', transcription: '"Assessment"', suggestion: 'assessment', timing: { initialPause: 800, highlightDuration: 650, voiceDuration: 1100, transcriptionDuration: 1000, thinkingDuration: 700, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Save yourself the horror with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'autocorrect-pubic', tagline: null, editorText: 'We are excited to announce our {{pubic}} launch event scheduled for next month.', mode: 'Didactic', transcription: '"Public"', suggestion: 'public', timing: { initialPause: 800, highlightDuration: 650, voiceDuration: 900, transcriptionDuration: 800, thinkingDuration: 600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Proofread by voice with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'autocorrect-manger', tagline: null, editorText: 'Please direct all questions to your project {{manger}} during the transition.', mode: 'Didactic', transcription: '"Manager"', suggestion: 'manager', timing: { initialPause: 800, highlightDuration: 700, voiceDuration: 1000, transcriptionDuration: 900, thinkingDuration: 700, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Speak it right with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'autocorrect-shift', tagline: null, editorText: 'The deadline has been moved, so please plan for the {{shit}} in timeline.', mode: 'Didactic', transcription: '"Shift"', suggestion: 'shift', timing: { initialPause: 800, highlightDuration: 600, voiceDuration: 900, transcriptionDuration: 800, thinkingDuration: 600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Avoid career-ending typos with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+          { id: 'autocorrect-count', tagline: null, editorText: 'Please update the inventory {{count}} and send me the final numbers by noon.', mode: 'Socratic', transcription: '"Wait, this is spelled right?"', suggestion: 'total', timing: { initialPause: 800, highlightDuration: 650, voiceDuration: 2000, transcriptionDuration: 1600, thinkingDuration: 1600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 }, cta: { description: 'Double-check everything with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+        ]
+      }
+    ];
+
+    // =====================================================
+    // WAVEFORM ANIMATION
+    // =====================================================
+    function createWaveformAnimation(canvas, scale = 1) {
+      const ctx = canvas.getContext('2d');
+      const particles = [];
+      const particleCount = Math.floor(8 * scale);
+      const permanentCount = Math.floor(2 * scale);
+      let time = 0;
+      let thinkingPhase = 0;
+      let mode = 'speaking';
+
+      for (let i = 0; i < particleCount + permanentCount; i++) {
+        particles.push({
+          angle: (i / (particleCount + permanentCount)) * Math.PI * 2,
+          radius: 3 * scale,
+          size: 1.2 * scale,
+          state: 'orbiting',
+          permanent: i >= particleCount,
+          x: 0, y: 0, vx: 0, vy: 0, life: 1
+        });
+      }
+
+      function draw() {
+        const w = canvas.width;
+        const h = canvas.height;
+        const centerX = w / 2;
+        const centerY = h / 2;
+        ctx.clearRect(0, 0, w, h);
+
+        let isSpeaking, boostedLevel;
+        if (mode === 'speaking') {
+          const simulatedLevel = 0.5 + Math.sin(time * 4) * 0.3 + Math.sin(time * 7) * 0.15;
+          boostedLevel = Math.pow(Math.max(0, simulatedLevel), 0.5) * 1.6;
+          isSpeaking = boostedLevel > 0.18;
+        } else {
+          isSpeaking = false;
+          boostedLevel = 0;
+        }
+
+        const maxRadius = Math.min(w, h) / 2 - 2;
+        const halfRadius = maxRadius * 0.35;
+        let orbitRadius;
+        if (isSpeaking) {
+          orbitRadius = halfRadius;
+        } else {
+          thinkingPhase += 0.03;
+          const pulse = Math.sin(thinkingPhase) * 0.5 + 0.5;
+          orbitRadius = maxRadius * (0.15 + pulse * 0.2);
+        }
+
+        const spinSpeed = isSpeaking ? 0.03 + boostedLevel * 0.02 : 0.015;
+
+        particles.forEach(p => {
+          if (p.state === 'orbiting') {
+            p.angle += spinSpeed;
+            p.radius += (orbitRadius - p.radius) * 0.1;
+            const x = centerX + Math.cos(p.angle) * p.radius;
+            const y = centerY + Math.sin(p.angle) * p.radius;
+            const atHorizon = Math.abs(y - centerY) < 3 * scale;
+            const shouldDetach = !p.permanent && isSpeaking && atHorizon && Math.random() < boostedLevel * 0.4;
+
+            if (shouldDetach) {
+              p.state = 'flying';
+              p.x = x; p.y = y;
+              p.vx = (x < centerX ? -1 : 1) * (0.4 + boostedLevel * 0.4) * scale;
+              p.vy = (Math.random() - 0.5) * 0.2 * scale;
+              p.life = 1;
+            } else {
+              ctx.beginPath();
+              ctx.arc(x, y, p.size + (isSpeaking ? boostedLevel * 0.3 : 0.1), 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(180, 83, 9, ${isSpeaking ? 0.8 : 0.5})`;
+              ctx.fill();
+            }
+          } else if (p.state === 'flying') {
+            p.x += p.vx; p.y += p.vy;
+            p.vy *= 0.96; p.life -= 0.05;
+            if (p.life > 0) {
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, p.size * (0.5 + p.life * 0.5), 0, Math.PI * 2);
+              ctx.fillStyle = p.vx < 0 ? `rgba(220, 100, 20, ${p.life * 0.9})` : `rgba(251, 191, 36, ${p.life * 0.9})`;
+              ctx.fill();
+            }
+            if (p.life <= 0) { p.state = 'refilling'; p.radius = 0; }
+          } else if (p.state === 'refilling') {
+            p.angle += spinSpeed;
+            p.radius += (orbitRadius - p.radius) * 0.08;
+            const x = centerX + Math.cos(p.angle) * p.radius;
+            const y = centerY + Math.sin(p.angle) * p.radius;
+            const fadeIn = Math.min(1, p.radius / (orbitRadius * 0.8));
+            ctx.beginPath();
+            ctx.arc(x, y, p.size * fadeIn, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(180, 83, 9, ${fadeIn * (isSpeaking ? 0.8 : 0.5)})`;
+            ctx.fill();
+            if (p.radius > orbitRadius * 0.9) p.state = 'orbiting';
+          }
+        });
+
+        time += 0.05;
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+      return {
+        setMode: (newMode) => { mode = newMode; },
+        setSpeaking: () => { mode = 'speaking'; },
+        setThinking: () => { mode = 'thinking'; }
+      };
+    }
+
+    // =====================================================
+    // RENDER CONCEPTS
+    // =====================================================
+    function parseEditorText(text) {
+      const match = text.match(/\{\{(.+?)\}\}/);
+      if (match) {
+        return { before: text.substring(0, match.index), highlightText: match[1], after: text.substring(match.index + match[0].length) };
+      }
+      return { before: text, highlightText: '', after: '' };
+    }
+
+    function createAdHTML(variant, adIndex, conceptIndex) {
+      const prefix = `c${conceptIndex}-a${adIndex}`;
+      const parsed = parseEditorText(variant.editorText);
+
+      return `
+        <div class="ad-slot">
+          <div class="ad-variant-label">Variant ${String.fromCharCode(65 + adIndex)}</div>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="ad-content">
+                <button class="phone-sound-toggle" data-phone-key="${prefix}" title="Toggle sound">
+                  <svg class="sound-off" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a8a29e" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                  <svg class="sound-on" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                </button>
+                <div class="ad-watermark">Ada</div>
+                <div class="ad-demo" id="${prefix}-demo">
+                  <div class="ad-tagline">${variant.tagline || ''}</div>
+                  <div class="ad-editor">
+                    <div class="ad-editor-text">
+                      ${parsed.before}<span class="highlight" id="${prefix}-highlight">${parsed.highlightText}</span>${parsed.after}
+                    </div>
+                    <div class="ad-frames" id="${prefix}-frames">
+                      <div class="ad-frame" id="${prefix}-frame-speaking">
+                        <div class="ad-voice-header">
+                          <span class="ad-voice-mode">${variant.mode}</span>
+                          <span class="ad-voice-dot"></span>
+                        </div>
+                        <div class="ad-waveform-container">
+                          <canvas class="ad-waveform" id="${prefix}-waveform" width="42" height="42"></canvas>
+                        </div>
+                      </div>
+                      <div class="ad-frame" id="${prefix}-frame-transcription">
+                        <div class="ad-frame-label">You said</div>
+                        <div class="ad-transcription">${variant.transcription}</div>
+                      </div>
+                      <div class="ad-frame" id="${prefix}-frame-thinking">
+                        <div class="ad-waveform-container">
+                          <canvas class="ad-waveform" id="${prefix}-waveform-thinking" width="42" height="42"></canvas>
+                        </div>
+                        <div class="ad-thinking-label">Thinking...</div>
+                      </div>
+                      <div class="ad-frame" id="${prefix}-frame-suggestion">
+                        <div class="ad-frame-label">Suggested edit</div>
+                        <div class="ad-suggestion-text">${variant.suggestion}</div>
+                        <div class="ad-suggestion-actions">
+                          <button class="ad-btn ad-btn-accept" id="${prefix}-accept">
+                            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                            Accept
+                          </button>
+                          <button class="ad-btn ad-btn-reject">
+                            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="ad-frame" id="${prefix}-frame-applied">
+                        <div class="ad-applied-check">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <div class="ad-applied-text">Edit applied</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="ad-cta-frame" id="${prefix}-cta-frame">
+                  <div class="ad-cta-description">${variant.cta.description}</div>
+                  <div class="ad-cta-headline">${variant.cta.headline}</div>
+                  <a href="#" class="ad-cta-button">${variant.cta.buttonText}</a>
+                  <div class="ad-cta-note">${variant.cta.note}</div>
+                </div>
+                <div class="ad-cta-frame ad-final-frame" id="${prefix}-final-frame">
+                  <div class="ad-final-text" id="${prefix}-final-text"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function createConceptHTML(concept, conceptIndex) {
+      return `
+        <div class="concept-card" data-concept="${conceptIndex}">
+          <div class="concept-header">
+            <div>
+              <div class="concept-number">Concept ${conceptIndex + 1}</div>
+              <div class="concept-name">${concept.name}</div>
+              <div class="concept-insight">${concept.insight}</div>
+            </div>
+            <div class="concept-toggle">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+          <div class="concept-ads">
+            <div class="ads-wrap" id="concept-${conceptIndex}-ads"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Render all concepts
+    const conceptsGrid = document.getElementById('concepts-grid');
+    conceptsGrid.innerHTML = adConcepts.map((c, i) => createConceptHTML(c, i)).join('');
+
+    // Track initialized ads
+    const initializedConcepts = new Set();
+
+    // Handle sound/play toggle clicks (delegated)
+    document.addEventListener('click', function(e) {
+      const toggle = e.target.closest('.phone-sound-toggle');
+      if (!toggle) return;
+      e.stopPropagation();
+      const key = toggle.dataset.phoneKey;
+      if (audioEnabledPhones.has(key)) {
+        // Stop: turn off audio, stop bg music, stop ad animation
+        audioEnabledPhones.delete(key);
+        toggle.classList.remove('active');
+        stopBgMusic(key);
+        if (toggle._adStop) toggle._adStop();
+      } else {
+        // Play: turn on audio, start bg music, run ad once
+        audioEnabledPhones.add(key);
+        toggle.classList.add('active');
+        startBgMusic(key);
+        if (toggle._adRun) toggle._adRun();
+      }
+    });
+
+    // Handle concept expansion
+    document.querySelectorAll('.concept-card').forEach(card => {
+      card.addEventListener('click', function(e) {
+        if (e.target.closest('.concept-ads')) return; // Don't toggle when clicking inside ad content
+
+        const conceptIndex = parseInt(this.dataset.concept);
+        const isExpanded = this.classList.contains('expanded');
+
+        // Collapse all others
+        document.querySelectorAll('.concept-card.expanded').forEach(c => {
+          if (c !== this) c.classList.remove('expanded');
+        });
+
+        // Toggle this one
+        this.classList.toggle('expanded');
+
+        // Initialize ads if not already done
+        if (!isExpanded && !initializedConcepts.has(conceptIndex)) {
+          const concept = adConcepts[conceptIndex];
+          const adsContainer = document.getElementById(`concept-${conceptIndex}-ads`);
+          adsContainer.innerHTML = concept.variants.map((v, i) => createAdHTML(v, i, conceptIndex)).join('');
+
+          // Initialize animations
+          concept.variants.forEach((variant, vIndex) => {
+            initializeAd(variant, vIndex, conceptIndex);
+          });
+
+          initializedConcepts.add(conceptIndex);
+        }
+      });
+    });
+
+    // =====================================================
+    // ANIMATION CONTROLLER
+    // =====================================================
+    function initializeAd(variant, adIndex, conceptIndex) {
+      const prefix = `c${conceptIndex}-a${adIndex}`;
+      const highlight = document.getElementById(`${prefix}-highlight`);
+      const acceptBtn = document.getElementById(`${prefix}-accept`);
+      const framesContainer = document.getElementById(`${prefix}-frames`);
+      const demoArea = document.getElementById(`${prefix}-demo`);
+      const ctaFrame = document.getElementById(`${prefix}-cta-frame`);
+      const finalFrame = document.getElementById(`${prefix}-final-frame`);
+      const finalText = document.getElementById(`${prefix}-final-text`);
+
+      const FINAL_MESSAGE = 'Ada is an agentic voice-driven content editor with built-in agents that watch as you write. Discuss ideas, refine prose, or dictate replacements\u2014all with your voice.';
+
+      const frames = {
+        speaking: document.getElementById(`${prefix}-frame-speaking`),
+        transcription: document.getElementById(`${prefix}-frame-transcription`),
+        thinking: document.getElementById(`${prefix}-frame-thinking`),
+        suggestion: document.getElementById(`${prefix}-frame-suggestion`),
+        applied: document.getElementById(`${prefix}-frame-applied`)
+      };
+
+      const speakingCanvas = document.getElementById(`${prefix}-waveform`);
+      const thinkingCanvas = document.getElementById(`${prefix}-waveform-thinking`);
+      const speakingWaveform = createWaveformAnimation(speakingCanvas, 0.7);
+      const thinkingWaveform = createWaveformAnimation(thinkingCanvas, 0.7);
+      thinkingWaveform.setThinking();
+
+      function showFrame(frameName) {
+        framesContainer.classList.add('visible');
+        Object.values(frames).forEach(f => f.classList.remove('active'));
+        if (frames[frameName]) frames[frameName].classList.add('active');
+      }
+
+      function hideAllFrames() {
+        framesContainer.classList.remove('visible');
+        Object.values(frames).forEach(f => f.classList.remove('active'));
+      }
+
+      function resetAll() {
+        ctaFrame.classList.remove('visible');
+        finalFrame.classList.remove('visible', 'fade-out');
+        finalText.innerHTML = '';
+        demoArea.style.opacity = '1';
+        hideAllFrames();
+        highlight.classList.remove('active', 'accepted');
+        highlight.textContent = parseEditorText(variant.editorText).highlightText;
+        highlight.style.display = '';
+        acceptBtn.classList.remove('clicked');
+      }
+
+      let stopped = false;
+
+      async function runAd() {
+        stopped = false;
+        const parsed = parseEditorText(variant.editorText);
+        resetAll();
+
+        // Beat-quantized animation (81 BPM grid)
+        const wait = ms => new Promise((resolve, reject) => {
+          const id = setTimeout(resolve, ms);
+          const check = setInterval(() => {
+            if (stopped) { clearTimeout(id); clearInterval(check); reject('stopped'); }
+          }, 100);
+          setTimeout(() => clearInterval(check), ms + 50);
+        });
+
+        try {
+          // --- Chapter 1: The Edit ---
+          await wait(BEAT);                       // 1 beat: pause
+          highlight.classList.add('active');
+          await wait(BEAT * 2);                   // 2 beats: highlight visible
+          showFrame('speaking');
+          await wait(BEAT * 3);                   // 3 beats: waveform speaking
+          showFrame('transcription');
+          await wait(BEAT * 3);                   // 3 beats: transcription visible
+          showFrame('thinking');
+          await wait(BEAT * 3);                   // 3 beats: thinking dots
+          showFrame('suggestion');
+          await wait(BAR);                        // 1 bar (4 beats): suggestion shown
+          acceptBtn.classList.add('clicked');
+          await wait(HALF_BEAT);                  // ½ beat: accept click
+          showFrame('applied');
+          highlight.classList.remove('active');
+          highlight.classList.add('accepted');
+          if (variant.suggestion !== '(deleted)' && variant.suggestion !== '(delete)') {
+            highlight.textContent = variant.suggestion;
+          } else {
+            highlight.style.display = 'none';
+          }
+          await wait(BAR);                        // 1 bar (4 beats): applied state
+
+          // --- Chapter 2: Variant CTA ---
+          demoArea.style.opacity = '0';
+          ctaFrame.classList.add('visible');
+          await wait(BAR * 3);                    // 3 bars (12 beats): variant CTA
+
+          // Done
+          highlight.style.display = '';
+        } catch (e) {
+          // Stopped — reset to initial state
+          resetAll();
+        }
+      }
+
+      function stopAd() {
+        stopped = true;
+      }
+
+      // Store control functions on the toggle button
+      const phoneEl = document.querySelector(`[data-phone-key="${prefix}"]`);
+      if (phoneEl) {
+        phoneEl._adRun = runAd;
+        phoneEl._adStop = stopAd;
+      }
+    }
+
+    // =====================================================
+    // AGENT AD CONCEPTS DATA
+    // =====================================================
+    const agentAdVariants = [
+      // 1. CLARITY CHECK (Green #059669)
+      { id: 'clarity-vague', agent: { name: 'Clarity Check', color: '#059669', icon: 'info' }, editorText: 'Our Q3 results {{demonstrate a significant improvement}} over the previous quarter.', issue: '"Significant" is vague\u2014you have the number. Lead with it.', suggestion: 'grew 23%', timing: { typingSpeed: 35, pauseBeforeAgent: 1200, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1800, suggestionAppearDuration: 400, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Agents watch while you write. They catch what you miss.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'clarity-hedge', agent: { name: 'Clarity Check', color: '#059669', icon: 'info' }, editorText: 'I {{think we might need to}} revisit the timeline before the next sprint.', issue: 'Hedging weakens your point. Be direct.', suggestion: 'We need to', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Catch your hedges before they weaken your writing.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'clarity-weasel', agent: { name: 'Clarity Check', color: '#059669', icon: 'info' }, editorText: '{{Some people say}} that remote work reduces productivity.', issue: 'Who says? Name them or cut it.', suggestion: 'Critics argue', timing: { typingSpeed: 35, pauseBeforeAgent: 1100, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Vague claims weaken your argument. An agent notices.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'clarity-thing', agent: { name: 'Clarity Check', color: '#059669', icon: 'info' }, editorText: 'We need to address {{the thing with}} the client\'s feedback.', issue: 'What thing? Be specific.', suggestion: 'the delay in responding to', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1500, suggestionAppearDuration: 400, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Say what you mean. An agent helps you find it.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'clarity-very', agent: { name: 'Clarity Check', color: '#059669', icon: 'info' }, editorText: 'The results were {{very impressive}} and exceeded our targets.', issue: '"Very" adds nothing. Show, don\'t tell.', suggestion: 'exceeded targets by 40%', timing: { typingSpeed: 35, pauseBeforeAgent: 1100, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1700, suggestionAppearDuration: 400, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Numbers persuade. Adjectives don\'t.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'clarity-stuff', agent: { name: 'Clarity Check', color: '#059669', icon: 'info' }, editorText: 'Let\'s discuss {{the stuff}} from yesterday\'s meeting.', issue: '"Stuff" is lazy. Name it.', suggestion: 'the budget concerns', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1500, suggestionAppearDuration: 400, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Precision beats vagueness. Every time.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+
+      // 2. VOICE CONSISTENCY (Purple #7c3aed)
+      { id: 'voice-passive', agent: { name: 'Voice Consistency', color: '#7c3aed', icon: 'mic' }, editorText: 'The marketing team\'s {{new strategy contributed to}} higher engagement.', issue: 'Passive construction. Your voice guide says: active voice always.', suggestion: 'new strategy drove', timing: { typingSpeed: 35, pauseBeforeAgent: 1200, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 2000, suggestionAppearDuration: 400, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Your tone drifts. An agent remembers what you forget.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'voice-formal', agent: { name: 'Voice Consistency', color: '#7c3aed', icon: 'mic' }, editorText: 'We are {{pleased to inform you}} that your request has been approved.', issue: 'Too formal. Your guide says: "talk like a human."', suggestion: 'happy to share', timing: { typingSpeed: 35, pauseBeforeAgent: 1100, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1900, suggestionAppearDuration: 400, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Your style guide isn\'t decoration. It\'s your brand.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'voice-jargon', agent: { name: 'Voice Consistency', color: '#7c3aed', icon: 'mic' }, editorText: 'Let\'s {{leverage our synergies}} to maximize stakeholder value.', issue: 'Corporate speak alert. Your guide bans buzzwords.', suggestion: 'work together', timing: { typingSpeed: 35, pauseBeforeAgent: 1200, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1800, suggestionAppearDuration: 400, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Sound like yourself, not a press release.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'voice-hedge', agent: { name: 'Voice Consistency', color: '#7c3aed', icon: 'mic' }, editorText: 'I {{just wanted to check in}} about the project status.', issue: '"Just" undermines you. Your guide says: be direct.', suggestion: 'wanted to check in', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1800, suggestionAppearDuration: 400, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Stop minimizing yourself. An agent notices.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'voice-we', agent: { name: 'Voice Consistency', color: '#7c3aed', icon: 'mic' }, editorText: '{{The company has decided}} to implement new policies.', issue: 'Third person feels distant. Your guide prefers "we."', suggestion: 'We\'ve decided', timing: { typingSpeed: 35, pauseBeforeAgent: 1100, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1900, suggestionAppearDuration: 400, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Write like you\'re part of the team. Because you are.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'voice-exclaim', agent: { name: 'Voice Consistency', color: '#7c3aed', icon: 'mic' }, editorText: 'This is {{great news!!!!}} for the entire team!', issue: 'Too many exclamation points. Your guide says: one max.', suggestion: 'great news!', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1800, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Enthusiasm is good. Exclamation abuse isn\'t.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+
+      // 3. JARGON BUSTER (Orange #ea580c)
+      { id: 'jargon-synergy', agent: { name: 'Jargon Buster', color: '#ea580c', icon: 'zap' }, editorText: 'We need to {{leverage synergies}} across departments.', issue: '"Synergies" died in 2005. Let it rest.', suggestion: 'work together', timing: { typingSpeed: 35, pauseBeforeAgent: 1100, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1700, suggestionAppearDuration: 400, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Kill the corporate speak. Sound like yourself.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'jargon-bandwidth', agent: { name: 'Jargon Buster', color: '#ea580c', icon: 'zap' }, editorText: 'I don\'t have the {{bandwidth}} to take on this project.', issue: 'You\'re not a router. Say what you mean.', suggestion: 'time', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Humans have time, not bandwidth.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'jargon-circle', agent: { name: 'Jargon Buster', color: '#ea580c', icon: 'zap' }, editorText: 'Let\'s {{circle back}} on this after the meeting.', issue: 'Corporate bingo! Try human words.', suggestion: 'revisit this', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1500, suggestionAppearDuration: 400, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Your colleagues aren\'t circles. Talk to them.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'jargon-needle', agent: { name: 'Jargon Buster', color: '#ea580c', icon: 'zap' }, editorText: 'We need to {{move the needle}} on customer satisfaction.', issue: 'What needle? Speak plainly.', suggestion: 'improve', timing: { typingSpeed: 35, pauseBeforeAgent: 1100, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1500, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Simple words. Clear meaning.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'jargon-fruit', agent: { name: 'Jargon Buster', color: '#ea580c', icon: 'zap' }, editorText: 'This is {{low-hanging fruit}} for the team.', issue: 'Fruit metaphors are rotten. Be direct.', suggestion: 'easy to implement', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Drop the metaphors. Say what you mean.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'jargon-eod', agent: { name: 'Jargon Buster', color: '#ea580c', icon: 'zap' }, editorText: 'Please send this {{EOD}} today.', issue: 'Not everyone speaks acronym.', suggestion: 'by end of day', timing: { typingSpeed: 35, pauseBeforeAgent: 900, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1500, suggestionAppearDuration: 400, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Spell it out. Not everyone\'s in your bubble.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+
+      // 4. BREVITY (Blue #0284c7)
+      { id: 'brevity-order', agent: { name: 'Brevity', color: '#0284c7', icon: 'scissors' }, editorText: '{{In order to}} complete the project, we need more resources.', issue: '"In order to" = "To"', suggestion: 'To', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1400, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Brevity is the soul of wit. And emails.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'brevity-fact', agent: { name: 'Brevity', color: '#0284c7', icon: 'scissors' }, editorText: '{{Due to the fact that}} sales dropped, we\'re restructuring.', issue: '5 words \u2192 1 word.', suggestion: 'Because', timing: { typingSpeed: 35, pauseBeforeAgent: 1100, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1400, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Cut the filler. Keep the meaning.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'brevity-time', agent: { name: 'Brevity', color: '#0284c7', icon: 'scissors' }, editorText: '{{At this point in time}}, we\'re not accepting new clients.', issue: '5 words \u2192 1 word.', suggestion: 'Currently', timing: { typingSpeed: 35, pauseBeforeAgent: 1100, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1400, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Fewer words. Same meaning. More impact.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'brevity-basic', agent: { name: 'Brevity', color: '#0284c7', icon: 'scissors' }, editorText: 'The {{basic fundamentals}} of the strategy are sound.', issue: 'Fundamentals are basic by definition.', suggestion: 'fundamentals', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1700, suggestionAppearDuration: 400, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Redundancy is redundant.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'brevity-whether', agent: { name: 'Brevity', color: '#0284c7', icon: 'scissors' }, editorText: '{{Whether or not}} we proceed depends on funding.', issue: '"Or not" is redundant.', suggestion: 'Whether', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1400, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Every word should earn its place.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'brevity-unique', agent: { name: 'Brevity', color: '#0284c7', icon: 'scissors' }, editorText: 'This is a {{very unique}} opportunity for growth.', issue: 'Unique is absolute. No "very" needed.', suggestion: 'unique', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Absolutes don\'t need amplifiers.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+
+      // 5. CONFIDENCE BOOSTER (Teal #0d9488)
+      { id: 'confidence-just', agent: { name: 'Confidence Booster', color: '#0d9488', icon: 'star' }, editorText: 'I {{just}} wanted to follow up on my previous email.', issue: '"Just" minimizes you. Delete it.', suggestion: '', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Stop apologizing for existing.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'confidence-sorry', agent: { name: 'Confidence Booster', color: '#0d9488', icon: 'star' }, editorText: '{{Sorry to bother you}}, but could you review this?', issue: 'Don\'t apologize for doing your job.', suggestion: 'When you have a moment,', timing: { typingSpeed: 35, pauseBeforeAgent: 1100, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1700, suggestionAppearDuration: 400, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Your requests are valid. Make them.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'confidence-think', agent: { name: 'Confidence Booster', color: '#0d9488', icon: 'star' }, editorText: 'I {{think}} this approach would work better.', issue: 'You know it would. Own it.', suggestion: 'believe', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1500, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Believe in your ideas. They\'re worth it.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'confidence-maybe', agent: { name: 'Confidence Booster', color: '#0d9488', icon: 'star' }, editorText: '{{Maybe we could}} try a different approach?', issue: 'Stop asking permission. Propose it.', suggestion: 'Let\'s', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Propose, don\'t ask. Lead, don\'t follow.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'confidence-little', agent: { name: 'Confidence Booster', color: '#0d9488', icon: 'star' }, editorText: 'I have a {{little}} suggestion for the project.', issue: 'Your ideas aren\'t little. They\'re ideas.', suggestion: '', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1700, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Your contributions matter. Say so.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'confidence-actually', agent: { name: 'Confidence Booster', color: '#0d9488', icon: 'star' }, editorText: 'I {{actually}} finished the report early.', issue: '"Actually" implies surprise at your own competence.', suggestion: '', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1900, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'You\'re competent. Act like it.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+
+      // 6. CAPTAIN BLACKQUILL - PIRATE (Brown #854d0e)
+      { id: 'pirate-meeting', agent: { name: 'Captain Blackquill', color: '#854d0e', icon: 'skull' }, editorText: 'Please {{join us for}} the quarterly planning meeting.', issue: 'Arrr! This be soundin\' too landlubber-like!', suggestion: 'set sail with us fer', timing: { typingSpeed: 35, pauseBeforeAgent: 1100, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1800, suggestionAppearDuration: 400, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Write like a scallywag. Or don\'t. We won\'t judge.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'pirate-hello', agent: { name: 'Captain Blackquill', color: '#854d0e', icon: 'skull' }, editorText: '{{Hello everyone}}, welcome to today\'s presentation.', issue: 'Ahoy! Where be yer sea legs?', suggestion: 'Ahoy, ye scallywags', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Arrr! Make yer emails more... piraty.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'pirate-team', agent: { name: 'Captain Blackquill', color: '#854d0e', icon: 'skull' }, editorText: 'The {{team}} did excellent work this quarter.', issue: 'They be no mere team, matey!', suggestion: 'crew', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1500, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Teams are for landlubbers. Crews are for legends.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'pirate-money', agent: { name: 'Captain Blackquill', color: '#854d0e', icon: 'skull' }, editorText: 'We need to discuss the {{budget}} for next year.', issue: 'Landlubber talk! Call it what it be!', suggestion: 'treasure', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'X marks the spot. Even in spreadsheets.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'pirate-good', agent: { name: 'Captain Blackquill', color: '#854d0e', icon: 'skull' }, editorText: 'That\'s a {{great}} idea for the campaign.', issue: 'Weak praise fer a scurvy dog!', suggestion: 'shipshape', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Praise like a pirate. Mean it.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'pirate-agree', agent: { name: 'Captain Blackquill', color: '#854d0e', icon: 'skull' }, editorText: 'I {{agree}} with the proposed timeline.', issue: 'Speak like ye mean it, bucko!', suggestion: 'be on board with', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'All aboard! (The good idea, that is.)', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+
+      // 7. SIR QUILLSWORTH - SHAKESPEARE (Burgundy #7c2d12)
+      { id: 'shakespeare-you', agent: { name: 'Sir Quillsworth', color: '#7c2d12', icon: 'quill' }, editorText: '{{You}} should review the document by Friday.', issue: 'Thou speakest too commonly!', suggestion: 'Thou shouldst', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Forsooth! Thy prose doth lack panache.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'shakespeare-good', agent: { name: 'Sir Quillsworth', color: '#7c2d12', icon: 'quill' }, editorText: 'The results were {{very good}} this quarter.', issue: 'Such plain speech! More flourish!', suggestion: 'most excellent', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Make thy quarterly reports... dramatic.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'shakespeare-think', agent: { name: 'Sir Quillsworth', color: '#7c2d12', icon: 'quill' }, editorText: 'I {{think}} we should proceed with caution.', issue: 'Methinks thy words lack conviction!', suggestion: 'Methinks', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1700, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'To write, or not to write... dramatically.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'shakespeare-hurry', agent: { name: 'Sir Quillsworth', color: '#7c2d12', icon: 'quill' }, editorText: 'We need to {{hurry}} to meet the deadline.', issue: 'Haste makes waste, but sounds better!', suggestion: 'make haste', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1700, suggestionAppearDuration: 400, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Deadlines are but the stuff of drama.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'shakespeare-want', agent: { name: 'Sir Quillsworth', color: '#7c2d12', icon: 'quill' }, editorText: 'I {{want}} to schedule a follow-up meeting.', issue: 'Thy desires deserve grander expression!', suggestion: 'doth wish', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1700, suggestionAppearDuration: 400, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'All the office is a stage.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'shakespeare-friends', agent: { name: 'Sir Quillsworth', color: '#7c2d12', icon: 'quill' }, editorText: 'Dear {{colleagues}}, thank you for attending.', issue: 'Address thy fellows with warmth!', suggestion: 'gentle friends', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Friends, Romans, coworkers... lend me your ears.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+
+      // 8. HEMINGWAY (Black #1c1917)
+      { id: 'hemingway-really', agent: { name: 'Hemingway', color: '#1c1917', icon: 'pen' }, editorText: 'This is {{really important}} for the team.', issue: 'Cut the filler.', suggestion: 'important', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1300, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Write drunk. Edit sober. Then cut more.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'hemingway-that', agent: { name: 'Hemingway', color: '#1c1917', icon: 'pen' }, editorText: 'The report {{that we discussed}} is ready.', issue: '"That" is weak. Kill it.', suggestion: 'we discussed', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1400, suggestionAppearDuration: 400, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Good writing is rewriting. Then cutting.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'hemingway-very', agent: { name: 'Hemingway', color: '#1c1917', icon: 'pen' }, editorText: 'The feedback was {{very helpful}}.', issue: '"Very" is lazy. Find a better word.', suggestion: 'useful', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1500, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Substitute "damn" for "very." Then delete both.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'hemingway-going', agent: { name: 'Hemingway', color: '#1c1917', icon: 'pen' }, editorText: 'We are {{going to be}} launching next week.', issue: 'Too many words.', suggestion: 'launch', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1300, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Say it. Then say it shorter.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'hemingway-able', agent: { name: 'Hemingway', color: '#1c1917', icon: 'pen' }, editorText: 'We were {{able to}} complete the project early.', issue: 'Just say you did it.', suggestion: 'completed', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1400, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Don\'t tell me you could. Tell me you did.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'hemingway-lot', agent: { name: 'Hemingway', color: '#1c1917', icon: 'pen' }, editorText: 'There\'s {{a lot of}} work to do.', issue: 'How much? Be specific. Or just "much."', suggestion: 'much', timing: { typingSpeed: 35, pauseBeforeAgent: 900, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1500, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Prose is architecture. Not interior decoration.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+
+      // 9. VALLEY GIRL (Pink #ec4899)
+      { id: 'valley-good', agent: { name: 'Valley Girl', color: '#ec4899', icon: 'sparkle' }, editorText: 'The presentation was {{excellent}}.', issue: 'That\'s lowkey mid. Slay harder.', suggestion: 'giving main character energy', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Your writing is giving... boomer energy.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'valley-agree', agent: { name: 'Valley Girl', color: '#ec4899', icon: 'sparkle' }, editorText: 'I {{completely agree}} with this approach.', issue: 'Bestie, that\'s so formal.', suggestion: 'literally same', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1500, suggestionAppearDuration: 400, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Speak internet. It\'s the vibe.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'valley-problem', agent: { name: 'Valley Girl', color: '#ec4899', icon: 'sparkle' }, editorText: 'We have a {{significant issue}} with the timeline.', issue: 'That\'s not it, bestie.', suggestion: 'major red flag', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1400, suggestionAppearDuration: 400, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Red flags aren\'t just for dating.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'valley-excited', agent: { name: 'Valley Girl', color: '#ec4899', icon: 'sparkle' }, editorText: 'I\'m {{looking forward to}} the launch.', issue: 'The excitement isn\'t excitementing.', suggestion: 'so hyped for', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Hype is a lifestyle. Embrace it.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'valley-no', agent: { name: 'Valley Girl', color: '#ec4899', icon: 'sparkle' }, editorText: 'I {{disagree}} with the proposed changes.', issue: 'Say it with your chest!', suggestion: 'that\'s a hard no from me', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1500, suggestionAppearDuration: 400, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Boundaries are important. Express them.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'valley-understand', agent: { name: 'Valley Girl', color: '#ec4899', icon: 'sparkle' }, editorText: 'I {{understand}} your concerns about the budget.', issue: 'Valid, but make it vibe.', suggestion: 'hear you', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1400, suggestionAppearDuration: 400, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Empathy, but make it casual.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+
+      // 10. NOIR DETECTIVE (Slate #374151)
+      { id: 'noir-meeting', agent: { name: 'Noir Detective', color: '#374151', icon: 'search' }, editorText: '{{Let\'s schedule}} a meeting to discuss the project.', issue: 'Too clean. Life\'s messier than that.', suggestion: 'We need to talk. My office.', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1700, suggestionAppearDuration: 400, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'The email was short. The grammar was shorter.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'noir-problem', agent: { name: 'Noir Detective', color: '#374151', icon: 'search' }, editorText: 'We {{encountered}} an issue with the deployment.', issue: 'You don\'t "encounter" trouble. It finds you.', suggestion: 'Trouble walked in.', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1900, suggestionAppearDuration: 400, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Every bug has a story. Tell it right.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'noir-thanks', agent: { name: 'Noir Detective', color: '#374151', icon: 'search' }, editorText: '{{Thank you}} for your help with the report.', issue: 'Gratitude\'s cheap in this town.', suggestion: 'I owe you one.', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'In this business, debts get paid.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'noir-waiting', agent: { name: 'Noir Detective', color: '#374151', icon: 'search' }, editorText: 'I\'m {{waiting for}} your response on the proposal.', issue: 'Nobody likes a patient man.', suggestion: 'The clock\'s ticking.', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Deadlines wait for no one.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'noir-bad', agent: { name: 'Noir Detective', color: '#374151', icon: 'search' }, editorText: 'The results were {{disappointing}}.', issue: 'Sugarcoating it won\'t help.', suggestion: 'It was a bloodbath.', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1500, suggestionAppearDuration: 400, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'The truth hurts. Tell it anyway.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'noir-help', agent: { name: 'Noir Detective', color: '#374151', icon: 'search' }, editorText: 'Could you {{help me}} with this analysis?', issue: 'Asking for help is honest. I respect that.', suggestion: 'I need a hand.', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1800, suggestionAppearDuration: 400, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Even lone wolves need backup sometimes.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+
+      // 11. HYPE BEAST (Yellow #eab308)
+      { id: 'hype-update', agent: { name: 'Hype Beast', color: '#eab308', icon: 'fire' }, editorText: 'Here\'s the {{weekly update}} on the project.', issue: 'That\'s it? Where\'s the ENERGY?', suggestion: 'MASSIVE UPDATE DROP', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'EVERYTHING IS INCREDIBLE AND I\'M SHOUTING.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'hype-complete', agent: { name: 'Hype Beast', color: '#eab308', icon: 'fire' }, editorText: 'We {{finished}} the new feature.', issue: 'Finished? You SHIPPED. Celebrate!', suggestion: 'JUST SHIPPED', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'You did the thing. CELEBRATE IT.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'hype-good', agent: { name: 'Hype Beast', color: '#eab308', icon: 'fire' }, editorText: 'The feedback was {{positive}}.', issue: 'Positive? It was INCREDIBLE!', suggestion: 'OFF THE CHARTS', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1500, suggestionAppearDuration: 400, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Good is the enemy of AMAZING.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'hype-team', agent: { name: 'Hype Beast', color: '#eab308', icon: 'fire' }, editorText: 'Thanks to the {{team}} for the hard work.', issue: 'They\'re not a team. They\'re LEGENDS.', suggestion: 'ABSOLUTE LEGENDS', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1700, suggestionAppearDuration: 400, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Your team deserves HYPE.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'hype-launch', agent: { name: 'Hype Beast', color: '#eab308', icon: 'fire' }, editorText: 'We\'re {{ready to launch}} next week.', issue: 'Ready? You\'re ABOUT TO CHANGE EVERYTHING.', suggestion: 'GOING LIVE', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1800, suggestionAppearDuration: 400, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Launch mode: ACTIVATED.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'hype-idea', agent: { name: 'Hype Beast', color: '#eab308', icon: 'fire' }, editorText: 'I have an {{idea}} for the next campaign.', issue: 'An idea? You have a VISION.', suggestion: 'GAME-CHANGING CONCEPT', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Ideas are for mortals. VISIONS are for you.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+
+      // 12. MOTIVATIONAL COACH (Green #16a34a)
+      { id: 'motivate-problem', agent: { name: 'Motivational Coach', color: '#16a34a', icon: 'heart' }, editorText: 'We {{have a problem}} with the timeline.', issue: 'Problems are just opportunities in disguise!', suggestion: 'have an opportunity to grow with', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1800, suggestionAppearDuration: 400, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'YOU\'VE GOT THIS. NOW CRUSH IT.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'motivate-fail', agent: { name: 'Motivational Coach', color: '#16a34a', icon: 'heart' }, editorText: 'The launch {{failed}} to meet expectations.', issue: 'Failure? That\'s just feedback!', suggestion: 'taught us valuable lessons about', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1700, suggestionAppearDuration: 400, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Every setback is a setup for a comeback.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'motivate-hard', agent: { name: 'Motivational Coach', color: '#16a34a', icon: 'heart' }, editorText: 'This will be {{difficult}} to implement.', issue: 'Difficult? You mean CHALLENGING AND REWARDING!', suggestion: 'an exciting challenge', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1900, suggestionAppearDuration: 400, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Hard things are worth doing.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'motivate-cant', agent: { name: 'Motivational Coach', color: '#16a34a', icon: 'heart' }, editorText: 'I {{can\'t}} take on more work right now.', issue: 'Can\'t? You mean "not yet!"', suggestion: 'am prioritizing other wins while I', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Boundaries are self-care. Frame them positively.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'motivate-bad', agent: { name: 'Motivational Coach', color: '#16a34a', icon: 'heart' }, editorText: 'The feedback was {{negative}}.', issue: 'Negative? That\'s GROWTH DATA!', suggestion: 'full of actionable insights', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Feedback is a gift. Unwrap it.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } },
+      { id: 'motivate-tired', agent: { name: 'Motivational Coach', color: '#16a34a', icon: 'heart' }, editorText: 'I\'m {{exhausted}} from this project.', issue: 'Exhausted? You\'re INVESTED!', suggestion: 'fully committed to', timing: { typingSpeed: 35, pauseBeforeAgent: 1000, highlightDuration: 600, cardAppearDuration: 400, issueDuration: 1600, suggestionAppearDuration: 400, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1500, ctaDuration: 3000 }, cta: { description: 'Passion looks like exhaustion sometimes.', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' } }
+    ];
+
+    // Group agent ad variants by agent name into concepts
+    const agentAdConcepts = [];
+    const agentMap = new Map();
+    agentAdVariants.forEach(v => {
+      const name = v.agent.name;
+      if (!agentMap.has(name)) {
+        agentMap.set(name, {
+          id: v.id.split('-')[0],
+          name: name,
+          description: '',
+          insight: '',
+          agentColor: v.agent.color,
+          agentIcon: v.agent.icon,
+          variants: []
+        });
+      }
+      agentMap.get(name).variants.push(v);
+    });
+
+    // Add descriptions and insights per agent
+    const agentMeta = {
+      'Clarity Check': { description: 'Catches vague language, hedging, and weasel words.', insight: '"Be specific. Be clear."' },
+      'Voice Consistency': { description: 'Enforces your style guide and catches tone drift.', insight: '"Sound like yourself."' },
+      'Jargon Buster': { description: 'Kills corporate buzzwords and translates to human.', insight: '"Say it like a person."' },
+      'Brevity': { description: 'Cuts filler words and redundant phrases.', insight: '"Every word earns its place."' },
+      'Confidence Booster': { description: 'Removes hedging, "just," and self-diminishing language.', insight: '"Own your words."' },
+      'Captain Blackquill': { description: 'Translates everything into pirate speak. Because why not.', insight: '"Arrr, matey!"' },
+      'Sir Quillsworth': { description: 'Rewrites in Shakespearean English. Forsooth.', insight: '"To write, or not to write."' },
+      'Hemingway': { description: 'Cuts everything to the bone. Short. Direct.', insight: '"Cut. Then cut more."' },
+      'Valley Girl': { description: 'Rewrites in gen-z internet speak. It\'s giving.', insight: '"Slay, bestie."' },
+      'Noir Detective': { description: 'Rewrites like hardboiled detective fiction.', insight: '"It was a dark and stormy email."' },
+      'Hype Beast': { description: 'Maximum enthusiasm for everything. ALL CAPS ENERGY.', insight: '"EVERYTHING IS INCREDIBLE."' },
+      'Motivational Coach': { description: 'Reframes negatives as positives. Relentlessly.', insight: '"Every problem is an opportunity!"' }
+    };
+
+    agentMap.forEach((concept, name) => {
+      if (agentMeta[name]) {
+        concept.description = agentMeta[name].description;
+        concept.insight = agentMeta[name].insight;
+      }
+      agentAdConcepts.push(concept);
+    });
+
+    // =====================================================
+    // AGENT AD HTML GENERATOR
+    // =====================================================
+    function createAgentAdHTML(variant, adIndex, conceptIndex) {
+      const prefix = `ag${conceptIndex}-a${adIndex}`;
+      const color = variant.agent.color;
+
+      return `
+        <div class="ad-slot">
+          <div class="ad-variant-label">Variant ${String.fromCharCode(65 + adIndex)}</div>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="ad-content">
+                <button class="phone-sound-toggle" data-phone-key="${prefix}" title="Play ad">
+                  <svg class="sound-off" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a8a29e" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                  <svg class="sound-on" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                </button>
+                <div class="ad-watermark">Ada</div>
+                <div class="ad-demo" id="${prefix}-demo">
+                  <div class="ad-editor" style="position: relative;">
+                    <div class="agent-badge" id="${prefix}-badge" style="color: ${color};">
+                      <span class="agent-badge-dot"></span>
+                      <span>${variant.agent.name}</span>
+                    </div>
+                    <div class="agent-ad-editor-text" id="${prefix}-editor-text"></div>
+                    <div class="agent-card" id="${prefix}-card">
+                      <div class="agent-card-header" style="color: ${color};">
+                        <svg class="agent-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                          <circle cx="12" cy="12" r="10"/>
+                          <path d="M12 16v-4"/>
+                          <path d="M12 8h.01"/>
+                        </svg>
+                        <span class="agent-card-name">${variant.agent.name}</span>
+                      </div>
+                      <div class="agent-card-issue" id="${prefix}-issue"></div>
+                      <div class="agent-card-suggestion" id="${prefix}-suggestion">
+                        <span class="agent-suggestion-arrow" style="color: ${color};">\u2192</span>
+                        <span class="agent-suggestion-text" id="${prefix}-suggestion-text"></span>
+                      </div>
+                      <div class="agent-card-actions" id="${prefix}-actions">
+                        <button class="ad-btn ad-btn-accept" id="${prefix}-accept">
+                          <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                          Accept
+                        </button>
+                        <button class="ad-btn ad-btn-reject">
+                          <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                        </button>
+                      </div>
+                      <div class="agent-card-applied" id="${prefix}-applied">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                        <span class="agent-card-applied-text">Edit applied</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="ad-cta-frame" id="${prefix}-cta-frame">
+                  <div class="ad-cta-description">${variant.cta.description}</div>
+                  <div class="ad-cta-headline">${variant.cta.headline}</div>
+                  <a href="#" class="ad-cta-button">${variant.cta.buttonText}</a>
+                  <div class="ad-cta-note">${variant.cta.note}</div>
+                </div>
+                <div class="ad-cta-frame ad-final-frame" id="${prefix}-final-frame">
+                  <div class="ad-final-text" id="${prefix}-final-text"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function createAgentConceptHTML(concept, conceptIndex) {
+      const globalIndex = adConcepts.length + conceptIndex;
+      return `
+        <div class="concept-card" data-agent-concept="${conceptIndex}">
+          <div class="concept-header">
+            <div>
+              <div class="concept-number">Concept ${globalIndex + 1}</div>
+              <div class="concept-name"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${concept.agentColor};margin-right:6px;vertical-align:middle;"></span>${concept.name}</div>
+              <div class="concept-insight">${concept.insight}</div>
+            </div>
+            <div class="concept-toggle">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+          <div class="concept-ads">
+            <div class="ads-wrap" id="agent-concept-${conceptIndex}-ads"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Render agent concepts
+    const agentConceptsGrid = document.getElementById('agent-concepts-grid');
+    agentConceptsGrid.innerHTML = agentAdConcepts.map((c, i) => createAgentConceptHTML(c, i)).join('');
+
+    // Track initialized agent ads
+    const initializedAgentConcepts = new Set();
+
+    // Handle agent concept expansion
+    document.querySelectorAll('#agent-concepts-grid .concept-card').forEach(card => {
+      card.addEventListener('click', function(e) {
+        if (e.target.closest('.concept-ads')) return;
+
+        const conceptIndex = parseInt(this.dataset.agentConcept);
+        const isExpanded = this.classList.contains('expanded');
+
+        // Collapse all others in this section
+        document.querySelectorAll('#agent-concepts-grid .concept-card.expanded').forEach(c => {
+          if (c !== this) c.classList.remove('expanded');
+        });
+
+        this.classList.toggle('expanded');
+
+        if (!isExpanded && !initializedAgentConcepts.has(conceptIndex)) {
+          const concept = agentAdConcepts[conceptIndex];
+          const adsContainer = document.getElementById(`agent-concept-${conceptIndex}-ads`);
+          adsContainer.innerHTML = concept.variants.map((v, i) => createAgentAdHTML(v, i, conceptIndex)).join('');
+
+          concept.variants.forEach((variant, vIndex) => {
+            initializeAgentAd(variant, vIndex, conceptIndex);
+          });
+
+          initializedAgentConcepts.add(conceptIndex);
+        }
+      });
+    });
+
+    // =====================================================
+    // AGENT AD ANIMATION CONTROLLER
+    // =====================================================
+    function agentTypeText(element, text, speed) {
+      return new Promise(resolve => {
+        let i = 0;
+        element.innerHTML = '<span class="typing-cursor"></span>';
+        function type() {
+          if (i < text.length) {
+            element.innerHTML = text.substring(0, i + 1) + '<span class="typing-cursor"></span>';
+            i++;
+            setTimeout(type, speed + Math.random() * 20);
+          } else {
+            resolve();
+          }
+        }
+        type();
+      });
+    }
+
+    function initializeAgentAd(variant, adIndex, conceptIndex) {
+      const prefix = `ag${conceptIndex}-a${adIndex}`;
+      const editorText = document.getElementById(`${prefix}-editor-text`);
+      const badge = document.getElementById(`${prefix}-badge`);
+      const card = document.getElementById(`${prefix}-card`);
+      const issueEl = document.getElementById(`${prefix}-issue`);
+      const suggestionContainer = document.getElementById(`${prefix}-suggestion`);
+      const suggestionText = document.getElementById(`${prefix}-suggestion-text`);
+      const actionsEl = document.getElementById(`${prefix}-actions`);
+      const acceptBtn = document.getElementById(`${prefix}-accept`);
+      const appliedEl = document.getElementById(`${prefix}-applied`);
+      const demoArea = document.getElementById(`${prefix}-demo`);
+      const ctaFrame = document.getElementById(`${prefix}-cta-frame`);
+      const finalFrame = document.getElementById(`${prefix}-final-frame`);
+      const finalTextEl = document.getElementById(`${prefix}-final-text`);
+
+      const FINAL_MSG = 'Ada is an agentic voice-driven content editor with built-in agents that watch as you write. Discuss ideas, refine prose, or dictate replacements\u2014all with your voice.';
+
+      let stopped = false;
+
+      async function runAgentAd() {
+        stopped = false;
+        const t = variant.timing;
+        const parsed = parseEditorText(variant.editorText);
+        const wait = ms => new Promise((resolve, reject) => {
+          const id = setTimeout(resolve, ms);
+          const check = setInterval(() => {
+            if (stopped) { clearTimeout(id); clearInterval(check); reject('stopped'); }
+          }, 100);
+          setTimeout(() => clearInterval(check), ms + 50);
+        });
+
+        // Reset
+        editorText.innerHTML = '';
+        badge.classList.remove('visible', 'running');
+        card.classList.remove('visible');
+        suggestionContainer.classList.remove('visible');
+        actionsEl.classList.remove('visible');
+        appliedEl.classList.remove('visible');
+        acceptBtn.classList.remove('clicked');
+        ctaFrame.classList.remove('visible');
+        demoArea.style.opacity = '1';
+
+        try {
+          await wait(HALF_BEAT);
+
+          // Type the text (organic speed, not beat-quantized)
+          // Typing uses short waits that also check stopped
+          for (let i = 0; i < parsed.before.length; i++) {
+            if (stopped) throw 'stopped';
+            editorText.innerHTML = parsed.before.substring(0, i + 1) + '<span class="typing-cursor"></span>';
+            await wait(t.typingSpeed + Math.random() * 20);
+          }
+          const beforeLength = parsed.before.length;
+          let currentText = parsed.before + parsed.highlightText;
+          for (let i = 0; i < parsed.highlightText.length; i++) {
+            if (stopped) throw 'stopped';
+            editorText.innerHTML = currentText.substring(0, beforeLength + i + 1) + '<span class="typing-cursor"></span>';
+            await wait(t.typingSpeed + Math.random() * 20);
+          }
+          for (let i = 0; i < parsed.after.length; i++) {
+            if (stopped) throw 'stopped';
+            editorText.innerHTML = currentText + parsed.after.substring(0, i + 1) + '<span class="typing-cursor"></span>';
+            await wait(t.typingSpeed + Math.random() * 20);
+          }
+
+          // Beat-quantized transitions from here
+          await wait(BEAT);                       // 1 beat: pause after typing
+
+          badge.classList.add('visible');
+          await wait(HALF_BEAT);                  // ½ beat: badge appear
+          badge.classList.add('running');
+          await wait(BEAT);                       // 1 beat: badge running
+          badge.classList.remove('running');
+
+          // Highlight flagged text
+          editorText.innerHTML = `${parsed.before}<span class="highlight active" id="${prefix}-highlight">${parsed.highlightText}</span>${parsed.after}`;
+          await wait(BEAT);                       // 1 beat: highlight visible
+
+          // Agent card slides in
+          issueEl.textContent = variant.issue;
+          suggestionText.textContent = variant.suggestion || '(delete)';
+          card.classList.add('visible');
+          await wait(BEAT * 3);                   // 3 beats: read issue
+
+          // Show suggestion
+          suggestionContainer.classList.add('visible');
+          await wait(HALF_BEAT);                  // ½ beat: suggestion appears
+          actionsEl.classList.add('visible');
+          await wait(BAR);                        // 1 bar (4 beats): read suggestion
+
+          // Accept clicked
+          acceptBtn.classList.add('clicked');
+          await wait(HALF_BEAT);                  // ½ beat: accept click
+
+          // Hide actions, show applied
+          actionsEl.classList.remove('visible');
+          suggestionContainer.classList.remove('visible');
+          appliedEl.classList.add('visible');
+
+          // Update highlight to accepted state
+          const highlight = document.getElementById(`${prefix}-highlight`);
+          if (highlight) {
+            highlight.classList.remove('active');
+            highlight.classList.add('accepted');
+            if (variant.suggestion) {
+              highlight.textContent = variant.suggestion;
+            } else {
+              highlight.style.display = 'none';
+            }
+          }
+
+          await wait(BAR);                        // 1 bar (4 beats): applied state
+
+          // --- Chapter 2: Variant CTA ---
+          demoArea.style.opacity = '0';
+          ctaFrame.classList.add('visible');
+          await wait(BAR * 3);                    // 3 bars (12 beats): variant CTA
+
+          // Done
+          if (highlight) highlight.style.display = '';
+        } catch (e) {
+          // Stopped — reset to initial state
+          editorText.innerHTML = '';
+          badge.classList.remove('visible', 'running');
+          card.classList.remove('visible');
+          suggestionContainer.classList.remove('visible');
+          actionsEl.classList.remove('visible');
+          appliedEl.classList.remove('visible');
+          acceptBtn.classList.remove('clicked');
+          ctaFrame.classList.remove('visible');
+          finalFrame.classList.remove('visible', 'fade-out');
+          finalTextEl.innerHTML = '';
+          demoArea.style.opacity = '1';
+        }
+      }
+
+      function stopAgentAd() {
+        stopped = true;
+      }
+
+      // Store control functions on the toggle button
+      const toggleEl = document.querySelector(`[data-phone-key="${prefix}"]`);
+      if (toggleEl) {
+        toggleEl._adRun = runAgentAd;
+        toggleEl._adStop = stopAgentAd;
+      }
+    }
+  </script>
+</body>
+</html>

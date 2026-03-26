@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ada - Ad Mockups</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Ads Page Specific Styles */
+    .ads-page {
+      min-height: 100vh;
+      background: #1c1917;
+      padding: 40px 24px;
+    }
+
+    .ads-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .ads-header h1 {
+      color: #fafaf9;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .ads-header p {
+      color: #a8a29e;
+      font-size: 1rem;
+    }
+
+    .ads-grid {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .ad-mockup {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .ad-label {
+      color: #a8a29e;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+
+    /* Phone Frame */
+    .phone-frame {
+      width: 280px;
+      height: 580px;
+      background: #0c0a09;
+      border-radius: 40px;
+      padding: 12px;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.1),
+        0 25px 50px -12px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+      position: relative;
+    }
+
+    /* Dynamic Island notch - positioned inside the screen */
+    .phone-frame::before {
+      content: '';
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 76px;
+      height: 24px;
+      background: #000;
+      border-radius: 12px;
+      z-index: 10;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: #fdfcfa;
+      border-radius: 32px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Ad Content Styles */
+    .ad-content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Story Ad Style - respects Instagram safe zones */
+    /* Screen height: 556px */
+    /* Top 14% safe zone: ~78px (notch + IG profile/username overlay) */
+    /* Bottom 20% safe zone: ~111px (CTA swipe area) */
+    .ad-content.story-ad {
+      background: linear-gradient(180deg, #fdfcfa 0%, #f5f4f2 100%);
+      padding: 78px 16px 111px;
+      position: relative;
+    }
+
+    .ad-content.story-ad .ad-headline {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 1.75rem;
+      font-weight: 600;
+      font-style: italic;
+      color: #1c1917;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .story-ad .ad-subhead {
+      font-size: 0.875rem;
+      color: #78716c;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    /* Editor mockup inside ad */
+    .ad-editor {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      margin: 0 4px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ad-editor-text {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #1c1917;
+    }
+
+    .ad-editor-text .highlight {
+      padding: 1px 2px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, #fef3c7 50%, transparent 50%);
+      background-size: 200% 100%;
+      background-position: 100% 0;
+      transition: background-position 0.5s ease;
+    }
+
+    .ad-editor-text .highlight.active {
+      background-position: 0% 0;
+    }
+
+    .ad-editor-text .highlight.accepted {
+      background: #d1fae5;
+      transition: background 0.3s ease;
+    }
+
+    /* Frames Container - starts collapsed, expands down */
+    .ad-frames {
+      margin-top: 16px;
+      border-radius: 8px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      overflow: hidden;
+      max-height: 0;
+      padding: 0 16px;
+      transition: max-height 0.3s ease, padding 0.3s ease, background 0.3s ease;
+    }
+
+    .ad-frames.visible {
+      background: #f5f4f2;
+      max-height: 200px;
+      padding: 20px 16px;
+    }
+
+    .ad-frame {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .ad-frame.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ad-frame-label {
+      font-size: 0.6rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #78716c;
+      margin-bottom: 8px;
+    }
+
+    .ad-voice-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .ad-voice-mode {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #b45309;
+    }
+
+    .ad-voice-dot {
+      width: 6px;
+      height: 6px;
+      background: #b45309;
+      border-radius: 50%;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    .ad-waveform-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .ad-waveform {
+      width: 60px;
+      height: 60px;
+    }
+
+    .ad-thinking-label {
+      font-size: 0.75rem;
+      color: #78716c;
+      margin-top: 8px;
+    }
+
+    .ad-transcription {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 0.9rem;
+      color: #1c1917;
+      font-style: italic;
+    }
+
+    .ad-suggestion-text {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 0.9rem;
+      color: #1c1917;
+      margin-bottom: 12px;
+    }
+
+    .ad-suggestion-actions {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .ad-applied-check {
+      margin-bottom: 8px;
+    }
+
+    .ad-applied-text {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #059669;
+    }
+
+    .ad-btn {
+      padding: 8px 16px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .ad-btn-accept {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+
+    .ad-btn-accept.clicked {
+      background: #166534;
+      color: white;
+    }
+
+    .ad-btn-reject {
+      background: #f5f4f2;
+      color: #78716c;
+      border: 1px solid #e7e5e4;
+    }
+
+    /* Transparent watermark at bottom */
+    .ad-watermark {
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      font-family: 'Literata', Georgia, serif;
+      font-weight: 600;
+      font-style: italic;
+      font-size: 7rem;
+      line-height: 0.8;
+      color: #1c1917;
+      opacity: 0.04;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+    }
+
+    /* Demo area - fixed at top, expands down */
+    .ad-demo {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      opacity: 1;
+      transition: opacity 0.4s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ad-tagline {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #78716c;
+      text-align: center;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .ad-tagline:empty {
+      display: none;
+    }
+
+    /* CTA Frame - full screen takeover */
+    .ad-cta-frame {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #fdfcfa 0%, #f5f4f2 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+      border-radius: 32px;
+    }
+
+    .ad-cta-frame.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .ad-cta-description {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #57534e;
+      text-align: center;
+      margin-bottom: 8px;
+      max-width: 200px;
+    }
+
+    .ad-cta-headline {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      font-style: italic;
+      color: #1c1917;
+      margin-bottom: 24px;
+    }
+
+    .ad-cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: #1c1917;
+      color: #fafaf9;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      width: 100%;
+    }
+
+    .ad-cta-note {
+      font-size: 0.7rem;
+      color: #a8a29e;
+      margin-top: 8px;
+    }
+
+    /* Back link */
+    .back-link {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      color: #a8a29e;
+      text-decoration: none;
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.15s;
+    }
+
+    .back-link:hover {
+      color: #fafaf9;
+    }
+
+    /* Typing cursor */
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: #b45309;
+      margin-left: 2px;
+      animation: blink 0.8s ease-in-out infinite;
+      vertical-align: text-bottom;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
+    }
+
+  </style>
+</head>
+<body>
+  <a href="../index.html" class="back-link">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M19 12H5"/>
+      <polyline points="12 19 5 12 12 5"/>
+    </svg>
+    Back to site
+  </a>
+
+  <div class="ads-page">
+    <div class="ads-header">
+      <h1>Ad Mockups</h1>
+      <p>Mobile-optimized ad concepts for Ada</p>
+    </div>
+
+    <div class="ads-grid">
+      <!-- Ad 1: Socratic Mode Story -->
+      <div class="ad-mockup">
+        <span class="ad-label">Story Ad - Socratic Mode</span>
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div class="ad-content story-ad">
+              <!-- Transparent watermark -->
+              <div class="ad-watermark">Ada</div>
+
+              <!-- Main demo area -->
+              <div class="ad-demo" id="ad1-demo">
+                <div class="ad-tagline" id="ad1-tagline">Edit with your voice</div>
+                <div class="ad-editor">
+                <div class="ad-editor-text" id="ad1-editor-text">
+                  The new policy will <span class="highlight" id="ad1-highlight">significantly impact</span> our quarterly projections.
+                </div>
+
+                <!-- Frame container - shows one frame at a time -->
+                <div class="ad-frames" id="ad1-frames">
+                  <!-- Frame 1: Speaking with waveform -->
+                  <div class="ad-frame" id="ad1-frame-speaking">
+                    <div class="ad-voice-header">
+                      <span class="ad-voice-mode" id="ad1-mode">Socratic</span>
+                      <span class="ad-voice-dot"></span>
+                    </div>
+                    <div class="ad-waveform-container">
+                      <canvas class="ad-waveform" id="ad1-waveform" width="60" height="60"></canvas>
+                    </div>
+                  </div>
+
+                  <!-- Frame 2: Transcription -->
+                  <div class="ad-frame" id="ad1-frame-transcription">
+                    <div class="ad-frame-label">You said</div>
+                    <div class="ad-transcription" id="ad1-transcription">"Is this too vague?"</div>
+                  </div>
+
+                  <!-- Frame 3: Thinking (AI processing) -->
+                  <div class="ad-frame" id="ad1-frame-thinking">
+                    <div class="ad-waveform-container">
+                      <canvas class="ad-waveform" id="ad1-waveform-thinking" width="60" height="60"></canvas>
+                    </div>
+                    <div class="ad-thinking-label">Thinking...</div>
+                  </div>
+
+                  <!-- Frame 4: Suggestion -->
+                  <div class="ad-frame" id="ad1-frame-suggestion">
+                    <div class="ad-frame-label">Suggested edit</div>
+                    <div class="ad-suggestion-text" id="ad1-suggestion-text">boost by 15%</div>
+                    <div class="ad-suggestion-actions">
+                      <button class="ad-btn ad-btn-accept" id="ad1-accept">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                        Accept
+                      </button>
+                      <button class="ad-btn ad-btn-reject">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Frame 4: Applied -->
+                  <div class="ad-frame" id="ad1-frame-applied">
+                    <div class="ad-applied-check">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <div class="ad-applied-text">Edit applied</div>
+                  </div>
+                </div>
+                </div>
+              </div>
+
+              <!-- CTA Frame - shows at end -->
+              <div class="ad-cta-frame" id="ad1-cta-frame">
+                <div class="ad-cta-description" id="ad1-cta-description">Discuss your ideas, refine your prose, or dictate replacements with</div>
+                <div class="ad-cta-headline" id="ad1-cta-headline">Ada</div>
+                <a href="#" class="ad-cta-button" id="ad1-cta-button">Download Free</a>
+                <div class="ad-cta-note" id="ad1-cta-note">macOS only</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Ad Configuration Schema
+    // Each ad variant is defined here with all customizable parameters
+    const adVariants = [
+      {
+        id: 'socratic-vague',
+
+        // Optional tagline shown above the editor on first screen
+        tagline: 'Edit with your voice',
+
+        // Editor content - use {{highlight}} to mark the selectable text
+        editorText: 'The new policy will {{significantly impact}} our quarterly projections.',
+
+        // Voice interaction
+        mode: 'Socratic',
+        transcription: '"Is this too vague?"',
+        suggestion: 'boost by 15%',
+
+        // Timing (ms) - will align with TTS audio
+        timing: {
+          initialPause: 1000,
+          highlightDuration: 1200,
+          voiceStart: 0,           // TTS timestamp start
+          voiceDuration: 2000,     // How long waveform shows (speaking mode)
+          voiceEnd: 2000,          // TTS timestamp end
+          transcriptionDuration: 1500,
+          thinkingDuration: 1800,  // AI processing animation (thinking mode)
+          suggestionDuration: 1500,
+          acceptDelay: 400,
+          appliedDuration: 2000,
+          ctaDuration: 3000
+        },
+
+        // CTA frame content
+        cta: {
+          description: 'Discuss your ideas, refine your prose, or dictate replacements with',
+          headline: 'Ada',
+          buttonText: 'Download Free',
+          note: 'macOS only'
+        }
+      },
+      {
+        id: 'socratic-formal',
+        tagline: 'Your voice, amplified',
+        editorText: 'We are {{pleased to inform you}} that your application has been received.',
+        mode: 'Socratic',
+        transcription: '"Too formal?"',
+        suggestion: 'happy to share',
+        timing: {
+          initialPause: 1000,
+          highlightDuration: 1000,
+          voiceStart: 0,
+          voiceDuration: 1500,
+          voiceEnd: 1500,
+          transcriptionDuration: 1400,
+          thinkingDuration: 1600,
+          suggestionDuration: 1500,
+          acceptDelay: 400,
+          appliedDuration: 2000,
+          ctaDuration: 3000
+        },
+        cta: {
+          description: 'Discuss your ideas, refine your prose, or dictate replacements with',
+          headline: 'Ada',
+          buttonText: 'Download Free',
+          note: 'macOS only'
+        }
+      },
+      {
+        id: 'didactic-replace',
+        tagline: 'Speak your edits',
+        editorText: 'The project deadline is {{next month}} and we need to prepare.',
+        mode: 'Didactic',
+        transcription: '"March 15th"',
+        suggestion: 'March 15th',
+        timing: {
+          initialPause: 1000,
+          highlightDuration: 800,
+          voiceStart: 0,
+          voiceDuration: 1200,
+          voiceEnd: 1200,
+          transcriptionDuration: 1200,
+          thinkingDuration: 1000,  // Shorter for Didactic (direct replacement)
+          suggestionDuration: 1400,
+          acceptDelay: 400,
+          appliedDuration: 2000,
+          ctaDuration: 3000
+        },
+        cta: {
+          description: 'Select text, speak your replacement, and watch it appear instantly with',
+          headline: 'Ada',
+          buttonText: 'Try Free',
+          note: 'macOS only'
+        }
+      }
+    ];
+
+    // Current variant index (cycle through or set specific)
+    let currentVariantIndex = 0;
+
+    // Waveform Animation (reused from main site)
+    // Returns controller object to switch between speaking/thinking modes
+    function createWaveformAnimation(canvas, scale = 1) {
+      const ctx = canvas.getContext('2d');
+      const particles = [];
+      const particleCount = Math.floor(10 * scale);
+      const permanentCount = Math.floor(3 * scale);
+      let time = 0;
+      let thinkingPhase = 0;
+      let mode = 'speaking'; // 'speaking' | 'thinking'
+
+      // Initialize particles
+      for (let i = 0; i < particleCount + permanentCount; i++) {
+        particles.push({
+          angle: (i / (particleCount + permanentCount)) * Math.PI * 2,
+          radius: 4 * scale,
+          size: 1.5 * scale,
+          state: 'orbiting',
+          permanent: i >= particleCount,
+          x: 0, y: 0, vx: 0, vy: 0, life: 1
+        });
+      }
+
+      function draw() {
+        const w = canvas.width;
+        const h = canvas.height;
+        const centerX = w / 2;
+        const centerY = h / 2;
+
+        ctx.clearRect(0, 0, w, h);
+
+        // In speaking mode, simulate voice levels; in thinking mode, gentle pulse
+        let isSpeaking, boostedLevel;
+        if (mode === 'speaking') {
+          const simulatedLevel = 0.5 + Math.sin(time * 4) * 0.3 + Math.sin(time * 7) * 0.15;
+          boostedLevel = Math.pow(Math.max(0, simulatedLevel), 0.5) * 1.6;
+          isSpeaking = boostedLevel > 0.18;
+        } else {
+          // Thinking mode - no particles flying, gentle orbit
+          isSpeaking = false;
+          boostedLevel = 0;
+        }
+
+        const maxRadius = Math.min(w, h) / 2 - 2;
+        const halfRadius = maxRadius * 0.35;
+
+        let orbitRadius;
+        if (isSpeaking) {
+          orbitRadius = halfRadius;
+        } else {
+          thinkingPhase += 0.03;
+          const pulse = Math.sin(thinkingPhase) * 0.5 + 0.5;
+          orbitRadius = maxRadius * (0.15 + pulse * 0.2);
+        }
+
+        const spinSpeed = isSpeaking ? 0.03 + boostedLevel * 0.02 : 0.015;
+
+        particles.forEach(p => {
+          if (p.state === 'orbiting') {
+            p.angle += spinSpeed;
+            p.radius += (orbitRadius - p.radius) * 0.1;
+
+            const x = centerX + Math.cos(p.angle) * p.radius;
+            const y = centerY + Math.sin(p.angle) * p.radius;
+
+            const atHorizon = Math.abs(y - centerY) < 4 * scale;
+            const shouldDetach = !p.permanent && isSpeaking && atHorizon && Math.random() < boostedLevel * 0.4;
+
+            if (shouldDetach) {
+              p.state = 'flying';
+              p.x = x;
+              p.y = y;
+              p.vx = (x < centerX ? -1 : 1) * (0.4 + boostedLevel * 0.4) * scale;
+              p.vy = (Math.random() - 0.5) * 0.2 * scale;
+              p.life = 1;
+            } else {
+              ctx.beginPath();
+              ctx.arc(x, y, p.size + (isSpeaking ? boostedLevel * 0.3 : 0.1), 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(180, 83, 9, ${isSpeaking ? 0.8 : 0.5})`;
+              ctx.fill();
+            }
+          } else if (p.state === 'flying') {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy *= 0.96;
+            p.life -= 0.05;
+
+            if (p.life > 0) {
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, p.size * (0.5 + p.life * 0.5), 0, Math.PI * 2);
+              ctx.fillStyle = p.vx < 0
+                ? `rgba(220, 100, 20, ${p.life * 0.9})`
+                : `rgba(251, 191, 36, ${p.life * 0.9})`;
+              ctx.fill();
+            }
+
+            if (p.life <= 0) {
+              p.state = 'refilling';
+              p.radius = 0;
+            }
+          } else if (p.state === 'refilling') {
+            p.angle += spinSpeed;
+            p.radius += (orbitRadius - p.radius) * 0.08;
+
+            const x = centerX + Math.cos(p.angle) * p.radius;
+            const y = centerY + Math.sin(p.angle) * p.radius;
+            const fadeIn = Math.min(1, p.radius / (orbitRadius * 0.8));
+
+            ctx.beginPath();
+            ctx.arc(x, y, p.size * fadeIn, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(180, 83, 9, ${fadeIn * (isSpeaking ? 0.8 : 0.5)})`;
+            ctx.fill();
+
+            if (p.radius > orbitRadius * 0.9) {
+              p.state = 'orbiting';
+            }
+          }
+        });
+
+        time += 0.05;
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+
+      // Return controller to switch modes
+      return {
+        setMode: (newMode) => { mode = newMode; },
+        setSpeaking: () => { mode = 'speaking'; },
+        setThinking: () => { mode = 'thinking'; }
+      };
+    }
+
+    // Typing animation
+    function typeText(element, text, speed = 30) {
+      return new Promise(resolve => {
+        let i = 0;
+        element.innerHTML = '<span class="typing-cursor"></span>';
+        function type() {
+          if (i < text.length) {
+            element.innerHTML = text.substring(0, i + 1) + '<span class="typing-cursor"></span>';
+            i++;
+            setTimeout(type, speed + Math.random() * 20);
+          } else {
+            element.innerHTML = text;
+            resolve();
+          }
+        }
+        type();
+      });
+    }
+
+    // Ad 1: Socratic Mode - Frame-based Animation (Schema-driven)
+    (function() {
+      // DOM elements
+      const taglineEl = document.getElementById('ad1-tagline');
+      const editorText = document.getElementById('ad1-editor-text');
+      const highlight = document.getElementById('ad1-highlight');
+      const acceptBtn = document.getElementById('ad1-accept');
+      const framesContainer = document.getElementById('ad1-frames');
+      const demoArea = document.getElementById('ad1-demo');
+      const ctaFrame = document.getElementById('ad1-cta-frame');
+      const modeLabel = document.getElementById('ad1-mode');
+      const transcriptionEl = document.getElementById('ad1-transcription');
+      const suggestionEl = document.getElementById('ad1-suggestion-text');
+      const ctaDescription = document.getElementById('ad1-cta-description');
+      const ctaHeadline = document.getElementById('ad1-cta-headline');
+      const ctaButton = document.getElementById('ad1-cta-button');
+      const ctaNote = document.getElementById('ad1-cta-note');
+
+      const frames = {
+        speaking: document.getElementById('ad1-frame-speaking'),
+        transcription: document.getElementById('ad1-frame-transcription'),
+        thinking: document.getElementById('ad1-frame-thinking'),
+        suggestion: document.getElementById('ad1-frame-suggestion'),
+        applied: document.getElementById('ad1-frame-applied')
+      };
+
+      // Initialize waveforms with controllers
+      const speakingCanvas = document.getElementById('ad1-waveform');
+      const thinkingCanvas = document.getElementById('ad1-waveform-thinking');
+      const speakingWaveform = createWaveformAnimation(speakingCanvas, 1);
+      const thinkingWaveform = createWaveformAnimation(thinkingCanvas, 1);
+
+      // Set thinking waveform to thinking mode
+      thinkingWaveform.setThinking();
+
+      function showFrame(frameName) {
+        framesContainer.classList.add('visible');
+        Object.values(frames).forEach(f => f.classList.remove('active'));
+        if (frames[frameName]) {
+          frames[frameName].classList.add('active');
+        }
+      }
+
+      function hideAllFrames() {
+        framesContainer.classList.remove('visible');
+        Object.values(frames).forEach(f => f.classList.remove('active'));
+      }
+
+      function showCTA() {
+        demoArea.style.opacity = '0';
+        ctaFrame.classList.add('visible');
+      }
+
+      function hideCTA() {
+        ctaFrame.classList.remove('visible');
+        demoArea.style.opacity = '1';
+      }
+
+      // Parse editor text and extract highlight
+      function parseEditorText(text) {
+        const match = text.match(/\{\{(.+?)\}\}/);
+        if (match) {
+          const highlightText = match[1];
+          const before = text.substring(0, match.index);
+          const after = text.substring(match.index + match[0].length);
+          return { before, highlightText, after };
+        }
+        return { before: text, highlightText: '', after: '' };
+      }
+
+      // Apply variant content to DOM
+      function applyVariant(variant) {
+        const parsed = parseEditorText(variant.editorText);
+
+        // Update tagline (optional)
+        taglineEl.textContent = variant.tagline || '';
+
+        // Update editor text structure
+        editorText.innerHTML = `${parsed.before}<span class="highlight" id="ad1-highlight">${parsed.highlightText}</span>${parsed.after}`;
+
+        // Re-grab highlight reference after innerHTML change
+        const newHighlight = document.getElementById('ad1-highlight');
+
+        // Update mode label
+        modeLabel.textContent = variant.mode;
+
+        // Update transcription and suggestion
+        transcriptionEl.textContent = variant.transcription;
+        suggestionEl.textContent = variant.suggestion;
+
+        // Update CTA
+        ctaDescription.textContent = variant.cta.description || '';
+        ctaHeadline.textContent = variant.cta.headline;
+        ctaButton.textContent = variant.cta.buttonText;
+        ctaNote.textContent = variant.cta.note;
+
+        return { newHighlight, parsed };
+      }
+
+      async function runAd() {
+        // Get current variant
+        const variant = adVariants[currentVariantIndex];
+        const t = variant.timing;
+
+        // Apply variant content
+        const { newHighlight, parsed } = applyVariant(variant);
+
+        // Reset state
+        hideCTA();
+        hideAllFrames();
+        acceptBtn.classList.remove('clicked');
+        newHighlight.classList.remove('active', 'accepted');
+
+        await new Promise(r => setTimeout(r, t.initialPause));
+
+        // Step 1: Highlight text (like mouse selection)
+        newHighlight.classList.add('active');
+        await new Promise(r => setTimeout(r, t.highlightDuration));
+
+        // Step 2: Speaking with waveform
+        // t.voiceStart could trigger TTS playback here
+        showFrame('speaking');
+        await new Promise(r => setTimeout(r, t.voiceDuration));
+        // t.voiceEnd - TTS stops here
+
+        // Step 3: Transcription
+        showFrame('transcription');
+        await new Promise(r => setTimeout(r, t.transcriptionDuration));
+
+        // Step 4: Thinking (AI processing)
+        showFrame('thinking');
+        await new Promise(r => setTimeout(r, t.thinkingDuration));
+
+        // Step 5: Suggestion
+        showFrame('suggestion');
+        await new Promise(r => setTimeout(r, t.suggestionDuration));
+
+        // Accept clicked
+        acceptBtn.classList.add('clicked');
+        await new Promise(r => setTimeout(r, t.acceptDelay));
+
+        // Step 6: Applied
+        showFrame('applied');
+        newHighlight.classList.remove('active');
+        newHighlight.classList.add('accepted');
+        newHighlight.textContent = variant.suggestion;
+
+        await new Promise(r => setTimeout(r, t.appliedDuration));
+
+        // Step 7: Show CTA
+        showCTA();
+        await new Promise(r => setTimeout(r, t.ctaDuration));
+
+        // Cycle to next variant (or loop same one)
+        // currentVariantIndex = (currentVariantIndex + 1) % adVariants.length;
+
+        // Loop
+        runAd();
+      }
+
+      runAd();
+    })();
+
+  </script>
+</body>
+</html>

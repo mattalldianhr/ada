@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ada - Creative Review</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* === BASE === */
+    .creative-review {
+      min-height: 100vh;
+      background: #1c1917;
+      padding: 40px 24px 80px;
+    }
+
+    .review-header {
+      max-width: 1200px;
+      margin: 0 auto 48px;
+      text-align: center;
+    }
+
+    .review-header h1 {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 600;
+      font-style: italic;
+      color: #fafaf9;
+      margin-bottom: 8px;
+    }
+
+    .review-header p {
+      color: #78716c;
+      font-size: 0.95rem;
+    }
+
+    /* === STRATEGY SECTION === */
+    .strategy-section {
+      max-width: 1400px;
+      margin: 0 auto 80px;
+    }
+
+    .strategy-header {
+      margin-bottom: 32px;
+      padding: 24px;
+      background: #292524;
+      border-radius: 12px;
+      border-left: 4px solid #b45309;
+    }
+
+    .strategy-number {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #b45309;
+      margin-bottom: 8px;
+    }
+
+    .strategy-header h2 {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #fafaf9;
+      margin-bottom: 8px;
+    }
+
+    .strategy-header p {
+      color: #a8a29e;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      max-width: 700px;
+    }
+
+    .strategy-insight {
+      margin-top: 16px;
+      padding: 12px 16px;
+      background: rgba(180, 83, 9, 0.1);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: #fbbf24;
+    }
+
+    .strategy-insight strong {
+      color: #fafaf9;
+    }
+
+    /* === ADS GRID === */
+    .ads-grid {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      padding-bottom: 16px;
+    }
+
+    .ad-slot {
+      flex-shrink: 0;
+    }
+
+    .ad-variant-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #78716c;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    /* === PHONE FRAME === */
+    .phone-frame {
+      width: 280px;
+      height: 580px;
+      background: #0c0a09;
+      border-radius: 40px;
+      padding: 12px;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.1),
+        0 25px 50px -12px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+      position: relative;
+    }
+
+    .phone-frame::before {
+      content: '';
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 76px;
+      height: 24px;
+      background: #000;
+      border-radius: 12px;
+      z-index: 10;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: #fdfcfa;
+      border-radius: 32px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* === AD CONTENT === */
+    .ad-content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(180deg, #fdfcfa 0%, #f5f4f2 100%);
+      padding: 78px 16px 111px;
+      position: relative;
+    }
+
+    .ad-watermark {
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      font-family: 'Literata', Georgia, serif;
+      font-weight: 600;
+      font-style: italic;
+      font-size: 7rem;
+      line-height: 0.8;
+      color: #1c1917;
+      opacity: 0.04;
+      pointer-events: none;
+    }
+
+    .ad-demo {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      position: relative;
+      z-index: 1;
+      opacity: 1;
+      transition: opacity 0.4s ease;
+    }
+
+    .ad-tagline {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #78716c;
+      text-align: center;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .ad-tagline:empty {
+      display: none;
+    }
+
+    .ad-editor {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      margin: 0 4px;
+      padding: 16px;
+    }
+
+    .ad-editor-text {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #1c1917;
+    }
+
+    .highlight {
+      padding: 1px 2px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, #fef3c7 50%, transparent 50%);
+      background-size: 200% 100%;
+      background-position: 100% 0;
+      transition: background-position 0.5s ease;
+    }
+
+    .highlight.active {
+      background-position: 0% 0;
+    }
+
+    .highlight.accepted {
+      background: #d1fae5;
+      transition: background 0.3s ease;
+    }
+
+    /* === FRAMES === */
+    .ad-frames {
+      margin-top: 16px;
+      border-radius: 8px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      overflow: hidden;
+      max-height: 0;
+      padding: 0 16px;
+      transition: max-height 0.3s ease, padding 0.3s ease, background 0.3s ease;
+    }
+
+    .ad-frames.visible {
+      background: #f5f4f2;
+      max-height: 200px;
+      padding: 20px 16px;
+    }
+
+    .ad-frame {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .ad-frame.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ad-frame-label {
+      font-size: 0.6rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #78716c;
+      margin-bottom: 8px;
+    }
+
+    .ad-voice-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .ad-voice-mode {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #b45309;
+    }
+
+    .ad-voice-dot {
+      width: 6px;
+      height: 6px;
+      background: #b45309;
+      border-radius: 50%;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    .ad-waveform-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .ad-waveform {
+      width: 60px;
+      height: 60px;
+    }
+
+    .ad-thinking-label {
+      font-size: 0.75rem;
+      color: #78716c;
+      margin-top: 8px;
+    }
+
+    .ad-transcription {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 0.9rem;
+      color: #1c1917;
+      font-style: italic;
+    }
+
+    .ad-suggestion-text {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 0.9rem;
+      color: #1c1917;
+      margin-bottom: 12px;
+    }
+
+    .ad-suggestion-actions {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .ad-btn {
+      padding: 8px 16px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .ad-btn-accept {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+
+    .ad-btn-accept.clicked {
+      background: #166534;
+      color: white;
+    }
+
+    .ad-btn-reject {
+      background: #f5f4f2;
+      color: #78716c;
+      border: 1px solid #e7e5e4;
+    }
+
+    .ad-applied-check {
+      margin-bottom: 8px;
+    }
+
+    .ad-applied-text {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #059669;
+    }
+
+    /* === CTA FRAME === */
+    .ad-cta-frame {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #fdfcfa 0%, #f5f4f2 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+      border-radius: 32px;
+    }
+
+    .ad-cta-frame.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .ad-cta-description {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #57534e;
+      margin-bottom: 8px;
+      max-width: 200px;
+    }
+
+    .ad-cta-headline {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      font-style: italic;
+      color: #1c1917;
+      margin-bottom: 24px;
+    }
+
+    .ad-cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      background: #1c1917;
+      color: #fafaf9;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      width: 100%;
+    }
+
+    .ad-cta-note {
+      font-size: 0.7rem;
+      color: #a8a29e;
+      margin-top: 8px;
+    }
+
+    /* === UTILITIES === */
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: #b45309;
+      margin-left: 2px;
+      animation: blink 0.8s ease-in-out infinite;
+      vertical-align: text-bottom;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    .back-link {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      color: #a8a29e;
+      text-decoration: none;
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 100;
+    }
+
+    .back-link:hover {
+      color: #fafaf9;
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-link">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M19 12H5"/>
+      <polyline points="12 19 5 12 12 5"/>
+    </svg>
+    Back
+  </a>
+
+  <div class="creative-review">
+    <header class="review-header">
+      <h1>Creative Review</h1>
+      <p>17 creative strategies. 6 animated ads per strategy. 102 total ads running the full demo flow.</p>
+    </header>
+
+    <!-- Strategies and ads will be injected here -->
+    <div id="strategies-container"></div>
+  </div>
+
+  <script>
+    // =====================================================
+    // CREATIVE STRATEGIES + COPY VARIANTS
+    // =====================================================
+    // Each strategy contains multiple ad variants in JSON schema format
+
+    const creativeStrategies = [
+      // =====================================================
+      // HOOK 1: FAMOUS EDITS THAT CHANGED HISTORY
+      // =====================================================
+      {
+        id: 'famous-edits',
+        name: 'Famous Edits That Changed History',
+        description: 'Small word changes with massive consequences. Historical examples of how tiny edits transformed documents into legendary texts. All resolve to the TRUE/better version.',
+        insight: 'Big Idea: "History was made in the edit."',
+        variants: [
+          {
+            id: 'famous-jfk-ask-not',
+            tagline: null,
+            editorText: 'And so, my fellow Americans, you should {{not ask what your country can do for you, ask what you can do for your country}}.',
+            mode: 'Socratic',
+            transcription: '"Should I flip this around?"',
+            suggestion: 'ask not what your country can do for you',
+            timing: { initialPause: 800, highlightDuration: 2400, voiceDuration: 2000, transcriptionDuration: 1600, thinkingDuration: 1700, suggestionDuration: 1800, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Find the right structure with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'famous-mlk-dream',
+            tagline: null,
+            editorText: 'I say to you today, my friends, that in spite of the difficulties and frustrations, {{I still have an idea}}.',
+            mode: 'Socratic',
+            transcription: '"Is \'idea\' too weak?"',
+            suggestion: 'I still have a dream',
+            timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 1700, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Find the right word with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'famous-declaration-self-evident',
+            tagline: null,
+            editorText: 'We hold these truths to be {{sacred and undeniable}}, that all men are created equal.',
+            mode: 'Socratic',
+            transcription: '"Too religious?"',
+            suggestion: 'self-evident',
+            timing: { initialPause: 800, highlightDuration: 1300, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Find the right tone with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'famous-apple-think-different',
+            tagline: null,
+            editorText: 'Here\'s to the crazy ones. The misfits. The rebels. {{Think Differently}}.',
+            mode: 'Socratic',
+            transcription: '"Too proper?"',
+            suggestion: 'Think Different',
+            timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1400, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Break the rules with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'famous-gettysburg-four-score',
+            tagline: null,
+            editorText: '{{Eighty-seven years ago}}, our fathers brought forth on this continent a new nation.',
+            mode: 'Socratic',
+            transcription: '"Too plain?"',
+            suggestion: 'Four score and seven years ago',
+            timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 1400, transcriptionDuration: 1200, thinkingDuration: 1600, suggestionDuration: 1600, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Find your voice with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'famous-hemingway-iceberg',
+            tagline: null,
+            editorText: 'The old man sat alone in a boat. He was very sad because he hadn\'t caught a fish {{and this made him feel like a failure}}.',
+            mode: 'Socratic',
+            transcription: '"Too much explaining?"',
+            suggestion: 'in eighty-four days',
+            timing: { initialPause: 800, highlightDuration: 1800, voiceDuration: 1900, transcriptionDuration: 1500, thinkingDuration: 1700, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Show, don\'t tell with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          }
+        ]
+      },
+
+      // =====================================================
+      // HOOK 2: SMALL CHANGES, BIG CONSEQUENCES
+      // =====================================================
+      {
+        id: 'small-changes-big-consequences',
+        name: 'Small Changes, Big Consequences',
+        description: 'Words that look similar but change everything. The hook is the anxiety of not knowing which word is right—and the relief of getting it correct.',
+        insight: 'Big Idea: "One letter can change everything."',
+        variants: [
+          {
+            id: 'confuse-affect-effect',
+            tagline: null,
+            editorText: 'The new policy will {{effect}} how we handle customer complaints going forward.',
+            mode: 'Socratic',
+            transcription: '"Wait, affect or effect?"',
+            suggestion: 'affect',
+            timing: { initialPause: 800, highlightDuration: 800, voiceDuration: 2000, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Catch your mistakes with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'confuse-complement-compliment',
+            tagline: null,
+            editorText: 'The red wine really {{compliments}} the steak beautifully.',
+            mode: 'Socratic',
+            transcription: '"Is that the right one?"',
+            suggestion: 'complements',
+            timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1800, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Get the details right with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'confuse-discrete-discreet',
+            tagline: null,
+            editorText: 'Please keep this conversation {{discrete}}. We can\'t have word getting out.',
+            mode: 'Socratic',
+            transcription: '"Discrete or discreet?"',
+            suggestion: 'discreet',
+            timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1900, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Say exactly what you mean with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'confuse-principal-principle',
+            tagline: null,
+            editorText: 'As a matter of {{principal}}, I never discuss salary with colleagues.',
+            mode: 'Socratic',
+            transcription: '"Wait, which spelling?"',
+            suggestion: 'principle',
+            timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1800, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Catch the small stuff with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'confuse-stationary-stationery',
+            tagline: null,
+            editorText: 'I need to order new company {{stationary}} with the updated logo.',
+            mode: 'Socratic',
+            transcription: '"Is that the paper one?"',
+            suggestion: 'stationery',
+            timing: { initialPause: 800, highlightDuration: 1000, voiceDuration: 1800, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Never second-guess with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'confuse-whos-whose',
+            tagline: null,
+            editorText: 'The client {{who\'s}} project we just finished wants to schedule a follow-up call.',
+            mode: 'Socratic',
+            transcription: '"Who\'s or whose?"',
+            suggestion: 'whose',
+            timing: { initialPause: 800, highlightDuration: 800, voiceDuration: 1700, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Ask your doubts out loud with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          }
+        ]
+      },
+
+      // =====================================================
+      // HOOK 3: KILLING OFFICE SPEAK
+      // =====================================================
+      {
+        id: 'killing-office-speak',
+        name: 'Killing Office Speak',
+        description: 'Corporate bloat transformed into human speech. The hook is the universal hatred of jargon and the satisfaction of killing it.',
+        insight: 'Big Idea: "Say it like a person."',
+        variants: [
+          {
+            id: 'jargon-synergy',
+            tagline: null,
+            editorText: 'We need to {{leverage our cross-functional synergies}} to maximize output this quarter.',
+            mode: 'Socratic',
+            transcription: '"Does anyone know what this means?"',
+            suggestion: 'work together',
+            timing: { initialPause: 800, highlightDuration: 1800, voiceDuration: 2400, transcriptionDuration: 1800, thinkingDuration: 1700, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Kill your jargon with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'jargon-circle-back',
+            tagline: null,
+            editorText: 'Let\'s {{circle back}} on this and touch base after I\'ve had time to review.',
+            mode: 'Socratic',
+            transcription: '"Too corporate?"',
+            suggestion: 'talk again',
+            timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Sound human with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'jargon-going-forward',
+            tagline: null,
+            editorText: '{{Going forward}}, we need to ensure all reports are submitted by Friday.',
+            mode: 'Socratic',
+            transcription: '"Do I need this?"',
+            suggestion: 'From now on',
+            timing: { initialPause: 800, highlightDuration: 1000, voiceDuration: 1600, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Cut the fluff with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'jargon-end-of-day',
+            tagline: null,
+            editorText: '{{At the end of the day}}, what matters most is that we hit our targets.',
+            mode: 'Socratic',
+            transcription: '"Ugh, everyone says this"',
+            suggestion: 'Ultimately',
+            timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 2000, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Kill your cliches with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'jargon-per-my-last-email',
+            tagline: null,
+            editorText: '{{Per my last email}}, the deadline was moved to Monday. Please confirm receipt.',
+            mode: 'Socratic',
+            transcription: '"Too passive-aggressive?"',
+            suggestion: 'As I mentioned',
+            timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 2100, transcriptionDuration: 1600, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Sound less annoyed with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'jargon-low-hanging-fruit',
+            tagline: null,
+            editorText: 'Let\'s focus on the {{low-hanging fruit}} first before tackling the bigger issues.',
+            mode: 'Socratic',
+            transcription: '"Too buzzwordy?"',
+            suggestion: 'quick wins',
+            timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1600, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Say it straight with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          }
+        ]
+      },
+
+      // =====================================================
+      // HOOK 4: THINKING PARTNERS
+      // =====================================================
+      {
+        id: 'thinking-partners',
+        name: 'Thinking Partners',
+        description: 'Reframing the question entirely. The hook is having someone help you see what you\'re really trying to say—and the courage to say it.',
+        insight: 'Big Idea: "What are you really trying to say?"',
+        variants: [
+          {
+            id: 'reframe-passive-voice',
+            tagline: null,
+            editorText: '{{Mistakes were made}} in the handling of this account. We regret the inconvenience.',
+            mode: 'Socratic',
+            transcription: '"Am I hiding who did it?"',
+            suggestion: 'We made mistakes',
+            timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 2100, transcriptionDuration: 1600, thinkingDuration: 1700, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Own your words with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'reframe-hedging',
+            tagline: null,
+            editorText: 'I {{think we might want to consider}} raising prices next quarter.',
+            mode: 'Socratic',
+            transcription: '"Am I just hedging?"',
+            suggestion: 'recommend we',
+            timing: { initialPause: 800, highlightDuration: 1500, voiceDuration: 1900, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Find your confidence with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'reframe-burying-lead',
+            tagline: null,
+            editorText: 'After reviewing the data from Q3, {{I believe we should cancel the project}}.',
+            mode: 'Socratic',
+            transcription: '"Should I lead with this?"',
+            suggestion: 'We should cancel the project',
+            timing: { initialPause: 800, highlightDuration: 1800, voiceDuration: 2100, transcriptionDuration: 1600, thinkingDuration: 1700, suggestionDuration: 1600, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Lead with your point with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'reframe-over-apologizing',
+            tagline: null,
+            editorText: '{{I\'m sorry to bother you, but}} I need the report by end of day.',
+            mode: 'Socratic',
+            transcription: '"Why am I apologizing?"',
+            suggestion: 'Hi,',
+            timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 2000, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Stop over-apologizing with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'reframe-vague-conflict',
+            tagline: null,
+            editorText: 'There were {{some concerns raised}} about the timeline in yesterday\'s meeting.',
+            mode: 'Socratic',
+            transcription: '"Am I being too vague?"',
+            suggestion: 'concerns',
+            timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 2000, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Be direct with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'reframe-softening-bad-news',
+            tagline: null,
+            editorText: 'We\'ve {{decided to go in a different direction}} with the role. Thank you for your time.',
+            mode: 'Socratic',
+            transcription: '"Should I just say it?"',
+            suggestion: 'chosen another candidate',
+            timing: { initialPause: 800, highlightDuration: 1700, voiceDuration: 2000, transcriptionDuration: 1500, thinkingDuration: 1700, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Say what you mean with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          }
+        ]
+      },
+
+      // =====================================================
+      // HOOK 5: GENERATIONAL CODE-SWITCHING
+      // =====================================================
+      {
+        id: 'generational-code-switching',
+        name: 'Generational Code-Switching',
+        description: 'Translating across age gaps. Different generations communicate differently, and what sounds professional to one may sound dated or too casual to another.',
+        insight: 'Big Idea: "Speak every generation\'s language."',
+        variants: [
+          {
+            id: 'gen-millennial-to-boomer',
+            tagline: null,
+            editorText: 'Just wanted to {{circle back on this}} and see if we can sync up about the Q3 deliverables.',
+            mode: 'Socratic',
+            transcription: '"Too millennial for the CEO?"',
+            suggestion: 'follow up on this',
+            timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Translate across generations with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'gen-boomer-to-genz',
+            tagline: null,
+            editorText: 'We are seeking a {{highly motivated self-starter}} to join our dynamic team.',
+            mode: 'Socratic',
+            transcription: '"Does this sound like a boomer?"',
+            suggestion: 'driven problem-solver',
+            timing: { initialPause: 800, highlightDuration: 1300, voiceDuration: 1700, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Speak every generation\'s language with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'gen-professional-to-slack',
+            tagline: null,
+            editorText: '{{Please be advised that}} the office will be closed on Friday for the retreat.',
+            mode: 'Socratic',
+            transcription: '"This is just for Slack"',
+            suggestion: 'Heads up:',
+            timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Match the channel\'s vibe with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'gen-slack-to-formal',
+            tagline: null,
+            editorText: 'The new policy is {{kinda confusing ngl}} and we should probably talk about it.',
+            mode: 'Socratic',
+            transcription: '"This is for the board memo"',
+            suggestion: 'unclear',
+            timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 800, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Code-switch effortlessly with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'gen-internet-to-professional',
+            tagline: null,
+            editorText: 'The results were {{lowkey amazing}} and exceeded our expectations for the quarter.',
+            mode: 'Socratic',
+            transcription: '"Too casual for investors?"',
+            suggestion: 'surprisingly strong',
+            timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Find the right register with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'gen-formal-to-parent',
+            tagline: null,
+            editorText: 'I\'ve been {{optimizing our B2B SaaS conversion funnel}} which has been rewarding.',
+            mode: 'Socratic',
+            transcription: '"How do I explain this to mom?"',
+            suggestion: 'helping businesses sign up faster',
+            timing: { initialPause: 800, highlightDuration: 1600, voiceDuration: 1800, transcriptionDuration: 1600, thinkingDuration: 1700, suggestionDuration: 1600, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Translate for any audience with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          }
+        ]
+      },
+
+      // =====================================================
+      // HOOK 6: THE APOLOGY SPECTRUM
+      // =====================================================
+      {
+        id: 'apology-spectrum',
+        name: 'The Apology Spectrum',
+        description: 'Finding the right level of sorry. Over-apologizing weakens your message, under-apologizing seems cold. Ada helps you calibrate.',
+        insight: 'Big Idea: "Find the right level of sorry."',
+        variants: [
+          {
+            id: 'apology-over-apologizing',
+            tagline: null,
+            editorText: '{{I\'m so incredibly sorry for any inconvenience this may have caused}} but we need to reschedule.',
+            mode: 'Socratic',
+            transcription: '"Am I over-apologizing?"',
+            suggestion: 'Thanks for your flexibility',
+            timing: { initialPause: 800, highlightDuration: 1800, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Find the right level of sorry with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'apology-under-apologizing',
+            tagline: null,
+            editorText: 'The report will be late. {{I\'ll send it tomorrow}} instead of today as planned.',
+            mode: 'Socratic',
+            transcription: '"Should I apologize here?"',
+            suggestion: 'Apologies, I\'ll send it tomorrow',
+            timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Strike the right balance with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'apology-sorry-to-thanks',
+            tagline: null,
+            editorText: '{{Sorry for the delayed response}} but I wanted to give your question proper thought.',
+            mode: 'Socratic',
+            transcription: '"Gratitude not guilt?"',
+            suggestion: 'Thanks for your patience',
+            timing: { initialPause: 800, highlightDuration: 1300, voiceDuration: 1300, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Turn sorry into thanks with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'apology-performative-removal',
+            tagline: null,
+            editorText: '{{Sorry to bother you, but}} do you have a minute to review this draft?',
+            mode: 'Socratic',
+            transcription: '"Do I need to apologize?"',
+            suggestion: 'Do you have a minute',
+            timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Stop apologizing for existing with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'apology-calibrating-intensity',
+            tagline: null,
+            editorText: '{{I deeply apologize for this oversight}} and it will never happen again. The typo has been corrected.',
+            mode: 'Socratic',
+            transcription: '"Too dramatic for a typo?"',
+            suggestion: 'Sorry about that',
+            timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Calibrate your apologies with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'apology-adding-sincerity',
+            tagline: null,
+            editorText: '{{We apologize for any inconvenience}} and appreciate your continued loyalty.',
+            mode: 'Socratic',
+            transcription: '"This sounds robotic"',
+            suggestion: 'We\'re sorry this happened',
+            timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 1400, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Make apologies feel human with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          }
+        ]
+      },
+
+      // =====================================================
+      // HOOK 7: THE CONFIDENCE EDIT
+      // =====================================================
+      {
+        id: 'confidence-edit',
+        name: 'The Confidence Edit',
+        description: 'Hedging to asserting. Stop shrinking yourself with weak language. Ada helps you write with conviction.',
+        insight: 'Big Idea: "Write with conviction."',
+        variants: [
+          {
+            id: 'confidence-classic-hedge',
+            tagline: null,
+            editorText: '{{I think maybe we should consider}} launching the campaign in March.',
+            mode: 'Socratic',
+            transcription: '"Too much hedging?"',
+            suggestion: 'We should',
+            timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 1300, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Write with conviction with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'confidence-just-removal',
+            tagline: null,
+            editorText: 'I {{just wanted to}} check if you had a chance to review the proposal.',
+            mode: 'Socratic',
+            transcription: '"Why am I shrinking myself?"',
+            suggestion: 'wanted to',
+            timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1600, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Stop shrinking yourself with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'confidence-belief-to-assertion',
+            tagline: null,
+            editorText: '{{I believe that our team}} has the skills needed to deliver this project on time.',
+            mode: 'Socratic',
+            transcription: '"Why \'believe\'? I know it."',
+            suggestion: 'Our team',
+            timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 800, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'State what you know with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'confidence-permission-seeking',
+            tagline: null,
+            editorText: '{{If it\'s okay with everyone}}, I\'d like to propose a new approach.',
+            mode: 'Socratic',
+            transcription: '"I don\'t need permission"',
+            suggestion: 'I\'d like to propose',
+            timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Own your ideas with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'confidence-weak-verb',
+            tagline: null,
+            editorText: 'The data {{seems to suggest that}} customers prefer the new design.',
+            mode: 'Socratic',
+            transcription: '"The data doesn\'t \'seem\'"',
+            suggestion: 'shows that',
+            timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Let the facts speak with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'confidence-self-doubt',
+            tagline: null,
+            editorText: '{{This might be a dumb question, but}} what\'s the expected timeline?',
+            mode: 'Socratic',
+            transcription: '"Not a dumb question"',
+            suggestion: 'What\'s',
+            timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 1300, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 700, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Ask without apology with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          }
+        ]
+      },
+
+      // =====================================================
+      // HOOK 8: FINDING YOUR VOICE
+      // =====================================================
+      {
+        id: 'finding-your-voice',
+        name: 'Finding Your Voice',
+        description: 'Empowering people who struggle to be direct or assertive. Own your decisions, claim your wins, and speak directly.',
+        insight: 'Big Idea: "Advocate for yourself."',
+        variants: [
+          {
+            id: 'voice-passive-to-active',
+            tagline: null,
+            editorText: '{{It was decided that the project would be}} moved to Q2 for additional testing.',
+            mode: 'Socratic',
+            transcription: '"Who decided? I did."',
+            suggestion: 'I decided to move the project to',
+            timing: { initialPause: 800, highlightDuration: 1500, voiceDuration: 1400, transcriptionDuration: 1300, thinkingDuration: 1600, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Own your decisions with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'voice-non-native-clarity',
+            tagline: null,
+            editorText: 'I would like to {{make a suggestion about}} how we can improve the experience.',
+            mode: 'Socratic',
+            transcription: '"More natural in English?"',
+            suggestion: 'suggest how',
+            timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Find natural phrasing with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'voice-introvert-advocacy',
+            tagline: null,
+            editorText: '{{I was lucky enough to be part of}} the team that increased revenue by forty percent.',
+            mode: 'Socratic',
+            transcription: '"I earned this"',
+            suggestion: 'I led',
+            timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 1100, transcriptionDuration: 1000, thinkingDuration: 1500, suggestionDuration: 700, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Claim your wins with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'voice-deferential-to-direct',
+            tagline: null,
+            editorText: '{{If you have time and it\'s not too much trouble}}, could you review my summary?',
+            mode: 'Socratic',
+            transcription: '"I deserve a review"',
+            suggestion: 'When you have a chance',
+            timing: { initialPause: 800, highlightDuration: 1600, voiceDuration: 1300, transcriptionDuration: 1200, thinkingDuration: 1600, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Advocate for yourself with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'voice-taking-credit',
+            tagline: null,
+            editorText: '{{The team worked on}} a new onboarding flow that reduced churn by twenty percent.',
+            mode: 'Socratic',
+            transcription: '"I designed most of it"',
+            suggestion: 'I designed',
+            timing: { initialPause: 800, highlightDuration: 1000, voiceDuration: 1400, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Take up space with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'voice-conditional-to-declarative',
+            tagline: null,
+            editorText: '{{I would say that}} this approach gives us the best chance of meeting the deadline.',
+            mode: 'Socratic',
+            transcription: '"Why so conditional?"',
+            suggestion: 'This approach',
+            timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1300, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Speak directly with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          }
+        ]
+      },
+
+      // =====================================================
+      // HOOK 9: THE BREVITY CHALLENGE
+      // =====================================================
+      {
+        id: 'brevity-challenge',
+        name: 'The Brevity Challenge',
+        description: 'Every word should earn its place. Ada helps you cut the fluff and get to the point faster.',
+        insight: 'Big Idea: "How short can you go?"',
+        variants: [
+          {
+            id: 'brevity-email-confirmation',
+            tagline: null,
+            editorText: '{{I am writing to inform you that we have received your application}} and will review it shortly.',
+            mode: 'Socratic',
+            transcription: '"Way too long"',
+            suggestion: 'Got your application',
+            timing: { initialPause: 800, highlightDuration: 1400, voiceDuration: 1200, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Cut the fluff with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'brevity-meeting-request',
+            tagline: null,
+            editorText: 'I was wondering if {{it would be possible for us to schedule}} a call next week.',
+            mode: 'Socratic',
+            transcription: '"Just ask directly"',
+            suggestion: 'we could schedule',
+            timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1400, transcriptionDuration: 1300, thinkingDuration: 1600, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Get to the point with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'brevity-status-update',
+            tagline: null,
+            editorText: '{{I wanted to reach out to let you know that}} the project is on track for Friday.',
+            mode: 'Socratic',
+            transcription: '"Half of this is filler"',
+            suggestion: 'Quick update:',
+            timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Say more with less using', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'brevity-thank-you',
+            tagline: null,
+            editorText: 'I just wanted to {{take a moment to express my gratitude}} for your help.',
+            mode: 'Socratic',
+            transcription: '"Too wordy for a thanks"',
+            suggestion: 'thank you',
+            timing: { initialPause: 800, highlightDuration: 1000, voiceDuration: 1600, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Trim the fat with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'brevity-follow-up',
+            tagline: null,
+            editorText: 'I am {{following up on my previous email regarding}} the budget proposal.',
+            mode: 'Socratic',
+            transcription: '"Can I just say checking in?"',
+            suggestion: 'checking in on',
+            timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1800, transcriptionDuration: 1600, thinkingDuration: 1500, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Write shorter emails with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'brevity-request-direct',
+            tagline: null,
+            editorText: '{{I was hoping you might be able to}} send me the latest draft.',
+            mode: 'Socratic',
+            transcription: '"So much padding"',
+            suggestion: 'Could you',
+            timing: { initialPause: 800, highlightDuration: 1000, voiceDuration: 1200, transcriptionDuration: 1200, thinkingDuration: 1600, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Ditch the preamble with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          }
+        ]
+      },
+
+      // =====================================================
+      // HOOK 10: THE TONE LADDER
+      // =====================================================
+      {
+        id: 'tone-ladder',
+        name: 'The Tone Ladder',
+        description: 'The same message hits different depending on who receives it. Ada helps you find the right register for every audience.',
+        insight: 'Big Idea: "Same message, different registers."',
+        variants: [
+          {
+            id: 'tone-formal-to-casual',
+            tagline: null,
+            editorText: '{{I acknowledge receipt of your correspondence}} and will respond by end of day.',
+            mode: 'Socratic',
+            transcription: '"This isn\'t a law firm"',
+            suggestion: 'Got your email',
+            timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Match your tone with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'tone-stiff-for-slack',
+            tagline: null,
+            editorText: 'Team, {{please be advised that}} the meeting has been moved to 3pm tomorrow.',
+            mode: 'Socratic',
+            transcription: '"Too formal for Slack"',
+            suggestion: 'heads up:',
+            timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1400, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Find the right register with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'tone-casual-for-client',
+            tagline: null,
+            editorText: 'Hey! {{Just wanted to ping you real quick}} about the contract renewal.',
+            mode: 'Socratic',
+            transcription: '"Too casual for a client"',
+            suggestion: 'Following up',
+            timing: { initialPause: 800, highlightDuration: 1000, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Dial in your tone with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'tone-board-gravity',
+            tagline: null,
+            editorText: 'Hi everyone, {{just a quick note to say}} quarterly revenue exceeded projections.',
+            mode: 'Socratic',
+            transcription: '"Too casual for the board"',
+            suggestion: 'I am pleased to report',
+            timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1600, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Strike the right tone with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'tone-friendly-too-cold',
+            tagline: null,
+            editorText: 'Sarah, {{per my previous communication}}, the files you requested are attached.',
+            mode: 'Socratic',
+            transcription: '"She\'s my friend, not a vendor"',
+            suggestion: 'as promised',
+            timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1800, transcriptionDuration: 1600, thinkingDuration: 1500, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Write like you talk with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'tone-text-informal',
+            tagline: null,
+            editorText: 'The redesign is {{gonna be done by Friday}} and the team is wrapping up.',
+            mode: 'Socratic',
+            transcription: '"This is for the exec team"',
+            suggestion: 'scheduled for Friday',
+            timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1600, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Adjust your register with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          }
+        ]
+      },
+
+      // =====================================================
+      // HOOK 11: THE "ACTUALLY WHAT I MEAN" EDIT
+      // =====================================================
+      {
+        id: 'actually-what-i-mean',
+        name: 'The "Actually What I Mean" Edit',
+        description: 'Corporate speak hides what we really think. Ada helps you decode the subtext and say it plainly.',
+        insight: 'Big Idea: "Subtext becomes text."',
+        variants: [
+          {
+            id: 'mean-interesting-approach',
+            tagline: null,
+            editorText: 'Thanks for sharing. {{That\'s an interesting approach}} and I appreciate the creativity.',
+            mode: 'Socratic',
+            transcription: '"I mean I disagree"',
+            suggestion: 'I have some concerns',
+            timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1400, transcriptionDuration: 1300, thinkingDuration: 1600, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Say what you mean with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'mean-table-this',
+            tagline: null,
+            editorText: 'Good discussion, but {{let\'s table this for now}} and revisit when we have more data.',
+            mode: 'Socratic',
+            transcription: '"This is never happening"',
+            suggestion: 'I don\'t think this is the right direction',
+            timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1600, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Make implicit explicit with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'mean-going-forward',
+            tagline: null,
+            editorText: '{{Going forward}}, please ensure all changes are reviewed before deployment.',
+            mode: 'Socratic',
+            transcription: '"I mean don\'t do that again"',
+            suggestion: 'From now on',
+            timing: { initialPause: 800, highlightDuration: 700, voiceDuration: 1700, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Drop the corporate mask with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'mean-opportunity',
+            tagline: null,
+            editorText: 'The delayed launch {{presents an opportunity}} to refine our messaging strategy.',
+            mode: 'Socratic',
+            transcription: '"It\'s a setback, be honest"',
+            suggestion: 'gives us time',
+            timing: { initialPause: 800, highlightDuration: 800, voiceDuration: 1600, transcriptionDuration: 1500, thinkingDuration: 1500, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Speak plainly with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'mean-challenging',
+            tagline: null,
+            editorText: 'The timeline is {{challenging but achievable}} if the team prioritizes effectively.',
+            mode: 'Socratic',
+            transcription: '"It\'s basically impossible"',
+            suggestion: 'tight',
+            timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1600, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 800, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Cut the spin with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'mean-misaligned',
+            tagline: null,
+            editorText: 'I think our teams are {{slightly misaligned}} on the deliverables for this sprint.',
+            mode: 'Socratic',
+            transcription: '"We totally disagree"',
+            suggestion: 'not on the same page',
+            timing: { initialPause: 800, highlightDuration: 800, voiceDuration: 1400, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Say the quiet part with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          }
+        ]
+      },
+
+      // =====================================================
+      // HOOK 12: THE STAKES SPECTRUM
+      // =====================================================
+      {
+        id: 'stakes-spectrum',
+        name: 'The Stakes Spectrum',
+        description: 'When everything is urgent, nothing is. Ada helps you match your words to what actually matters.',
+        insight: 'Big Idea: "Matching urgency to reality."',
+        variants: [
+          {
+            id: 'stakes-not-urgent',
+            tagline: null,
+            editorText: 'Hi team, {{URGENT:}} please update your availability in the shared calendar by Friday.',
+            mode: 'Socratic',
+            transcription: '"Calendar updates aren\'t urgent"',
+            suggestion: 'Reminder:',
+            timing: { initialPause: 800, highlightDuration: 700, voiceDuration: 1700, transcriptionDuration: 1500, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Match urgency to stakes with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'stakes-downplaying',
+            tagline: null,
+            editorText: '{{When you get a chance}}, the client needs the revised contract before their board meeting tomorrow.',
+            mode: 'Socratic',
+            transcription: '"This is actually urgent"',
+            suggestion: 'By end of day today',
+            timing: { initialPause: 800, highlightDuration: 800, voiceDuration: 1500, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Signal what matters with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'stakes-asap-overused',
+            tagline: null,
+            editorText: 'Please send me the meeting notes {{ASAP}}. I want to share them with the team next week.',
+            mode: 'Socratic',
+            transcription: '"ASAP for next week?"',
+            suggestion: 'when you can',
+            timing: { initialPause: 800, highlightDuration: 600, voiceDuration: 1400, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Calibrate your urgency with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'stakes-critical-undersold',
+            tagline: null,
+            editorText: 'The security patch {{should probably be applied}} to production servers this weekend.',
+            mode: 'Socratic',
+            transcription: '"This is critical, not optional"',
+            suggestion: 'must be applied',
+            timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1700, transcriptionDuration: 1600, thinkingDuration: 1600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Get the stakes right with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'stakes-exclamation-overload',
+            tagline: null,
+            editorText: 'Great news! The logo options are ready! {{Can\'t wait for your feedback!!!}} Let me know!',
+            mode: 'Socratic',
+            transcription: '"Too many exclamation points"',
+            suggestion: 'Looking forward to your thoughts.',
+            timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1700, transcriptionDuration: 1500, thinkingDuration: 1500, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Calibrate your energy with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'stakes-time-sensitive',
+            tagline: null,
+            editorText: '{{If possible}}, please approve the vendor invoice before the payment deadline on Monday.',
+            mode: 'Socratic',
+            transcription: '"It\'s not optional, we\'ll miss payment"',
+            suggestion: 'Please',
+            timing: { initialPause: 800, highlightDuration: 700, voiceDuration: 2000, transcriptionDuration: 1800, thinkingDuration: 1600, suggestionDuration: 800, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Match words to stakes with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          }
+        ]
+      },
+
+      // =====================================================
+      // HOOK 13: THE DELETE KEY
+      // =====================================================
+      {
+        id: 'the-delete-key',
+        name: 'The Delete Key',
+        description: 'Sometimes the best edit is removal. These ads showcase how cutting unnecessary words makes writing stronger and more confident.',
+        insight: 'Big Idea: "The best word is often no word at all."',
+        variants: [
+          {
+            id: 'delete-key-i-think',
+            tagline: null,
+            editorText: '{{I think we should}} move forward with the rebrand since all stakeholders approved.',
+            mode: 'Socratic',
+            transcription: '"Too hesitant?"',
+            suggestion: 'We should',
+            timing: { initialPause: 800, highlightDuration: 900, voiceDuration: 1200, transcriptionDuration: 1100, thinkingDuration: 1500, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Cut the filler with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'delete-key-just-quickly',
+            tagline: null,
+            editorText: 'I wanted to {{just quickly}} check if you had a chance to review the proposal.',
+            mode: 'Socratic',
+            transcription: '"Why am I minimizing this?"',
+            suggestion: 'check',
+            timing: { initialPause: 800, highlightDuration: 800, voiceDuration: 2000, transcriptionDuration: 1600, thinkingDuration: 1600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Stop undermining yourself with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'delete-key-very',
+            tagline: null,
+            editorText: 'The client feedback was {{very positive}} and they want to expand the project scope.',
+            mode: 'Socratic',
+            transcription: '"Weak. Just say it."',
+            suggestion: 'excellent',
+            timing: { initialPause: 800, highlightDuration: 800, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Say more with less using', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'delete-key-basically',
+            tagline: null,
+            editorText: 'The new system {{basically allows us to}} track inventory in real time.',
+            mode: 'Socratic',
+            transcription: '"This adds nothing."',
+            suggestion: 'lets us',
+            timing: { initialPause: 800, highlightDuration: 1000, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Trim the fat with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'delete-key-honestly',
+            tagline: null,
+            editorText: '{{Honestly, I believe}} this is the best approach given our constraints.',
+            mode: 'Socratic',
+            transcription: '"Sounds like I\'m lying."',
+            suggestion: 'This is',
+            timing: { initialPause: 800, highlightDuration: 950, voiceDuration: 1700, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Sound more confident with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'delete-key-in-order-to',
+            tagline: null,
+            editorText: 'We restructured the team {{in order to}} improve communication between teams.',
+            mode: 'Socratic',
+            transcription: '"Three words for one?"',
+            suggestion: 'to',
+            timing: { initialPause: 800, highlightDuration: 750, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1500, suggestionDuration: 800, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Write leaner with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          }
+        ]
+      },
+
+      // =====================================================
+      // HOOK 14: THE CONTEXT COLLAPSE
+      // =====================================================
+      {
+        id: 'the-context-collapse',
+        name: 'The Context Collapse',
+        description: 'Same words, different audience = different meaning. These ads show how context changes everything.',
+        insight: 'Big Idea: "The right words depend on who\'s reading them."',
+        variants: [
+          {
+            id: 'context-collapse-tiger-team',
+            tagline: null,
+            editorText: 'The {{tiger team}} has been working on this issue and expects resolution by end of week.',
+            mode: 'Socratic',
+            transcription: '"Board won\'t know this term."',
+            suggestion: 'dedicated task force',
+            timing: { initialPause: 800, highlightDuration: 750, voiceDuration: 2000, transcriptionDuration: 1600, thinkingDuration: 1600, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Know your audience with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'context-collapse-hey',
+            tagline: null,
+            editorText: '{{Hey!}} Thanks for sending over the contracts. I took a look and have questions.',
+            mode: 'Socratic',
+            transcription: '"Too casual for this client?"',
+            suggestion: 'Hello,',
+            timing: { initialPause: 800, highlightDuration: 600, voiceDuration: 1900, transcriptionDuration: 1500, thinkingDuration: 1500, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Match the room with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'context-collapse-sync-offline',
+            tagline: null,
+            editorText: 'We\'ll {{sync offline}} to discuss the details and get back to you with a proposal.',
+            mode: 'Socratic',
+            transcription: '"They\'re not in tech."',
+            suggestion: 'follow up separately',
+            timing: { initialPause: 800, highlightDuration: 750, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Speak their language with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'context-collapse-crush-it',
+            tagline: null,
+            editorText: 'Looking forward to the partnership! {{Let\'s crush it!}}',
+            mode: 'Socratic',
+            transcription: '"This is going to legal."',
+            suggestion: 'Best regards,',
+            timing: { initialPause: 800, highlightDuration: 850, voiceDuration: 1700, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Read the room with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'context-collapse-api-latency',
+            tagline: null,
+            editorText: 'The {{API latency issues}} have been resolved and the system is now performing well.',
+            mode: 'Socratic',
+            transcription: '"CEO doesn\'t care how."',
+            suggestion: 'technical problems',
+            timing: { initialPause: 800, highlightDuration: 950, voiceDuration: 1800, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1400, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Translate for your audience with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'context-collapse-writing-to-inquire',
+            tagline: null,
+            editorText: '{{I am writing to inquire}} whether you might have availability next Tuesday.',
+            mode: 'Socratic',
+            transcription: '"This is a startup founder."',
+            suggestion: 'Got time',
+            timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1900, transcriptionDuration: 1500, thinkingDuration: 1700, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Match their vibe with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          }
+        ]
+      },
+
+      // =====================================================
+      // HOOK 15: THE TIME CAPSULE
+      // =====================================================
+      {
+        id: 'the-time-capsule',
+        name: 'The Time Capsule',
+        description: 'Phrases that aged poorly or feel dated. These ads help users update their vocabulary and sound contemporary.',
+        insight: 'Big Idea: "Good writing ages - make sure yours keeps up."',
+        variants: [
+          {
+            id: 'time-capsule-synergies',
+            tagline: null,
+            editorText: 'Let\'s {{leverage our synergies}} to create a more efficient workflow across departments.',
+            mode: 'Socratic',
+            transcription: '"Did I write this in 1999?"',
+            suggestion: 'work together',
+            timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1900, transcriptionDuration: 1500, thinkingDuration: 1600, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Update your vocabulary with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'time-capsule-unprecedented',
+            tagline: null,
+            editorText: '{{In these unprecedented times}}, we remain committed to serving our customers.',
+            mode: 'Socratic',
+            transcription: '"This sounds exhausting now."',
+            suggestion: 'As always,',
+            timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 2100, transcriptionDuration: 1700, thinkingDuration: 1700, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Keep it current with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'time-capsule-gendered',
+            tagline: null,
+            editorText: 'Each employee should submit {{his}} timesheet by end of day Friday.',
+            mode: 'Socratic',
+            transcription: '"This feels old."',
+            suggestion: 'their',
+            timing: { initialPause: 800, highlightDuration: 600, voiceDuration: 1400, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Modernize your writing with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'time-capsule-pivot',
+            tagline: null,
+            editorText: 'We need to {{pivot}} our strategy based on the latest customer feedback data.',
+            mode: 'Socratic',
+            transcription: '"This word is tired."',
+            suggestion: 'shift',
+            timing: { initialPause: 800, highlightDuration: 650, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1500, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Refresh your language with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'time-capsule-yours-faithfully',
+            tagline: null,
+            editorText: 'Please find attached the documents you requested. {{Yours faithfully}}, Sarah',
+            mode: 'Socratic',
+            transcription: '"What century is this?"',
+            suggestion: 'Best,',
+            timing: { initialPause: 800, highlightDuration: 850, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 900, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Sound contemporary with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'time-capsule-out-of-park',
+            tagline: null,
+            editorText: 'Let\'s {{hit this one out of the park}} and deliver exceptional results this quarter.',
+            mode: 'Socratic',
+            transcription: '"Everyone uses this."',
+            suggestion: 'deliver something great',
+            timing: { initialPause: 800, highlightDuration: 1300, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1600, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Find fresher phrases with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          }
+        ]
+      },
+
+      // =====================================================
+      // HOOK 16: THE FEEDBACK SANDWICH DECONSTRUCTION
+      // =====================================================
+      {
+        id: 'the-feedback-sandwich',
+        name: 'The Feedback Sandwich Deconstruction',
+        description: 'Give feedback people can actually use. Direct but kind. Stop hiding criticism in compliments.',
+        insight: 'Big Idea: "Kindness is clarity, not cushioning."',
+        variants: [
+          {
+            id: 'feedback-sandwich-buried',
+            tagline: null,
+            editorText: 'Great work on this! {{Maybe consider possibly}} restructuring section two. Love the energy!',
+            mode: 'Socratic',
+            transcription: '"They\'ll miss this."',
+            suggestion: 'Please',
+            timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1400, transcriptionDuration: 1200, thinkingDuration: 1500, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Give real feedback with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'feedback-sandwich-softening',
+            tagline: null,
+            editorText: 'The presentation was good! {{I wonder if it might help to}} add more data on slide four.',
+            mode: 'Socratic',
+            transcription: '"Just tell them."',
+            suggestion: 'Add more data to',
+            timing: { initialPause: 800, highlightDuration: 1300, voiceDuration: 1300, transcriptionDuration: 1100, thinkingDuration: 1500, suggestionDuration: 1300, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Be clear and kind with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'feedback-sandwich-passive',
+            tagline: null,
+            editorText: 'The report is solid overall. {{It would be beneficial if}} the timeline was more detailed.',
+            mode: 'Socratic',
+            transcription: '"Beneficial to whom?"',
+            suggestion: 'Please make',
+            timing: { initialPause: 800, highlightDuration: 1100, voiceDuration: 1500, transcriptionDuration: 1300, thinkingDuration: 1600, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Say what you mean with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'feedback-sandwich-question',
+            tagline: null,
+            editorText: 'Have you {{thought about whether this}} could be shortened? Just curious.',
+            mode: 'Socratic',
+            transcription: '"I should just say it."',
+            suggestion: 'considered shortening this',
+            timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 1700, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1500, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Stop hinting, start saying with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'feedback-sandwich-hedging',
+            tagline: null,
+            editorText: 'This is really close. {{I\'m not sure but I think}} the numbers in table three need checking.',
+            mode: 'Socratic',
+            transcription: '"I am sure actually."',
+            suggestion: 'The numbers in',
+            timing: { initialPause: 800, highlightDuration: 1200, voiceDuration: 1600, transcriptionDuration: 1400, thinkingDuration: 1600, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Trust your edits with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'feedback-sandwich-compliment',
+            tagline: null,
+            editorText: 'Loved this draft! So creative! {{One tiny thought}} - the conclusion feels rushed.',
+            mode: 'Socratic',
+            transcription: '"It\'s not tiny."',
+            suggestion: 'One note',
+            timing: { initialPause: 800, highlightDuration: 850, voiceDuration: 1200, transcriptionDuration: 1100, thinkingDuration: 1500, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Give useful feedback with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          }
+        ]
+      },
+
+      // =====================================================
+      // HOOK 17: THE AUTOCORRECT DISASTER PREVENTION
+      // =====================================================
+      {
+        id: 'the-autocorrect-disaster',
+        name: 'The Autocorrect Disaster Prevention',
+        description: 'Catching embarrassing mistakes before send. These ads use Didactic mode to quickly correct potentially career-ending typos.',
+        insight: 'Big Idea: "One letter can end your career. Hear it first."',
+        variants: [
+          {
+            id: 'autocorrect-regards',
+            tagline: null,
+            editorText: 'Thank you for your consideration. Best {{retards}}, Michael',
+            mode: 'Didactic',
+            transcription: '"Regards"',
+            suggestion: 'regards',
+            timing: { initialPause: 800, highlightDuration: 700, voiceDuration: 1000, transcriptionDuration: 900, thinkingDuration: 700, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Catch disasters before send with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'autocorrect-assessment',
+            tagline: null,
+            editorText: 'Please complete your risk {{asses}} form and return it by Friday.',
+            mode: 'Didactic',
+            transcription: '"Assessment"',
+            suggestion: 'assessment',
+            timing: { initialPause: 800, highlightDuration: 650, voiceDuration: 1100, transcriptionDuration: 1000, thinkingDuration: 700, suggestionDuration: 1200, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Save yourself the horror with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'autocorrect-public',
+            tagline: null,
+            editorText: 'We are excited to announce our {{pubic}} launch event scheduled for next month.',
+            mode: 'Didactic',
+            transcription: '"Public"',
+            suggestion: 'public',
+            timing: { initialPause: 800, highlightDuration: 650, voiceDuration: 900, transcriptionDuration: 800, thinkingDuration: 600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Proofread by voice with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'autocorrect-manager',
+            tagline: null,
+            editorText: 'Please direct all questions to your project {{manger}} during the transition.',
+            mode: 'Didactic',
+            transcription: '"Manager"',
+            suggestion: 'manager',
+            timing: { initialPause: 800, highlightDuration: 700, voiceDuration: 1000, transcriptionDuration: 900, thinkingDuration: 700, suggestionDuration: 1100, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Speak it right with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'autocorrect-shift',
+            tagline: null,
+            editorText: 'The deadline has been moved, so please plan for the {{shit}} in timeline.',
+            mode: 'Didactic',
+            transcription: '"Shift"',
+            suggestion: 'shift',
+            timing: { initialPause: 800, highlightDuration: 600, voiceDuration: 900, transcriptionDuration: 800, thinkingDuration: 600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Avoid career-ending typos with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          },
+          {
+            id: 'autocorrect-count',
+            tagline: null,
+            editorText: 'Please update the inventory {{count}} and send me the final numbers by noon.',
+            mode: 'Socratic',
+            transcription: '"Wait, this is spelled right?"',
+            suggestion: 'total',
+            timing: { initialPause: 800, highlightDuration: 650, voiceDuration: 2000, transcriptionDuration: 1600, thinkingDuration: 1600, suggestionDuration: 1000, acceptDelay: 400, appliedDuration: 1800, ctaDuration: 3000 },
+            cta: { description: 'Double-check everything with', headline: 'Ada', buttonText: 'Download Free', note: 'macOS only' }
+          }
+        ]
+      }
+    ];
+
+    // =====================================================
+    // WAVEFORM ANIMATION
+    // =====================================================
+    function createWaveformAnimation(canvas, scale = 1) {
+      const ctx = canvas.getContext('2d');
+      const particles = [];
+      const particleCount = Math.floor(10 * scale);
+      const permanentCount = Math.floor(3 * scale);
+      let time = 0;
+      let thinkingPhase = 0;
+      let mode = 'speaking';
+
+      for (let i = 0; i < particleCount + permanentCount; i++) {
+        particles.push({
+          angle: (i / (particleCount + permanentCount)) * Math.PI * 2,
+          radius: 4 * scale,
+          size: 1.5 * scale,
+          state: 'orbiting',
+          permanent: i >= particleCount,
+          x: 0, y: 0, vx: 0, vy: 0, life: 1
+        });
+      }
+
+      function draw() {
+        const w = canvas.width;
+        const h = canvas.height;
+        const centerX = w / 2;
+        const centerY = h / 2;
+
+        ctx.clearRect(0, 0, w, h);
+
+        let isSpeaking, boostedLevel;
+        if (mode === 'speaking') {
+          const simulatedLevel = 0.5 + Math.sin(time * 4) * 0.3 + Math.sin(time * 7) * 0.15;
+          boostedLevel = Math.pow(Math.max(0, simulatedLevel), 0.5) * 1.6;
+          isSpeaking = boostedLevel > 0.18;
+        } else {
+          isSpeaking = false;
+          boostedLevel = 0;
+        }
+
+        const maxRadius = Math.min(w, h) / 2 - 2;
+        const halfRadius = maxRadius * 0.35;
+
+        let orbitRadius;
+        if (isSpeaking) {
+          orbitRadius = halfRadius;
+        } else {
+          thinkingPhase += 0.03;
+          const pulse = Math.sin(thinkingPhase) * 0.5 + 0.5;
+          orbitRadius = maxRadius * (0.15 + pulse * 0.2);
+        }
+
+        const spinSpeed = isSpeaking ? 0.03 + boostedLevel * 0.02 : 0.015;
+
+        particles.forEach(p => {
+          if (p.state === 'orbiting') {
+            p.angle += spinSpeed;
+            p.radius += (orbitRadius - p.radius) * 0.1;
+
+            const x = centerX + Math.cos(p.angle) * p.radius;
+            const y = centerY + Math.sin(p.angle) * p.radius;
+
+            const atHorizon = Math.abs(y - centerY) < 4 * scale;
+            const shouldDetach = !p.permanent && isSpeaking && atHorizon && Math.random() < boostedLevel * 0.4;
+
+            if (shouldDetach) {
+              p.state = 'flying';
+              p.x = x;
+              p.y = y;
+              p.vx = (x < centerX ? -1 : 1) * (0.4 + boostedLevel * 0.4) * scale;
+              p.vy = (Math.random() - 0.5) * 0.2 * scale;
+              p.life = 1;
+            } else {
+              ctx.beginPath();
+              ctx.arc(x, y, p.size + (isSpeaking ? boostedLevel * 0.3 : 0.1), 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(180, 83, 9, ${isSpeaking ? 0.8 : 0.5})`;
+              ctx.fill();
+            }
+          } else if (p.state === 'flying') {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy *= 0.96;
+            p.life -= 0.05;
+
+            if (p.life > 0) {
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, p.size * (0.5 + p.life * 0.5), 0, Math.PI * 2);
+              ctx.fillStyle = p.vx < 0
+                ? `rgba(220, 100, 20, ${p.life * 0.9})`
+                : `rgba(251, 191, 36, ${p.life * 0.9})`;
+              ctx.fill();
+            }
+
+            if (p.life <= 0) {
+              p.state = 'refilling';
+              p.radius = 0;
+            }
+          } else if (p.state === 'refilling') {
+            p.angle += spinSpeed;
+            p.radius += (orbitRadius - p.radius) * 0.08;
+
+            const x = centerX + Math.cos(p.angle) * p.radius;
+            const y = centerY + Math.sin(p.angle) * p.radius;
+            const fadeIn = Math.min(1, p.radius / (orbitRadius * 0.8));
+
+            ctx.beginPath();
+            ctx.arc(x, y, p.size * fadeIn, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(180, 83, 9, ${fadeIn * (isSpeaking ? 0.8 : 0.5)})`;
+            ctx.fill();
+
+            if (p.radius > orbitRadius * 0.9) {
+              p.state = 'orbiting';
+            }
+          }
+        });
+
+        time += 0.05;
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+
+      return {
+        setMode: (newMode) => { mode = newMode; },
+        setSpeaking: () => { mode = 'speaking'; },
+        setThinking: () => { mode = 'thinking'; }
+      };
+    }
+
+    // =====================================================
+    // RENDER STRATEGIES AND ADS
+    // =====================================================
+    function parseEditorText(text) {
+      const match = text.match(/\{\{(.+?)\}\}/);
+      if (match) {
+        const highlightText = match[1];
+        const before = text.substring(0, match.index);
+        const after = text.substring(match.index + match[0].length);
+        return { before, highlightText, after };
+      }
+      return { before: text, highlightText: '', after: '' };
+    }
+
+    function createAdHTML(variant, adIndex, strategyIndex) {
+      const prefix = `s${strategyIndex}-a${adIndex}`;
+      const parsed = parseEditorText(variant.editorText);
+
+      return `
+        <div class="ad-slot">
+          <div class="ad-variant-label">Variant ${String.fromCharCode(65 + adIndex)}</div>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="ad-content">
+                <div class="ad-watermark">Ada</div>
+                <div class="ad-demo" id="${prefix}-demo">
+                  <div class="ad-tagline">${variant.tagline || ''}</div>
+                  <div class="ad-editor">
+                    <div class="ad-editor-text">
+                      ${parsed.before}<span class="highlight" id="${prefix}-highlight">${parsed.highlightText}</span>${parsed.after}
+                    </div>
+                    <div class="ad-frames" id="${prefix}-frames">
+                      <div class="ad-frame" id="${prefix}-frame-speaking">
+                        <div class="ad-voice-header">
+                          <span class="ad-voice-mode">${variant.mode}</span>
+                          <span class="ad-voice-dot"></span>
+                        </div>
+                        <div class="ad-waveform-container">
+                          <canvas class="ad-waveform" id="${prefix}-waveform" width="60" height="60"></canvas>
+                        </div>
+                      </div>
+                      <div class="ad-frame" id="${prefix}-frame-transcription">
+                        <div class="ad-frame-label">You said</div>
+                        <div class="ad-transcription">${variant.transcription}</div>
+                      </div>
+                      <div class="ad-frame" id="${prefix}-frame-thinking">
+                        <div class="ad-waveform-container">
+                          <canvas class="ad-waveform" id="${prefix}-waveform-thinking" width="60" height="60"></canvas>
+                        </div>
+                        <div class="ad-thinking-label">Thinking...</div>
+                      </div>
+                      <div class="ad-frame" id="${prefix}-frame-suggestion">
+                        <div class="ad-frame-label">Suggested edit</div>
+                        <div class="ad-suggestion-text">${variant.suggestion}</div>
+                        <div class="ad-suggestion-actions">
+                          <button class="ad-btn ad-btn-accept" id="${prefix}-accept">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                            Accept
+                          </button>
+                          <button class="ad-btn ad-btn-reject">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="ad-frame" id="${prefix}-frame-applied">
+                        <div class="ad-applied-check">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <div class="ad-applied-text">Edit applied</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="ad-cta-frame" id="${prefix}-cta-frame">
+                  <div class="ad-cta-description">${variant.cta.description}</div>
+                  <div class="ad-cta-headline">${variant.cta.headline}</div>
+                  <a href="#" class="ad-cta-button">${variant.cta.buttonText}</a>
+                  <div class="ad-cta-note">${variant.cta.note}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function createStrategyHTML(strategy, strategyIndex) {
+      const adsHTML = strategy.variants.map((v, i) => createAdHTML(v, i, strategyIndex)).join('');
+
+      return `
+        <section class="strategy-section" id="strategy-${strategy.id}">
+          <div class="strategy-header">
+            <div class="strategy-number">Strategy ${strategyIndex + 1}</div>
+            <h2>${strategy.name}</h2>
+            <p>${strategy.description}</p>
+            <div class="strategy-insight"><strong>Big Idea:</strong> ${strategy.insight}</div>
+          </div>
+          <div class="ads-grid">${adsHTML}</div>
+        </section>
+      `;
+    }
+
+    // Render all strategies
+    const container = document.getElementById('strategies-container');
+    container.innerHTML = creativeStrategies.map((s, i) => createStrategyHTML(s, i)).join('');
+
+    // =====================================================
+    // ANIMATION CONTROLLER
+    // =====================================================
+    function initializeAd(variant, adIndex, strategyIndex) {
+      const prefix = `s${strategyIndex}-a${adIndex}`;
+
+      const highlight = document.getElementById(`${prefix}-highlight`);
+      const acceptBtn = document.getElementById(`${prefix}-accept`);
+      const framesContainer = document.getElementById(`${prefix}-frames`);
+      const demoArea = document.getElementById(`${prefix}-demo`);
+      const ctaFrame = document.getElementById(`${prefix}-cta-frame`);
+
+      const frames = {
+        speaking: document.getElementById(`${prefix}-frame-speaking`),
+        transcription: document.getElementById(`${prefix}-frame-transcription`),
+        thinking: document.getElementById(`${prefix}-frame-thinking`),
+        suggestion: document.getElementById(`${prefix}-frame-suggestion`),
+        applied: document.getElementById(`${prefix}-frame-applied`)
+      };
+
+      const speakingCanvas = document.getElementById(`${prefix}-waveform`);
+      const thinkingCanvas = document.getElementById(`${prefix}-waveform-thinking`);
+      const speakingWaveform = createWaveformAnimation(speakingCanvas, 1);
+      const thinkingWaveform = createWaveformAnimation(thinkingCanvas, 1);
+      thinkingWaveform.setThinking();
+
+      function showFrame(frameName) {
+        framesContainer.classList.add('visible');
+        Object.values(frames).forEach(f => f.classList.remove('active'));
+        if (frames[frameName]) frames[frameName].classList.add('active');
+      }
+
+      function hideAllFrames() {
+        framesContainer.classList.remove('visible');
+        Object.values(frames).forEach(f => f.classList.remove('active'));
+      }
+
+      function showCTA() {
+        demoArea.style.opacity = '0';
+        ctaFrame.classList.add('visible');
+      }
+
+      function hideCTA() {
+        ctaFrame.classList.remove('visible');
+        demoArea.style.opacity = '1';
+      }
+
+      async function runAd() {
+        const t = variant.timing;
+        const parsed = parseEditorText(variant.editorText);
+
+        // Reset
+        hideCTA();
+        hideAllFrames();
+        highlight.classList.remove('active', 'accepted');
+        highlight.textContent = parsed.highlightText;
+        acceptBtn.classList.remove('clicked');
+
+        await new Promise(r => setTimeout(r, t.initialPause));
+
+        // Highlight
+        highlight.classList.add('active');
+        await new Promise(r => setTimeout(r, t.highlightDuration));
+
+        // Speaking
+        showFrame('speaking');
+        await new Promise(r => setTimeout(r, t.voiceDuration));
+
+        // Transcription
+        showFrame('transcription');
+        await new Promise(r => setTimeout(r, t.transcriptionDuration));
+
+        // Thinking
+        showFrame('thinking');
+        await new Promise(r => setTimeout(r, t.thinkingDuration));
+
+        // Suggestion
+        showFrame('suggestion');
+        await new Promise(r => setTimeout(r, t.suggestionDuration));
+
+        // Accept
+        acceptBtn.classList.add('clicked');
+        await new Promise(r => setTimeout(r, t.acceptDelay));
+
+        // Applied
+        showFrame('applied');
+        highlight.classList.remove('active');
+        highlight.classList.add('accepted');
+        if (variant.suggestion !== '(deleted)' && variant.suggestion !== '(delete)') {
+          highlight.textContent = variant.suggestion;
+        } else {
+          highlight.style.display = 'none';
+        }
+        await new Promise(r => setTimeout(r, t.appliedDuration));
+
+        // CTA
+        showCTA();
+        await new Promise(r => setTimeout(r, t.ctaDuration));
+
+        // Reset highlight for deleted case
+        highlight.style.display = '';
+
+        // Loop
+        runAd();
+      }
+
+      runAd();
+    }
+
+    // Initialize all ads
+    creativeStrategies.forEach((strategy, sIndex) => {
+      strategy.variants.forEach((variant, vIndex) => {
+        initializeAd(variant, vIndex, sIndex);
+      });
+    });
+  </script>
+</body>
+</html>

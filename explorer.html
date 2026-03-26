@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Waveform Style Guide | Ada</title>
+  <style>
+    :root {
+      --color-bg: #fdfcfa;
+      --color-surface: #ffffff;
+      --color-text: #2d2d2d;
+      --color-text-muted: #78716c;
+      --color-border: #e7e5e4;
+      --color-accent: #b45309;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .header p {
+      color: var(--color-text-muted);
+      font-size: 0.875rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 20px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    /* Preview area */
+    .preview-area {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .preview-row {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .preview-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .preview-card:hover {
+      border-color: var(--color-text-muted);
+    }
+
+    .preview-card.selected {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 2px rgba(180, 83, 9, 0.15);
+    }
+
+    .preview-info {
+      flex: 1;
+      min-width: 100px;
+    }
+
+    .preview-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 2px;
+    }
+
+    .preview-size {
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 0.65rem;
+      color: var(--color-text-muted);
+    }
+
+    .preview-desc {
+      font-size: 0.65rem;
+      color: var(--color-text-muted);
+      margin-top: 4px;
+    }
+
+    .canvas-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: repeating-conic-gradient(#e5e5e5 0% 25%, #fff 0% 50%) 50% / 12px 12px;
+      border-radius: 6px;
+      flex-shrink: 0;
+      border: 1px solid var(--color-border);
+    }
+
+    .canvas-wrap {
+      border-radius: 6px;
+      padding: 8px;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .mode-label {
+      font-size: 0.6rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: white;
+      background: var(--color-accent);
+      padding: 3px 8px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    /* Controls panel */
+    .controls-panel {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 16px;
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
+    }
+
+    .selected-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .controls-section {
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .controls-section:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .section-title {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+      margin-bottom: 10px;
+    }
+
+    .control-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .control-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .control-label {
+      font-size: 0.75rem;
+      color: var(--color-text);
+    }
+
+    .control-value {
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 0.65rem;
+      color: var(--color-text-muted);
+      min-width: 36px;
+      text-align: right;
+    }
+
+    .control-input {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    input[type="range"] {
+      width: 90px;
+      height: 4px;
+      -webkit-appearance: none;
+      background: var(--color-border);
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    input[type="color"] {
+      width: 24px;
+      height: 24px;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      cursor: pointer;
+      padding: 2px;
+    }
+
+    /* Mode buttons */
+    .mode-buttons {
+      display: flex;
+      gap: 4px;
+    }
+
+    .mode-btn {
+      flex: 1;
+      padding: 5px 6px;
+      font-size: 0.65rem;
+      font-weight: 500;
+      border: 1px solid var(--color-border);
+      border-radius: 5px;
+      background: var(--color-surface);
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .mode-btn:hover {
+      border-color: var(--color-accent);
+    }
+
+    .mode-btn.active {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      color: white;
+    }
+
+    /* Action buttons */
+    .action-buttons {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      flex: 1;
+      min-width: 80px;
+      padding: 8px 10px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      background: var(--color-surface);
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .action-btn:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    .action-btn.primary {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      color: white;
+    }
+
+    .action-btn.primary:hover {
+      background: #a04408;
+    }
+
+    /* Preset buttons */
+    .preset-buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+    }
+
+    .preset-btn {
+      padding: 5px 6px;
+      font-size: 0.65rem;
+      font-weight: 500;
+      border: 1px solid var(--color-border);
+      border-radius: 5px;
+      background: var(--color-surface);
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .preset-btn:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    /* Export code area */
+    .export-code {
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 0.6rem;
+      background: #1f2937;
+      color: #e5e7eb;
+      padding: 10px;
+      border-radius: 6px;
+      overflow-x: auto;
+      white-space: pre;
+      max-height: 120px;
+      overflow-y: auto;
+      display: none;
+    }
+
+    .export-code.visible {
+      display: block;
+      margin-top: 10px;
+    }
+
+    /* Add preview button */
+    .add-preview {
+      border: 2px dashed var(--color-border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--color-text-muted);
+      font-size: 0.75rem;
+      transition: all 0.15s;
+    }
+
+    .add-preview:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      .controls-panel {
+        position: static;
+        max-height: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Waveform Style Guide</h1>
+    <p>Click a preview to edit its settings</p>
+  </div>
+
+  <div class="layout">
+    <div class="preview-area">
+      <div class="preview-row" id="preview-row"></div>
+    </div>
+
+    <!-- Controls Panel -->
+    <div class="controls-panel">
+      <div class="selected-label" id="selected-label">Select a preview</div>
+
+      <!-- Mode Toggle -->
+      <div class="controls-section">
+        <div class="section-title">Mode</div>
+        <div class="mode-buttons">
+          <button class="mode-btn" data-mode="thinking">Think</button>
+          <button class="mode-btn active" data-mode="speaking">Speak</button>
+          <button class="mode-btn" data-mode="auto">Auto</button>
+        </div>
+      </div>
+
+      <!-- Size -->
+      <div class="controls-section">
+        <div class="section-title">Size (% of container)</div>
+        <div class="control-row">
+          <span class="control-label">Width %</span>
+          <div class="control-input">
+            <input type="range" id="ctrl-width" min="5" max="100" value="50">
+            <span class="control-value" id="ctrl-width-val">50%</span>
+          </div>
+        </div>
+        <div class="control-row">
+          <span class="control-label">Height %</span>
+          <div class="control-input">
+            <input type="range" id="ctrl-height" min="5" max="100" value="50">
+            <span class="control-value" id="ctrl-height-val">50%</span>
+          </div>
+        </div>
+        <div class="control-row">
+          <span class="control-label">Preview box</span>
+          <div class="control-input">
+            <input type="range" id="ctrl-container" min="60" max="300" value="150">
+            <span class="control-value" id="ctrl-container-val">150px</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Particles -->
+      <div class="controls-section">
+        <div class="section-title">Particles</div>
+        <div class="control-row">
+          <span class="control-label">Detachable</span>
+          <div class="control-input">
+            <input type="range" id="ctrl-count" min="4" max="32" value="10">
+            <span class="control-value" id="ctrl-count-val">10</span>
+          </div>
+        </div>
+        <div class="control-row">
+          <span class="control-label">Permanent</span>
+          <div class="control-input">
+            <input type="range" id="ctrl-permanent" min="0" max="12" value="3">
+            <span class="control-value" id="ctrl-permanent-val">3</span>
+          </div>
+        </div>
+        <div class="control-row">
+          <span class="control-label">Size</span>
+          <div class="control-input">
+            <input type="range" id="ctrl-size" min="0.5" max="5" step="0.1" value="1.5">
+            <span class="control-value" id="ctrl-size-val">1.5</span>
+          </div>
+        </div>
+        <div class="control-row">
+          <span class="control-label">Spread</span>
+          <div class="control-input">
+            <input type="range" id="ctrl-spread" min="0" max="1" step="0.05" value="0">
+            <span class="control-value" id="ctrl-spread-val">0</span>
+          </div>
+        </div>
+        <div class="control-row">
+          <span class="control-label">Grouping</span>
+          <div class="control-input">
+            <input type="range" id="ctrl-grouping" min="0" max="1" step="0.05" value="0">
+            <span class="control-value" id="ctrl-grouping-val">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Orbit -->
+      <div class="controls-section">
+        <div class="section-title">Orbit</div>
+        <div class="control-row">
+          <span class="control-label">Speak radius</span>
+          <div class="control-input">
+            <input type="range" id="ctrl-speakRadius" min="10" max="80" value="35">
+            <span class="control-value" id="ctrl-speakRadius-val">35%</span>
+          </div>
+        </div>
+        <div class="control-row">
+          <span class="control-label">Think min</span>
+          <div class="control-input">
+            <input type="range" id="ctrl-thinkMin" min="5" max="40" value="15">
+            <span class="control-value" id="ctrl-thinkMin-val">15%</span>
+          </div>
+        </div>
+        <div class="control-row">
+          <span class="control-label">Think max</span>
+          <div class="control-input">
+            <input type="range" id="ctrl-thinkMax" min="15" max="60" value="35">
+            <span class="control-value" id="ctrl-thinkMax-val">35%</span>
+          </div>
+        </div>
+        <div class="control-row">
+          <span class="control-label">Spin speed</span>
+          <div class="control-input">
+            <input type="range" id="ctrl-spinSpeed" min="0.005" max="0.1" step="0.005" value="0.03">
+            <span class="control-value" id="ctrl-spinSpeed-val">0.030</span>
+          </div>
+        </div>
+        <div class="control-row">
+          <span class="control-label">Pulse speed</span>
+          <div class="control-input">
+            <input type="range" id="ctrl-pulseSpeed" min="0.01" max="0.1" step="0.005" value="0.03">
+            <span class="control-value" id="ctrl-pulseSpeed-val">0.030</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detach -->
+      <div class="controls-section">
+        <div class="section-title">Detach</div>
+        <div class="control-row">
+          <span class="control-label">Probability</span>
+          <div class="control-input">
+            <input type="range" id="ctrl-detachProb" min="0" max="1" step="0.05" value="0.4">
+            <span class="control-value" id="ctrl-detachProb-val">0.40</span>
+          </div>
+        </div>
+        <div class="control-row">
+          <span class="control-label">Fly speed</span>
+          <div class="control-input">
+            <input type="range" id="ctrl-flySpeed" min="0.2" max="2" step="0.1" value="0.6">
+            <span class="control-value" id="ctrl-flySpeed-val">0.6</span>
+          </div>
+        </div>
+        <div class="control-row">
+          <span class="control-label">Fade rate</span>
+          <div class="control-input">
+            <input type="range" id="ctrl-fadeRate" min="0.005" max="0.05" step="0.001" value="0.012">
+            <span class="control-value" id="ctrl-fadeRate-val">0.012</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Colors -->
+      <div class="controls-section">
+        <div class="section-title">Colors</div>
+        <div class="control-row">
+          <span class="control-label">Orbit</span>
+          <input type="color" id="ctrl-colorOrbit" value="#b45309">
+        </div>
+        <div class="control-row">
+          <span class="control-label">Fly left</span>
+          <input type="color" id="ctrl-colorFlyLeft" value="#dc6414">
+        </div>
+        <div class="control-row">
+          <span class="control-label">Fly right</span>
+          <input type="color" id="ctrl-colorFlyRight" value="#fbbf24">
+        </div>
+        <div class="control-row">
+          <span class="control-label">Background</span>
+          <input type="color" id="ctrl-colorBg" value="#1f2937">
+        </div>
+        <div class="control-row">
+          <span class="control-label">BG opacity</span>
+          <div class="control-input">
+            <input type="range" id="ctrl-bgOpacity" min="0" max="1" step="0.05" value="1">
+            <span class="control-value" id="ctrl-bgOpacity-val">1.0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Presets -->
+      <div class="controls-section">
+        <div class="section-title">Presets</div>
+        <div class="preset-buttons">
+          <button class="preset-btn" data-preset="default">Default</button>
+          <button class="preset-btn" data-preset="minimal">Minimal</button>
+          <button class="preset-btn" data-preset="dense">Dense</button>
+          <button class="preset-btn" data-preset="slow">Slow</button>
+          <button class="preset-btn" data-preset="fast">Fast</button>
+          <button class="preset-btn" data-preset="tight">Tight</button>
+        </div>
+      </div>
+
+      <!-- Export -->
+      <div class="controls-section">
+        <div class="section-title">Export</div>
+        <div class="action-buttons">
+          <button class="action-btn" id="btn-copy">Copy</button>
+          <button class="action-btn" id="btn-copy-all">Copy All</button>
+          <button class="action-btn primary" id="btn-export">Show</button>
+        </div>
+        <pre class="export-code" id="export-code"></pre>
+      </div>
+
+      <!-- Actions -->
+      <div class="controls-section">
+        <div class="action-buttons">
+          <button class="action-btn primary" id="btn-copy-to-all">Copy to All</button>
+        </div>
+        <div class="action-buttons" style="margin-top: 6px;">
+          <button class="action-btn" id="btn-duplicate">Duplicate</button>
+          <button class="action-btn" id="btn-delete">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Default config template
+    // widthPct/heightPct = percentage of container
+    // containerSize = preview container size in pixels (for explorer only)
+    function createDefaultConfig(name, widthPct, heightPct, containerSize) {
+      return {
+        name,
+        widthPct,
+        heightPct,
+        containerSize, // preview reference size
+        particles: { count: 10, permanent: 3, size: 1.5, spread: 0, grouping: 0 },
+        orbit: { speakRadius: 0.35, thinkMin: 0.15, thinkMax: 0.35, spinSpeed: 0.03, pulseSpeed: 0.03 },
+        detach: { probability: 0.4, flySpeed: 0.6, fadeRate: 0.012 },
+        colors: { orbit: '#b45309', flyLeft: '#dc6414', flyRight: '#fbbf24', bg: '#1f2937', bgOpacity: 1 }
+      };
+    }
+
+    // Calculate actual pixel size from percentage
+    function getActualSize(config) {
+      return {
+        width: Math.round(config.containerSize * config.widthPct / 100),
+        height: Math.round(config.containerSize * config.heightPct / 100)
+      };
+    }
+
+    // Presets
+    const presets = {
+      default: { particles: { count: 10, permanent: 3, size: 1.5, spread: 0, grouping: 0 }, orbit: { speakRadius: 0.35, thinkMin: 0.15, thinkMax: 0.35, spinSpeed: 0.03, pulseSpeed: 0.03 }, detach: { probability: 0.4, flySpeed: 0.6, fadeRate: 0.012 }, colors: { orbit: '#b45309', flyLeft: '#dc6414', flyRight: '#fbbf24', bg: '#1f2937', bgOpacity: 1 } },
+      minimal: { particles: { count: 6, permanent: 2, size: 1.2, spread: 0, grouping: 0 }, orbit: { speakRadius: 0.30, thinkMin: 0.10, thinkMax: 0.25, spinSpeed: 0.02, pulseSpeed: 0.02 }, detach: { probability: 0.2, flySpeed: 0.4, fadeRate: 0.015 }, colors: { orbit: '#b45309', flyLeft: '#dc6414', flyRight: '#fbbf24', bg: '#1f2937', bgOpacity: 1 } },
+      dense: { particles: { count: 24, permanent: 8, size: 1.0, spread: 0.1, grouping: 0 }, orbit: { speakRadius: 0.40, thinkMin: 0.15, thinkMax: 0.40, spinSpeed: 0.025, pulseSpeed: 0.03 }, detach: { probability: 0.5, flySpeed: 0.7, fadeRate: 0.010 }, colors: { orbit: '#b45309', flyLeft: '#dc6414', flyRight: '#fbbf24', bg: '#1f2937', bgOpacity: 1 } },
+      slow: { particles: { count: 10, permanent: 3, size: 1.5, spread: 0, grouping: 0 }, orbit: { speakRadius: 0.35, thinkMin: 0.15, thinkMax: 0.35, spinSpeed: 0.01, pulseSpeed: 0.015 }, detach: { probability: 0.2, flySpeed: 0.3, fadeRate: 0.008 }, colors: { orbit: '#b45309', flyLeft: '#dc6414', flyRight: '#fbbf24', bg: '#1f2937', bgOpacity: 1 } },
+      fast: { particles: { count: 12, permanent: 4, size: 1.5, spread: 0, grouping: 0 }, orbit: { speakRadius: 0.35, thinkMin: 0.15, thinkMax: 0.35, spinSpeed: 0.06, pulseSpeed: 0.05 }, detach: { probability: 0.6, flySpeed: 1.0, fadeRate: 0.018 }, colors: { orbit: '#b45309', flyLeft: '#dc6414', flyRight: '#fbbf24', bg: '#1f2937', bgOpacity: 1 } },
+      tight: { particles: { count: 16, permanent: 4, size: 1.2, spread: 0, grouping: 0.7 }, orbit: { speakRadius: 0.25, thinkMin: 0.10, thinkMax: 0.25, spinSpeed: 0.035, pulseSpeed: 0.03 }, detach: { probability: 0.3, flySpeed: 0.5, fadeRate: 0.012 }, colors: { orbit: '#b45309', flyLeft: '#dc6414', flyRight: '#fbbf24', bg: '#1f2937', bgOpacity: 1 } }
+    };
+
+    // Ada Waveform Style Guide - Finalized Config
+    // All sizes: 100% width, 80% height of container
+    // Transparent background, fast particle fade
+    let configs = [
+      {
+        name: 'Hero',
+        widthPct: 100,
+        heightPct: 80,
+        containerSize: 200,
+        particles: { count: 10, permanent: 3, size: 1.5, spread: 0, grouping: 0 },
+        orbit: { speakRadius: 0.35, thinkMin: 0.15, thinkMax: 0.35, spinSpeed: 0.03, pulseSpeed: 0.03 },
+        detach: { probability: 0.4, flySpeed: 0.4, fadeRate: 0.05 },
+        colors: { orbit: '#b45309', flyLeft: '#dc6414', flyRight: '#fbbf24', bg: '#ffffff', bgOpacity: 0 }
+      },
+      {
+        name: 'Desktop',
+        widthPct: 100,
+        heightPct: 80,
+        containerSize: 160,
+        particles: { count: 10, permanent: 3, size: 1.5, spread: 0, grouping: 0 },
+        orbit: { speakRadius: 0.35, thinkMin: 0.15, thinkMax: 0.35, spinSpeed: 0.03, pulseSpeed: 0.03 },
+        detach: { probability: 0.4, flySpeed: 0.4, fadeRate: 0.05 },
+        colors: { orbit: '#b45309', flyLeft: '#dc6414', flyRight: '#fbbf24', bg: '#ffffff', bgOpacity: 0 }
+      },
+      {
+        name: 'Tablet',
+        widthPct: 100,
+        heightPct: 80,
+        containerSize: 140,
+        particles: { count: 10, permanent: 3, size: 1.5, spread: 0, grouping: 0 },
+        orbit: { speakRadius: 0.35, thinkMin: 0.15, thinkMax: 0.35, spinSpeed: 0.03, pulseSpeed: 0.03 },
+        detach: { probability: 0.4, flySpeed: 0.4, fadeRate: 0.05 },
+        colors: { orbit: '#b45309', flyLeft: '#dc6414', flyRight: '#fbbf24', bg: '#ffffff', bgOpacity: 0 }
+      },
+      {
+        name: 'Mobile',
+        widthPct: 100,
+        heightPct: 80,
+        containerSize: 120,
+        particles: { count: 10, permanent: 3, size: 1.5, spread: 0, grouping: 0 },
+        orbit: { speakRadius: 0.35, thinkMin: 0.15, thinkMax: 0.35, spinSpeed: 0.03, pulseSpeed: 0.03 },
+        detach: { probability: 0.4, flySpeed: 0.4, fadeRate: 0.05 },
+        colors: { orbit: '#b45309', flyLeft: '#dc6414', flyRight: '#fbbf24', bg: '#ffffff', bgOpacity: 0 }
+      },
+      {
+        name: 'Compact',
+        widthPct: 100,
+        heightPct: 80,
+        containerSize: 100,
+        particles: { count: 10, permanent: 3, size: 1.5, spread: 0, grouping: 0 },
+        orbit: { speakRadius: 0.35, thinkMin: 0.15, thinkMax: 0.35, spinSpeed: 0.03, pulseSpeed: 0.03 },
+        detach: { probability: 0.4, flySpeed: 0.4, fadeRate: 0.05 },
+        colors: { orbit: '#b45309', flyLeft: '#dc6414', flyRight: '#fbbf24', bg: '#ffffff', bgOpacity: 0 }
+      }
+    ];
+
+    // State for each preview
+    const states = configs.map(() => ({ particles: [], thinkingPhase: 0, lastConfig: null }));
+
+    let selectedIndex = 0;
+    let forceMode = 'speaking';
+    let time = 0;
+
+    // Helper: hex to rgba
+    function hexToRgba(hex, alpha) {
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      if (result) {
+        return `rgba(${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}, ${alpha})`;
+      }
+      return `rgba(31, 41, 55, ${alpha})`;
+    }
+
+    function hexToRgb(hex) {
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : { r: 180, g: 83, b: 9 };
+    }
+
+    // Initialize particles
+    function initParticles(state, config) {
+      const actual = getActualSize(config);
+      const configKey = JSON.stringify({ ...config.particles, w: actual.width, h: actual.height });
+      if (state.lastConfig === configKey) return;
+      state.lastConfig = configKey;
+
+      state.particles = [];
+      const scale = Math.min(actual.width, actual.height) / 54;
+      const totalParticles = config.particles.count + config.particles.permanent;
+
+      for (let i = 0; i < totalParticles; i++) {
+        // Base angle with grouping effect
+        let baseAngle = (i / totalParticles) * Math.PI * 2;
+
+        // Grouping: cluster particles together
+        if (config.particles.grouping > 0) {
+          const groupCount = Math.max(2, Math.round(4 - config.particles.grouping * 2));
+          const groupIndex = Math.floor(i / (totalParticles / groupCount));
+          const groupAngle = (groupIndex / groupCount) * Math.PI * 2;
+          const withinGroup = (i % Math.ceil(totalParticles / groupCount)) / Math.ceil(totalParticles / groupCount);
+          const groupSpread = (1 - config.particles.grouping) * Math.PI * 2 / groupCount;
+          baseAngle = groupAngle + (withinGroup - 0.5) * groupSpread;
+        }
+
+        state.particles.push({
+          angle: baseAngle,
+          baseAngle: baseAngle,
+          radius: 4 * scale,
+          radiusOffset: (Math.random() - 0.5) * 2, // for spread
+          size: config.particles.size * scale,
+          state: 'orbiting',
+          permanent: i >= config.particles.count,
+          x: 0, y: 0, vx: 0, vy: 0, life: 1
+        });
+      }
+    }
+
+    // Draw visualization
+    function drawVisualization(ctx, canvas, state, config) {
+      const actual = getActualSize(config);
+      const w = actual.width;
+      const h = actual.height;
+      const dpr = window.devicePixelRatio || 1;
+
+      if (canvas.width !== w * dpr || canvas.height !== h * dpr) {
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.scale(dpr, dpr);
+      }
+
+      const centerX = w / 2;
+      const centerY = h / 2;
+      const scale = Math.min(w, h) / 54;
+
+      // Clear
+      ctx.clearRect(0, 0, w, h);
+
+      // Background with opacity
+      if (config.colors.bgOpacity > 0) {
+        ctx.fillStyle = hexToRgba(config.colors.bg, config.colors.bgOpacity);
+        ctx.fillRect(0, 0, w, h);
+      }
+
+      // Simulated voice level
+      const simulatedLevel = 0.5 + Math.sin(time * 4) * 0.3 + Math.sin(time * 7) * 0.15;
+      const boostedLevel = Math.pow(Math.max(0, simulatedLevel), 0.5) * 1.6;
+
+      const maxRadius = Math.min(w, h) / 2 - 2 * scale;
+
+      // Determine mode
+      let isSpeaking;
+      if (forceMode === 'auto') {
+        isSpeaking = boostedLevel > 0.18;
+      } else {
+        isSpeaking = forceMode === 'speaking';
+      }
+
+      let baseOrbitRadius;
+      if (isSpeaking) {
+        baseOrbitRadius = maxRadius * config.orbit.speakRadius;
+      } else {
+        state.thinkingPhase += config.orbit.pulseSpeed;
+        const pulse = Math.sin(state.thinkingPhase) * 0.5 + 0.5;
+        const range = config.orbit.thinkMax - config.orbit.thinkMin;
+        baseOrbitRadius = maxRadius * (config.orbit.thinkMin + pulse * range);
+      }
+
+      const spinSpeed = isSpeaking
+        ? config.orbit.spinSpeed + boostedLevel * 0.02
+        : config.orbit.spinSpeed * 0.5;
+
+      const orbitColor = hexToRgb(config.colors.orbit);
+      const flyLeftColor = hexToRgb(config.colors.flyLeft);
+      const flyRightColor = hexToRgb(config.colors.flyRight);
+
+      state.particles.forEach(p => {
+        p.size = config.particles.size * scale;
+
+        // Apply spread to orbit radius
+        const spreadAmount = config.particles.spread * maxRadius * 0.3;
+        const orbitRadius = baseOrbitRadius + p.radiusOffset * spreadAmount;
+
+        if (p.state === 'orbiting') {
+          p.angle += spinSpeed;
+          p.radius += (orbitRadius - p.radius) * 0.1;
+
+          const x = centerX + Math.cos(p.angle) * p.radius;
+          const y = centerY + Math.sin(p.angle) * p.radius;
+
+          const atHorizon = Math.abs(y - centerY) < 4 * scale;
+          const shouldDetach = !p.permanent && isSpeaking && atHorizon && Math.random() < boostedLevel * config.detach.probability;
+
+          if (shouldDetach) {
+            p.state = 'flying';
+            p.x = x;
+            p.y = y;
+            p.vx = (x < centerX ? -1 : 1) * (config.detach.flySpeed + boostedLevel * 0.7) * scale;
+            p.vy = (Math.random() - 0.5) * 0.2 * scale;
+            p.life = 1;
+          } else {
+            ctx.beginPath();
+            ctx.arc(x, y, p.size + (isSpeaking ? boostedLevel * 0.3 * scale : 0.1 * scale), 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${orbitColor.r}, ${orbitColor.g}, ${orbitColor.b}, ${isSpeaking ? 0.8 : 0.5})`;
+            ctx.fill();
+          }
+
+        } else if (p.state === 'flying') {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy *= 0.96;
+          p.life -= config.detach.fadeRate;
+
+          if (p.life > 0) {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size * (0.5 + p.life * 0.5), 0, Math.PI * 2);
+            const isLeft = p.vx < 0;
+            const c = isLeft ? flyLeftColor : flyRightColor;
+            ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${p.life * 0.9})`;
+            ctx.fill();
+          }
+
+          if (p.life <= 0) {
+            p.state = 'refilling';
+            p.radius = 0;
+          }
+
+        } else if (p.state === 'refilling') {
+          p.angle += spinSpeed;
+          p.radius += (orbitRadius - p.radius) * 0.08;
+
+          const x = centerX + Math.cos(p.angle) * p.radius;
+          const y = centerY + Math.sin(p.angle) * p.radius;
+          const fadeIn = Math.min(1, p.radius / (orbitRadius * 0.8));
+
+          ctx.beginPath();
+          ctx.arc(x, y, p.size * fadeIn, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${orbitColor.r}, ${orbitColor.g}, ${orbitColor.b}, ${fadeIn * (isSpeaking ? 0.8 : 0.5)})`;
+          ctx.fill();
+
+          if (p.radius > orbitRadius * 0.9) {
+            p.state = 'orbiting';
+          }
+        }
+      });
+
+      return isSpeaking;
+    }
+
+    // Size descriptions
+    const sizeDescriptions = {
+      'Hero': 'Marketing pages, hero sections',
+      'Desktop': 'Standard desktop component',
+      'Tablet': 'Tablet-optimized, touch-friendly',
+      'Mobile': 'Mobile screens',
+      'Compact': 'Toolbars, inline displays'
+    };
+
+    // Render previews
+    function renderPreviews() {
+      const container = document.getElementById('preview-row');
+      container.innerHTML = '';
+
+      configs.forEach((config, index) => {
+        const card = document.createElement('div');
+        card.className = 'preview-card' + (index === selectedIndex ? ' selected' : '');
+        card.onclick = () => selectPreview(index);
+
+        const desc = sizeDescriptions[config.name] || '';
+        const actual = getActualSize(config);
+
+        card.innerHTML = `
+          <div class="canvas-container" style="width: ${config.containerSize}px; height: ${config.containerSize}px;">
+            <div class="canvas-wrap" style="background: ${hexToRgba(config.colors.bg, config.colors.bgOpacity)}">
+              <canvas id="canvas-${index}"></canvas>
+            </div>
+          </div>
+          <div class="preview-info">
+            <div class="preview-title">${config.name}</div>
+            <div class="preview-size">${config.widthPct}% × ${config.heightPct}% → ${actual.width}×${actual.height}px</div>
+            ${desc ? `<div class="preview-desc">${desc}</div>` : ''}
+          </div>
+          <span class="mode-label" id="mode-${index}">Speaking</span>
+        `;
+
+        container.appendChild(card);
+      });
+
+      // Add "add preview" button
+      const addBtn = document.createElement('div');
+      addBtn.className = 'add-preview';
+      addBtn.textContent = '+ Add Preview';
+      addBtn.onclick = addPreview;
+      container.appendChild(addBtn);
+    }
+
+    // Select preview
+    function selectPreview(index) {
+      selectedIndex = index;
+      document.querySelectorAll('.preview-card').forEach((card, i) => {
+        card.classList.toggle('selected', i === index);
+      });
+      updateControlsFromConfig();
+    }
+
+    // Update controls from selected config
+    function updateControlsFromConfig() {
+      const config = configs[selectedIndex];
+      const actual = getActualSize(config);
+      document.getElementById('selected-label').textContent = `Editing: ${config.name}`;
+
+      document.getElementById('ctrl-width').value = config.widthPct;
+      document.getElementById('ctrl-width-val').textContent = config.widthPct + '%';
+      document.getElementById('ctrl-height').value = config.heightPct;
+      document.getElementById('ctrl-height-val').textContent = config.heightPct + '%';
+      document.getElementById('ctrl-container').value = config.containerSize;
+      document.getElementById('ctrl-container-val').textContent = config.containerSize + 'px';
+      document.getElementById('ctrl-count').value = config.particles.count;
+      document.getElementById('ctrl-count-val').textContent = config.particles.count;
+      document.getElementById('ctrl-permanent').value = config.particles.permanent;
+      document.getElementById('ctrl-permanent-val').textContent = config.particles.permanent;
+      document.getElementById('ctrl-size').value = config.particles.size;
+      document.getElementById('ctrl-size-val').textContent = config.particles.size.toFixed(1);
+      document.getElementById('ctrl-spread').value = config.particles.spread;
+      document.getElementById('ctrl-spread-val').textContent = config.particles.spread.toFixed(2);
+      document.getElementById('ctrl-grouping').value = config.particles.grouping;
+      document.getElementById('ctrl-grouping-val').textContent = config.particles.grouping.toFixed(2);
+      document.getElementById('ctrl-speakRadius').value = config.orbit.speakRadius * 100;
+      document.getElementById('ctrl-speakRadius-val').textContent = Math.round(config.orbit.speakRadius * 100) + '%';
+      document.getElementById('ctrl-thinkMin').value = config.orbit.thinkMin * 100;
+      document.getElementById('ctrl-thinkMin-val').textContent = Math.round(config.orbit.thinkMin * 100) + '%';
+      document.getElementById('ctrl-thinkMax').value = config.orbit.thinkMax * 100;
+      document.getElementById('ctrl-thinkMax-val').textContent = Math.round(config.orbit.thinkMax * 100) + '%';
+      document.getElementById('ctrl-spinSpeed').value = config.orbit.spinSpeed;
+      document.getElementById('ctrl-spinSpeed-val').textContent = config.orbit.spinSpeed.toFixed(3);
+      document.getElementById('ctrl-pulseSpeed').value = config.orbit.pulseSpeed;
+      document.getElementById('ctrl-pulseSpeed-val').textContent = config.orbit.pulseSpeed.toFixed(3);
+      document.getElementById('ctrl-detachProb').value = config.detach.probability;
+      document.getElementById('ctrl-detachProb-val').textContent = config.detach.probability.toFixed(2);
+      document.getElementById('ctrl-flySpeed').value = config.detach.flySpeed;
+      document.getElementById('ctrl-flySpeed-val').textContent = config.detach.flySpeed.toFixed(1);
+      document.getElementById('ctrl-fadeRate').value = config.detach.fadeRate;
+      document.getElementById('ctrl-fadeRate-val').textContent = config.detach.fadeRate.toFixed(3);
+      document.getElementById('ctrl-colorOrbit').value = config.colors.orbit;
+      document.getElementById('ctrl-colorFlyLeft').value = config.colors.flyLeft;
+      document.getElementById('ctrl-colorFlyRight').value = config.colors.flyRight;
+      document.getElementById('ctrl-colorBg').value = config.colors.bg;
+      document.getElementById('ctrl-bgOpacity').value = config.colors.bgOpacity;
+      document.getElementById('ctrl-bgOpacity-val').textContent = config.colors.bgOpacity.toFixed(2);
+    }
+
+    // Add preview
+    function addPreview() {
+      const newConfig = createDefaultConfig(`Custom ${configs.length + 1}`, 50, 50, 150);
+      configs.push(newConfig);
+      states.push({ particles: [], thinkingPhase: 0, lastConfig: null });
+      renderPreviews();
+      selectPreview(configs.length - 1);
+    }
+
+    // Bind control
+    function bindControl(id, setter) {
+      const input = document.getElementById(id);
+      const valueEl = document.getElementById(id + '-val');
+
+      input.addEventListener('input', () => {
+        const val = parseFloat(input.value);
+        setter(configs[selectedIndex], val);
+        if (valueEl) valueEl.textContent = valueEl.dataset.format === 'percent'
+          ? Math.round(val) + '%'
+          : (Number.isInteger(val) ? val : val.toFixed(val < 1 ? 2 : 1));
+        states[selectedIndex].lastConfig = null; // Reset particles
+        renderPreviews();
+        selectPreview(selectedIndex);
+      });
+    }
+
+    // Initialize controls
+    bindControl('ctrl-width', (c, v) => { c.widthPct = Math.round(v); document.getElementById('ctrl-width-val').textContent = Math.round(v) + '%'; });
+    bindControl('ctrl-height', (c, v) => { c.heightPct = Math.round(v); document.getElementById('ctrl-height-val').textContent = Math.round(v) + '%'; });
+    bindControl('ctrl-container', (c, v) => { c.containerSize = Math.round(v); document.getElementById('ctrl-container-val').textContent = Math.round(v) + 'px'; });
+    bindControl('ctrl-count', (c, v) => { c.particles.count = Math.round(v); });
+    bindControl('ctrl-permanent', (c, v) => { c.particles.permanent = Math.round(v); });
+    bindControl('ctrl-size', (c, v) => { c.particles.size = v; });
+    bindControl('ctrl-spread', (c, v) => { c.particles.spread = v; });
+    bindControl('ctrl-grouping', (c, v) => { c.particles.grouping = v; });
+    bindControl('ctrl-speakRadius', (c, v) => { c.orbit.speakRadius = v / 100; document.getElementById('ctrl-speakRadius-val').textContent = Math.round(v) + '%'; });
+    bindControl('ctrl-thinkMin', (c, v) => { c.orbit.thinkMin = v / 100; document.getElementById('ctrl-thinkMin-val').textContent = Math.round(v) + '%'; });
+    bindControl('ctrl-thinkMax', (c, v) => { c.orbit.thinkMax = v / 100; document.getElementById('ctrl-thinkMax-val').textContent = Math.round(v) + '%'; });
+    bindControl('ctrl-spinSpeed', (c, v) => { c.orbit.spinSpeed = v; document.getElementById('ctrl-spinSpeed-val').textContent = v.toFixed(3); });
+    bindControl('ctrl-pulseSpeed', (c, v) => { c.orbit.pulseSpeed = v; document.getElementById('ctrl-pulseSpeed-val').textContent = v.toFixed(3); });
+    bindControl('ctrl-detachProb', (c, v) => { c.detach.probability = v; document.getElementById('ctrl-detachProb-val').textContent = v.toFixed(2); });
+    bindControl('ctrl-flySpeed', (c, v) => { c.detach.flySpeed = v; document.getElementById('ctrl-flySpeed-val').textContent = v.toFixed(1); });
+    bindControl('ctrl-fadeRate', (c, v) => { c.detach.fadeRate = v; document.getElementById('ctrl-fadeRate-val').textContent = v.toFixed(3); });
+    bindControl('ctrl-bgOpacity', (c, v) => { c.colors.bgOpacity = v; document.getElementById('ctrl-bgOpacity-val').textContent = v.toFixed(2); });
+
+    // Color controls
+    ['ctrl-colorOrbit', 'ctrl-colorFlyLeft', 'ctrl-colorFlyRight', 'ctrl-colorBg'].forEach(id => {
+      document.getElementById(id).addEventListener('input', (e) => {
+        const config = configs[selectedIndex];
+        if (id === 'ctrl-colorOrbit') config.colors.orbit = e.target.value;
+        else if (id === 'ctrl-colorFlyLeft') config.colors.flyLeft = e.target.value;
+        else if (id === 'ctrl-colorFlyRight') config.colors.flyRight = e.target.value;
+        else if (id === 'ctrl-colorBg') config.colors.bg = e.target.value;
+      });
+    });
+
+    // Mode buttons
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        forceMode = btn.dataset.mode;
+        document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b === btn));
+      });
+    });
+
+    // Preset buttons
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const preset = presets[btn.dataset.preset];
+        if (!preset) return;
+        const config = configs[selectedIndex];
+        Object.assign(config.particles, JSON.parse(JSON.stringify(preset.particles)));
+        Object.assign(config.orbit, JSON.parse(JSON.stringify(preset.orbit)));
+        Object.assign(config.detach, JSON.parse(JSON.stringify(preset.detach)));
+        Object.assign(config.colors, JSON.parse(JSON.stringify(preset.colors)));
+        states[selectedIndex].lastConfig = null;
+        updateControlsFromConfig();
+      });
+    });
+
+    // Export buttons
+    document.getElementById('btn-export').addEventListener('click', () => {
+      const code = JSON.stringify(configs[selectedIndex], null, 2);
+      const codeEl = document.getElementById('export-code');
+      codeEl.textContent = code;
+      codeEl.classList.toggle('visible');
+    });
+
+    document.getElementById('btn-copy').addEventListener('click', () => {
+      navigator.clipboard.writeText(JSON.stringify(configs[selectedIndex], null, 2)).then(() => {
+        const btn = document.getElementById('btn-copy');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 1500);
+      });
+    });
+
+    document.getElementById('btn-copy-all').addEventListener('click', () => {
+      navigator.clipboard.writeText(JSON.stringify(configs, null, 2)).then(() => {
+        const btn = document.getElementById('btn-copy-all');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy All', 1500);
+      });
+    });
+
+    // Copy to All
+    document.getElementById('btn-copy-to-all').addEventListener('click', () => {
+      const source = configs[selectedIndex];
+      configs.forEach((config, index) => {
+        if (index !== selectedIndex) {
+          // Copy all settings except name, widthPct, heightPct, containerSize
+          Object.assign(config.particles, JSON.parse(JSON.stringify(source.particles)));
+          Object.assign(config.orbit, JSON.parse(JSON.stringify(source.orbit)));
+          Object.assign(config.detach, JSON.parse(JSON.stringify(source.detach)));
+          Object.assign(config.colors, JSON.parse(JSON.stringify(source.colors)));
+          states[index].lastConfig = null;
+        }
+      });
+      renderPreviews();
+      selectPreview(selectedIndex);
+      // Visual feedback
+      const btn = document.getElementById('btn-copy-to-all');
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy to All', 1500);
+    });
+
+    // Duplicate / Delete
+    document.getElementById('btn-duplicate').addEventListener('click', () => {
+      const newConfig = JSON.parse(JSON.stringify(configs[selectedIndex]));
+      newConfig.name = newConfig.name + ' Copy';
+      configs.push(newConfig);
+      states.push({ particles: [], thinkingPhase: 0, lastConfig: null });
+      renderPreviews();
+      selectPreview(configs.length - 1);
+    });
+
+    document.getElementById('btn-delete').addEventListener('click', () => {
+      if (configs.length <= 1) return;
+      configs.splice(selectedIndex, 1);
+      states.splice(selectedIndex, 1);
+      selectedIndex = Math.min(selectedIndex, configs.length - 1);
+      renderPreviews();
+      selectPreview(selectedIndex);
+    });
+
+    // Animation loop
+    function animate() {
+      configs.forEach((config, index) => {
+        const canvas = document.getElementById(`canvas-${index}`);
+        const modeLabel = document.getElementById(`mode-${index}`);
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+        initParticles(states[index], config);
+        const isSpeaking = drawVisualization(ctx, canvas, states[index], config);
+        if (modeLabel) modeLabel.textContent = isSpeaking ? 'Speaking' : 'Thinking';
+
+        // Update wrap background
+        const wrap = canvas.closest('.canvas-wrap');
+        if (wrap) wrap.style.background = hexToRgba(config.colors.bg, config.colors.bgOpacity);
+      });
+
+      time += 0.05;
+      requestAnimationFrame(animate);
+    }
+
+    // Initialize
+    renderPreviews();
+    selectPreview(0);
+    animate();
+  </script>
+</body>
+</html>

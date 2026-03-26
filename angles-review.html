@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ada - Creative Angles Review</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .review-page {
+      min-height: 100vh;
+      background: #1c1917;
+      padding: 40px 24px 80px;
+    }
+
+    .review-header {
+      max-width: 900px;
+      margin: 0 auto 48px;
+      text-align: center;
+    }
+
+    .review-header h1 {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 600;
+      font-style: italic;
+      color: #fafaf9;
+      margin-bottom: 8px;
+    }
+
+    .review-header p {
+      color: #a8a29e;
+      font-size: 1rem;
+    }
+
+    /* Campaign Section */
+    .campaign-section {
+      max-width: 1400px;
+      margin: 0 auto 64px;
+    }
+
+    .campaign-header {
+      margin-bottom: 24px;
+      padding-left: 8px;
+      border-left: 3px solid #b45309;
+    }
+
+    .campaign-header h2 {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #fafaf9;
+      margin-bottom: 4px;
+    }
+
+    .campaign-header p {
+      color: #78716c;
+      font-size: 0.875rem;
+    }
+
+    /* Ads Grid */
+    .angles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 32px;
+    }
+
+    .angle-card {
+      background: #292524;
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .angle-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #b45309;
+      margin-bottom: 4px;
+    }
+
+    .angle-hook {
+      font-size: 0.8rem;
+      color: #d6d3d1;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    /* Phone Frame */
+    .phone-frame {
+      width: 260px;
+      height: 540px;
+      background: #0c0a09;
+      border-radius: 36px;
+      padding: 10px;
+      margin: 0 auto 16px;
+      position: relative;
+    }
+
+    .phone-frame::before {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 22px;
+      background: #000;
+      border-radius: 11px;
+      z-index: 10;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #fdfcfa 0%, #f5f4f2 100%);
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+      padding: 72px 14px 100px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ad-watermark {
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      font-family: 'Literata', Georgia, serif;
+      font-weight: 600;
+      font-style: italic;
+      font-size: 6.5rem;
+      line-height: 0.8;
+      color: #1c1917;
+      opacity: 0.04;
+      pointer-events: none;
+    }
+
+    .ad-tagline {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #78716c;
+      text-align: center;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .ad-editor {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 14px;
+    }
+
+    .ad-editor-text {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: #1c1917;
+    }
+
+    .highlight {
+      background: #fef3c7;
+      padding: 1px 3px;
+      border-radius: 2px;
+    }
+
+    .ad-frames {
+      margin-top: 14px;
+      background: #f5f4f2;
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .frame-label {
+      font-size: 0.55rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #78716c;
+      margin-bottom: 6px;
+    }
+
+    .transcription {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 0.85rem;
+      color: #1c1917;
+      font-style: italic;
+    }
+
+    .suggestion {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #e7e5e4;
+    }
+
+    .suggestion-text {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 0.85rem;
+      color: #059669;
+    }
+
+    .ad-cta {
+      margin-top: auto;
+      text-align: center;
+    }
+
+    .cta-description {
+      font-size: 0.75rem;
+      color: #57534e;
+      margin-bottom: 8px;
+    }
+
+    .cta-headline {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      font-style: italic;
+      color: #1c1917;
+      margin-bottom: 12px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #1c1917;
+      color: #fafaf9;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    .cta-note {
+      font-size: 0.6rem;
+      color: #a8a29e;
+      margin-top: 6px;
+    }
+
+    /* Priority badge */
+    .priority-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #fef3c7;
+      color: #92400e;
+      font-size: 0.6rem;
+      font-weight: 600;
+      border-radius: 4px;
+      margin-left: 8px;
+    }
+
+    .back-link {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      color: #a8a29e;
+      text-decoration: none;
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 100;
+    }
+
+    .back-link:hover {
+      color: #fafaf9;
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-link">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M19 12H5"/>
+      <polyline points="12 19 5 12 12 5"/>
+    </svg>
+    Back
+  </a>
+
+  <div class="review-page">
+    <header class="review-header">
+      <h1>Creative Angles</h1>
+      <p>Ways in - hooks that make people stop scrolling. Same template, different content.</p>
+    </header>
+
+    <!-- Kill Your Clichés -->
+    <section class="campaign-section">
+      <div class="campaign-header">
+        <h2>Kill Your Clichés</h2>
+        <p>Universal cringe. Everyone's written these. Everyone hates them.</p>
+      </div>
+
+      <div class="angles-grid">
+        <!-- Angle: Hope this finds you well -->
+        <div class="angle-card">
+          <div class="angle-label">Angle 1 <span class="priority-badge">High Priority</span></div>
+          <div class="angle-hook">The opener everyone writes and immediately regrets.</div>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="ad-watermark">Ada</div>
+              <div class="ad-editor">
+                <div class="ad-editor-text">
+                  I hope this email finds you <span class="highlight">well</span>.
+                </div>
+                <div class="ad-frames">
+                  <div class="frame-label">You said</div>
+                  <div class="transcription">"Ugh, everyone hates this"</div>
+                  <div class="suggestion">
+                    <div class="frame-label">Suggestion</div>
+                    <div class="suggestion-text">Hi Sarah,</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ad-cta">
+                <div class="cta-description">Kill your clichés with</div>
+                <div class="cta-headline">Ada</div>
+                <a href="#" class="cta-btn">Download Free</a>
+                <div class="cta-note">macOS only</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Angle: Circle back -->
+        <div class="angle-card">
+          <div class="angle-label">Angle 2 <span class="priority-badge">High Priority</span></div>
+          <div class="angle-hook">Corporate speak everyone uses but nobody likes.</div>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="ad-watermark">Ada</div>
+              <div class="ad-editor">
+                <div class="ad-editor-text">
+                  Let's <span class="highlight">circle back</span> on this next week.
+                </div>
+                <div class="ad-frames">
+                  <div class="frame-label">You said</div>
+                  <div class="transcription">"Just say meet"</div>
+                  <div class="suggestion">
+                    <div class="frame-label">Suggestion</div>
+                    <div class="suggestion-text">meet</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ad-cta">
+                <div class="cta-description">Talk like a human with</div>
+                <div class="cta-headline">Ada</div>
+                <a href="#" class="cta-btn">Download Free</a>
+                <div class="cta-note">macOS only</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Angle: Leverage synergies -->
+        <div class="angle-card">
+          <div class="angle-label">Angle 2b</div>
+          <div class="angle-hook">The jargon that makes everyone cringe.</div>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="ad-watermark">Ada</div>
+              <div class="ad-editor">
+                <div class="ad-editor-text">
+                  We need to <span class="highlight">leverage synergies</span> across departments.
+                </div>
+                <div class="ad-frames">
+                  <div class="frame-label">You said</div>
+                  <div class="transcription">"What does that even mean?"</div>
+                  <div class="suggestion">
+                    <div class="frame-label">Suggestion</div>
+                    <div class="suggestion-text">work together</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ad-cta">
+                <div class="cta-description">Say it simply with</div>
+                <div class="cta-headline">Ada</div>
+                <a href="#" class="cta-btn">Download Free</a>
+                <div class="cta-note">macOS only</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Angle: In today's fast-paced world -->
+        <div class="angle-card">
+          <div class="angle-label">Angle 11</div>
+          <div class="angle-hook">The opener that goes nowhere.</div>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="ad-watermark">Ada</div>
+              <div class="ad-editor">
+                <div class="ad-editor-text">
+                  <span class="highlight">In today's fast-paced world</span>, communication is key.
+                </div>
+                <div class="ad-frames">
+                  <div class="frame-label">You said</div>
+                  <div class="transcription">"Delete this"</div>
+                  <div class="suggestion">
+                    <div class="frame-label">Suggestion</div>
+                    <div class="suggestion-text" style="text-decoration: line-through; color: #dc2626;">In today's fast-paced world,</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ad-cta">
+                <div class="cta-description">Kill your darlings with</div>
+                <div class="cta-headline">Ada</div>
+                <a href="#" class="cta-btn">Download Free</a>
+                <div class="cta-note">macOS only</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Say What You Mean -->
+    <section class="campaign-section">
+      <div class="campaign-header">
+        <h2>Say What You Mean</h2>
+        <p>Hedging, vagueness, and avoiding the point. We all do it.</p>
+      </div>
+
+      <div class="angles-grid">
+        <!-- Angle: Hedging -->
+        <div class="angle-card">
+          <div class="angle-label">Angle 4 <span class="priority-badge">High Priority</span></div>
+          <div class="angle-hook">Weak language that undermines your point.</div>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="ad-watermark">Ada</div>
+              <div class="ad-editor">
+                <div class="ad-editor-text">
+                  I <span class="highlight">think we might need to perhaps</span> reconsider this.
+                </div>
+                <div class="ad-frames">
+                  <div class="frame-label">You said</div>
+                  <div class="transcription">"Be direct"</div>
+                  <div class="suggestion">
+                    <div class="frame-label">Suggestion</div>
+                    <div class="suggestion-text">We need to</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ad-cta">
+                <div class="cta-description">Say what you mean with</div>
+                <div class="cta-headline">Ada</div>
+                <a href="#" class="cta-btn">Download Free</a>
+                <div class="cta-note">macOS only</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Angle: Significantly -->
+        <div class="angle-card">
+          <div class="angle-label">Angle 12 <span class="priority-badge">High Priority</span></div>
+          <div class="angle-hook">Vague claims that mean nothing.</div>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="ad-watermark">Ada</div>
+              <div class="ad-editor">
+                <div class="ad-editor-text">
+                  Sales increased <span class="highlight">significantly</span> last quarter.
+                </div>
+                <div class="ad-frames">
+                  <div class="frame-label">You said</div>
+                  <div class="transcription">"How much?"</div>
+                  <div class="suggestion">
+                    <div class="frame-label">Suggestion</div>
+                    <div class="suggestion-text">by 34%</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ad-cta">
+                <div class="cta-description">Be specific with</div>
+                <div class="cta-headline">Ada</div>
+                <a href="#" class="cta-btn">Download Free</a>
+                <div class="cta-note">macOS only</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Angle: Real talk -->
+        <div class="angle-card">
+          <div class="angle-label">Angle 15</div>
+          <div class="angle-hook">When you need to say the hard thing.</div>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="ad-watermark">Ada</div>
+              <div class="ad-editor">
+                <div class="ad-editor-text">
+                  We <span class="highlight">may need to explore alternative directions</span> for this project.
+                </div>
+                <div class="ad-frames">
+                  <div class="frame-label">You said</div>
+                  <div class="transcription">"Just say we're canceling it"</div>
+                  <div class="suggestion">
+                    <div class="frame-label">Suggestion</div>
+                    <div class="suggestion-text">are canceling the project</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ad-cta">
+                <div class="cta-description">Say the hard thing with</div>
+                <div class="cta-headline">Ada</div>
+                <a href="#" class="cta-btn">Download Free</a>
+                <div class="cta-note">macOS only</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Angle: Just -->
+        <div class="angle-card">
+          <div class="angle-label">Angle 4b</div>
+          <div class="angle-hook">The word that makes you sound unsure.</div>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="ad-watermark">Ada</div>
+              <div class="ad-editor">
+                <div class="ad-editor-text">
+                  I'm <span class="highlight">just</span> following up on my previous email.
+                </div>
+                <div class="ad-frames">
+                  <div class="frame-label">You said</div>
+                  <div class="transcription">"Don't apologize"</div>
+                  <div class="suggestion">
+                    <div class="frame-label">Suggestion</div>
+                    <div class="suggestion-text">(delete "just")</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ad-cta">
+                <div class="cta-description">Write with confidence with</div>
+                <div class="cta-headline">Ada</div>
+                <a href="#" class="cta-btn">Download Free</a>
+                <div class="cta-note">macOS only</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Think Out Loud -->
+    <section class="campaign-section">
+      <div class="campaign-header">
+        <h2>Think Out Loud</h2>
+        <p>The internal dialogue. Second-guessing. Wondering if it's right.</p>
+      </div>
+
+      <div class="angles-grid">
+        <!-- Angle: Is love too strong? -->
+        <div class="angle-card">
+          <div class="angle-label">Angle 6 <span class="priority-badge">High Priority</span></div>
+          <div class="angle-hook">The doubt every writer has.</div>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="ad-watermark">Ada</div>
+              <div class="ad-editor">
+                <div class="ad-editor-text">
+                  I would <span class="highlight">love</span> to discuss this further.
+                </div>
+                <div class="ad-frames">
+                  <div class="frame-label">You said</div>
+                  <div class="transcription">"Is 'love' too strong?"</div>
+                  <div class="suggestion">
+                    <div class="frame-label">Suggestion</div>
+                    <div class="suggestion-text">like</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ad-cta">
+                <div class="cta-description">Ask your doubts out loud with</div>
+                <div class="cta-headline">Ada</div>
+                <a href="#" class="cta-btn">Download Free</a>
+                <div class="cta-note">macOS only</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Angle: Too eager? -->
+        <div class="angle-card">
+          <div class="angle-label">Angle 6b</div>
+          <div class="angle-hook">When you're worried about coming on too strong.</div>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="ad-watermark">Ada</div>
+              <div class="ad-editor">
+                <div class="ad-editor-text">
+                  <span class="highlight">Thanks so much!!</span> This is exactly what I needed.
+                </div>
+                <div class="ad-frames">
+                  <div class="frame-label">You said</div>
+                  <div class="transcription">"Is this too eager?"</div>
+                  <div class="suggestion">
+                    <div class="frame-label">Suggestion</div>
+                    <div class="suggestion-text">Thanks!</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ad-cta">
+                <div class="cta-description">Find the right tone with</div>
+                <div class="cta-headline">Ada</div>
+                <a href="#" class="cta-btn">Download Free</a>
+                <div class="cta-note">macOS only</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Angle: Actually we did try this -->
+        <div class="angle-card">
+          <div class="angle-label">Angle 10</div>
+          <div class="angle-hook">When you realize mid-sentence you're wrong.</div>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="ad-watermark">Ada</div>
+              <div class="ad-editor">
+                <div class="ad-editor-text">
+                  We've <span class="highlight">never</span> attempted this approach before.
+                </div>
+                <div class="ad-frames">
+                  <div class="frame-label">You said</div>
+                  <div class="transcription">"Wait, we tried this in 2022"</div>
+                  <div class="suggestion">
+                    <div class="frame-label">Suggestion</div>
+                    <div class="suggestion-text">only attempted this once, in 2022</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ad-cta">
+                <div class="cta-description">Think out loud with</div>
+                <div class="cta-headline">Ada</div>
+                <a href="#" class="cta-btn">Download Free</a>
+                <div class="cta-note">macOS only</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Angle: Second guess -->
+        <div class="angle-card">
+          <div class="angle-label">Angle 9</div>
+          <div class="angle-hook">The word you've changed three times already.</div>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="ad-watermark">Ada</div>
+              <div class="ad-editor">
+                <div class="ad-editor-text">
+                  This approach is <span class="highlight">innovative</span>.
+                </div>
+                <div class="ad-frames">
+                  <div class="frame-label">You said</div>
+                  <div class="transcription">"No, that's not it either"</div>
+                  <div class="suggestion">
+                    <div class="frame-label">Suggestion</div>
+                    <div class="suggestion-text">practical</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ad-cta">
+                <div class="cta-description">Stop second-guessing with</div>
+                <div class="cta-headline">Ada</div>
+                <a href="#" class="cta-btn">Download Free</a>
+                <div class="cta-note">macOS only</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Just Speak It (Didactic) -->
+    <section class="campaign-section">
+      <div class="campaign-header">
+        <h2>Just Speak It</h2>
+        <p>Didactic mode. Direct replacement. No conversation needed.</p>
+      </div>
+
+      <div class="angles-grid">
+        <!-- Angle: Date replacement -->
+        <div class="angle-card">
+          <div class="angle-label">Angle 5</div>
+          <div class="angle-hook">The simple replacement everyone does manually.</div>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="ad-watermark">Ada</div>
+              <div class="ad-editor">
+                <div class="ad-editor-text">
+                  The deadline is <span class="highlight">next Tuesday</span>.
+                </div>
+                <div class="ad-frames">
+                  <div class="frame-label">You said</div>
+                  <div class="transcription">"January 14th"</div>
+                  <div class="suggestion">
+                    <div class="frame-label">Replaced</div>
+                    <div class="suggestion-text">January 14th</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ad-cta">
+                <div class="cta-description">Speak your edits with</div>
+                <div class="cta-headline">Ada</div>
+                <a href="#" class="cta-btn">Download Free</a>
+                <div class="cta-note">macOS only</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Angle: TODO placeholder -->
+        <div class="angle-card">
+          <div class="angle-label">Angle 8</div>
+          <div class="angle-hook">The placeholder you wrote at 2am.</div>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="ad-watermark">Ada</div>
+              <div class="ad-editor">
+                <div class="ad-editor-text">
+                  The results showed <span class="highlight">[insert data]</span> improvement.
+                </div>
+                <div class="ad-frames">
+                  <div class="frame-label">You said</div>
+                  <div class="transcription">"Fifteen percent"</div>
+                  <div class="suggestion">
+                    <div class="frame-label">Replaced</div>
+                    <div class="suggestion-text">15%</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ad-cta">
+                <div class="cta-description">Fill in the blanks with</div>
+                <div class="cta-headline">Ada</div>
+                <a href="#" class="cta-btn">Download Free</a>
+                <div class="cta-note">macOS only</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Angle: Name replacement -->
+        <div class="angle-card">
+          <div class="angle-label">Angle 5b</div>
+          <div class="angle-hook">Quick fixes that don't need AI thinking.</div>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="ad-watermark">Ada</div>
+              <div class="ad-editor">
+                <div class="ad-editor-text">
+                  Please send this to <span class="highlight">John</span> by end of day.
+                </div>
+                <div class="ad-frames">
+                  <div class="frame-label">You said</div>
+                  <div class="transcription">"Sarah"</div>
+                  <div class="suggestion">
+                    <div class="frame-label">Replaced</div>
+                    <div class="suggestion-text">Sarah</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ad-cta">
+                <div class="cta-description">Edit at the speed of speech with</div>
+                <div class="cta-headline">Ada</div>
+                <a href="#" class="cta-btn">Download Free</a>
+                <div class="cta-note">macOS only</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>
